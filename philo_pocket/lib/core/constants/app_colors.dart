@@ -1,27 +1,46 @@
 import 'package:flutter/material.dart';
 
-/// Charte Graphique Officielle de Philo Pocket
+/// Charte Graphique Officielle et Moderne de Philo Pocket
 class AppColors {
-  // Couleur Principale (Navigation, en-têtes, boutons principaux)
-  // Un vert d'apprentissage et de validation, vif mais doux pour les yeux
-  static const Color primary = Color(0xFF1F7348); 
+  // Couleurs de marque (Brand Colors)
+  static const Color primary = Color(0xFF1B4D3E); // Vert forêt profond et premium
+  static const Color primaryLight = Color(0xFF2A7A62); 
+  
+  static const Color secondary = Color(0xFFE9C46A); // Or moutarde élégant
+  static const Color accent = Color(0xFFE76F51); // Terre cuite vibrante
 
-  // Couleur Secondaire (Cartes, encouragements, badges)
-  static const Color secondary = Color(0xFFF7C6D7); // Rose poudré
-
-  // Couleur d'Accent (Progression, flamme, réussite)
-  static const Color accent = Color(0xFFD4AF37); // Or chaud
-
-  // Fonds
-  static const Color backgroundLight = Color(0xFFFAF6F0); // Blanc cassé / Ivoire
-  static const Color backgroundDark = Color(0xFF121A15); // Mode Sombre
+  // Fonds (Backgrounds)
+  static const Color backgroundLight = Color(0xFFF8F9FA); // Gris perle très léger
+  static const Color surfaceLight = Color(0xFFFFFFFF); // Blanc pur pour les cartes
+  
+  static const Color backgroundDark = Color(0xFF0F172A); // Bleu nuit profond (Slate 900)
+  static const Color surfaceDark = Color(0xFF1E293B); // Slate 800
 
   // Typographie & Bordures
-  static const Color textDark = Color(0xFF1B2A4A); // Bleu nuit très foncé pour le texte
-  static const Color textLight = Color(0xFFFFFFFF);
-  static const Color border = Color(0xFFE6E2DC); // Gris chaud clair
+  static const Color textDark = Color(0xFF0F172A); // Texte principal sombre
+  static const Color textLight = Color(0xFFF8F9FA); // Texte principal clair
+  static const Color textMuted = Color(0xFF64748B); // Slate 500 pour sous-titres
+  static const Color border = Color(0xFFE2E8F0); // Slate 200
 
   // Couleurs sémantiques (UI)
-  static const Color error = Color(0xFFD32F2F);
-  static const Color success = Color(0xFF388E3C);
+  static const Color error = Color(0xFFEF4444); // Rouge moderne
+  static const Color success = Color(0xFF22C55E); // Vert moderne
+  static const Color info = Color(0xFF3B82F6); // Bleu vif
+
+  // Gradients Premium
+  static const LinearGradient primaryGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [primary, primaryLight],
+  );
+
+  static const LinearGradient premiumGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Color(0xFF6366F1), Color(0xFF8B5CF6), Color(0xFFD946EF)], // Dégradé "Aristote"
+  );
+  
+  // Effet Glassmorphism (Fonds translucides)
+  static Color glassBackground = Colors.white.withOpacity(0.7);
+  static Color glassBorder = Colors.white.withOpacity(0.4);
 }

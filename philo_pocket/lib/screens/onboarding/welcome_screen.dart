@@ -122,7 +122,7 @@ class WelcomeScreen extends StatelessWidget {
                         // Bouton Commencer
                         ElevatedButton(
                           onPressed: () {
-                            context.go('/aleckse');
+                            context.go('/auth');
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primary,

@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
   # UI & Design
   google_fonts: ^6.1.0
+  flutter_animate: ^4.5.0
   cupertino_icons: ^1.0.6
   
   # State Management
@@ -22,11 +23,14 @@ dependencies:
   
   # Backend & DB
   supabase_flutter: ^2.3.4
+  flutter_dotenv: ^6.0.1
   shared_preferences: ^2.2.2
   
   # Utils
   intl: ^0.18.1
   syncfusion_flutter_pdfviewer: ^33.2.13
+  flutter_markdown: ^0.7.7+1
+  google_generative_ai: ^0.4.7
 
 dev_dependencies:
   flutter_test:
@@ -51,5 +55,9 @@ flutter_native_splash:
 flutter:
   uses-material-design: true
   assets:
+    - .env
     - assets/ipn/
     - assets/images/
+    - assets/courses/
+    - assets/methodologie/
+    - .env

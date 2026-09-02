@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/services/supabase_service.dart';
 
 class RoleSelectionScreen extends StatelessWidget {
   const RoleSelectionScreen({Key? key}) : super(key: key);
@@ -58,6 +59,8 @@ class RoleSelectionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final supabase = SupabaseService();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Qui êtes-vous ?'),
@@ -79,8 +82,17 @@ class RoleSelectionScreen extends StatelessWidget {
               title: 'Élève / Étudiant',
               description: 'Apprendre, progresser et préparer le BAC.',
               icon: Icons.school_rounded,
-              onTap: () {
-                context.go('/main');
+              onTap: () async {
+                try {
+                  await supabase.saveUserRole('eleve');
+                  if (context.mounted) context.go('/profile-setup');
+                } catch (e) {
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Erreur: $e')),
+                    );
+                  }
+                }
               },
             ),
             
@@ -89,8 +101,17 @@ class RoleSelectionScreen extends StatelessWidget {
               title: 'Parent',
               description: 'Suivre la progression de votre enfant.',
               icon: Icons.family_restroom_rounded,
-              onTap: () {
-                context.go('/parent');
+              onTap: () async {
+                try {
+                  await supabase.saveUserRole('parent');
+                  if (context.mounted) context.go('/parent');
+                } catch (e) {
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Erreur: $e')),
+                    );
+                  }
+                }
               },
             ),
             

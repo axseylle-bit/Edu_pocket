@@ -3,16 +3,20 @@ import '../models/student_level.dart';
 
 class StudentState {
   final SubscriptionTier tier;
+  final double globalProgress; // 0.0 à 1.0
   
   StudentState({
     this.tier = SubscriptionTier.gratuit,
+    this.globalProgress = 0.73, // Par défaut pour la démo
   });
 
   StudentState copyWith({
     SubscriptionTier? tier,
+    double? globalProgress,
   }) {
     return StudentState(
       tier: tier ?? this.tier,
+      globalProgress: globalProgress ?? this.globalProgress,
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/theme/app_theme.dart';
+import '../../core/services/supabase_service.dart';
 import 'package:go_router/go_router.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -12,6 +13,55 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   bool _isLogin = true;
+  bool _isLoading = false;
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _supabase = SupabaseService();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _submit() async {
+    setState(() => _isLoading = true);
+    try {
+      final email = _emailController.text.trim();
+      final password = _passwordController.text.trim();
+
+      try {
+        if (_isLogin) {
+          await _supabase.signInWithEmail(email, password);
+        } else {
+          await _supabase.signUpWithEmail(email, password, 'Utilisateur');
+        }
+      } catch (e) {
+        // Mode test MVP : On ignore l'erreur Supabase pour te laisser tester l'application sans base de données
+        print("Erreur Supabase ignorée pour le test: $e");
+      }
+      
+      if (mounted) {
+        context.go('/role-selection');
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString().replaceAll('Exception: ', '')),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 8),
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +86,9 @@ class _AuthScreenState extends State<AuthScreen> {
                 const SizedBox(height: 32),
                 
                 TextFormField(
+                  controller: _emailController,
                   decoration: InputDecoration(
-                    labelText: 'Email ou Téléphone (Airtel/Moov)',
+                    labelText: 'Email',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -47,6 +98,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 const SizedBox(height: 16),
                 
                 TextFormField(
+                  controller: _passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
                     labelText: 'Mot de passe',
@@ -58,13 +110,12 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
                 const SizedBox(height: 24),
                 
-                ElevatedButton(
-                  onPressed: () {
-                    // Bypass login pour la démo MVP
-                    context.go('/role-selection');
-                  },
-                  child: Text(_isLogin ? 'Se connecter' : 'Créer un compte'),
-                ),
+                _isLoading 
+                  ? const Center(child: CircularProgressIndicator())
+                  : ElevatedButton(
+                      onPressed: _submit,
+                      child: Text(_isLogin ? 'Se connecter' : 'Créer un compte'),
+                    ),
                 const SizedBox(height: 16),
                 
                 TextButton(

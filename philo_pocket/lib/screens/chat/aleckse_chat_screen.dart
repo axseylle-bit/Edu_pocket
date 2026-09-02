@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/services/ai_service.dart';
 
 class AleckseChatScreen extends StatefulWidget {
-  const AleckseChatScreen({Key? key}) : super(key: key);
+  final String? mode;
+  final String? notion;
+  final String? subject;
+  final String? type;
+  final String? methodologyId;
+
+  const AleckseChatScreen({
+    Key? key,
+    this.mode,
+    this.notion,
+    this.subject,
+    this.type,
+    this.methodologyId,
+  }) : super(key: key);
 
   @override
   State<AleckseChatScreen> createState() => _AleckseChatScreenState();
@@ -10,35 +24,78 @@ class AleckseChatScreen extends StatefulWidget {
 
 class _AleckseChatScreenState extends State<AleckseChatScreen> {
   final TextEditingController _messageController = TextEditingController();
-  final List<Map<String, dynamic>> _messages = [
-    {
-      'isMe': false,
-      'text': 'Bonjour ! Je suis Aleckse, ta professeure virtuelle. Pose-moi une question sur ton cours de philosophie !',
-    }
-  ];
+  final List<Map<String, dynamic>> _messages = [];
+  final AiService _aiService = AiService();
+  bool _isLoading = false;
 
-  void _sendMessage() {
+  @override
+  void initState() {
+    super.initState();
+    _initChat();
+    _initAi();
+  }
+
+  Future<void> _initAi() async {
+    String? extraContext = widget.subject;
+    if (widget.mode == 'td') {
+      extraContext = "Exercice de type ${widget.type}. Le sujet est : ${widget.subject}";
+    }
+    
+    try {
+      await _aiService.init(widget.methodologyId, extraContext);
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _messages.add({
+            'isMe': false,
+            'text': "Erreur lors de l'initialisation de mon cerveau: $e",
+          });
+        });
+      }
+    }
+  }
+
+  void _initChat() {
+    if (widget.mode == 'td' && widget.subject != null) {
+      _messages.add({
+        'isMe': false,
+        'text': 'Excellent choix ! Nous allons traiter ce ${widget.type ?? 'sujet'} :\n\n"${widget.subject}"\n\nJe vais t\'aider pas à pas. Pour commencer, propose-moi une idée d\'amorce pour l\'introduction.',
+      });
+    } else {
+      _messages.add({
+        'isMe': false,
+        'text': 'Bonjour ! Je suis Aleckse, ta professeure virtuelle. Pose-moi une question sur ton cours de philosophie !',
+      });
+    }
+  }
+
+  Future<void> _sendMessage() async {
     if (_messageController.text.trim().isEmpty) return;
+    
+    final question = _messageController.text;
 
     setState(() {
       _messages.add({
         'isMe': true,
-        'text': _messageController.text,
+        'text': question,
       });
+      _isLoading = true;
     });
 
-    final question = _messageController.text;
     _messageController.clear();
 
-    // Simulation d'une réponse de l'IA
-    Future.delayed(const Duration(seconds: 1), () {
-      if (!mounted) return;
-      setState(() {
+    final response = await _aiService.sendMessage(question);
+
+    if (!mounted) return;
+    
+    setState(() {
+      _isLoading = false;
+      if (response != null) {
         _messages.add({
           'isMe': false,
-          'text': 'C\'est une excellente question ! Pour l\'instant je suis en mode démo pour le MVP, mais bientôt je pourrai répondre intelligemment à toutes tes questions de philosophie.',
+          'text': response,
         });
-      });
+      }
     });
   }
 
@@ -52,19 +109,69 @@ class _AleckseChatScreenState extends State<AleckseChatScreen> {
               backgroundImage: AssetImage('assets/images/aleckse.png'),
             ),
             const SizedBox(width: 12),
-            const Text('Aleckse'),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text('Aleckse', style: TextStyle(fontSize: 16)),
+                  if (widget.mode == 'td')
+                    const Text('Entraînement TD', style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal)),
+                ],
+              ),
+            ),
           ],
         ),
         backgroundColor: AppColors.backgroundLight,
         elevation: 1,
+        actions: [
+          if (widget.mode == 'td' && widget.methodologyId != null)
+            IconButton(
+              icon: const Icon(Icons.menu_book_rounded),
+              tooltip: 'Voir la méthodologie',
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Méthodologie Officielle'),
+                    content: Text('Le document "${widget.methodologyId}" sera chargé ici pour t\'aider à rédiger selon les critères de l\'IPN.\n\nALECKSE utilisera également ce document pour évaluer et corriger tes réponses de manière stricte et bienveillante.'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text('Compris'),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+        ],
       ),
       body: Column(
         children: [
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.all(16),
-              itemCount: _messages.length,
+              itemCount: _messages.length + (_isLoading ? 1 : 0),
               itemBuilder: (context, index) {
+                if (index == _messages.length && _isLoading) {
+                  return const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 20, 
+                          height: 20, 
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        ),
+                        SizedBox(width: 16),
+                        Text("Aleckse réfléchit...", style: TextStyle(fontStyle: FontStyle.italic)),
+                      ],
+                    ),
+                  );
+                }
+                
                 final message = _messages[index];
                 final isMe = message['isMe'] as bool;
                 return Align(
@@ -111,7 +218,7 @@ class _AleckseChatScreenState extends State<AleckseChatScreen> {
                   child: TextField(
                     controller: _messageController,
                     decoration: InputDecoration(
-                      hintText: 'Pose une question...',
+                      hintText: 'Écris ton message...',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(24),
                         borderSide: BorderSide.none,
@@ -124,10 +231,13 @@ class _AleckseChatScreenState extends State<AleckseChatScreen> {
                   ),
                 ),
                 const SizedBox(width: 12),
-                CircleAvatar(
-                  backgroundColor: AppColors.primary,
+                Container(
+                  decoration: const BoxDecoration(
+                    color: AppColors.accent,
+                    shape: BoxShape.circle,
+                  ),
                   child: IconButton(
-                    icon: const Icon(Icons.send, color: Colors.white),
+                    icon: const Icon(Icons.send_rounded, color: Colors.white),
                     onPressed: _sendMessage,
                   ),
                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/providers/student_provider.dart';
 
@@ -12,222 +13,292 @@ class StudentDashboardScreen extends ConsumerWidget {
     final studentState = ref.watch(studentProvider);
     final tier = studentState.tier;
 
-    return SafeArea(
-      child: ListView(
-        padding: const EdgeInsets.all(24.0),
-        children: [
-          // Logo de l'application
-          Center(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.asset(
-                'assets/images/logo.jpg',
-                height: 80,
-                width: 80,
-                fit: BoxFit.cover,
-              ),
-            ),
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Hero Section
+              _buildHeroSection(context, ref, 1, tier.name)
+                  .animate()
+                  .fade(duration: 600.ms)
+                  .slideY(begin: -0.1, end: 0, curve: Curves.easeOutQuad),
+                  
+              const SizedBox(height: 32),
+              
+              Text(
+                'Actions Rapides',
+                style: Theme.of(context).textTheme.titleLarge,
+              ).animate().fade(delay: 200.ms).slideX(begin: -0.1),
+              
+              const SizedBox(height: 20),
+              
+              // Bento Box Layout
+              _buildBentoBox(context).animate().fade(delay: 300.ms).scale(begin: const Offset(0.95, 0.95)),
+            ],
           ),
-          const SizedBox(height: 16),
-          // En-tête Salutation
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeroSection(BuildContext context, WidgetRef ref, int level, String tierName) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        gradient: AppColors.primaryGradient,
+        borderRadius: BorderRadius.circular(32),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.primary.withOpacity(0.3),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        'Bonjour Axelle 👋',
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      // Bouton de triche pour dev
-                      IconButton(
-                        icon: const Icon(Icons.upgrade, size: 20, color: Colors.grey),
-                        onPressed: () {
-                          ref.read(studentProvider.notifier).levelUp();
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Abonnement : ${tier.name} (${tier.description})',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.accent,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              const CircleAvatar(
-                radius: 24,
-                backgroundColor: AppColors.secondary,
-                child: Icon(Icons.person, color: AppColors.primary),
-              ),
-            ],
-          ),
-          const SizedBox(height: 32),
-
-          // Jauge de progression globale
-          Container(
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: AppColors.primary,
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.primary.withOpacity(0.3),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Progression Globale',
-                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                    Text(
+                      'Bonjour Axelle 👋',
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
+                    const SizedBox(height: 8),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
-                        color: AppColors.accent,
+                        color: Colors.white.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: const Text(
-                        '73%',
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                      child: Text(
+                        'Abonnement $tierName',
+                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 12),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: LinearProgressIndicator(
-                    value: 0.73,
-                    minHeight: 8,
-                    backgroundColor: Colors.white.withOpacity(0.2),
-                    valueColor: const AlwaysStoppedAnimation<Color>(AppColors.accent),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  '12 notions maîtrisées sur 18 au programme.',
-                  style: TextStyle(color: Colors.white70, fontSize: 14),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 24),
-
-          // Bouton IPN (remonté pour plus de visibilité)
-          ElevatedButton.icon(
-            onPressed: () => context.push('/ipn'),
-            icon: const Icon(Icons.library_books),
-            label: const Text('Ressources Officielles (IPN)'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.secondary,
-              foregroundColor: AppColors.primary,
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
               ),
-            ),
-          ),
-          const SizedBox(height: 32),
-
-          // Message d'encouragement ALECKSE
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: AppColors.secondary.withOpacity(0.3),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: AppColors.secondary),
-            ),
-            child: Row(
-              children: [
-                const Icon(Icons.tips_and_updates_rounded, color: AppColors.accent, size: 32),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Text(
-                    'Conseil d\'ALECKSE : N\'oubliez pas de revoir la définition de la "Conscience" avant votre prochain quiz !',
-                    style: TextStyle(color: AppColors.textDark, fontWeight: FontWeight.w500),
+              InkWell(
+                onTap: () {
+                  ref.read(studentProvider.notifier).levelUp();
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.white.withOpacity(0.5), width: 2),
+                  ),
+                  child: const CircleAvatar(
+                    radius: 32,
+                    backgroundColor: Colors.white,
+                    backgroundImage: AssetImage('assets/images/logo.jpg'),
                   ),
                 ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 32),
-
-          // Grille de raccourcis
-          Text(
-            'Raccourcis rapides',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 16),
-          GridView.count(
-            crossAxisCount: 2,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            mainAxisSpacing: 16,
-            crossAxisSpacing: 16,
-            childAspectRatio: 1.5,
-            children: [
-              _buildShortcutCard(context, Icons.menu_book_rounded, 'Reprendre le cours', Colors.blue.shade100, '/cours', true),
-              _buildShortcutCard(context, Icons.quiz_rounded, 'S\'entraîner (Quiz)', Colors.green.shade100, '/quiz', true),
-              _buildShortcutCard(context, Icons.psychology_rounded, 'À revoir (TD)', Colors.orange.shade100, '/td', true),
-              _buildShortcutCard(context, Icons.science_rounded, 'Travaux Pratiques (TP)', Colors.teal.shade100, '/tp', tier.canAccessTP),
-              _buildShortcutCard(context, Icons.format_quote_rounded, 'Citations', Colors.purple.shade100, '/citations', true),
+              ),
             ],
           ),
           const SizedBox(height: 32),
+          Text(
+            'Progression Globale',
+            style: TextStyle(color: Colors.white.withOpacity(0.9), fontSize: 14),
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: LinearProgressIndicator(
+                    value: 0.65,
+                    backgroundColor: Colors.white.withOpacity(0.2),
+                    valueColor: const AlwaysStoppedAnimation<Color>(AppColors.secondary),
+                    minHeight: 14,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Text(
+                '65%',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Niveau $level • Prochain palier dans 350 pts',
+            style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 13),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildShortcutCard(BuildContext context, IconData icon, String title, Color color, String route, bool isUnlocked) {
-    return Card(
-      elevation: 0,
-      color: isUnlocked ? color : Colors.grey.shade200,
-      child: InkWell(
-        onTap: isUnlocked ? () => context.push(route) : () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Ce raccourci est verrouillé à votre palier actuel.')),
-          );
-        },
-        borderRadius: BorderRadius.circular(16),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                isUnlocked ? icon : Icons.lock_rounded, 
-                color: isUnlocked ? AppColors.primary : Colors.grey.shade500, 
-                size: 32
-              ),
-              const SizedBox(height: 8),
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.w600, 
-                  fontSize: 13, 
-                  color: isUnlocked ? AppColors.primary : Colors.grey.shade500
+  Widget _buildBentoBox(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isWeb = constraints.maxWidth > 600;
+        return Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: _buildBentoCard(
+                    context,
+                    title: 'Programme IPN',
+                    subtitle: 'Tous les cours',
+                    icon: Icons.menu_book_rounded,
+                    color: AppColors.primary,
+                    gradient: AppColors.primaryGradient,
+                    height: 180,
+                    onTap: () => context.push('/cours'),
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(width: 16),
+                Expanded(
+                  flex: 2,
+                  child: _buildBentoCard(
+                    context,
+                    title: 'Quiz',
+                    subtitle: 'Évalue-toi',
+                    icon: Icons.quiz_rounded,
+                    color: AppColors.accent,
+                    height: 180,
+                    onTap: () => context.push('/quiz?notion=Genèse de la philosophie : du mythe à la rationalité'),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: _buildBentoCard(
+                    context,
+                    title: 'ALECKSE',
+                    subtitle: 'Ton IA',
+                    icon: Icons.smart_toy_rounded,
+                    color: const Color(0xFF6366F1), // Violet premium
+                    gradient: AppColors.premiumGradient,
+                    height: 160,
+                    onTap: () => context.push('/chat'),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  flex: 3,
+                  child: _buildBentoCard(
+                    context,
+                    title: 'Citations',
+                    subtitle: 'Auteurs & Phrases',
+                    icon: Icons.format_quote_rounded,
+                    color: AppColors.secondary,
+                    textColor: AppColors.textDark,
+                    height: 160,
+                    onTap: () => context.push('/citations'),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            _buildBentoCard(
+              context,
+              title: 'Entraînement Bac & TD',
+              subtitle: 'Pratique rédactionnelle avec ALECKSE',
+              icon: Icons.school_rounded,
+              color: AppColors.textDark,
+              height: 120,
+              onTap: () => context.push('/td'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildBentoCard(
+    BuildContext context, {
+    required String title,
+    required String subtitle,
+    required IconData icon,
+    required Color color,
+    Gradient? gradient,
+    required double height,
+    required VoidCallback onTap,
+    Color textColor = Colors.white,
+  }) {
+    return Container(
+      height: height,
+      decoration: BoxDecoration(
+        color: gradient == null ? color : null,
+        gradient: gradient,
+        borderRadius: BorderRadius.circular(28),
+        boxShadow: [
+          BoxShadow(
+            color: color.withOpacity(0.2),
+            blurRadius: 15,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(28),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: textColor.withOpacity(0.2),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(icon, color: textColor, size: 28),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: textColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        color: textColor.withOpacity(0.8),
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
