@@ -1,67 +1,88 @@
-# Journal de Bord - Philo Pocket
+# Journal de Bord - EduPocket Gabon (ex-Philo Pocket)
 
-Ce document sert de mémoire pour suivre la progression du développement de l'application Philo Pocket. 
-Il recense ce qui a été accompli et les étapes futures.
+Ce document sert de mémoire centrale pour suivre la progression du développement technique, juridique et stratégique d'EduPocket Gabon.
 
 ---
 
-## 📅 Bilan de la session (Aujourd'hui)
+## 📅 Session du 11 - 12 Octobre 2026 : Sécurité, Conformité Juridique, Verrouillage Pilote & Stratégie Recrutement
+
+### 1. 🛡️ Cybersécurité & Verrouillage Git (Secrets & Leak Prevention)
+- ✅ **Exclusion des secrets de production** : Inscription stricte de `.env`, `*.env`, `*.jks`, `*.keystore`, et `key.properties` dans `.gitignore` (au niveau du projet Flutter et à la racine).
+- ✅ **Nettoyage de l'historique d'index** : Suppression du fichier `.env` de l'index Git (`git rm --cached`).
+- ✅ **Migration du dépôt distant** : Renommage propre et synchronisation vers le nouveau dépôt GitHub public : `https://github.com/axseylle-bit/Edu_pocket.git`.
+
+### 2. 🔐 Sécurisation de la Base de Données (Supabase RLS & Fonctions RPC)
+- ✅ **Déploiement de la migration `20261011_security_and_privacy_hardening.sql`** :
+  - **Correction de la faille de lecture publique** : Suppression de la clause permissive `OR (auth.role() = 'authenticated')` sur la table `profils_eleves`.
+  - **Création de la fonction RPC sécurisée `lier_parent_eleve`** : Utilisation d'un code d'invitation parent généré cryptographiquement (`Random.secure()`).
+  - **Création de la fonction RPC `supprimer_mon_compte`** : Droit à l'oubli et purge irréversible des données conformément à la Loi APDPVP n° 025/2023.
+  - **Verrouillage anti-fraude des abonnements** : Restriction stricte des insertions/mises à jour dans la table `abonnements` au seul rôle serveur (`service_role`).
+
+### 3. ⚖️ Conformité Juridique, Éthique & APDPVP (Gabon)
+- ✅ **Rédaction des Mentions Légales & Charte Éthique** (`docs/MENTIONS_LEGALES_ET_CHARTE_ETHIQUE.md`) intégrant l'éthique de l'IA ALECKSE et le cadre légal gabonais (Ordonnance n° 0011/PR/2024 sur les droits d'auteur).
+- ✅ **Rédaction des CGU / CGV** (`docs/CGU_CGV_EDUPOCKET.md`) avec encadrement des micro-paiements Mobile Money (Airtel Money / Moov Money, réglementation CEMAC / COBAC).
+- ✅ **Rédaction de la Politique de Confidentialité APDPVP** (`docs/POLITIQUE_CONFIDENTIALITE_APDPVP.md`) et de la page web déployable (`docs/privacy.html`).
+- ✅ **Guide de formalisation administrative APDPVP** (`docs/GUIDE_DECLARATION_APDPVP_GABON.md`) pour le dépôt du dossier à Libreville.
+- ✅ **Modèle de contrat de partenariat enseignant** (`docs/CONTRAT_PARTENARIAT_ENSEIGNANT_EDUPOCKET.md`) sécurisant les 70 % de royalties sans requalification en contrat de travail.
+
+### 4. 📱 Application Mobile Flutter : Intégrations & Déploiement de l'Option B
+- ✅ **Composant visualiseur de documents in-app** (`LegalDocumentViewerScreen`) avec support Markdown et copie des fichiers légaux dans les assets de l'application.
+- ✅ **Écran d'authentification (`auth_screen.dart`)** : Ajout d'une case obligatoire d'acceptation des CGU et de la Politique de Confidentialité avec mention spéciale pour le consentement parental des mineurs et liens cliquables.
+- ✅ **Écran de profil (`profile_screen.dart`)** : Ajout de la section des documents légaux et du bouton de suppression irréversible du compte utilisateur connecté à la RPC Supabase.
+- ✅ **Verrouillage Phase Pilote (Option B) dans `role_selection_screen.dart`** :
+  - **Enseignant / Collègue** : Mis en avant tout en haut avec badge vert `ACCÈS OUVERT`, bouton interactif menant directement à l'espace enseignant (`/teacher-partner`).
+  - **Élève / Étudiant**, **Parent / Tuteur** et **Curieux** : Verrouillés avec cadenas et badge `OUVERTURE PROCHAINE`. Boîte modale explicative de la phase pilote et collecte d'intérêt sans frustration.
+- ✅ **Tests de non-régression** : `flutter test` validé à 100 %.
+
+### 5. 🎯 Stratégie de Recrutement des Enseignants & Quotas Provinciaux (606 Places)
+- ✅ **Élaboration du document stratégique** (`docs/STRATEGIE_RECRUTEMENT_ENSEIGNANTS_PIONNIERS.md`).
+- ✅ **Calibrage officiel du Grand Libreville (150 places)** :
+  - **100 places pour l'Enseignement Général** :
+    - *Piliers transversaux (6e ➔ Tle - 88 places)* : Français (18), Mathématiques (18), Physique-Chimie (14), SVT (14), Histoire-Géo/ÉC (14), Anglais (10).
+    - *Second cycle & Langues (12 places)* : Philosophie (4), Espagnol LV2 (4), SES Série B (4).
+  - **50 places pour l'Enseignement Technique & Professionnel** :
+    - *Tertiaire (20 places)* : G2 Compta (8), G3 Commerce (6), G1 Secrétariat (6).
+    - *Industriel (20 places)* : F3 Électrotech (6), F4 BTP (6), F2/TI Numérique (5), F1 Mécanique (3).
+    - *Filières stratégiques (10 places)* : Bois/Nkok (4), Maintenance (3), Transit (3).
+- ✅ **Grille nationale sur les 9 provinces du Gabon** : Application de la dégressivité démographique (Total national : **405 Général + 201 Technique = 606 places**).
+- ✅ **Kit de conviction rédigé** : Speech oral de 90 secondes en salle des profs, modèle de message WhatsApp prêt à copier-coller et argumentaire par matière.
+- ✅ **Méthode commando anti-goulot d'étranglement (Objectif Fin Décembre)** :
+  - Règle « 1 Enseignant = 1 Chapitre Officiel » (zéro travail perdu, couverture intégrale du programme en parallèle).
+  - Sélection sur « Micro-Test d'Éligibilité » (1 fiche + 5 QCM seulement) pour ne léser aucun candidat.
+
+---
+
+## 📅 Sessions Précédentes
 
 ### 1. Création de l'application d'administration (e-eduPocket)
 - ✅ Création complète du projet Flutter Web **e_edu_admin**.
 - ✅ Intégration de Supabase (Copie du `.env`, initialisation).
-- ✅ Mise en place du routage sécurisé avec `go_router` (redirection automatique si non connecté).
+- ✅ Mise en place du routage sécurisé avec `go_router`.
 - ✅ Création de l'interface de connexion et du Layout administrateur (`AdminDashboardScreen`).
-- ✅ Choix stratégique du nom : Abandon de "e-edu.ga" (risque institutionnel) au profit de **"e-eduPocket"**.
+- ✅ Choix stratégique du nom : **"e-eduPocket"**.
 
 ### 2. Pédagogie : Cours "L'Art et la Technique"
 - ✅ Intégration du cours `art_et_technique.md` dans la base de données locale (`assets/courses/`).
-- ✅ Respect absolu du canevas méthodologique de dissertation pour les Terminales (Fiche pédagogique, [Amorce], [Problématique], [Thèse], [Argument], [Exemple], etc.).
-- ✅ Fusion réussie de la philosophie classique (Kant, Alain, Dalí) et de la culture tech/gabonaise (Back-end/Front-end, Masque Punu).
+- ✅ Respect absolu du canevas méthodologique de dissertation pour les Terminales.
 
-### 3. Stratégie Produit (Espace Enseignants & EdTech)
-- ✅ Analyse critique de l'ouverture de l'application aux professeurs externes.
-- ✅ Validation du modèle **MVP d'abord** : Pas de développement complexe de CMS ou de rejet algorithmique des cours pour le moment.
-- ✅ Validation de la règle d'or EdTech : **Ne jamais faire payer le professeur**. L'enseignant est l'hameçon (prescripteur gratuit), l'élève est le client final (Premium).
-
-### 4. Intégration de l'Héritage "Excel Virtualis" (EVA)
-- ✅ Repositionnement d'**Excel Virtualis Academy (EVA)** : Abandon de l'ancien format (tutorat live 1h30/soir très coûteux) au profit d'un écosystème asynchrone propulsé par l'IA (ALECKSE).
-- ✅ **L'Écosystème e-eduPocket** : Philo Pocket n'est qu'une des disciplines. Le lancement de toutes les disciplines (Maths, Physique, Français, etc.) se fera en même temps.
-- ✅ **EVA comme "Sceau d'Excellence"** : Le système de progression de l'élève devient transversal. On n'accumule plus de simples XP, on gagne des **"Crédits EVA"**. Le statut académique global (initié, érudit, maître) est certifié par l'Excel Virtualis Academy et englobe l'assimilation de toutes les matières.
+### 3. Intégration des Ressources Officielles (IPN) & Identité Visuelle
+- ✅ Intégration du document "Progressions Nationales 2025-2026" via `SfPdfViewer`.
+- ✅ Validation et intégration du logo officiel Version 2 (Poche/bouclier bleu nuit avec flamme dorée).
 
 ---
 
-## 📅 Bilan des sessions précédentes
+## 🚀 Prochaines Étapes Opérationnelles (Octobre - Décembre 2026)
 
-### 1. Intégration des Ressources Officielles (IPN)
-- ✅ Ajout du document clé **"Progressions Nationales 2025-2026"**.
-- ✅ Modification du code (`ipn_resources_screen.dart`) pour rendre ce PDF accessible depuis la liste des ressources de l'application.
-- ✅ Correction d'un bug de nommage du fichier (`Progression nationales.pdf.pdf` ➡️ `progressions_nationales.pdf`) pour que l'application puisse l'afficher sans erreur (écran vide corrigé).
+### 1. Déploiement & Tests Pilotes Immédiats
+- [ ] Compiler l'APK Android Release (`flutter build apk --release`) pour distribution directe aux premiers collègues testeurs.
+- [ ] Activer GitHub Pages sur la branche `main` dossier `/docs` pour mise en ligne de la page de confidentialité.
+- [ ] Dépôt du dossier de déclaration préalable à l'APDPVP (Libreville).
 
-### 2. Refonte et Intégration du Logo
-- ✅ Création de plusieurs propositions de logos professionnels pour remplacer l'esquisse de départ (effet "poche de jean").
-- ✅ Choix final et validation de la **Version 2 (Premium)** : une poche/bouclier bleu nuit élégante avec une flamme dorée sans coutures.
-- ✅ Remplacement de l'icône temporaire sur l'écran de bienvenue (`main.dart`) par ce nouveau logo officiel.
-- ✅ Ajout du logo en haut du tableau de bord de l'élève (`student_dashboard_screen.dart`).
+### 2. Recrutement & Production Pédagogique (Novembre 2026)
+- [ ] Lancer l'appel à candidature WhatsApp avec la formule du micro-test (1 fiche + 5 QCM).
+- [ ] Attribuer les chapitres découpés aux enseignants retenus (1 prof = 1 chapitre).
+- [ ] Automatiser l'ingestion des cours Word dans la base de données Supabase.
 
----
-
-## 🚀 Reste à faire (Prochaines étapes)
-
-### 1. Finalisation UI / UX (Interface)
-- [ ] Ajuster la taille et les marges du logo sur différents écrans (mobile vs web).
-- [ ] Vérifier que tous les autres documents IPN s'ouvrent correctement via le `SfPdfViewer`.
-
-### 2. Base de données et Backend (Supabase)
-- ✅ Connecter l'application à la base de données (basé sur le fichier `supabase_schema.sql` existant).
-- ✅ Mettre en place l'authentification (Connexion/Inscription).
-- ✅ Sauvegarder la progression réelle de l'élève (dynamique depuis Supabase pour les tableaux de bord élève et parent).
-
-### 3. Fonctionnalités Cœur
-- [ ] Implémenter l'Assistant IA **ALECKSE** pour qu'il donne de vrais conseils contextuels (TD validé ✅).
-- [ ] Développer les écrans interactifs : **Quiz** (Fait ✅), **TD** (Fait ✅), et **TP**.
-- [ ] Lier le système de "Paliers" (Tiers) pour débloquer les contenus (comme les TP) en fonction des points XP accumulés.
-
-### 5. Mod�le �conomique (Redistribution Professeurs)
-- ? **Validation du Mod�le de Revenue Share** : Adoption d'un partage de revenus pour les professeurs contributeurs sur la marketplace e-eduPocket.
-- ? **R�partition valid�e** : 50% pour la plateforme (frais de serveurs, IA Gemini, frais CinetPay) et 50% pour le professeur. Variante possible : 70% pour le professeur s'il apporte lui-m�me l'�l�ve (parrainage/code promo). Cela fait du professeur le premier ambassadeur de l'application sans risque financier initial pour la structure.
+### 3. Lancement Public (Janvier 2027)
+- [ ] Déverrouiller les profils Élève et Parent dans `role_selection_screen.dart`.
+- [ ] Raccorder les passerelles marchandes Airtel Money / Moov Money pour les abonnements.
