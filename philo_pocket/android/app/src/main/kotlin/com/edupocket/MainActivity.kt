@@ -1,4 +1,4 @@
-package com.example.philo_pocket
+﻿package com.edupocket
 
 import io.flutter.embedding.android.FlutterActivity
 

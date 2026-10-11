@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../core/constants/app_colors.dart';
 
 class AdminLayout extends StatefulWidget {
@@ -33,7 +35,7 @@ class _AdminLayoutState extends State<AdminLayout> {
           : AppBar(
               backgroundColor: AppColors.sidebar,
               foregroundColor: Colors.white,
-              title: const Text('e-edu.ga Admin', style: TextStyle(fontWeight: FontWeight.bold)),
+              title: const Text('e-eduPocket Admin', style: TextStyle(fontWeight: FontWeight.bold)),
             ),
       drawer: isDesktop ? null : _buildDrawer(),
       body: Row(
@@ -79,7 +81,7 @@ class _AdminLayoutState extends State<AdminLayout> {
               const Icon(Icons.school_rounded, color: AppColors.accent, size: 48),
               const SizedBox(height: 16),
               const Text(
-                'e-edu.ga',
+                'e-eduPocket',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -131,7 +133,7 @@ class _AdminLayoutState extends State<AdminLayout> {
                   if (Scaffold.of(context).hasDrawer && Scaffold.of(context).isDrawerOpen) {
                     Navigator.pop(context);
                   }
-                  // TODO: GoRouter push
+                  context.go(item['route']);
                 },
               );
             },
@@ -144,8 +146,11 @@ class _AdminLayoutState extends State<AdminLayout> {
           leading: const Icon(Icons.logout_rounded, color: AppColors.secondary),
           title: const Text('Déconnexion', style: TextStyle(color: AppColors.secondary)),
           contentPadding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-          onTap: () {
-            // TODO: Auth logout
+          onTap: () async {
+            await Supabase.instance.client.auth.signOut();
+            if (context.mounted) {
+              context.go('/login');
+            }
           },
         ),
       ],

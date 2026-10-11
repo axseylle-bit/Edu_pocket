@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import '../../core/models/quiz_model.dart';
 import '../../core/constants/app_colors.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/services/supabase_service.dart';
 
 class QuizScreen extends StatefulWidget {
   final String? notion;
-  
+
   const QuizScreen({Key? key, this.notion}) : super(key: key);
 
   @override
@@ -17,7 +18,7 @@ class _QuizScreenState extends State<QuizScreen> {
   int _score = 0;
   bool _isAnswered = false;
   int? _selectedOptionIndex;
-  
+
   List<QuizQuestion> _getQuestions() {
     if (widget.notion != null && quizzesByNotion.containsKey(widget.notion)) {
       return quizzesByNotion[widget.notion]!;
@@ -28,14 +29,14 @@ class _QuizScreenState extends State<QuizScreen> {
     }
     return [];
   }
-  
+
   void _submitAnswer(int index, List<QuizQuestion> questions) {
     if (_isAnswered) return;
-    
+
     setState(() {
       _isAnswered = true;
       _selectedOptionIndex = index;
-      
+
       if (index == questions[_currentQuestionIndex].correctOptionIndex) {
         _score++;
       }
@@ -49,11 +50,14 @@ class _QuizScreenState extends State<QuizScreen> {
         _isAnswered = false;
         _selectedOptionIndex = null;
       } else {
+        if (widget.notion != null) {
+          SupabaseService().saveQuizScore(widget.notion!, _score, questions.length);
+        }
         _showResults(questions);
       }
     });
   }
-  
+
   void _showResults(List<QuizQuestion> questions) {
     showDialog(
       context: context,
@@ -91,33 +95,37 @@ class _QuizScreenState extends State<QuizScreen> {
   Color _getOptionColor(int index, int correctIndex) {
     if (!_isAnswered) return Colors.white;
     if (index == correctIndex) return Colors.green.shade100;
-    if (index == _selectedOptionIndex && index != correctIndex) return Colors.red.shade100;
+    if (index == _selectedOptionIndex && index != correctIndex)
+      return Colors.red.shade100;
     return Colors.white;
   }
-  
+
   Color _getOptionBorderColor(int index, int correctIndex) {
     if (!_isAnswered) return Colors.grey.shade300;
     if (index == correctIndex) return Colors.green;
-    if (index == _selectedOptionIndex && index != correctIndex) return Colors.red;
+    if (index == _selectedOptionIndex && index != correctIndex)
+      return Colors.red;
     return Colors.grey.shade300;
   }
 
   @override
   Widget build(BuildContext context) {
     final questions = _getQuestions();
-    
+
     if (questions.isEmpty) {
       return Scaffold(
         appBar: AppBar(title: const Text('Quiz')),
-        body: const Center(child: Text('Aucun quiz disponible pour cette notion.')),
+        body: const Center(
+            child: Text('Aucun quiz disponible pour cette notion.')),
       );
     }
-    
+
     final question = questions[_currentQuestionIndex];
-    
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Question ${_currentQuestionIndex + 1}/${questions.length}'),
+        title:
+            Text('Question ${_currentQuestionIndex + 1}/${questions.length}'),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -126,14 +134,16 @@ class _QuizScreenState extends State<QuizScreen> {
             return SingleChildScrollView(
               padding: const EdgeInsets.all(24.0),
               child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight - 48.0), // -48 for padding
+                constraints: BoxConstraints(
+                    minHeight: constraints.maxHeight - 48.0), // -48 for padding
                 child: IntrinsicHeight(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
                         question.questionText,
-                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 32),
@@ -146,9 +156,11 @@ class _QuizScreenState extends State<QuizScreen> {
                             child: Container(
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
-                                color: _getOptionColor(index, question.correctOptionIndex),
+                                color: _getOptionColor(
+                                    index, question.correctOptionIndex),
                                 border: Border.all(
-                                  color: _getOptionBorderColor(index, question.correctOptionIndex),
+                                  color: _getOptionBorderColor(
+                                      index, question.correctOptionIndex),
                                   width: 2,
                                 ),
                                 borderRadius: BorderRadius.circular(12),
@@ -178,11 +190,16 @@ class _QuizScreenState extends State<QuizScreen> {
                                 children: [
                                   Icon(Icons.info_outline, color: Colors.blue),
                                   SizedBox(width: 8),
-                                  Text('Explication', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
+                                  Text('Explication',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue)),
                                 ],
                               ),
                               const SizedBox(height: 8),
-                              Text(question.explanation, style: const TextStyle(color: Colors.black87)),
+                              Text(question.explanation,
+                                  style:
+                                      const TextStyle(color: Colors.black87)),
                             ],
                           ),
                         ),
@@ -192,11 +209,17 @@ class _QuizScreenState extends State<QuizScreen> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primary,
                             padding: const EdgeInsets.symmetric(vertical: 16),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
                           ),
                           child: Text(
-                            _currentQuestionIndex < questions.length - 1 ? 'Question suivante' : 'Voir les résultats',
-                            style: const TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
+                            _currentQuestionIndex < questions.length - 1
+                                ? 'Question suivante'
+                                : 'Voir les résultats',
+                            style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],

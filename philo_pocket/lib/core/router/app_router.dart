@@ -6,28 +6,32 @@ import '../../screens/auth/role_selection_screen.dart';
 import '../../screens/auth/profile_setup_screen.dart';
 import '../../screens/auth/progression_setup_screen.dart';
 import '../../screens/auth/subscription_choice_screen.dart';
+import '../../screens/auth/teacher_partner_screen.dart';
 import '../../screens/chat/aleckse_chat_screen.dart';
+import '../../screens/dashboard/discipline_selection_screen.dart';
 import '../../screens/main/main_navigation_screen.dart';
+import '../../screens/cours/philo_pocket_screen.dart';
 import '../../screens/dashboard/parent_dashboard_screen.dart';
 import '../../screens/cours/cours_screen.dart';
 import '../../screens/cours/course_detail_screen.dart';
 import '../../screens/cours/course_viewer_screen.dart';
+import '../../screens/cours/myth_3d_viewer_screen.dart';
 import '../../screens/quiz/quiz_screen.dart';
 import '../../screens/td/td_screen.dart';
 import '../../screens/tp/tp_screen.dart';
 import '../../screens/citations/citations_screen.dart';
 import '../../screens/parent/rapport_detaille_screen.dart';
 import '../../screens/resources/ipn_resources_screen.dart';
-
-import '../../core/services/supabase_service.dart';
+import '../../screens/onboarding/general_intro_screen.dart';
+import '../../screens/teacher/teacher_grading_screen.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/welcome',
-  redirect: (context, state) {
-    // Bypassed for local testing (No Supabase backend yet)
-    return null;
-  },
   routes: [
+    GoRoute(
+      path: '/grading',
+      builder: (context, state) => const TeacherGradingScreen(),
+    ),
     GoRoute(
       path: '/',
       builder: (context, state) => const AuthScreen(),
@@ -46,11 +50,18 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: '/subscription',
-      builder: (context, state) => const SubscriptionChoiceScreen(),
+      builder: (context, state) {
+        final discipline = state.uri.queryParameters['discipline'] ?? 'philo';
+        return SubscriptionChoiceScreen(targetDiscipline: discipline);
+      },
     ),
     GoRoute(
       path: '/role-selection',
       builder: (context, state) => const RoleSelectionScreen(),
+    ),
+    GoRoute(
+      path: '/teacher-partner',
+      builder: (context, state) => const TeacherPartnerScreen(),
     ),
     GoRoute(
       path: '/profile-setup',
@@ -58,7 +69,18 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: '/progression-setup',
-      builder: (context, state) => const ProgressionSetupScreen(),
+      builder: (context, state) {
+        final niveau = state.uri.queryParameters['niveau'];
+        final serie = state.uri.queryParameters['serie'];
+        return ProgressionSetupScreen(
+          initialNiveau: niveau,
+          initialSerie: serie,
+        );
+      },
+    ),
+    GoRoute(
+      path: '/hub',
+      builder: (context, state) => const DisciplineSelectionScreen(),
     ),
     GoRoute(
       path: '/main',
@@ -67,6 +89,10 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/parent',
       builder: (context, state) => const ParentDashboardScreen(),
+    ),
+    GoRoute(
+      path: '/philo-pocket',
+      builder: (context, state) => const PhiloPocketScreen(),
     ),
     GoRoute(
       path: '/cours',
@@ -84,6 +110,13 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) {
         final notion = state.uri.queryParameters['notion'] ?? 'Notion';
         return CourseViewerScreen(notion: notion);
+      },
+    ),
+    GoRoute(
+      path: '/myth-3d',
+      builder: (context, state) {
+        final notion = state.uri.queryParameters['notion'] ?? 'Notion';
+        return Myth3DViewerScreen(notion: notion);
       },
     ),
     GoRoute(
@@ -110,7 +143,10 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: '/rapport',
-      builder: (context, state) => const RapportDetailleScreen(),
+      builder: (context, state) {
+        final childData = state.extra as Map<String, dynamic>?;
+        return RapportDetailleScreen(childData: childData);
+      },
     ),
     GoRoute(
       path: '/ipn',
@@ -132,6 +168,10 @@ final GoRouter appRouter = GoRouter(
           methodologyId: methodologyId,
         );
       },
+    ),
+    GoRoute(
+      path: '/general-intro',
+      builder: (context, state) => const GeneralIntroScreen(),
     ),
   ],
 );

@@ -1,5 +1,15 @@
 # MODULE 1 : Genèse de la philosophie : du mythe à la rationalité
 
+Avant d'être une discipline scolaire, la philosophie fut d'abord une **rupture** : la rupture avec le mythe. Or, ce mythe n'appartient à aucun peuple en particulier — il est **le patrimoine de toutes les cultures et de toutes les nations**. Grecs, Égyptiens, peuples d'Afrique, d'Asie ou d'Amérique : chaque civilisation a forgé ses propres récits pour expliquer l'origine du monde, l'apparition du mal ou le destin des hommes. Partout, avant la raison, il y a eu le récit. Le **mythe** répondait à tout sans jamais se justifier. On ne le discutait pas ; on y croyait.
+
+C'est précisément contre cette évidence indiscutable que la philosophie va s'élever. Un jour, en Grèce antique, quelques esprits ont osé poser une question insolente : *et si nous exigions des preuves ?* Ce geste fondateur — remplacer le récit sacré par l'argument rationnel — porte un nom : c'est la genèse de la philosophie. Penser philosophiquement, c'est donc refuser la réponse imposée pour construire la sienne.
+
+Cependant, une fois la raison libérée du mythe, encore fallait-il s'entendre sur la direction à prendre. Qu'est-ce qui fonde la réalité : la matière ou l'esprit ? Le véritable savoir provient-il de l'expérience concrète ou de la seule force de la raison ? De ces questionnements passionnés sont nés les grands courants philosophiques — **matérialisme, idéalisme, empirisme, rationalisme** — qui sont autant de manières différentes d'habiter cette liberté intellectuelle nouvellement conquise.
+
+Ce premier segment n'est donc pas un simple chapitre d'histoire : c'est l'acte de naissance de votre propre capacité à douter, à questionner et, ultimement, à penser par vous-même.
+
+---
+
 ## 1. Fiche Pédagogique
 | Élément | Description |
 | :--- | :--- |

@@ -24,9 +24,9 @@ class CourseDetailScreen extends StatelessWidget {
                   Text(
                     'Introduction à $title',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primary,
-                    ),
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.primary,
+                        ),
                   ),
                   const SizedBox(height: 16),
                   const Text(
@@ -38,13 +38,14 @@ class CourseDetailScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: AppColors.secondary.withOpacity(0.2),
+                      color: AppColors.secondary.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(color: AppColors.secondary),
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.lightbulb_outline, color: AppColors.primary),
+                        const Icon(Icons.lightbulb_outline,
+                            color: AppColors.primary),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
@@ -67,7 +68,7 @@ class CourseDetailScreen extends StatelessWidget {
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withValues(alpha: 0.05),
                     offset: const Offset(0, -4),
                     blurRadius: 10,
                   ),
@@ -90,7 +91,10 @@ class CourseDetailScreen extends StatelessWidget {
                   children: [
                     Text(
                       'Évaluer mes connaissances (Quiz)',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
                     SizedBox(width: 8),
                     Icon(Icons.psychology, color: Colors.white),

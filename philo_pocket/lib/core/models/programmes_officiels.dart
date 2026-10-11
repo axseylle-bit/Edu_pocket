@@ -1,5 +1,6 @@
 class ProgrammeOfficiel {
-  static Map<String, List<String>> getNotions(String niveau, String serie, int trimestre) {
+  static Map<String, List<String>> getNotions(
+      String niveau, String serie, int trimestre) {
     if (niveau == '1ere') {
       if (serie == 'A1' || serie == 'A2') {
         return _premiereA(trimestre);
@@ -26,8 +27,12 @@ class ProgrammeOfficiel {
     switch (trimestre) {
       case 1:
         return {
-          'Mythe et Philosophie': ['Genèse de la philosophie : du mythe à la rationalité'],
-          'Quelques grands courants philosophiques': ['Le matérialisme, l\'idéalisme, l\'empirisme et le rationalisme'],
+          'Mythe et Philosophie': [
+            'Genèse de la philosophie : du mythe à la rationalité'
+          ],
+          'Quelques grands courants philosophiques': [
+            'Le matérialisme, l\'idéalisme, l\'empirisme et le rationalisme'
+          ],
           'Méthodologie': ['Le sujet-question'],
           'Croyance et Savoir': [
             'La sorcellerie et le fétiche',
@@ -73,8 +78,12 @@ class ProgrammeOfficiel {
     switch (trimestre) {
       case 1:
         return {
-          'Mythe et Philosophie': ['Genèse de la philosophie : du mythe à la rationalité'],
-          'Quelques grands courants philosophiques': ['Le matérialisme, l\'idéalisme, l\'empirisme et le rationalisme'],
+          'Mythe et Philosophie': [
+            'Genèse de la philosophie : du mythe à la rationalité'
+          ],
+          'Quelques grands courants philosophiques': [
+            'Le matérialisme, l\'idéalisme, l\'empirisme et le rationalisme'
+          ],
           'Méthodologie': ['Le sujet-question'],
           'Croyance et Savoir': [
             'La sorcellerie et le fétiche',
@@ -118,12 +127,13 @@ class ProgrammeOfficiel {
     switch (trimestre) {
       case 1:
         return {
-          'Mythe et Philosophie': ['Genèse de la philosophie : du mythe à la rationalité'],
-          'Quelques grands courants philosophiques': ['Le matérialisme, l\'idéalisme, l\'empirisme et le rationalisme'],
-          'Croyance et Savoir': [
-            'La sorcellerie',
-            'Le rêve et la réalité'
+          'Mythe et Philosophie': [
+            'Genèse de la philosophie : du mythe à la rationalité'
           ],
+          'Quelques grands courants philosophiques': [
+            'Le matérialisme, l\'idéalisme, l\'empirisme et le rationalisme'
+          ],
+          'Croyance et Savoir': ['La sorcellerie', 'Le rêve et la réalité'],
           'Méthodologie': ['Le sujet-question'],
           'Être et Pensée': [
             'La nature et l\'écologie',
@@ -144,10 +154,7 @@ class ProgrammeOfficiel {
         };
       case 3:
         return {
-          'Science et Vérité': [
-            'L\'expérimentation',
-            'La logique'
-          ],
+          'Science et Vérité': ['L\'expérimentation', 'La logique'],
           'Méthodologie': [
             'Renforcement des acquis méthodologiques (sujet-question, sujet-citation et sujet-texte)',
             'Évaluation type bac'
@@ -258,10 +265,7 @@ class ProgrammeOfficiel {
           'Culture et Civilisation (Partie 2)': [
             'Le développement et le progrès'
           ],
-          'Le Relatif et L\'Absolu': [
-            'L\'existence et la mort',
-            'L\'histoire'
-          ],
+          'Le Relatif et L\'Absolu': ['L\'existence et la mort', 'L\'histoire'],
           'Méthodologie   ': ['Étude d\'une œuvre en partie'],
           'La Raison et le Réel': [
             'La démonstration',
@@ -302,15 +306,9 @@ class ProgrammeOfficiel {
             'Les passions'
           ],
           'Méthodologie': ['Le sujet-question'],
-          'L\'Individu et la Société ': [
-            'Autrui',
-            'L\'ethnie et la nation'
-          ],
+          'L\'Individu et la Société ': ['Autrui', 'L\'ethnie et la nation'],
           'Méthodologie ': ['Le sujet-citation'],
-          'Culture et Civilisation (Partie 1)': [
-            'Le langage',
-            'Le travail'
-          ],
+          'Culture et Civilisation (Partie 1)': ['Le langage', 'Le travail'],
           'Méthodologie  ': ['Le sujet-texte']
         };
       case 2:
@@ -331,9 +329,7 @@ class ProgrammeOfficiel {
             'Les sciences du vivant',
             'La vérité'
           ],
-          'La Politique et la Morale (Partie 1)': [
-            'L\'État'
-          ]
+          'La Politique et la Morale (Partie 1)': ['L\'État']
         };
       case 3:
         return {

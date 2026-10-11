@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/services/ai_service.dart';
+import '../../core/constants/notion_prompts.dart';
 
 class AleckseChatScreen extends StatefulWidget {
   final String? mode;
@@ -31,18 +32,31 @@ class _AleckseChatScreenState extends State<AleckseChatScreen> {
   @override
   void initState() {
     super.initState();
-    _initChat();
-    _initAi();
+    final initialMsg = _initChat();
+    _initAi(initialMsg);
   }
 
-  Future<void> _initAi() async {
+  Future<void> _initAi(String initialMessage) async {
     String? extraContext = widget.subject;
-    if (widget.mode == 'td') {
-      extraContext = "Exercice de type ${widget.type}. Le sujet est : ${widget.subject}";
-    }
     
+    if (widget.notion != null) {
+      final notionContext = NotionPrompts.getPromptForNotion(widget.notion);
+      extraContext = (extraContext == null) 
+          ? "NOTION ABORDÉE : ${widget.notion}\nCONSIGNES SPÉCIFIQUES : $notionContext"
+          : "$extraContext\n\nNOTION ABORDÉE : ${widget.notion}\nCONSIGNES SPÉCIFIQUES : $notionContext";
+    }
+
+    if (widget.mode == 'td') {
+      extraContext =
+          "Exercice de type ${widget.type}. Le sujet est : ${widget.subject}\n\n$extraContext";
+    }
+
     try {
-      await _aiService.init(widget.methodologyId, extraContext);
+      await _aiService.init(
+        widget.methodologyId,
+        extraContext,
+        initialModelMessage: initialMessage,
+      );
     } catch (e) {
       if (mounted) {
         setState(() {
@@ -55,23 +69,27 @@ class _AleckseChatScreenState extends State<AleckseChatScreen> {
     }
   }
 
-  void _initChat() {
+  String _initChat() {
+    String firstMessage;
     if (widget.mode == 'td' && widget.subject != null) {
-      _messages.add({
-        'isMe': false,
-        'text': 'Excellent choix ! Nous allons traiter ce ${widget.type ?? 'sujet'} :\n\n"${widget.subject}"\n\nJe vais t\'aider pas à pas. Pour commencer, propose-moi une idée d\'amorce pour l\'introduction.',
-      });
+      firstMessage =
+          'Excellent choix ! Nous allons traiter ce ${widget.type ?? 'sujet'} :\n\n"${widget.subject}"\n\nJe vais t\'aider pas à pas. Pour commencer, propose-moi une idée d\'amorce pour l\'introduction.';
     } else {
-      _messages.add({
-        'isMe': false,
-        'text': 'Bonjour ! Je suis Aleckse, ta professeure virtuelle. Pose-moi une question sur ton cours de philosophie !',
-      });
+      firstMessage =
+          'Bonjour ! Je suis Aleckse, ta professeure virtuelle. Pose-moi une question sur ton cours de philosophie !';
     }
+
+    _messages.add({
+      'isMe': false,
+      'text': firstMessage,
+    });
+
+    return firstMessage;
   }
 
   Future<void> _sendMessage() async {
     if (_messageController.text.trim().isEmpty) return;
-    
+
     final question = _messageController.text;
 
     setState(() {
@@ -87,7 +105,7 @@ class _AleckseChatScreenState extends State<AleckseChatScreen> {
     final response = await _aiService.sendMessage(question);
 
     if (!mounted) return;
-    
+
     setState(() {
       _isLoading = false;
       if (response != null) {
@@ -116,7 +134,9 @@ class _AleckseChatScreenState extends State<AleckseChatScreen> {
                 children: [
                   const Text('Aleckse', style: TextStyle(fontSize: 16)),
                   if (widget.mode == 'td')
-                    const Text('Entraînement TD', style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal)),
+                    const Text('Entraînement TD',
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.normal)),
                 ],
               ),
             ),
@@ -134,7 +154,8 @@ class _AleckseChatScreenState extends State<AleckseChatScreen> {
                   context: context,
                   builder: (context) => AlertDialog(
                     title: const Text('Méthodologie Officielle'),
-                    content: Text('Le document "${widget.methodologyId}" sera chargé ici pour t\'aider à rédiger selon les critères de l\'IPN.\n\nALECKSE utilisera également ce document pour évaluer et corriger tes réponses de manière stricte et bienveillante.'),
+                    content: Text(
+                        'Le document "${widget.methodologyId}" sera chargé ici pour t\'aider à rédiger selon les critères de l\'IPN.\n\nALECKSE utilisera également ce document pour évaluer et corriger tes réponses de manière stricte et bienveillante.'),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(context),
@@ -161,24 +182,27 @@ class _AleckseChatScreenState extends State<AleckseChatScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: 20, 
-                          height: 20, 
+                          width: 20,
+                          height: 20,
                           child: CircularProgressIndicator(strokeWidth: 2),
                         ),
                         SizedBox(width: 16),
-                        Text("Aleckse réfléchit...", style: TextStyle(fontStyle: FontStyle.italic)),
+                        Text("Aleckse réfléchit...",
+                            style: TextStyle(fontStyle: FontStyle.italic)),
                       ],
                     ),
                   );
                 }
-                
+
                 final message = _messages[index];
                 final isMe = message['isMe'] as bool;
                 return Align(
-                  alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+                  alignment:
+                      isMe ? Alignment.centerRight : Alignment.centerLeft,
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 12),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 12),
                     decoration: BoxDecoration(
                       color: isMe ? AppColors.primary : Colors.grey.shade200,
                       borderRadius: BorderRadius.circular(16).copyWith(
@@ -206,7 +230,7 @@ class _AleckseChatScreenState extends State<AleckseChatScreen> {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: Colors.black.withValues(alpha: 0.05),
                   blurRadius: 10,
                   offset: const Offset(0, -5),
                 ),
@@ -225,7 +249,8 @@ class _AleckseChatScreenState extends State<AleckseChatScreen> {
                       ),
                       filled: true,
                       fillColor: Colors.grey.shade100,
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 12),
                     ),
                     onSubmitted: (_) => _sendMessage(),
                   ),

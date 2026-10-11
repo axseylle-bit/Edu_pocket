@@ -15,14 +15,15 @@ class _CoursScreenState extends State<CoursScreen> {
   String _niveau = '1ere';
   String _serie = 'A1';
   bool _isLoading = true;
+  List<String> _readCourses = [];
 
   @override
   void initState() {
     super.initState();
-    _loadProfile();
+    _loadData();
   }
 
-  Future<void> _loadProfile() async {
+  Future<void> _loadData() async {
     try {
       final data = await SupabaseService().getStudentProfile();
       if (data != null) {
@@ -32,6 +33,13 @@ class _CoursScreenState extends State<CoursScreen> {
             _serie = data['serie'] ?? 'A1';
           });
         }
+      }
+      
+      final readCourses = await SupabaseService().getReadCourses();
+      if (mounted) {
+        setState(() {
+          _readCourses = readCourses;
+        });
       }
     } catch (e) {
       debugPrint('Erreur de chargement du profil: $e');
@@ -69,7 +77,8 @@ class _CoursScreenState extends State<CoursScreen> {
     );
   }
 
-  Widget _buildTrimestreSection(BuildContext context, String title, Map<String, List<String>> segmentsMap) {
+  Widget _buildTrimestreSection(BuildContext context, String title,
+      Map<String, List<String>> segmentsMap) {
     if (segmentsMap.isEmpty) return const SizedBox.shrink();
 
     return Column(
@@ -101,26 +110,37 @@ class _CoursScreenState extends State<CoursScreen> {
               shape: const Border(),
               title: Text(
                 segment,
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
               children: notions.map((notion) {
                 return InkWell(
-                  onTap: () {
-                    context.push(Uri(path: '/course-viewer', queryParameters: {'notion': notion}).toString());
+                  onTap: () async {
+                    await context.push(Uri(
+                        path: '/course-viewer',
+                        queryParameters: {'notion': notion}).toString());
+                    // Recharger après retour pour mettre à jour la coche
+                    _loadData();
                   },
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 12.0),
                     child: Row(
                       children: [
-                        Icon(Icons.menu_book_rounded, size: 20, color: AppColors.accent),
+                        Icon(
+                          _readCourses.contains(notion) ? Icons.check_circle : Icons.menu_book_rounded,
+                          size: 20, 
+                          color: _readCourses.contains(notion) ? Colors.green : AppColors.accent
+                        ),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            notion, 
+                            notion,
                             style: const TextStyle(fontSize: 14),
                           ),
                         ),
-                        Icon(Icons.chevron_right, size: 20, color: Colors.grey.shade400),
+                        Icon(Icons.chevron_right,
+                            size: 20, color: Colors.grey.shade400),
                       ],
                     ),
                   ),

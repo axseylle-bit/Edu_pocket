@@ -4,9 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/providers/student_provider.dart';
+import '../../core/models/student_level.dart';
 
-class StudentDashboardScreen extends ConsumerWidget {
-  const StudentDashboardScreen({Key? key}) : super(key: key);
+class PhiloPocketScreen extends ConsumerWidget {
+  const PhiloPocketScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,22 +22,25 @@ class StudentDashboardScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Hero Section
-              _buildHeroSection(context, ref, 1, tier.name)
+              _buildHeroSection(context, ref, studentState)
                   .animate()
                   .fade(duration: 600.ms)
                   .slideY(begin: -0.1, end: 0, curve: Curves.easeOutQuad),
-                  
+
               const SizedBox(height: 32),
-              
+
               Text(
                 'Actions Rapides',
                 style: Theme.of(context).textTheme.titleLarge,
               ).animate().fade(delay: 200.ms).slideX(begin: -0.1),
-              
+
               const SizedBox(height: 20),
-              
+
               // Bento Box Layout
-              _buildBentoBox(context).animate().fade(delay: 300.ms).scale(begin: const Offset(0.95, 0.95)),
+              _buildBentoBox(context, tier)
+                  .animate()
+                  .fade(delay: 300.ms)
+                  .scale(begin: const Offset(0.95, 0.95)),
             ],
           ),
         ),
@@ -44,7 +48,10 @@ class StudentDashboardScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildHeroSection(BuildContext context, WidgetRef ref, int level, String tierName) {
+  Widget _buildHeroSection(BuildContext context, WidgetRef ref, StudentState studentState) {
+    final tierName = studentState.tier.name;
+    final userName = studentState.userName;
+    final globalProgress = studentState.globalProgress;
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -52,7 +59,7 @@ class StudentDashboardScreen extends ConsumerWidget {
         borderRadius: BorderRadius.circular(32),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.3),
+            color: AppColors.primary.withValues(alpha: 0.3),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -69,22 +76,27 @@ class StudentDashboardScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Bonjour Axelle 👋',
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      'Bonjour $userName 👋',
+                      style:
+                          Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
                     ),
                     const SizedBox(height: 8),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
+                        color: Colors.white.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
                         'Abonnement $tierName',
-                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 12),
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12),
                       ),
                     ),
                   ],
@@ -98,7 +110,8 @@ class StudentDashboardScreen extends ConsumerWidget {
                   padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white.withOpacity(0.5), width: 2),
+                    border: Border.all(
+                        color: Colors.white.withValues(alpha: 0.5), width: 2),
                   ),
                   child: const CircleAvatar(
                     radius: 32,
@@ -112,7 +125,8 @@ class StudentDashboardScreen extends ConsumerWidget {
           const SizedBox(height: 32),
           Text(
             'Progression Globale',
-            style: TextStyle(color: Colors.white.withOpacity(0.9), fontSize: 14),
+            style: TextStyle(
+                color: Colors.white.withValues(alpha: 0.9), fontSize: 14),
           ),
           const SizedBox(height: 12),
           Row(
@@ -121,37 +135,38 @@ class StudentDashboardScreen extends ConsumerWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: LinearProgressIndicator(
-                    value: 0.65,
-                    backgroundColor: Colors.white.withOpacity(0.2),
-                    valueColor: const AlwaysStoppedAnimation<Color>(AppColors.secondary),
+                    value: globalProgress,
+                    backgroundColor: Colors.white.withValues(alpha: 0.2),
+                    valueColor: const AlwaysStoppedAnimation<Color>(
+                        AppColors.secondary),
                     minHeight: 14,
                   ),
                 ),
               ),
               const SizedBox(width: 16),
               Text(
-                '65%',
+                '${(globalProgress * 100).toInt()}%',
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
             ],
           ),
           const SizedBox(height: 8),
           Text(
-            'Niveau $level • Prochain palier dans 350 pts',
-            style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 13),
+            'Niveau ${studentState.niveau} ${studentState.serie} • Prochain palier dans 350 pts',
+            style: TextStyle(
+                color: Colors.white.withValues(alpha: 0.8), fontSize: 13),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildBentoBox(BuildContext context) {
+  Widget _buildBentoBox(BuildContext context, SubscriptionTier tier) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final isWeb = constraints.maxWidth > 600;
         return Column(
           children: [
             Row(
@@ -160,8 +175,8 @@ class StudentDashboardScreen extends ConsumerWidget {
                   flex: 3,
                   child: _buildBentoCard(
                     context,
-                    title: 'Programme IPN',
-                    subtitle: 'Tous les cours',
+                    title: 'Mes cours',
+                    subtitle: 'Programme de classe',
                     icon: Icons.menu_book_rounded,
                     color: AppColors.primary,
                     gradient: AppColors.primaryGradient,
@@ -179,10 +194,21 @@ class StudentDashboardScreen extends ConsumerWidget {
                     icon: Icons.quiz_rounded,
                     color: AppColors.accent,
                     height: 180,
-                    onTap: () => context.push('/quiz?notion=Genèse de la philosophie : du mythe à la rationalité'),
+                    onTap: () => context.push(
+                        '/quiz?notion=Genèse de la philosophie : du mythe à la rationalité'),
                   ),
                 ),
               ],
+            ),
+            const SizedBox(height: 16),
+            _buildBentoCard(
+              context,
+              title: 'Documents IPN',
+              subtitle: 'Méthodologies, progressions et grilles officielles',
+              icon: Icons.picture_as_pdf_rounded,
+              color: const Color(0xFF9C3B3B),
+              height: 124,
+              onTap: () => context.push('/ipn'),
             ),
             const SizedBox(height: 16),
             Row(
@@ -211,20 +237,42 @@ class StudentDashboardScreen extends ConsumerWidget {
                     color: AppColors.secondary,
                     textColor: AppColors.textDark,
                     height: 160,
+                    isLocked: tier.level < 2, // Essentiel requis
                     onTap: () => context.push('/citations'),
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 16),
-            _buildBentoCard(
-              context,
-              title: 'Entraînement Bac & TD',
-              subtitle: 'Pratique rédactionnelle avec ALECKSE',
-              icon: Icons.school_rounded,
-              color: AppColors.textDark,
-              height: 120,
-              onTap: () => context.push('/td'),
+            Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: _buildBentoCard(
+                    context,
+                    title: 'TD & Bac',
+                    subtitle: 'Pratique avec ALECKSE',
+                    icon: Icons.school_rounded,
+                    color: AppColors.textDark,
+                    height: 140,
+                    onTap: () => context.push('/td'),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  flex: 2,
+                  child: _buildBentoCard(
+                    context,
+                    title: 'TP & Ateliers',
+                    subtitle: 'Pratique intensive',
+                    icon: Icons.construction_rounded,
+                    color: Colors.blueGrey,
+                    height: 140,
+                    isLocked: !tier.canAccessTP,
+                    onTap: () => context.push('/tp'),
+                  ),
+                ),
+              ],
             ),
           ],
         );
@@ -242,6 +290,7 @@ class StudentDashboardScreen extends ConsumerWidget {
     required double height,
     required VoidCallback onTap,
     Color textColor = Colors.white,
+    bool isLocked = false,
   }) {
     return Container(
       height: height,
@@ -251,7 +300,7 @@ class StudentDashboardScreen extends ConsumerWidget {
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: color.withOpacity(0.2),
+            color: color.withValues(alpha: 0.2),
             blurRadius: 15,
             offset: const Offset(0, 8),
           ),
@@ -261,44 +310,63 @@ class StudentDashboardScreen extends ConsumerWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(28),
-          onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: textColor.withOpacity(0.2),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(icon, color: textColor, size: 28),
-                ),
-                Column(
+          onTap: isLocked ? () => context.push('/subscription') : onTap,
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      title,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: textColor,
-                        fontWeight: FontWeight.bold,
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: textColor.withValues(alpha: 0.2),
+                        shape: BoxShape.circle,
                       ),
+                      child: Icon(icon, color: textColor, size: 28),
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      subtitle,
-                      style: TextStyle(
-                        color: textColor.withOpacity(0.8),
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: textColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          subtitle,
+                          style: TextStyle(
+                            color: textColor.withValues(alpha: 0.8),
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+              if (isLocked)
+                Positioned(
+                  top: 16,
+                  right: 16,
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withValues(alpha: 0.4),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.lock_rounded,
+                        color: Colors.amber, size: 20),
+                  ),
+                ),
+            ],
           ),
         ),
       ),

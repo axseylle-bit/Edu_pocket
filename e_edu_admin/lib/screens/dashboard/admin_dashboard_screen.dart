@@ -20,7 +20,7 @@ class AdminDashboardScreen extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         const Text(
-          'Voici les performances globales de e-edu.ga aujourd\'hui.',
+          'Voici les performances globales de e-eduPocket aujourd\'hui.',
           style: TextStyle(color: AppColors.textMuted, fontSize: 16),
         ),
         const SizedBox(height: 32),

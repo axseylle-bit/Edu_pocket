@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS public.profils_eleves (
     utilisateur_id UUID PRIMARY KEY REFERENCES public.utilisateurs(id) ON DELETE CASCADE,
     etablissement VARCHAR(150),
     niveau VARCHAR(20) CHECK (niveau IN ('1ere', 'Tle')),
-    serie VARCHAR(10) CHECK (serie IN ('A1', 'A2', 'B', 'C', 'D')),
+    serie VARCHAR(10) CHECK (serie IN ('A1', 'A2', 'B', 'C', 'D', 'S')),
     code_invitation_parent VARCHAR(10) UNIQUE,
     date_expiration_code TIMESTAMP WITH TIME ZONE
 );
@@ -163,3 +163,17 @@ FOR SELECT USING (
         WHERE parent_id = auth.uid() AND eleve_id = public.suivi_progression.eleve_id
     )
 );
+
+-- Permettre aux utilisateurs d'insérer et modifier leur propre profil
+CREATE POLICY "Inserer son profil" ON public.utilisateurs 
+FOR INSERT WITH CHECK (auth.uid() = id);
+
+CREATE POLICY "Mettre a jour son profil" ON public.utilisateurs 
+FOR UPDATE USING (auth.uid() = id);
+
+CREATE POLICY "Inserer profil eleve" ON public.profils_eleves 
+FOR INSERT WITH CHECK (auth.uid() = utilisateur_id);
+
+CREATE POLICY "Mettre a jour profil eleve" ON public.profils_eleves 
+FOR UPDATE USING (auth.uid() = utilisateur_id);
+

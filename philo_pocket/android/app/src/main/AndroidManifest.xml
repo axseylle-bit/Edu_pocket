@@ -2,7 +2,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     
     <application
-        android:label="philo_pocket"
+        android:label="eduPocket"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
-import '../../core/theme/app_theme.dart';
 import '../../core/services/supabase_service.dart';
 import 'package:go_router/go_router.dart';
+import '../legal/legal_document_viewer_screen.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -14,10 +14,23 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   bool _isLogin = true;
   bool _isLoading = false;
+  bool _acceptTerms = false;
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _supabase = SupabaseService();
+
+  @override
+  void initState() {
+    super.initState();
+    _checkExistingAuth();
+  }
+
+  Future<void> _checkExistingAuth() async {
+    if (_supabase.isAuthenticated) {
+      await _routeAuthenticatedUser();
+    }
+  }
 
   @override
   void dispose() {
@@ -27,24 +40,49 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   Future<void> _submit() async {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text;
+
+    if (!email.contains('@') || !email.contains('.')) {
+      _showError('Saisissez une adresse e-mail valide.');
+      return;
+    }
+    if (password.length < 6) {
+      _showError('Le mot de passe doit contenir au moins 6 caractères.');
+      return;
+    }
+
+    if (!_isLogin && !_acceptTerms) {
+      _showError(
+        'Veuillez accepter les CGU et la Politique de confidentialité (avec accord parental pour les mineurs).',
+      );
+      return;
+    }
+
     setState(() => _isLoading = true);
     try {
-      final email = _emailController.text.trim();
-      final password = _passwordController.text.trim();
-
-      try {
-        if (_isLogin) {
-          await _supabase.signInWithEmail(email, password);
+      if (_isLogin) {
+        await _supabase.signInWithEmail(email, password);
+        await _routeAuthenticatedUser();
+      } else {
+        final response = await _supabase.signUpWithEmail(
+          email,
+          password,
+          'Utilisateur',
+        );
+        if (response.session == null) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(
+                  'Compte créé. Vérifiez votre e-mail avant de vous connecter.',
+                ),
+              ),
+            );
+          }
         } else {
-          await _supabase.signUpWithEmail(email, password, 'Utilisateur');
+          await _routeAuthenticatedUser();
         }
-      } catch (e) {
-        // Mode test MVP : On ignore l'erreur Supabase pour te laisser tester l'application sans base de données
-        print("Erreur Supabase ignorée pour le test: $e");
-      }
-      
-      if (mounted) {
-        context.go('/role-selection');
       }
     } catch (e) {
       if (mounted) {
@@ -61,6 +99,36 @@ class _AuthScreenState extends State<AuthScreen> {
         setState(() => _isLoading = false);
       }
     }
+  }
+
+  Future<void> _routeAuthenticatedUser() async {
+    final role = await _supabase.getCurrentUserRole();
+    if (!mounted) return;
+
+    if (role == 'parent') {
+      context.go('/parent');
+      return;
+    }
+
+    if (role == 'enseignant') {
+      context.go('/grading');
+      return;
+    }
+
+    if (role == 'eleve') {
+      final profile = await _supabase.getStudentProfile();
+      if (!mounted) return;
+      context.go(profile?['niveau'] == null ? '/profile-setup' : '/hub');
+      return;
+    }
+
+    context.go('/role-selection');
+  }
+
+  void _showError(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message), backgroundColor: Colors.red),
+    );
   }
 
   @override
@@ -84,7 +152,6 @@ class _AuthScreenState extends State<AuthScreen> {
                   color: AppColors.primary,
                 ),
                 const SizedBox(height: 32),
-                
                 TextFormField(
                   controller: _emailController,
                   decoration: InputDecoration(
@@ -96,7 +163,6 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                
                 TextFormField(
                   controller: _passwordController,
                   obscureText: true,
@@ -108,16 +174,130 @@ class _AuthScreenState extends State<AuthScreen> {
                     prefixIcon: const Icon(Icons.password_outlined),
                   ),
                 ),
-                const SizedBox(height: 24),
-                
-                _isLoading 
-                  ? const Center(child: CircularProgressIndicator())
-                  : ElevatedButton(
-                      onPressed: _submit,
-                      child: Text(_isLogin ? 'Se connecter' : 'Créer un compte'),
-                    ),
                 const SizedBox(height: 16),
-                
+                if (!_isLogin) ...[
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Checkbox(
+                        value: _acceptTerms,
+                        activeColor: AppColors.primary,
+                        onChanged: (val) {
+                          setState(() => _acceptTerms = val ?? false);
+                        },
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 12.0),
+                          child: Wrap(
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            children: [
+                              const Text("J'accepte les "),
+                              GestureDetector(
+                                onTap: () => LegalDocumentViewerScreen.show(
+                                  context,
+                                  title: 'Conditions Générales (CGU/CGV)',
+                                  assetPath: 'assets/legal/cgu_cgv.md',
+                                ),
+                                child: const Text(
+                                  'CGU & CGV',
+                                  style: TextStyle(
+                                    color: AppColors.primary,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                              ),
+                              const Text(" et la "),
+                              GestureDetector(
+                                onTap: () => LegalDocumentViewerScreen.show(
+                                  context,
+                                  title: 'Politique de Confidentialité',
+                                  assetPath: 'assets/legal/politique_confidentialite.md',
+                                ),
+                                child: const Text(
+                                  'Politique de Confidentialité',
+                                  style: TextStyle(
+                                    color: AppColors.primary,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                              ),
+                              const Text(
+                                " (accord préalable du parent/tuteur requis pour les mineurs dès la 6e).",
+                                style: TextStyle(fontSize: 11, color: Colors.grey),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                ] else
+                  const SizedBox(height: 8),
+                _isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : ElevatedButton(
+                        onPressed: _submit,
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: Text(_isLogin
+                            ? 'Se connecter avec Email'
+                            : 'Créer un compte'),
+                      ),
+                const SizedBox(height: 16),
+                  /* --- TEMPORAIREMENT MASQUÉ POUR LA BÊTA ---
+                  const Row(
+                    children: [
+                      Expanded(child: Divider()),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: Text("OU", style: TextStyle(color: Colors.grey)),
+                      ),
+                      Expanded(child: Divider()),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Bouton Google
+                  OutlinedButton.icon(
+                    onPressed: () async {
+                      try {
+                        await _supabase.signInWithGoogle();
+                        // Redirection gérée automatiquement par le auth state listener de main.dart
+                      } catch (e) {
+                        if (mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content: Text('Erreur Google: $e'),
+                                backgroundColor: Colors.red),
+                          );
+                        }
+                      }
+                    },
+                    icon: Image.network(
+                      'https://developers.google.com/identity/images/g-logo.png',
+                      height: 24,
+                      errorBuilder: (c, e, s) => const Icon(Icons.login),
+                    ),
+                    label: const Text('Continuer avec Google',
+                        style: TextStyle(color: Colors.black87)),
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      backgroundColor: Colors.white,
+                      side: const BorderSide(color: Colors.grey),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  */
                 TextButton(
                   onPressed: () {
                     setState(() {
@@ -125,9 +305,9 @@ class _AuthScreenState extends State<AuthScreen> {
                     });
                   },
                   child: Text(
-                    _isLogin 
-                      ? 'Nouveau ici ? Créez un compte' 
-                      : 'Déjà un compte ? Connectez-vous',
+                    _isLogin
+                        ? 'Nouveau ici ? Créez un compte via Email'
+                        : 'Déjà un compte ? Connectez-vous',
                     style: const TextStyle(fontWeight: FontWeight.w600),
                   ),
                 ),

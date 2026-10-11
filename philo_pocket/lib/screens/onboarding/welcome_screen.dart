@@ -2,11 +2,57 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/constants/app_colors.dart';
 
-class WelcomeScreen extends StatelessWidget {
+import '../../core/services/supabase_service.dart';
+
+class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  bool _isCheckingAuth = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkAuth();
+  }
+
+  Future<void> _checkAuth() async {
+    final supabase = SupabaseService();
+    if (supabase.isAuthenticated) {
+      final role = await supabase.getCurrentUserRole();
+      if (role == 'parent') {
+        if (mounted) context.go('/parent');
+        return;
+      }
+      final profile = await supabase.getStudentProfile();
+      if (mounted) {
+        if (profile != null && profile['niveau'] != null) {
+          context.go('/main');
+        } else {
+          context.go('/subscription');
+        }
+      }
+    } else {
+      if (mounted) {
+        setState(() => _isCheckingAuth = false);
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (_isCheckingAuth) {
+      return const Scaffold(
+        backgroundColor: AppColors.backgroundLight,
+        body:
+            Center(child: CircularProgressIndicator(color: AppColors.primary)),
+      );
+    }
+
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       body: SafeArea(
@@ -15,7 +61,6 @@ class WelcomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Header (Numéro + Titre)
               Row(
                 children: [
                   Container(
@@ -28,7 +73,10 @@ class WelcomeScreen extends StatelessWidget {
                     child: const Center(
                       child: Text(
                         '1',
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12),
                       ),
                     ),
                   ),
@@ -43,19 +91,17 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              
               const SizedBox(height: 24),
-              
-              // Carte Principale
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(32),
-                    border: Border.all(color: AppColors.border.withOpacity(0.5)),
+                    border: Border.all(
+                        color: AppColors.border.withValues(alpha: 0.5)),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
+                        color: Colors.black.withValues(alpha: 0.05),
                         blurRadius: 20,
                         offset: const Offset(0, 10),
                       ),
@@ -66,31 +112,34 @@ class WelcomeScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        // Titre Philo Pocket et Cloche
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             RichText(
                               text: const TextSpan(
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.w900,
-                                  letterSpacing: 1.5,
-                                  fontFamily: 'Serif', // Optionnel
+                                  letterSpacing: 1.2,
+                                  fontFamily: 'Serif',
                                 ),
                                 children: [
-                                  TextSpan(text: 'PHILO ', style: TextStyle(color: AppColors.primary)),
-                                  TextSpan(text: 'POCKET', style: TextStyle(color: Color(0xFFE5989B))),
+                                  TextSpan(
+                                    text: 'PHILO ',
+                                    style: TextStyle(color: AppColors.primary),
+                                  ),
+                                  TextSpan(
+                                    text: 'POCKET',
+                                    style: TextStyle(color: Color(0xFFE5989B)),
+                                  ),
                                 ],
                               ),
                             ),
-                            const Icon(Icons.notifications_none, color: AppColors.primary),
+                            const Icon(Icons.notifications_none,
+                                color: AppColors.primary),
                           ],
                         ),
-                        
                         const SizedBox(height: 32),
-                        
-                        // Texte Bienvenue
                         const Text(
                           'Bienvenue !',
                           style: TextStyle(
@@ -99,27 +148,28 @@ class WelcomeScreen extends StatelessWidget {
                             color: AppColors.primary,
                           ),
                         ),
-                        
                         const SizedBox(height: 16),
-                        
-                        // Sous-titre
                         const Text(
                           'La philosophie en poche,\npour éclairer votre esprit\nau quotidien.',
                           style: TextStyle(
                             fontSize: 16,
-                            color: AppColors.textLight,
+                            color: AppColors.textMuted,
                             height: 1.5,
                           ),
                         ),
-                        
-                        const Spacer(),
-                        
-                        // Image retirée
-                        const Spacer(flex: 4),
-                        
+                        const SizedBox(height: 8),
+                        Expanded(
+                          child: Semantics(
+                            image: true,
+                            label:
+                                'ALECKSE, professeure virtuelle de philosophie',
+                            child: Image.asset(
+                              'assets/images/aleckse.png',
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
                         const SizedBox(height: 24),
-                        
-                        // Bouton Commencer
                         ElevatedButton(
                           onPressed: () {
                             context.go('/auth');
@@ -135,7 +185,8 @@ class WelcomeScreen extends StatelessWidget {
                           ),
                           child: const Text(
                             'Commencer',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],

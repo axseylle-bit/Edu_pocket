@@ -8,7 +8,7 @@ import 'core/router/app_router.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   await dotenv.load(fileName: ".env");
 
   // Initialisation de Supabase avec les clés du .env
@@ -39,4 +39,3 @@ class PhiloPocketApp extends StatelessWidget {
     );
   }
 }
-

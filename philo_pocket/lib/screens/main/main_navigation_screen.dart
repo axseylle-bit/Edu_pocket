@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
-import '../dashboard/student_dashboard_screen.dart';
+import '../dashboard/main_dashboard_screen.dart';
 import '../chat/aleckse_chat_screen.dart';
+import '../cours/cours_screen.dart';
+import 'profile_screen.dart';
+import 'revisions_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({Key? key}) : super(key: key);
@@ -14,11 +17,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-    const StudentDashboardScreen(),
-    const Center(child: Text('Cours & TP')),
+    const MainDashboardScreen(),
+    const CoursScreen(),
     const AleckseChatScreen(),
-    const Center(child: Text('Révisions & Quiz')),
-    const Center(child: Text('Profil & Parents')),
+    const RevisionsScreen(),
+    const ProfileScreen(),
   ];
 
   @override
@@ -33,7 +36,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         },
         backgroundColor: AppColors.accent, // Bouton or chaud pour ALECKSE
         elevation: 4,
-        child: const Icon(Icons.local_fire_department_rounded, color: Colors.white, size: 32),
+        child: const Icon(Icons.local_fire_department_rounded,
+            color: Colors.white, size: 32),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
@@ -47,7 +51,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             children: [
               _buildNavItem(Icons.home_rounded, 'Accueil', 0),
               _buildNavItem(Icons.menu_book_rounded, 'Cours', 1),
-              const SizedBox(width: 48), // Espace pour le bouton central (Flamme)
+              const SizedBox(
+                  width: 48), // Espace pour le bouton central (Flamme)
               _buildNavItem(Icons.psychology_rounded, 'Révisions', 3),
               _buildNavItem(Icons.person_rounded, 'Profil', 4),
             ],

@@ -1,0 +1,10 @@
+# Workspace Git Ignore
+.env
+*.env
+*.jks
+*.keystore
+*.log
+.DS_Store
+Thumbs.db
+build/
+.dart_tool/

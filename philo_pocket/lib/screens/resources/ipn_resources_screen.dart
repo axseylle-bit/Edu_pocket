@@ -12,8 +12,8 @@ class IpnResourcesScreen extends StatelessWidget {
       'path': 'assets/ipn/epreuve_orale_philosophie.pdf',
     },
     {
-      'title': 'Méthodologies Nationales',
-      'path': 'assets/ipn/methodologies_nationales_philosophie.pdf',
+      'title': 'Méthodologies Nationales de Philosophie',
+      'path': 'assets/ipn/methodologies_nationales_philosophie_v2.pdf',
     },
     {
       'title': 'Progressions Nationales 2025-2026',
@@ -36,31 +36,42 @@ class IpnResourcesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Ressources IPN')),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16.0),
-        itemCount: _documents.length,
-        itemBuilder: (context, index) {
-          final doc = _documents[index];
-          return Card(
-            margin: const EdgeInsets.only(bottom: 16.0),
-            child: ListTile(
-              leading: const Icon(Icons.picture_as_pdf, color: Colors.redAccent),
-              title: Text(doc['title']!, style: const TextStyle(fontWeight: FontWeight.bold)),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => PdfViewerScreen(
-                      title: doc['title']!,
-                      pdfPath: doc['path']!,
+      appBar: AppBar(title: const Text('Documents officiels IPN')),
+      body: ListView(
+        padding: const EdgeInsets.all(20.0),
+        children: [
+          const Text(
+            'Documents de référence',
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            'Ces documents sont distincts de vos cours et peuvent être consultés à tout moment.',
+            style: TextStyle(color: Colors.grey),
+          ),
+          const SizedBox(height: 20),
+          ..._documents.map((doc) => Card(
+                margin: const EdgeInsets.only(bottom: 12.0),
+                child: ListTile(
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  leading: const Icon(Icons.picture_as_pdf_rounded,
+                      color: Colors.redAccent),
+                  title: Text(doc['title']!,
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                  subtitle: const Text('Document PDF officiel'),
+                  trailing: const Icon(Icons.open_in_new_rounded, size: 20),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => PdfViewerScreen(
+                        title: doc['title']!,
+                        pdfPath: doc['path']!,
+                      ),
                     ),
                   ),
-                );
-              },
-            ),
-          );
-        },
+                ),
+              )),
+        ],
       ),
     );
   }
@@ -80,7 +91,18 @@ class PdfViewerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(title)),
-      body: SfPdfViewer.asset(pdfPath),
+      body: SfPdfViewer.asset(
+        pdfPath,
+        canShowScrollHead: true,
+        canShowScrollStatus: true,
+        onDocumentLoadFailed: (details) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text(
+                    'Impossible d\'ouvrir ce document : ${details.error}')),
+          );
+        },
+      ),
     );
   }
 }

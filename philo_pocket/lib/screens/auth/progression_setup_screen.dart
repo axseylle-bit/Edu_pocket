@@ -5,15 +5,22 @@ import '../../core/services/supabase_service.dart';
 import '../../core/models/programmes_officiels.dart';
 
 class ProgressionSetupScreen extends StatefulWidget {
-  const ProgressionSetupScreen({Key? key}) : super(key: key);
+  final String? initialNiveau;
+  final String? initialSerie;
+
+  const ProgressionSetupScreen({
+    Key? key,
+    this.initialNiveau,
+    this.initialSerie,
+  }) : super(key: key);
 
   @override
   State<ProgressionSetupScreen> createState() => _ProgressionSetupScreenState();
 }
 
 class _ProgressionSetupScreenState extends State<ProgressionSetupScreen> {
-  String _niveau = '1ere';
-  String _serie = 'A1';
+  late String _niveau;
+  late String _serie;
   bool _isLoadingProfile = true;
 
   final Set<String> _selectedNotions = {};
@@ -22,6 +29,12 @@ class _ProgressionSetupScreenState extends State<ProgressionSetupScreen> {
   @override
   void initState() {
     super.initState();
+    _niveau = widget.initialNiveau ?? '1ere';
+    _serie = widget.initialSerie ?? 'A1';
+    
+    // We already have the info from the previous screen via routing,
+    // so we can display it immediately.
+    _isLoadingProfile = false;
     _loadProfile();
   }
 
@@ -36,14 +49,13 @@ class _ProgressionSetupScreenState extends State<ProgressionSetupScreen> {
       }
     } catch (e) {
       debugPrint('Error loading profile: $e');
-    } finally {
-      if (mounted) setState(() => _isLoadingProfile = false);
     }
   }
 
-  Widget _buildTrimestreSection(String title, Map<String, List<String>> segmentsMap) {
+  Widget _buildTrimestreSection(
+      String title, Map<String, List<String>> segmentsMap) {
     if (segmentsMap.isEmpty) return const SizedBox.shrink();
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -52,9 +64,9 @@ class _ProgressionSetupScreenState extends State<ProgressionSetupScreen> {
           child: Text(
             title,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: AppColors.primary,
-            ),
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primary,
+                ),
           ),
         ),
         ...segmentsMap.entries.map((entry) {
@@ -72,9 +84,9 @@ class _ProgressionSetupScreenState extends State<ProgressionSetupScreen> {
                     child: Text(
                       segment,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.textDark,
-                      ),
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.textDark,
+                          ),
                     ),
                   ),
                 ),
@@ -103,8 +115,11 @@ class _ProgressionSetupScreenState extends State<ProgressionSetupScreen> {
                         selectedColor: AppColors.secondary,
                         checkmarkColor: AppColors.primary,
                         labelStyle: TextStyle(
-                          color: isSelected ? AppColors.primary : AppColors.textDark,
-                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                          color: isSelected
+                              ? AppColors.primary
+                              : AppColors.textDark,
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.normal,
                         ),
                       );
                     }).toList(),
@@ -127,12 +142,14 @@ class _ProgressionSetupScreenState extends State<ProgressionSetupScreen> {
     try {
       // Dans une version complète, on sauvegarderait cela dans Supabase
       // await SupabaseService().updateStudentNotions(_selectedNotions.toList());
-      
-      // On redirige vers le cours de la première notion sélectionnée
-      final premiereNotion = _selectedNotions.first;
+
       if (mounted) {
-        // Envoi vers le cours avec le nom de la notion
-        context.go('/cours');
+        // Si l'élève est en 1ère, on lui montre l'introduction générale d'abord.
+        if (_niveau == '1ere') {
+          context.go('/general-intro');
+        } else {
+          context.go('/hub');
+        }
       }
     } catch (e) {
       if (mounted) {
@@ -162,9 +179,9 @@ class _ProgressionSetupScreenState extends State<ProgressionSetupScreen> {
                   Text(
                     'Quelles notions étudiez-vous actuellement en classe ?',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.w900,
-                      color: AppColors.textDark,
-                    ),
+                          fontWeight: FontWeight.w900,
+                          color: AppColors.textDark,
+                        ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
@@ -177,9 +194,12 @@ class _ProgressionSetupScreenState extends State<ProgressionSetupScreen> {
                   if (_isLoadingProfile)
                     const Center(child: CircularProgressIndicator())
                   else ...[
-                    _buildTrimestreSection('Trimestre 1', ProgrammeOfficiel.getNotions(_niveau, _serie, 1)),
-                    _buildTrimestreSection('Trimestre 2', ProgrammeOfficiel.getNotions(_niveau, _serie, 2)),
-                    _buildTrimestreSection('Trimestre 3', ProgrammeOfficiel.getNotions(_niveau, _serie, 3)),
+                    _buildTrimestreSection('Trimestre 1',
+                        ProgrammeOfficiel.getNotions(_niveau, _serie, 1)),
+                    _buildTrimestreSection('Trimestre 2',
+                        ProgrammeOfficiel.getNotions(_niveau, _serie, 2)),
+                    _buildTrimestreSection('Trimestre 3',
+                        ProgrammeOfficiel.getNotions(_niveau, _serie, 3)),
                   ],
                 ],
               ),
@@ -196,15 +216,16 @@ class _ProgressionSetupScreenState extends State<ProgressionSetupScreen> {
                     borderRadius: BorderRadius.circular(16),
                   ),
                 ),
-                child: _isLoading 
+                child: _isLoading
                     ? const SizedBox(
-                        height: 20, 
-                        width: 20, 
-                        child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2)
-                      )
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                            color: Colors.white, strokeWidth: 2))
                     : const Text(
                         'Lire mon premier cours',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
                       ),
               ),
             ),

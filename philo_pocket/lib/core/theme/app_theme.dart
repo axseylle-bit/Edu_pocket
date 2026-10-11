@@ -16,10 +16,14 @@ class AppTheme {
       ),
       scaffoldBackgroundColor: AppColors.backgroundLight,
       textTheme: GoogleFonts.outfitTextTheme().copyWith(
-        displayLarge: GoogleFonts.outfit(fontWeight: FontWeight.bold, color: AppColors.textDark),
-        displayMedium: GoogleFonts.outfit(fontWeight: FontWeight.bold, color: AppColors.textDark),
-        titleLarge: GoogleFonts.outfit(fontWeight: FontWeight.bold, color: AppColors.textDark),
-        titleMedium: GoogleFonts.outfit(fontWeight: FontWeight.w600, color: AppColors.textDark),
+        displayLarge: GoogleFonts.outfit(
+            fontWeight: FontWeight.bold, color: AppColors.textDark),
+        displayMedium: GoogleFonts.outfit(
+            fontWeight: FontWeight.bold, color: AppColors.textDark),
+        titleLarge: GoogleFonts.outfit(
+            fontWeight: FontWeight.bold, color: AppColors.textDark),
+        titleMedium: GoogleFonts.outfit(
+            fontWeight: FontWeight.w600, color: AppColors.textDark),
         bodyLarge: GoogleFonts.outfit(color: AppColors.textDark),
         bodyMedium: GoogleFonts.outfit(color: AppColors.textDark),
       ),
@@ -52,10 +56,11 @@ class AppTheme {
       cardTheme: CardThemeData(
         color: AppColors.surfaceLight,
         elevation: 8,
-        shadowColor: AppColors.textDark.withOpacity(0.08),
+        shadowColor: AppColors.textDark.withValues(alpha: 0.08),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
-          side: BorderSide(color: AppColors.border.withOpacity(0.3), width: 1),
+          side: BorderSide(
+              color: AppColors.border.withValues(alpha: 0.3), width: 1),
         ),
       ),
     );
@@ -74,10 +79,14 @@ class AppTheme {
       ),
       scaffoldBackgroundColor: AppColors.backgroundDark,
       textTheme: GoogleFonts.outfitTextTheme().copyWith(
-        displayLarge: GoogleFonts.outfit(fontWeight: FontWeight.bold, color: AppColors.textLight),
-        displayMedium: GoogleFonts.outfit(fontWeight: FontWeight.bold, color: AppColors.textLight),
-        titleLarge: GoogleFonts.outfit(fontWeight: FontWeight.bold, color: AppColors.textLight),
-        titleMedium: GoogleFonts.outfit(fontWeight: FontWeight.w600, color: AppColors.textLight),
+        displayLarge: GoogleFonts.outfit(
+            fontWeight: FontWeight.bold, color: AppColors.textLight),
+        displayMedium: GoogleFonts.outfit(
+            fontWeight: FontWeight.bold, color: AppColors.textLight),
+        titleLarge: GoogleFonts.outfit(
+            fontWeight: FontWeight.bold, color: AppColors.textLight),
+        titleMedium: GoogleFonts.outfit(
+            fontWeight: FontWeight.w600, color: AppColors.textLight),
         bodyLarge: GoogleFonts.outfit(color: AppColors.textLight),
         bodyMedium: GoogleFonts.outfit(color: AppColors.textLight),
       ),
@@ -110,10 +119,11 @@ class AppTheme {
       cardTheme: CardThemeData(
         color: AppColors.surfaceDark,
         elevation: 8,
-        shadowColor: Colors.black.withOpacity(0.3),
+        shadowColor: Colors.black.withValues(alpha: 0.3),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
-          side: BorderSide(color: AppColors.border.withOpacity(0.1), width: 1),
+          side: BorderSide(
+              color: AppColors.border.withValues(alpha: 0.1), width: 1),
         ),
       ),
     );

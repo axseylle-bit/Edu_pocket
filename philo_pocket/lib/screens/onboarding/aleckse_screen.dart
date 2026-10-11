@@ -26,7 +26,7 @@ class AleckseScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              
+
               // Contenu principal (Image + Liste)
               Expanded(
                 child: Row(
@@ -45,16 +45,19 @@ class AleckseScreen extends StatelessWidget {
                             return Container(
                               color: Colors.grey[200],
                               child: const Center(
-                                child: Text('Image aleckse.png manquante', textAlign: TextAlign.center,),
+                                child: Text(
+                                  'Image aleckse.png manquante',
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             );
                           },
                         ),
                       ),
                     ),
-                    
+
                     const SizedBox(width: 16),
-                    
+
                     // Liste des caractéristiques
                     Expanded(
                       flex: 5,
@@ -91,9 +94,9 @@ class AleckseScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              
+
               const SizedBox(height: 24),
-              
+
               // Bouton Continuer
               ElevatedButton(
                 onPressed: () {
@@ -120,7 +123,10 @@ class AleckseScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildFeatureItem({required IconData icon, required String title, required String subtitle}) {
+  Widget _buildFeatureItem(
+      {required IconData icon,
+      required String title,
+      required String subtitle}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 24.0),
       child: Row(
@@ -145,7 +151,7 @@ class AleckseScreen extends StatelessWidget {
                   subtitle,
                   style: TextStyle(
                     fontSize: 14,
-                    color: AppColors.textDark.withOpacity(0.7),
+                    color: AppColors.textDark.withValues(alpha: 0.7),
                   ),
                 ),
               ],

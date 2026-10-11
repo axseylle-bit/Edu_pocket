@@ -6,7 +6,8 @@ import '../../core/services/supabase_service.dart';
 class RoleSelectionScreen extends StatelessWidget {
   const RoleSelectionScreen({Key? key}) : super(key: key);
 
-  Widget _buildRoleCard(BuildContext context, {
+  Widget _buildRoleCard(
+    BuildContext context, {
     required String title,
     required String description,
     required IconData icon,
@@ -24,7 +25,7 @@ class RoleSelectionScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: AppColors.secondary.withOpacity(0.3),
+                  color: AppColors.secondary.withValues(alpha: 0.3),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(icon, color: AppColors.primary, size: 28),
@@ -37,9 +38,9 @@ class RoleSelectionScreen extends StatelessWidget {
                     Text(
                       title,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primary,
-                      ),
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primary,
+                          ),
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -49,7 +50,8 @@ class RoleSelectionScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const Icon(Icons.arrow_forward_ios_rounded, color: AppColors.border),
+              const Icon(Icons.arrow_forward_ios_rounded,
+                  color: AppColors.border),
             ],
           ),
         ),
@@ -76,7 +78,6 @@ class RoleSelectionScreen extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
-            
             _buildRoleCard(
               context,
               title: 'Élève / Étudiant',
@@ -85,7 +86,7 @@ class RoleSelectionScreen extends StatelessWidget {
               onTap: () async {
                 try {
                   await supabase.saveUserRole('eleve');
-                  if (context.mounted) context.go('/profile-setup');
+                  if (context.mounted) context.go('/subscription');
                 } catch (e) {
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -95,7 +96,6 @@ class RoleSelectionScreen extends StatelessWidget {
                 }
               },
             ),
-            
             _buildRoleCard(
               context,
               title: 'Parent',
@@ -114,17 +114,24 @@ class RoleSelectionScreen extends StatelessWidget {
                 }
               },
             ),
-            
             _buildRoleCard(
               context,
-              title: 'Enseignant',
-              description: 'Accompagner vos élèves (Bientôt disponible).',
+              title: 'Devenir Créateur',
+              description: 'Monétisez vos cours et accompagnez des milliers d\'élèves.',
               icon: Icons.menu_book_rounded,
-              onTap: () {
-                // TODO: Message V2
+              onTap: () async {
+                try {
+                  await supabase.saveUserRole('enseignant');
+                  if (context.mounted) context.go('/teacher-partner');
+                } catch (e) {
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Erreur: $e')),
+                    );
+                  }
+                }
               },
             ),
-            
             _buildRoleCard(
               context,
               title: 'Curieux',

@@ -2,7 +2,7 @@ name: philo_pocket
 description: "La philosophie en poche - Programme officiel du Gabon."
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.3+4
 
 environment:
   sdk: '>=3.2.0 <4.0.0'
@@ -30,7 +30,8 @@ dependencies:
   intl: ^0.18.1
   syncfusion_flutter_pdfviewer: ^33.2.13
   flutter_markdown: ^0.7.7+1
-  google_generative_ai: ^0.4.7
+  url_launcher: ^6.3.0
+  model_viewer_plus: ^1.10.0
 
 dev_dependencies:
   flutter_test:
@@ -60,4 +61,5 @@ flutter:
     - assets/images/
     - assets/courses/
     - assets/methodologie/
-    - .env
+    - assets/legal/
+
