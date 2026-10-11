@@ -148,6 +148,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               children: [
                 ListTile(
+                  leading: const Icon(Icons.auto_awesome_rounded, color: Colors.amber),
+                  title: const Text('Manifeste & Vision EduPocket'),
+                  subtitle: const Text('Démocratiser le savoir & valoriser l\'enseignant'),
+                  trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+                  onTap: () => LegalDocumentViewerScreen.show(
+                    context,
+                    title: 'Manifeste & Vision Fondatrice',
+                    assetPath: 'assets/legal/manifeste_vision.md',
+                  ),
+                ),
+                const Divider(height: 1),
+                ListTile(
                   leading: const Icon(Icons.gavel_rounded, color: AppColors.primary),
                   title: const Text('Mentions Légales & Charte Éthique'),
                   subtitle: const Text('Éditeur, hébergement et charte IA ALECKSE'),

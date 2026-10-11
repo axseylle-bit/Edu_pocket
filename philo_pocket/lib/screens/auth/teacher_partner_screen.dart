@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../core/constants/app_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../legal/legal_document_viewer_screen.dart';
 
 class TeacherPartnerScreen extends StatelessWidget {
   const TeacherPartnerScreen({Key? key}) : super(key: key);
@@ -96,11 +97,33 @@ class TeacherPartnerScreen extends StatelessWidget {
                       title: 'Zéro stress technique',
                       description: 'Envoyez-nous vos cours sous format Word. Nous nous occupons de tout intégrer et de la mise en page premium.',
                     ),
+                    const Divider(height: 32),
+                    _buildFeatureRow(
+                      context,
+                      icon: Icons.history_edu_rounded,
+                      title: 'Préservez votre patrimoine',
+                      description: 'Vos cours ne meurent plus à la fin de l\'année : ils deviennent des références durables pour tout le Gabon.',
+                    ),
                   ],
                 ),
               ).animate().fade(delay: 400.ms).slideY(begin: 0.1),
               
-              const SizedBox(height: 32),
+              const SizedBox(height: 16),
+              
+              TextButton.icon(
+                onPressed: () => LegalDocumentViewerScreen.show(
+                  context,
+                  title: 'Manifeste & Vision Fondatrice',
+                  assetPath: 'assets/legal/manifeste_vision.md',
+                ),
+                icon: const Icon(Icons.auto_awesome_rounded, color: AppColors.primary, size: 20),
+                label: const Text(
+                  'Lire notre Manifeste Fondateur pour le Gabon',
+                  style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.primary),
+                ),
+              ).animate().fade(delay: 450.ms),
+
+              const SizedBox(height: 16),
               
               ElevatedButton.icon(
                 onPressed: () => _launchWhatsApp(context),
