@@ -123,6 +123,19 @@ class TeacherPartnerScreen extends StatelessWidget {
                 ),
               ).animate().fade(delay: 450.ms),
 
+              TextButton.icon(
+                onPressed: () => LegalDocumentViewerScreen.show(
+                  context,
+                  title: 'Quotas Officiels par Province',
+                  assetPath: 'assets/legal/quotas_provinciaux.md',
+                ),
+                icon: const Icon(Icons.table_chart_rounded, color: AppColors.primary, size: 20),
+                label: const Text(
+                  'Consulter les Quotas par Matière & Province',
+                  style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.primary),
+                ),
+              ).animate().fade(delay: 480.ms),
+
               const SizedBox(height: 16),
               
               ElevatedButton.icon(

@@ -28,6 +28,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         if (mounted) context.go('/parent');
         return;
       }
+      if (role == 'enseignant') {
+        if (mounted) context.go('/teacher-partner');
+        return;
+      }
       final profile = await supabase.getStudentProfile();
       if (mounted) {
         if (profile != null && profile['niveau'] != null) {
