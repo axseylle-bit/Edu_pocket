@@ -1,127 +1,127 @@
 # STRATÉGIE DE RECRUTEMENT DES ENSEIGNANTS PIONNIERS & SPEECH DE CONVICTION
 **PLATEFORME ÉDUCATIVE : EDUPOCKET GABON**  
 *Phase Pilote : Réseau des Enseignants Référents Provinciaux*  
+*Règle Fondatrice : Parité Stricte 50 % Général / 50 % Technique & Professionnel*  
 *Date : Octobre 2026*
 
 ---
 
-## 1. PRINCIPE CLÉ : L'EXCLUSIVITÉ PROVINCIALE & DÉMOGRAPHIQUE (« PREMIER ARRIVÉ, PREMIER SERVI »)
+## 1. PRINCIPE STRATÉGIQUE : LA PARITÉ 50/50 (GÉNÉRAL & TECHNIQUE/PRO)
 
-Pour créer un engouement massif, valoriser les enseignants et leur garantir un vivier d'élèves rentable :
-- **Base de calibrage : 100 Enseignants Pionniers pour le Grand Libreville (Province de l'Estuaire)**.
-- **Ventilation par discipline** : Priorité absolue aux matières transversales enseignées de la 6e à la Terminale (fort volume d'élèves et examens BEPC + BAC), puis aux disciplines spécialisées du 2nd cycle (Lycée uniquement).
-- **Dégressivité démographique provinciale** : Les quotas des 8 autres provinces sont calculés au prorata de la population scolarisée dans le secondaire (données statistiques de l'Éducation Nationale / INSTAT Gabon).
+Pour faire d'EduPocket la plateforme incontournable de tout le système éducatif gabonais, les quotas réservent **exactement 50 % des places à l'Enseignement Général** et **50 % des places à l'Enseignement Technique et Professionnel**.
 
-### Pourquoi cette stratégie est irrésistible pour les enseignants :
-1. **Urgence psychologique légitime (FOMO)** : L'enseignant sait que le quota de sa matière dans sa province est compté. Une fois les places prises dans son bassin, les portes se ferment.
-2. **Garantie de non-dilution des gains** : Les 70 % de royalties et les commissions de parrainage (Airtel Money / Moov Money) ne sont pas partagés entre 500 profs, mais réservés au pool pionnier.
-3. **Reconnaissance & Statut** : Chaque enseignant sélectionné reçoit le titre officiel d'**« Enseignant Référent Provincial EduPocket »**.
+### Pourquoi cette parité 50/50 est un coup de génie au Gabon :
+1. **Un marché orphelin ultra-demandeur** : Contrairement à l'enseignement général qui dispose de quelques manuels, les élèves des lycées techniques (LTNOB Owendo, Lycée Technique de Nkok, Lycée Jean-Fidèle Otando de POG, Lycée Agathe Obendze de Franceville) manquent cruellement d'annales corrigées et de fiches méthodologiques. Leurs cours reposent presque exclusivement sur les polycopiés des professeurs.
+2. **Des enseignants aux supports prêts à monétiser** : Les professeurs des filières tertiaires (G1, G2, G3) et industrielles (F1, F2, F3, F4, TI, Métiers du Bois) possèdent déjà tous leurs schémas, études de cas et exercices sur leurs clés USB.
+3. **Revenus élevés et fidélité absolue des élèves** : Les élèves du technique sont habitués à payer des fascicules d'exercices d'atelier. Ils s'abonneront massivement via Airtel Money et Moov Money dès le lancement.
 
 ---
 
-## 2. RÉPARTITION DES 100 ENSEIGNANTS DE LIBREVILLE (ESTUAIRE) PAR DISCIPLINE
+## 2. TABLEAU DE LIBREVILLE (100 PLACES : 50 GÉNÉRAL / 50 TECHNIQUE & PRO)
 
-Le Grand Libreville concentre près de 55 % des effectifs du secondaire gabonais. Les 100 places sont réparties selon la demande scolaire et l'amplitude des cycles :
+Sur le vivier de référence de **100 enseignants à Libreville**, voici la ventilation exacte :
 
-| Rang | Discipline | Cycle d'Intervention | Quota Libreville (Estuaire) | Justification Pédagogique & Volume Élèves |
+### 🟢 VOLET A : ENSEIGNEMENT GÉNÉRAL (50 PLACES)
+*Matières transversales de la 6e à la Terminale + spécialités du 2nd cycle (Séries A1, A2, B, C, D)*
+
+| Rang | Discipline | Cycle | Quota LBV | Enjeux Pédagogiques & Volume d'Élèves |
 | :---: | :--- | :---: | :---: | :--- |
-| **1** | **Mathématiques** | 6e ➔ Terminale | **16 places** | Matière reine toutes séries, coef élevé BEPC + BAC C, D, E, TI. Forte demande de soutien. |
-| **2** | **Français & Lettres** | 6e ➔ Terminale | **14 places** | Tronc commun obligatoire tous niveaux, coef fort séries A, B et épreuves anticipées. |
-| **3** | **Sciences Physiques (PC)** | 4e ➔ Terminale | **12 places** | Matière sélective majeure scientifique (BEPC + BAC C, D, F, TI). Forte demande d'exercices. |
-| **4** | **Sciences de la Vie et de la Terre (SVT)** | 6e ➔ Terminale | **10 places** | Enseignée de la 6e à la Tle. Pilier du BAC D et épreuve BEPC. |
-| **5** | **Histoire - Géographie & ÉC** | 6e ➔ Terminale | **10 places** | Tronc commun 6e ➔ Tle. Méthodologie dissertation / commentaire très demandée au BAC. |
-| **6** | **Philosophie** | 1re & Terminale *(2nd cycle)* | **10 places** | **Matière emblématique au Gabon !** Tous les bacheliers (A, B, C, D) passent la Philo. Fort besoin d'annales corrigées. |
-| **7** | **Anglais (LV1)** | 6e ➔ Terminale | **8 places** | Tronc commun obligatoire tous niveaux (BEPC + toutes séries BAC). |
-| **8** | **Matières Techniques & Gestion** | Lycée Technique (F, G, TI) | **8 places** | Comptabilité, Économie d'entreprise, Dessin/Génie industriel. Public très demandeur et peu servi. |
-| **9** | **Sciences Économiques & Sociales (SES)** | 2nde ➔ Terminale *(Série B)* | **6 places** | Spécifique Lycée série B. Volume d'élèves ciblé mais très assidu. |
-| **10** | **Espagnol & Allemand (LV2)** | 4e ➔ Terminale *(Séries A)* | **6 places** | 4 places Espagnol + 2 places Allemand. Séries littéraires A1/A2. |
-| **TOTAL** | **Toutes disciplines confondues** | **6e ➔ Terminale** | **100 places** | **Pool Pionnier Grand Libreville** |
+| **1** | **Mathématiques** | 6e ➔ Tle | **10 places** | Matière reine toutes séries générales, coef majeur BEPC + BAC C, D. |
+| **2** | **Français & Lettres** | 6e ➔ Tle | **8 places** | Tronc commun obligatoire tous niveaux, épreuves anticipées et coef fort A/B. |
+| **3** | **Philosophie** | 1re & Tle | **8 places** | **Discipline phare PhiloPocket !** Épreuve reine du BAC pour toutes les séries. |
+| **4** | **Sciences Physiques (PC)** | 4e ➔ Tle | **7 places** | Discipline sélective scientifique (BEPC + BAC C, D). |
+| **5** | **Sciences de la Vie et de la Terre (SVT)** | 6e ➔ Tle | **6 places** | Pilier du BAC D et épreuve BEPC. |
+| **6** | **Histoire - Géographie & ÉC** | 6e ➔ Tle | **5 places** | Méthodologie dissertation / commentaire très demandée au BEPC et BAC. |
+| **7** | **Anglais (LV1)** | 6e ➔ Tle | **4 places** | Tronc commun obligatoire toutes séries. |
+| **8** | **SES (Sciences Éco & Sociales)** | 2nde ➔ Tle | **2 places** | Spécifique Lycée série B. |
+| **9** | **LV2 (Espagnol & Allemand)** | 4e ➔ Tle | **2 places** | Séries littéraires A1/A2 (Lycée National Léon Mba, etc.). |
+| **SOUS-TOTAL** | **Enseignement Général** | — | **50 places** | **Pool Pionnier Général Libreville** |
 
 ---
 
-## 3. GRILLE NATIONALE DES QUOTAS PAR PROVINCE (405 PLACES AU GABON)
+### 🔵 VOLET B : ENSEIGNEMENT TECHNIQUE ET PROFESSIONNEL (50 PLACES)
+*Lycée Technique National Omar Bongo (LTNOB), Lycée de Nkok, CFP, Lycées Commerciaux*
 
-En appliquant la dégressivité démographique selon les bassins de scolarisation (de -30 % pour le Haut-Ogooué jusqu'à -80 % pour les provinces à plus faible densité scolaire) :
-
-| # | Province | Pôles Urbains & Établissements Clés | Pondération Démographique | Quota Total Pionniers | Maths / Fr / PC (Top 3) | SVT / HG / Philo | Anglais / SES / Tech / LV2 |
-| :---: | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
-| **G1** | **Estuaire** | Libreville, Owendo, Ntoum, Akanda | **Référence (100 %)** | **100 profs** | 42 | 30 | 28 |
-| **G2** | **Haut-Ogooué** | Franceville, Moanda, Mounana | -30 % (Bassin Minier & Universitaire) | **70 profs** | 30 | 21 | 19 |
-| **G3** | **Ogooué-Maritime**| Port-Gentil, Gamba | -40 % (Bassin Pétrolier & Lycées côtiers) | **60 profs** | 25 | 18 | 17 |
-| **G4** | **Woleu-Ntem** | Oyem, Bitam, Mitzic | -55 % (Grand Nord Scolaire) | **45 profs** | 19 | 14 | 12 |
-| **G5** | **Ngounié** | Mouila, Ndendé, Fougamou | -65 % (Bassin Sud-Central) | **35 profs** | 15 | 11 | 9 |
-| **G6** | **Moyen-Ogooué** | Lambaréné, Ndjolé | -70 % (Bassin du Fleuve) | **30 profs** | 13 | 9 | 8 |
-| **G7** | **Nyanga** | Tchibanga, Mayumba | -75 % (Bassin Sud-Atlantique) | **25 profs** | 11 | 8 | 6 |
-| **G8** | **Ogooué-Lolo** | Koulamoutou, Lastoursville | -80 % (Bassin Centre-Est) | **20 profs** | 9 | 6 | 5 |
-| **G9** | **Ogooué-Ivindo** | Makokou, Booué, Mékambo | -80 % (Bassin Nord-Est) | **20 profs** | 9 | 6 | 5 |
-| **TOTAL**| **9 Provinces du Gabon** | **Ensemble du Territoire National** | — | **405 profs** | **173 profs** | **123 profs** | **109 profs** |
-
-> [!IMPORTANT]
-> **Règle d'Attribution Stricte :** Dès que le quota d'une matière est atteint dans une province (ex. les 16 places de Maths ou les 10 places de Philo à Libreville), les candidatures suivantes sont systématiquement basculées sur **liste d'attente pour la session suivante**.
+| Pôle Technique | Filières & Séries Ciblées | Quota LBV | Enjeux d'Apprentissage & Examens Officiels |
+| :--- | :--- | :---: | :--- |
+| **1. Pôle Tertiaire & Gestion** | **Série G2 (Comptabilité & Gestion financière)** | **8 places** | Filière tertiaire n°1 au Gabon. Énorme demande d'exercices de bilan, compte de résultat et fiscalité. |
+| | **Série G3 (Commerce, Vente & Action commerciale)** | **6 places** | Gestion commerciale, mercatique, techniques de vente (BAC G3). |
+| | **Série G1 (Secrétariat, Bureautique & Assistanat)** | **6 places** | Organisation administrative, communication d'entreprise, bureautique. |
+| **2. Pôle Industriel & Ingénierie** | **Série F3 (Électrotechnique & Énergie)** | **6 places** | Schémas électriques, moteurs industriels, automatismes (très fort besoin au Gabon). |
+| | **Série F4 (Génie Civil, BTP & Topographie)** | **6 places** | Calculs de structures, métré, dessin de bâtiment (lycées techniques et chantiers nationaux). |
+| | **Série F2 & TI (Électronique, Numérique & Informatique)** | **5 places** | Systèmes logiques, microcontrôleurs, maintenance informatique et réseaux. |
+| | **Série F1 (Construction Mécanique & Usinage)** | **4 places** | Dessin industriel, productique, guidage et tolérancement mécanique. |
+| **3. Pôle Filières Pro & Métiers Stratégiques** | **Filière Bois & Éco-foresterie (Spécial Nkok)** | **4 places** | Usinage du bois, transformation industrielle (priorité nationale de la ZIS de Nkok). |
+| | **Maintenance Véhicules Industriels & Mécanique Auto** | **3 places** | Motorisation thermique, diagnostic électronique automobile et engins miniers. |
+| | **Transit, Douane & Logistique Portuaire** | **2 places** | Procédures douanières gabonaises, transit maritime (Owendo) et supply chain. |
+| **SOUS-TOTAL** | **Enseignement Technique & Pro** | **50 places** | **Pool Pionnier Technique & Pro Libreville** |
 
 ---
 
-## 4. LE SPEECH DE VIVE VOIX (SALLE DES PROFS OU TÉLÉPHONE - 90 SECONDES)
+## 3. GRILLE NATIONALE DÉMOGRAPHIQUE PAR PROVINCE (405 PLACES : 203 GÉNÉRAL / 202 TECHNIQUE)
 
-> *« Bonjour cher collègue / Monsieur [Nom] / Madame [Nom],*
->
-> *Je viens te voir directement parce qu’on partage les mêmes réalités : chaque année, on passe des nuits à préparer nos fiches de cours, nos séries de TD et nos corrigés conformes à l'IPN. Et au final, tout ce travail intellectuel reste dans nos clés USB ou finit photocopié au portail du lycée sans réelle valorisation.*
->
-> *Avec des collègues enseignants, nous avons mis en place **EduPocket Gabon**, la première plateforme mobile d'apprentissage secondaire conforme à 100 % aux programmes officiels gabonais.*
->
-> *Pour nous enseignants, c'est une opportunité unique :*
-> 1. **Zéro travail technique** : Tu nous transmets tes fiches existantes sur Word. Notre équipe s'occupe de toute l'intégration interactive sur smartphone.
-> 2. **Des revenus récurrents et automatisés** : Tu touches **70 % de royalties** sur tes modules et quiz, plus une commission sur chaque élève qui utilise ton code enseignant. Les reversements tombent chaque mois directement sur ton compte **Airtel Money ou Moov Money**.
-> 3. **Un statut valorisant et encadré** : C'est juridiquement protégé par un contrat de droits d'auteur selon l'Ordonnance de 2024.
->
-> *Mais pourquoi je t'en parle maintenant ?*  
-> *Pour la phase pilote, nous limitons strictement les places : **exactement [ex: 16 places en Maths / 10 places en Philo] pour Libreville**. Dès que le quota est atteint, les inscriptions sont gelées pour garantir un grand volume d'élèves aux pionniers.*
->
-> *Comme je connais la rigueur de tes cours, je voulais te faire bénéficier de la priorité avant que les places ne soient prises. Tu veux qu'on regarde l'application ensemble ce soir ou que je t'envoie l'accès test sur WhatsApp ? »*
+La parité stricte 50/50 est déclinée dans chaque province selon son profil économique et industriel (ex: Pétrole à Port-Gentil, Mines à Moanda/Franceville, Bois dans le Woleu-Ntem et la Ngounié) :
+
+| # | Province | Spécificités Économiques & Établissements Clés | Quota Total | Volet Général (50 %) | Volet Technique & Pro (50 %) |
+| :---: | :--- | :--- | :---: | :---: | :---: |
+| **G1** | **Estuaire** | LTNOB Owendo, Nkok, Lycées Généraux de Libreville | **100 profs** | **50** | **50** (G1, G2, G3, F1-F4, Bois) |
+| **G2** | **Haut-Ogooué** | Franceville, Moanda (Lycée Agathe Obendze, Pôle Minier/Manganèse) | **70 profs** | **35** | **35** (Mines, Métallurgie, Électrotech, G2) |
+| **G3** | **Ogooué-Maritime**| Port-Gentil (Lycée Jean-Fidèle Otando, Pôle Pétrole/Offshore & BTP) | **60 profs** | **30** | **30** (Pétrole, Mécanique industrielle, BTP, Tertiaire) |
+| **G4** | **Woleu-Ntem** | Oyem, Bitam (Lycée Technique, Agro-foresterie, Commerce frontalier) | **45 profs** | **23** | **22** (Agro-industrie, Bois, Gestion G2/G3) |
+| **G5** | **Ngounié** | Mouila, Fougamou (Lycée Technique, Élevage, BTP) | **35 profs** | **18** | **17** (Génie Civil, Électromécanique, Tertiaire) |
+| **G6** | **Moyen-Ogooué** | Lambaréné, Ndjolé (Filières Santé/Bio, Forêt, Pêche & Tertiaire) | **30 profs** | **15** | **15** (Gestion, Maintenance, Sciences médicales) |
+| **G7** | **Nyanga** | Tchibanga, Mayumba (Pôle Côtier, BTP, Foresterie, Tertiaire) | **25 profs** | **13** | **12** (Génie Civil, Bois, Gestion commerciale) |
+| **G8** | **Ogooué-Lolo** | Koulamoutou, Lastoursville (Transgabonais, Bois, Maintenance) | **20 profs** | **10** | **10** (Ferroviaire, Mécanique, Tertiaire) |
+| **G9** | **Ogooué-Ivindo** | Makokou, Booué (Ressources naturelles, Éco-garde, BTP) | **20 profs** | **10** | **10** (BTP, Électrotechnique, Tertiaire) |
+| **TOTAL**| **9 Provinces** | **Ensemble du Territoire National Gabonais** | **405 profs** | **204 profs** | **201 profs** |
 
 ---
 
-## 5. MESSAGE WHATSAPP PRÊT À COPIER-COLLER (DIFFUSION COLLÈGUES & GROUPES PÉDAGOGIQUES)
+## 4. LE SPEECH DE VIVE VOIX CIBLÉ ENSEIGNEMENT TECHNIQUE (LTNOB, POG, NKOK)
+
+> *« Bonjour cher collègue,*
+>
+> *Regarde un peu notre réalité au lycée technique : nos élèves de G2, G3, F3 ou F4 n'ont pratiquement aucun manuel scolaire disponible en librairie au Gabon. Chaque trimestre, on est obligés de faire des photocopies de nos cours et de nos schémas que les élèves perdent la semaine d'après.*
+>
+> *Avec **EduPocket Gabon**, nous venons de lancer la toute première application mobile intégrant à 50 % les filières techniques et professionnelles gabonaises.*
+>
+> *Pourquoi c'est une mine d'or pour toi ?*
+> 1. **Tes fiches et études de cas sont prêtes** : Tu nous donnes tes séries d'exercices de compta, tes schémas d'électrotech ou tes cours de BTP sur Word. On les met sur l'application avec des quiz d'auto-évaluation.
+> 2. **Les élèves du technique souscrivent immédiatement** : Ils ont tellement faim d'annales corrigées pour le BAC Technique qu'ils sautent sur l'application. Tu touches **70 % de reversement** + ta commission sur chaque abonné, directement virés sur ton compte **Airtel Money ou Moov Money**.
+> 3. **Le quota est très serré** : À Libreville, on ouvre **seulement 8 places en G2, 6 en F3 et 6 en F4**. Dès que le quota est atteint, on verrouille les accès.
+>
+> *Tu veux qu'on jette un coup d'œil à l'application maintenant pour que je te réserve ta place de Référent avant que le quota de notre filière ne soit bouclé ? »*
+
+---
+
+## 5. MESSAGE WHATSAPP SPÉCIAL ENSEIGNANTS DU TECHNIQUE & PROFESSIONNEL
 
 ```text
-🏛️ URGENT & OFFICIEL : RECRUTEMENT DES ENSEIGNANTS PIONNIERS « EDUPOCKET GABON »
+⚙️ OFFICIEL & URGENT : RECRUTEMENT ENSEIGNANTS TECHNIQUE & PROFESSIONNEL (LTNOB, NKOK, POG, PROVINCES)
 
-Bonjour cher(e) collègue,
+Bonjour cher(e) collègue du Technique,
 
-Combien d'années de travail as-tu accumulées sur ton ordinateur en fiches de cours, sujets d'examens et corrigés méthodologiques conformes à l'IPN ? 📚
+Nos élèves de G1, G2, G3, F1, F2, F3, F4, TI et Métiers du Bois ont enfin leur application mobile dédiée aux examens nationaux : EDUPOCKET GABON ! 📱📐
 
-Et si ce travail intellectuel te rapportait des revenus passifs chaque mois directement sur ton téléphone (Airtel Money / Moov Money), sans aucune surcharge horaire ?
+Finie l'époque des cours perdus sur photocopies au portail du lycée. 
 
-C'est exactement la mission d'EDUPOCKET GABON, la nouvelle plateforme mobile d'excellence scolaire pour le secondaire (de la 6e à la Terminale).
+🎯 VOTRE STATUT DE RÉFÉRENT PIONNIER :
+1️⃣ Vous déposez vos cours/exercices existants (Comptabilité, Schémas F3, Calculs F4, Mercatique G3, etc.).
+2️⃣ Notre équipe technique se charge de toute la mise en page interactive sur smartphone.
+3️⃣ Vous touchez 70 % de royalties sur vos modules + une prime sur chaque élève qui utilise votre code personnel.
+4️⃣ Rémunération automatique chaque fin de mois par Airtel Money / Moov Money.
 
-🎯 CE QUE NOUS PROPOSONS AUX ENSEIGNANTS :
-1️⃣ Tu transmets tes contenus existants (Word / PDF).
-2️⃣ Notre équipe technique les transforme en cours et quiz interactifs sur l'application.
-3️⃣ Tu touches 70 % de reversement sur tes contenus + des commissions exclusives sur chaque élève qui rejoint avec ton code personnel.
-4️⃣ Paiements mensuels instantanés par Airtel Money / Moov Money.
+⚠️ QUOTAS STRICTS PAR SÉRIE (Premier arrivé, premier servi) :
+Pour garantir des revenus élevés à nos enseignants partenaires, les places sont contingentées :
+👉 Série G2 (Comptabilité) : 8 places à Libreville
+👉 Série G3 & G1 : 6 places chacune
+👉 Séries F3 (Électrotech) & F4 (BTP) : 6 places chacune
+👉 Séries F1, F2 & Filière Bois (Nkok) : 4 à 5 places
 
-⚠️ RESTRICTION DES PLACES — RÈGLE DU PREMIER ARRIVÉ, PREMIER SERVI :
-Afin de garantir un vivier d'élèves massif et des gains attractifs à chaque partenaire, les places sont rigoureusement contingentées :
-👉 Grand Libreville (Estuaire) : 100 places au total (16 en Maths, 14 en Français, 12 en PC, 10 en SVT, 10 en Philo, 10 en HG, etc.).
-👉 Provinces de l'Intérieur : Quotas limités par bassin pédagogique.
+Dès le quota atteint, la filière est fermée aux inscriptions !
 
-Dès qu'une discipline est complète dans une province, les inscriptions sont immédiatement closes !
+📲 Réservez votre place de Référent Territorial dès aujourd'hui :
+Contactez la coordination par message privé : [Votre Numéro WhatsApp]
 
-📲 Pour tester l'application en avant-première et réserver ton quota disciplinaire avant clôture :
-Écris-moi en message privé sur WhatsApp ou contacte la coordination : [Votre Numéro WhatsApp]
-
-EduPocket Gabon — L'excellence scolaire gabonaise dans la poche.
+EduPocket Gabon — La technologie et le savoir-faire gabonais au bout des doigts.
 ```
-
----
-
-## 6. TRAITEMENT DES OBJECTIONS DES COLLÈGUES
-
-### Objection 1 : *« Est-ce que c'est légal ? Est-ce qu'on risque des sanctions administratives ? »*
-* **Réponse :** « C'est 100 % légal. L'article 29 des mentions légales et l'Ordonnance n° 0011/PR/2024 consacrent le droit pour tout enseignant de valoriser ses œuvres de l'esprit à titre privé. Les contenus respectent rigoureusement les curricula de l'Inspection Pédagogique Nationale (IPN). Aucun matricule de la Fonction Publique n'est collecté. »
-
-### Objection 2 : *« Je ne maîtrise pas l'informatique, ça va me prendre trop de temps. »*
-* **Réponse :** « Tu n'as rien à programmer ni à saisir. Tu nous envoies tes documents Word déjà prêts. L'équipe d'EduPocket s'occupe de l'intégration, du design et des quiz interactifs. »
-
-### Objection 3 : *« Comment suis-je certain d'être payé ? »*
-* **Réponse :** « Tout est automatisé via Airtel Money et Moov Money. Un tableau de bord personnel te permet de suivre en temps réel le nombre d'élèves qui révisent avec tes cours et le cumul de tes commissions. Les versements sont traçables, sécurisés et réguliers. »
