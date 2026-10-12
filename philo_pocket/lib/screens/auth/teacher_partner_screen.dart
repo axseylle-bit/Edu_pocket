@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../core/constants/app_colors.dart';
@@ -6,23 +7,38 @@ import 'package:url_launcher/url_launcher.dart';
 import '../legal/legal_document_viewer_screen.dart';
 
 class TeacherPartnerScreen extends StatelessWidget {
-  const TeacherPartnerScreen({Key? key}) : super(key: key);
+  const TeacherPartnerScreen({super.key});
 
-  Future<void> _launchWhatsApp(BuildContext context) async {
-    const phoneNumber = '+24177141912';
-    const message = 'Bonjour, je suis enseignant et je souhaite échanger sur le partenariat pédagogique EduPocket.';
-    
-    final url = Uri.parse('https://wa.me/$phoneNumber?text=${Uri.encodeComponent(message)}');
-    
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url, mode: LaunchMode.externalApplication);
-    } else {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Impossible d\'ouvrir WhatsApp.')),
-        );
-      }
-    }
+  void _copyToClipboard(BuildContext context, String text, String label) {
+    Clipboard.setData(ClipboardData(text: text));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            const Icon(Icons.check_circle_rounded, color: Colors.white, size: 20),
+            const SizedBox(width: 8),
+            Text('$label copié : $text'),
+          ],
+        ),
+        backgroundColor: Colors.green.shade800,
+        behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 3),
+      ),
+    );
+  }
+
+  void _openWhatsApp(BuildContext context) {
+    _copyToClipboard(context, '+24177141912', 'Numéro WhatsApp');
+    final url = Uri.parse('https://wa.me/24177141912');
+    launchUrl(url, mode: LaunchMode.externalNonBrowserApplication).catchError((_) {
+      return launchUrl(url, mode: LaunchMode.platformDefault);
+    });
+  }
+
+  void _openEmail(BuildContext context) {
+    _copyToClipboard(context, 'axseylle@gmail.com', 'Email');
+    final url = Uri.parse('mailto:axseylle@gmail.com');
+    launchUrl(url).catchError((_) => false);
   }
 
   @override
@@ -141,19 +157,183 @@ class TeacherPartnerScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
               
-              ElevatedButton.icon(
-                onPressed: () => _launchWhatsApp(context),
-                icon: const Icon(Icons.chat_rounded, color: Colors.white),
-                label: const Text(
-                  'Nous contacter sur WhatsApp',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              // =======================================================
+              // CONTACT DIRECT : NUMÉRO WHATSAPP & EMAIL EN CLAIR
+              // =======================================================
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.green.shade400, width: 1.5),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.green.withValues(alpha: 0.12),
+                      blurRadius: 16,
+                      offset: const Offset(0, 6),
+                    ),
+                  ],
                 ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF25D366), // Vert WhatsApp
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Colors.green.shade50,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(Icons.support_agent_rounded, color: Colors.green.shade800, size: 26),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Contact Direct de la Coordination',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15.5,
+                                  color: Colors.green.shade900,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              const Text(
+                                'Échangez avec nous directement 7j/7 :',
+                                style: TextStyle(fontSize: 12, color: AppColors.textMuted),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+
+                    // 1. BLOC WHATSAPP
+                    InkWell(
+                      onTap: () => _openWhatsApp(context),
+                      borderRadius: BorderRadius.circular(14),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF25D366).withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(color: const Color(0xFF25D366).withValues(alpha: 0.4)),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: const BoxDecoration(
+                                color: Color(0xFF25D366),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(Icons.chat_rounded, color: Colors.white, size: 18),
+                            ),
+                            const SizedBox(width: 12),
+                            const Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'WhatsApp Officiel',
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xFF1E7E34),
+                                    ),
+                                  ),
+                                  SizedBox(height: 2),
+                                  SelectableText(
+                                    '+241 77 14 19 12',
+                                    style: TextStyle(
+                                      fontSize: 16.5,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF0F5132),
+                                      letterSpacing: 0.5,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            IconButton(
+                              tooltip: 'Copier le numéro WhatsApp',
+                              icon: const Icon(Icons.copy_rounded, color: Color(0xFF1E7E34), size: 20),
+                              onPressed: () => _copyToClipboard(context, '+24177141912', 'Numéro WhatsApp'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    // 2. BLOC EMAIL
+                    InkWell(
+                      onTap: () => _openEmail(context),
+                      borderRadius: BorderRadius.circular(14),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                        decoration: BoxDecoration(
+                          color: AppColors.primary.withValues(alpha: 0.08),
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: const BoxDecoration(
+                                color: AppColors.primary,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(Icons.email_rounded, color: Colors.white, size: 18),
+                            ),
+                            const SizedBox(width: 12),
+                            const Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Courriel de Coordination',
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.primary,
+                                    ),
+                                  ),
+                                  SizedBox(height: 2),
+                                  SelectableText(
+                                    'axseylle@gmail.com',
+                                    style: TextStyle(
+                                      fontSize: 15.5,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.textDark,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            IconButton(
+                              tooltip: 'Copier l\'adresse email',
+                              icon: const Icon(Icons.copy_rounded, color: AppColors.primary, size: 20),
+                              onPressed: () => _copyToClipboard(context, 'axseylle@gmail.com', 'Email'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 12),
+                    Text(
+                      'Touchez directement pour ouvrir ou cliquez sur l\'icône pour copier.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 11, color: Colors.grey.shade600, fontStyle: FontStyle.italic),
+                    ),
+                  ],
                 ),
               ).animate().fade(delay: 500.ms).scale(),
               
