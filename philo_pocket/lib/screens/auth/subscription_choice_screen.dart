@@ -449,19 +449,17 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
       ];
     } else if (widget.targetDiscipline == 'litterature' || widget.targetDiscipline == 'francais') {
       tier1Name = 'Montesquieu';
-      tier2Name = 'Léopold Sédar Senghor';
-      tier3Name = 'Victor Hugo';
-      showTier3 = true;
+      tier2Name = 'Victor Hugo & Senghor';
+      showTier3 = false; // Un seul palier payant pour la Littérature et Langues (2 500 FCFA)
       tier1Price = 'Gratuit';
-      tier2Price = '2500 FCFA/mois (Essentiel)';
-      tier3Price = '5000 FCFA/mois (Confort)';
+      tier2Price = '2500 FCFA/mois (Palier Unique)';
+      tier2Amount = 2500;
+      tier2Key = 'pack_pole_litteraire';
       tier1Color = AppColors.socrateGreen;
       tier2Color = AppColors.platonCoral;
-      tier3Color = AppColors.aristoteViolet;
       tier1Icon = Icons.menu_book_rounded;
       tier2Icon = Icons.edit_note_rounded;
-      tier3Icon = Icons.military_tech_rounded;
-      tier2Badge = 'LE PLUS CHOISI';
+      tier2Badge = 'PALIER UNIQUE 2 500 F';
       subjectName = "le français & la littérature";
       tier1Features = [
         'Accès aux synthèses d\'œuvres & fiches d\'auteurs',
@@ -470,51 +468,44 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
         'ALECKSE basique',
       ];
       tier2Features = [
-        'Tout le contenu gratuit',
-        'Ateliers d\'écriture & figures de style',
-        'Quiz illimités pour s\'entraîner',
-        'Bulletin hebdomadaire pour les parents',
-      ];
-      tier3Features = [
-        'Tout le contenu Essentiel',
-        'Modèles rédigés de dissertation d\'excellence',
-        'Simulations d\'épreuves du Baccalauréat',
-        'ALECKSE correcteur de commentaires',
-        'Mode hors ligne',
+        'Tout le contenu gratuit Montesquieu',
+        'Synthèses intégrales des œuvres littéraires au programme IPN',
+        'Méthodologie guidée du commentaire composé & dissertation',
+        'Modèles rédigés de dissertations d\'excellence avec citations clés',
+        'Règles de grammaire, vocabulaire & compréhension pour les langues',
+        'Annales officielles corrigées du Baccalauréat Série A gabonais',
+        'ALECKSE IA correcteur de style et d\'argumentation',
+        'Mode hors-ligne complet',
       ];
     } else if (widget.targetDiscipline == 'economie') {
-      tier1Name = 'Adam Smith';
-      tier2Name = 'Keynes';
-      tier3Name = 'Schumpeter';
-      showTier3 = true;
+      tier1Name = 'Hérodote & Adam Smith';
+      tier2Name = 'Keynes & Cheikh Anta Diop';
+      showTier3 = false; // Un seul palier payant pour le Pôle Économie & SHS (2 500 FCFA)
       tier1Price = 'Gratuit';
-      tier2Price = '2500 FCFA/mois (Essentiel)';
-      tier3Price = '5000 FCFA/mois (Confort)';
+      tier2Price = '2500 FCFA/mois (Palier Unique)';
+      tier2Amount = 2500;
+      tier2Key = 'pack_pole_eco';
       tier1Color = AppColors.socrateGreen;
       tier2Color = AppColors.platonCoral;
-      tier3Color = AppColors.aristoteViolet;
       tier1Icon = Icons.trending_up_rounded;
       tier2Icon = Icons.analytics_rounded;
-      tier3Icon = Icons.military_tech_rounded;
-      tier2Badge = 'LE PLUS CHOISI';
-      subjectName = "l'économie (S.E.S)";
+      tier2Badge = 'PALIER UNIQUE 2 500 F';
+      subjectName = "l'économie (S.E.S) & Histoire-Géo";
       tier1Features = [
         'Définitions macroéconomiques & fiches IPN',
+        'Repères historiques essentiels du Gabon et du monde',
         'Méthodologie de base du raisonnement économique',
         '1 quiz d\'évaluation par chapitre',
         'ALECKSE basique',
       ];
       tier2Features = [
         'Tout le contenu gratuit',
-        'Interprétation de tableaux & graphiques',
-        'Quiz illimités pour s\'entraîner',
-        'Bulletin hebdomadaire pour les parents',
-      ];
-      tier3Features = [
-        'Tout le contenu Essentiel',
-        'Entraînement complet aux sujets du Bac B',
-        'Synthèses économiques d\'actualité',
-        'Mode hors ligne',
+        'Méthodologie du raisonnement économique et commentaire de documents',
+        'Annales officielles résolues du Bac B gabonais (Éco & Histoire-Géo)',
+        'Cartographie, schémas géographiques & études de cas contemporaines',
+        'Analyses approfondies des mutations socio-économiques',
+        'ALECKSE IA pour structurer vos argumentaires économiques',
+        'Mode hors-ligne complet',
       ];
     }
 
@@ -768,7 +759,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                     const SizedBox(width: 10),
                     const Expanded(
                       child: Text(
-                        'Pôles d\'Excellence & Filières : Choisissez votre pack mutualisé (Sciences, Littérature & Langues, Économie, ou Technique & Pro). Chaque pôle propose deux paliers de formation (Essentiel & Confort). Philo Pocket reste 100% solo et indépendant dans le 1er onglet.',
+                        'Pôles d\'Excellence & Filières : Choisissez votre pack mutualisé (Sciences, Littérature & Langues, Économie, ou Technique & Pro). En enseignement général, il n\'y a que deux tarifs pour deux paliers : 2 500 F et 5 000 F (seuls la Philo et les Sciences ont 2 paliers en raison des niveaux de difficulté ; la Littérature et l\'Éco ont un palier unique à 2 500 F). Seules les matières du Technique sont à 3 000 F et 6 000 F. Philo Pocket reste 100% solo et indépendant dans le 1er onglet.',
                         style: TextStyle(fontSize: 11.5, color: AppColors.textDark, height: 1.3),
                       ),
                     ),
@@ -777,27 +768,27 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
               ),
 
               // ===============================================================
-              // 1. PÔLE SCIENCES (SÉRIES C & D) : 2 PALIERS PAYANTS
+              // 1. PÔLE SCIENCES (SÉRIES C & D) : 2 PALIERS PAYANTS (2 500 & 5 000 F)
               // ===============================================================
               _buildSectionHeader(
                 title: '🔬 PÔLE SCIENCES (SÉRIES C & D)',
-                subtitle: 'Mathématiques + Physique-Chimie + S.V.T. mutualisées',
+                subtitle: 'Mathématiques + Physique-Chimie + S.V.T. mutualisées (2 Paliers)',
                 icon: Icons.science_rounded,
                 color: const Color(0xFF00897B),
               ),
 
-              // Palier Essentiel Sciences (3 500 FCFA / mois)
+              // Palier Essentiel Sciences (2 500 FCFA / mois)
               _buildSubscriptionCard(
                 context,
                 title: 'Pôle Sciences · Palier Essentiel (Galilée & Newton)',
                 subtitle: 'Socle scientifique renforcé sur les 3 matières du pôle',
-                price: '3 500 FCFA / mois',
-                billingPeriod: 'Maths + Physique-Chimie + SVT réunies (Coût unitaire ultra-réduit)',
+                price: '2 500 FCFA / mois',
+                billingPeriod: 'Maths + Physique-Chimie + SVT réunies (2 500 FCFA / mois)',
                 badgeText: 'PÔLE SCIENCES · ESSENTIEL',
                 color: const Color(0xFF00897B),
                 icon: Icons.science_rounded,
                 tierKey: 'pack_pole_sciences_essentiel',
-                amountFcfa: 3500,
+                amountFcfa: 2500,
                 features: [
                   'Débloque les 3 matières phares du Bac scientifique (Maths, Physique-Chimie, SVT)',
                   'Formulaires complets & synthèses de cours conformes IPN',
@@ -831,103 +822,65 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
               ),
 
               // ===============================================================
-              // 2. PÔLE LITTÉRATURE & LANGUES (SÉRIES A & COLLÈGE) : 2 PALIERS
+              // 2. PÔLE LITTÉRATURE & LANGUES (SÉRIES A & COLLÈGE) : PALIER UNIQUE 2 500 F
               // ===============================================================
               _buildSectionHeader(
                 title: '📚 PÔLE LITTÉRATURE & LANGUES (SÉRIES A & COLLÈGE)',
-                subtitle: 'Français + Anglais + Espagnol + Allemand (Philosophie 100% Solo)',
+                subtitle: 'Français + Anglais + Espagnol + Allemand (Palier Unique : 2 500 FCFA/mois)',
                 icon: Icons.menu_book_rounded,
                 color: const Color(0xFFE65100),
               ),
 
-              // Palier Essentiel Littéraire (3 500 FCFA / mois)
+              // Palier Unique Littéraire & Langues (2 500 FCFA / mois)
               _buildSubscriptionCard(
                 context,
-                title: 'Pôle Littéraire · Palier Essentiel (Montesquieu & Senghor)',
-                subtitle: 'Méthodes littéraires & maîtrise des langues vivantes',
-                price: '3 500 FCFA / mois',
+                title: 'Pôle Littéraire & Langues · Palier Unique (Victor Hugo & Senghor)',
+                subtitle: 'Méthodes littéraires & maîtrise complète des langues vivantes',
+                price: '2 500 FCFA / mois',
                 billingPeriod: 'Français + Anglais + Espagnol + Allemand réunis',
-                badgeText: 'PÔLE LITTÉRAIRE · ESSENTIEL',
+                badgeText: 'PÔLE LITTÉRAIRE · PALIER UNIQUE 2 500 F',
                 color: const Color(0xFFE65100),
-                icon: Icons.edit_note_rounded,
-                tierKey: 'pack_pole_litteraire_essentiel',
-                amountFcfa: 3500,
+                icon: Icons.menu_book_rounded,
+                tierKey: 'pack_pole_litteraire',
+                amountFcfa: 2500,
                 features: [
                   'Synthèses intégrales des œuvres littéraires au programme IPN',
                   'Méthodologie guidée du commentaire composé & de la dissertation',
-                  'Règles de grammaire, fiches de vocabulaire et compréhension pour les langues',
-                  'ALECKSE IA spécialiste en expression écrite et argumentation',
-                  'Quiz d\'orthographe, syntaxe et littérature',
-                ],
-              ),
-
-              // Palier Confort Littéraire (5 000 FCFA / mois)
-              _buildSubscriptionCard(
-                context,
-                title: 'Pôle Littéraire · Palier Confort (Victor Hugo)',
-                subtitle: 'Le pass d\'excellence pour briller au Baccalauréat Série A',
-                price: '5 000 FCFA / mois',
-                billingPeriod: 'Français + Langues vivantes en formule prestige',
-                badgeText: 'PÔLE LITTÉRAIRE · CONFORT (EXCELLENCE)',
-                color: AppColors.aristoteViolet,
-                icon: Icons.military_tech_rounded,
-                tierKey: 'pack_pole_litteraire_confort',
-                amountFcfa: 5000,
-                features: [
-                  'Tout le contenu Essentiel Littéraire & Langues',
                   'Modèles rédigés de dissertations d\'excellence avec citations clés',
+                  'Règles de grammaire, vocabulaire et compréhension pour les langues',
                   'Annales officielles corrigées du Baccalauréat Série A gabonais',
                   'Simulations d\'épreuves écrites et orales de langues vivantes',
-                  'ALECKSE IA correcteur de style et d\'argumentation avancé',
-                  'Mode hors-ligne complet',
+                  'ALECKSE IA spécialiste en expression écrite et argumentation',
+                  'Mode hors-ligne complet pour réviser sans connexion Internet',
                 ],
               ),
 
               // ===============================================================
-              // 3. PÔLE ÉCONOMIQUE & SCIENCES HUMAINES (SÉRIE B) : 2 PALIERS
+              // 3. PÔLE ÉCONOMIQUE & SCIENCES HUMAINES (SÉRIE B) : PALIER UNIQUE 2 500 F
               // ===============================================================
               _buildSectionHeader(
                 title: '📈 PÔLE ÉCONOMIQUE & SCIENCES HUMAINES (SÉRIE B)',
-                subtitle: 'Histoire-Géographie + Économie (S.E.S) mutualisées',
+                subtitle: 'Histoire-Géographie + Économie (S.E.S) (Palier Unique : 2 500 FCFA/mois)',
                 icon: Icons.trending_up_rounded,
                 color: const Color(0xFF2E7D32),
               ),
 
-              // Palier Essentiel Éco & Humain (3 000 FCFA / mois)
+              // Palier Unique Éco & Humain (2 500 FCFA / mois)
               _buildSubscriptionCard(
                 context,
-                title: 'Pôle Éco & Humain · Palier Essentiel (Adam Smith & Ibn Khaldoun)',
-                subtitle: 'Bases solides en analyse économique et repères historiques',
-                price: '3 000 FCFA / mois',
+                title: 'Pôle Éco & Humain · Palier Unique (Adam Smith & Keynes)',
+                subtitle: 'Analyse économique approfondie & maîtrise du Baccalauréat Série B',
+                price: '2 500 FCFA / mois',
                 billingPeriod: 'Histoire-Géographie + S.E.S incluses',
-                badgeText: 'PÔLE ÉCO & HUMAIN · ESSENTIEL',
+                badgeText: 'PÔLE ÉCO & HUMAIN · PALIER UNIQUE 2 500 F',
                 color: const Color(0xFF2E7D32),
-                icon: Icons.analytics_rounded,
-                tierKey: 'pack_pole_eco_essentiel',
-                amountFcfa: 3000,
+                icon: Icons.trending_up_rounded,
+                tierKey: 'pack_pole_eco',
+                amountFcfa: 2500,
                 features: [
                   'Définitions macroéconomiques & fiches IPN en sciences économiques',
-                  'Repères historiques essentiels, frises chronologiques & faits marquants',
+                  'Repères historiques essentiels, frises chronologiques & cartes du Gabon',
                   'Méthodologie du raisonnement économique et du commentaire de documents',
-                  'Cartographie & schémas géographiques du Gabon et du monde',
-                  'ALECKSE IA assistant en économie et sciences humaines',
-                ],
-              ),
-
-              // Palier Confort Éco & Humain (5 000 FCFA / mois)
-              _buildSubscriptionCard(
-                context,
-                title: 'Pôle Éco & Humain · Palier Confort (Keynes & Fernand Braudel)',
-                subtitle: 'Maîtrise complète des grands écrits du Baccalauréat Série B',
-                price: '5 000 FCFA / mois',
-                billingPeriod: 'Histoire-Géo + S.E.S en formule confort',
-                badgeText: 'PÔLE ÉCO & HUMAIN · CONFORT (EXCELLENCE)',
-                color: AppColors.aristoteViolet,
-                icon: Icons.military_tech_rounded,
-                tierKey: 'pack_pole_eco_confort',
-                amountFcfa: 5000,
-                features: [
-                  'Tout le contenu Essentiel Éco & Humain',
                   'Annales officielles résolues du Bac B gabonais (Économie & Histoire-Géo)',
                   'Études de cas économiques contemporaines et dissertations modèles',
                   'Analyses approfondies des mutations socio-économiques internationales',
@@ -1035,10 +988,10 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
               _buildSubscriptionCard(
                 context,
                 title: 'Pack Annuel Examen d\'État Tech (Bac Tech / CAP)',
-                subtitle: 'Le Pass intégral jusqu\'aux épreuves pratiques et écrites du Bac ou CAP',
+                subtitle: 'Abonnement annuel intégral jusqu\'aux épreuves pratiques et écrites du Bac ou CAP',
                 price: '24 000 FCFA / an',
                 billingPeriod: 'Paiement unique pour 9 mois d\'année scolaire',
-                badgeText: 'PASS EXAMEN TECH · ÉCONOMIE 3 000 F+',
+                badgeText: 'PACK ANNUEL TECH · ÉCONOMIE 3 000 F+',
                 color: const Color(0xFF1E3A8A),
                 icon: Icons.workspace_premium_rounded,
                 tierKey: 'pack_technique_annuel',
@@ -1053,10 +1006,10 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
               ),
 
               // ===============================================================
-              // 5. PASS MULTI-TRIMESTRES ENSEIGNEMENT GÉNÉRAL
+              // 5. PACKS ANNUELS & MULTI-TRIMESTRES (ENSEIGNEMENT GÉNÉRAL)
               // ===============================================================
               _buildSectionHeader(
-                title: '🎓 PASS MULTI-TRIMESTRES ENSEIGNEMENT GÉNÉRAL',
+                title: '🎓 PACKS ANNUELS & TRIMESTRES (ENSEIGNEMENT GÉNÉRAL)',
                 subtitle: 'Forfaits longue durée couvrant tous les pôles généraux',
                 icon: Icons.school_rounded,
                 color: AppColors.primary,
@@ -1086,10 +1039,10 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
               _buildSubscriptionCard(
                 context,
                 title: 'Pack Annuel Examen d\'État (Bac Général - 9 Mois)',
-                subtitle: 'Pass complet pour toute l\'année scolaire (9 mois)',
+                subtitle: 'Abonnement annuel complet pour toute l\'année scolaire (9 mois)',
                 price: '19 000 FCFA / an',
                 billingPeriod: 'Paiement unique pour 9 mois d\'année scolaire',
-                badgeText: 'PASS EXAMEN · ÉCONOMIE 3 500 F',
+                badgeText: 'PACK ANNUEL · ÉCONOMIE 3 500 F',
                 color: AppColors.aristoteViolet,
                 icon: Icons.military_tech_rounded,
                 tierKey: 'pack_general_annuel',

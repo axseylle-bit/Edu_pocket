@@ -266,16 +266,17 @@ class MainDashboardScreen extends ConsumerWidget {
                       'Mutualisation complète des 3 matières scientifiques fondamentales du Bac gabonais : algèbre, géométrie, cinématique, réactions chimiques, immunologie et génétique.',
                   freePioneer: 'Thalès, Marie Curie & Darwin',
                   freePioneerDetails: 'Fiches de cours intégrales, formules clés, protocoles et quiz de base 100% gratuits pour toutes les matières scientifiques.',
-                  tier1Pioneer: 'Archimède & Lavoisier',
+                  tier1Pioneer: 'Galilée & Newton',
                   tier1Details: 'TD d\'approfondissement pas-à-pas, réactions chimiques expliquées, résolutions guidées et quiz illimités pour tout le pôle.',
-                  tier2Pioneer: 'Isaac Newton & Einstein',
+                  tier2Pioneer: 'Albert Einstein',
                   tier2Details: 'Annales officielles corrigées des Séries C et D, coaching d\'excellence, simulations d\'examen, IA ALECKSE avancée et mode hors ligne.',
                   isPole: true,
+                  hasTwoPaidTiers: true,
                   poleBadge: 'PÔLE SCIENCES C & D',
                   poleIncludedSubjects: 'Maths + Physique + SVT',
-                  tier1Price: '3500 FCFA/mois',
+                  tier1Price: '2500 FCFA/mois',
                   tier2Price: '5000 FCFA/mois',
-                  tier1Amount: 3500,
+                  tier1Amount: 2500,
                   tier2Amount: 5000,
                   tier1Key: 'pack_pole_sciences_essentiel',
                   tier2Key: 'pack_pole_sciences_confort',
@@ -291,7 +292,7 @@ class MainDashboardScreen extends ConsumerWidget {
         // 2. SECTION INTERMÉDIAIRE : Pôle Littérature & Langues & Pôle Économique
         Row(
           children: [
-            // Pôle Littérature & Langues (Séries A & Collège)
+            // Pôle Littérature & Langues (Séries A & Collège) - Palier Unique 2 500 F
             Expanded(
               flex: 1,
               child: _buildSubjectCard(
@@ -301,7 +302,7 @@ class MainDashboardScreen extends ConsumerWidget {
                 icon: Icons.menu_book_rounded,
                 color: const Color(0xFFE65100), // Orange ambré
                 isActive: true,
-                badgeText: 'SÉRIES A & COLLÈGE',
+                badgeText: 'SÉRIES A · 2 500 F',
                 height: 200,
                 onTap: () => _showDisciplinePioneersModal(
                   context,
@@ -311,29 +312,24 @@ class MainDashboardScreen extends ConsumerWidget {
                   color: const Color(0xFFE65100),
                   description:
                       'Excellence littéraire et linguistique : méthodologie du commentaire composé, dissertation, contraction de texte, grammaire et expression en langues vivantes.',
-                  freePioneer: 'Montesquieu, Césaire & Shakespeare',
+                  freePioneer: 'Montesquieu & Césaire',
                   freePioneerDetails: 'Synthèses d\'œuvres au programme IPN, méthodologies de base et fiches grammaticales libres et 100% gratuites.',
-                  tier1Pioneer: 'Senghor & Chinua Achebe',
-                  tier1Details: 'Ateliers d\'écriture guidés, figures de style, connecteurs logiques et renforcement lexical complet pour tout le pôle.',
-                  tier2Pioneer: 'Victor Hugo & Nelson Mandela',
-                  tier2Details: 'Modèles rédigés de dissertations d\'excellence, préparation intensive au grand oral et annales corrigées du Baccalauréat.',
+                  tier1Pioneer: 'Victor Hugo & Senghor',
+                  tier1Details: 'Ateliers d\'écriture guidés, modèles rédigés de dissertations d\'excellence, annales corrigées du Baccalauréat Série A et renforcement en langues vivantes.',
                   isPole: true,
+                  hasTwoPaidTiers: false,
                   poleBadge: 'PÔLE LITTÉRAIRE & LANGUES',
                   poleIncludedSubjects: 'Français + Anglais + Espagnol + Allemand',
-                  tier1Price: '3500 FCFA/mois',
-                  tier2Price: '5000 FCFA/mois',
-                  tier1Amount: 3500,
-                  tier2Amount: 5000,
-                  tier1Key: 'pack_pole_litteraire_essentiel',
-                  tier2Key: 'pack_pole_litteraire_confort',
-                  tier1Subtitle: 'Pack Essentiel Littéraire & Langues',
-                  tier2Subtitle: 'Pack Confort Littéraire & Grand Oral',
+                  tier1Price: '2500 FCFA/mois',
+                  tier1Amount: 2500,
+                  tier1Key: 'pack_pole_litteraire',
+                  tier1Subtitle: 'Pack Unique Littéraire & Langues (Français + LV1 + LV2)',
                 ),
               ),
             ),
             const SizedBox(width: 16),
 
-            // Pôle Économique & Sciences Humaines (Série B)
+            // Pôle Économique & Sciences Humaines (Série B) - Palier Unique 2 500 F
             Expanded(
               flex: 1,
               child: _buildSubjectCard(
@@ -343,7 +339,7 @@ class MainDashboardScreen extends ConsumerWidget {
                 icon: Icons.trending_up_rounded,
                 color: const Color(0xFF0288D1), // Bleu océan
                 isActive: true,
-                badgeText: 'SÉRIE B (ÉCO)',
+                badgeText: 'SÉRIE B · 2 500 F',
                 height: 200,
                 onTap: () => _showDisciplinePioneersModal(
                   context,
@@ -353,23 +349,18 @@ class MainDashboardScreen extends ConsumerWidget {
                   color: const Color(0xFF0288D1),
                   description:
                       'Histoire contemporaine du Gabon, mondialisation, géographie spatiale et mécanismes macroéconomiques au programme de la Série B.',
-                  freePioneer: 'Hérodote, Léon Mba & Adam Smith',
-                  freePioneerDetails: 'Repères historiques, fiches géographiques du Gabon et définitions macroéconomiques gratuites.',
-                  tier1Pioneer: 'Cheikh Anta Diop & Keynes',
-                  tier1Details: 'Méthodologie de dissertation historique, analyse de documents statistiques et argumentation économique guidée.',
-                  tier2Pioneer: 'Fernand Braudel & Schumpeter',
-                  tier2Details: 'Dossiers complets du Bac B, cartes géopolitiques, annales corrigées et préparation intensive aux examens officiels.',
+                  freePioneer: 'Hérodote & Adam Smith',
+                  freePioneerDetails: 'Repères historiques essentiels, fiches géographiques du Gabon et définitions macroéconomiques gratuites.',
+                  tier1Pioneer: 'Keynes & Cheikh Anta Diop',
+                  tier1Details: 'Méthodologie de dissertation historique, analyse de documents statistiques, cartes géopolitiques et dossiers complets du Bac B.',
                   isPole: true,
+                  hasTwoPaidTiers: false,
                   poleBadge: 'PÔLE ÉCONOMIQUE & HIST-GÉO',
                   poleIncludedSubjects: 'Histoire-Géo + S.E.S',
-                  tier1Price: '3000 FCFA/mois',
-                  tier2Price: '5000 FCFA/mois',
-                  tier1Amount: 3000,
-                  tier2Amount: 5000,
-                  tier1Key: 'pack_pole_eco_essentiel',
-                  tier2Key: 'pack_pole_eco_confort',
-                  tier1Subtitle: 'Pack Essentiel Économique & Hist-Géo',
-                  tier2Subtitle: 'Pack Confort Bac Série B',
+                  tier1Price: '2500 FCFA/mois',
+                  tier1Amount: 2500,
+                  tier1Key: 'pack_pole_eco',
+                  tier1Subtitle: 'Pack Unique Économique & Hist-Géo (Série B)',
                 ),
               ),
             ),
@@ -394,8 +385,9 @@ class MainDashboardScreen extends ConsumerWidget {
     required String freePioneerDetails,
     required String tier1Pioneer,
     required String tier1Details,
-    required String tier2Pioneer,
-    required String tier2Details,
+    String tier2Pioneer = 'Aristote',
+    String tier2Details = '',
+    bool hasTwoPaidTiers = true,
     String? targetRoute,
     bool isPole = false,
     bool isTechnique = false,
@@ -561,10 +553,12 @@ class MainDashboardScreen extends ConsumerWidget {
 
               const SizedBox(height: 18),
 
-              // 2. OFFRES DE FORMATION SUPPLÉMENTAIRES (2 PALIERS PIONNIERS AVEC LEURS PRIX)
+              // 2. OFFRES DE FORMATION SUPPLÉMENTAIRES (PALIERS PIONNIERS AVEC LEURS PRIX)
               Text(
                 isPole
-                    ? 'Offres de formation mutualisées (Pôle $title) :'
+                    ? (hasTwoPaidTiers
+                        ? 'Offres de formation mutualisées (Pôle $title) : 2 Paliers (2 500 F & 5 000 F)'
+                        : 'Offre de formation mutualisée (Pôle $title) : Palier Unique (2 500 FCFA/mois)')
                     : (isTechnique
                         ? 'Offres de formation Lycées Techniques & CET :'
                         : 'Offres de formation Philo Pocket (Vaisseau Amiral Solo) :'),
@@ -573,7 +567,9 @@ class MainDashboardScreen extends ConsumerWidget {
               const SizedBox(height: 4),
               Text(
                 isPole
-                    ? 'Toutes les matières du pôle ($poleIncludedSubjects) sont regroupées dans ces formules : pas de surcoût par matière !'
+                    ? (hasTwoPaidTiers
+                        ? 'Toutes les matières du pôle ($poleIncludedSubjects) sont regroupées dans ces formules : pas de surcoût par matière !'
+                        : 'Toutes les matières du pôle ($poleIncludedSubjects) sont réunies dans ce palier unique à 2 500 FCFA/mois.')
                     : (isTechnique
                         ? 'Modules de renforcement d\'atelier et technologiques (Minimum strict de 3 000 FCFA respecté).'
                         : 'Accompagnement philosophique d\'excellence pour toutes les séries de Terminale.'),
@@ -581,7 +577,7 @@ class MainDashboardScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 12),
 
-              // Palier 1 (Essentiel) - Orange un peu rose
+              // Palier 1 (Essentiel ou Palier Unique) - Orange un peu rose
               Container(
                 padding: const EdgeInsets.all(14),
                 margin: const EdgeInsets.only(bottom: 12),
@@ -610,7 +606,9 @@ class MainDashboardScreen extends ConsumerWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      'Palier $tier1Pioneer (Essentiel)',
+                                      hasTwoPaidTiers
+                                          ? 'Palier $tier1Pioneer (Essentiel)'
+                                          : 'Palier $tier1Pioneer (Palier Unique)',
                                       style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.platonCoral),
                                     ),
                                   ),
@@ -629,7 +627,7 @@ class MainDashboardScreen extends ConsumerWidget {
                               ),
                               const SizedBox(height: 3),
                               Text(
-                                tier1Subtitle ?? 'Pack Essentiel · Renforcement méthodologique & suivi parents',
+                                tier1Subtitle ?? (hasTwoPaidTiers ? 'Pack Essentiel · Renforcement méthodologique & suivi parents' : 'Pack Unique · Formation complète mutualisée'),
                                 style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.grey.shade700),
                               ),
                               const SizedBox(height: 4),
@@ -647,14 +645,18 @@ class MainDashboardScreen extends ConsumerWidget {
                           Navigator.pop(ctx);
                           MobileMoneyPaymentModal.show(
                             context,
-                            tierTitle: 'Palier $tier1Pioneer (Essentiel - $title)',
+                            tierTitle: hasTwoPaidTiers
+                                ? 'Palier $tier1Pioneer (Essentiel - $title)'
+                                : 'Palier $tier1Pioneer (Palier Unique - $title)',
                             tierKey: tier1Key,
                             amountFcfa: tier1Amount,
                             onSuccess: () => context.go('/hub'),
                           );
                         },
                         icon: const Icon(Icons.bolt_rounded, size: 16),
-                        label: Text('Choisir le Palier Essentiel ($tier1Price)'),
+                        label: Text(hasTwoPaidTiers
+                            ? 'Choisir le Palier Essentiel ($tier1Price)'
+                            : 'Choisir le Palier Unique ($tier1Price)'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.platonCoral,
                           foregroundColor: Colors.white,
@@ -667,91 +669,92 @@ class MainDashboardScreen extends ConsumerWidget {
                 ),
               ),
 
-              // Palier 2 (Confort) - Violet
-              Container(
-                padding: const EdgeInsets.all(14),
-                margin: const EdgeInsets.only(bottom: 12),
-                decoration: BoxDecoration(
-                  color: AppColors.aristoteViolet.withValues(alpha: 0.06),
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.aristoteViolet.withValues(alpha: 0.45), width: 1.5),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: AppColors.aristoteViolet.withValues(alpha: 0.15),
-                          radius: 18,
-                          child: const Icon(Icons.military_tech_rounded, color: AppColors.aristoteViolet, size: 20),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      'Palier $tier2Pioneer (Confort)',
-                                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.aristoteViolet),
+              // Palier 2 (Confort) - Violet (affiché uniquement si hasTwoPaidTiers est vrai)
+              if (hasTwoPaidTiers)
+                Container(
+                  padding: const EdgeInsets.all(14),
+                  margin: const EdgeInsets.only(bottom: 12),
+                  decoration: BoxDecoration(
+                    color: AppColors.aristoteViolet.withValues(alpha: 0.06),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: AppColors.aristoteViolet.withValues(alpha: 0.45), width: 1.5),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: AppColors.aristoteViolet.withValues(alpha: 0.15),
+                            radius: 18,
+                            child: const Icon(Icons.military_tech_rounded, color: AppColors.aristoteViolet, size: 20),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        'Palier $tier2Pioneer (Confort)',
+                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.aristoteViolet),
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.aristoteViolet,
-                                      borderRadius: BorderRadius.circular(10),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.aristoteViolet,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Text(
+                                        tier2Price,
+                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.white),
+                                      ),
                                     ),
-                                    child: Text(
-                                      tier2Price,
-                                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.white),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 3),
-                              Text(
-                                tier2Subtitle ?? 'Pack Confort · Coaching d\'excellence, Bac blanc ALECKSE & Mode hors-ligne',
-                                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.grey.shade700),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(tier2Details, style: const TextStyle(fontSize: 11.5, color: Colors.black87, height: 1.3)),
-                            ],
+                                  ],
+                                ),
+                                const SizedBox(height: 3),
+                                Text(
+                                  tier2Subtitle ?? 'Pack Confort · Coaching d\'excellence, Bac blanc ALECKSE & Mode hors-ligne',
+                                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.grey.shade700),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(tier2Details, style: const TextStyle(fontSize: 11.5, color: Colors.black87, height: 1.3)),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.pop(ctx);
+                            MobileMoneyPaymentModal.show(
+                              context,
+                              tierTitle: 'Palier $tier2Pioneer (Confort - $title)',
+                              tierKey: tier2Key,
+                              amountFcfa: tier2Amount,
+                              onSuccess: () => context.go('/hub'),
+                            );
+                          },
+                          icon: const Icon(Icons.star_rounded, size: 16),
+                          label: Text('Choisir le Palier Confort ($tier2Price)'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.aristoteViolet,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton.icon(
-                        onPressed: () {
-                          Navigator.pop(ctx);
-                          MobileMoneyPaymentModal.show(
-                            context,
-                            tierTitle: 'Palier $tier2Pioneer (Confort - $title)',
-                            tierKey: tier2Key,
-                            amountFcfa: tier2Amount,
-                            onSuccess: () => context.go('/hub'),
-                          );
-                        },
-                        icon: const Icon(Icons.star_rounded, size: 16),
-                        label: Text('Choisir le Palier Confort ($tier2Price)'),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.aristoteViolet,
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
 
               // Bouton vers la grille des abonnements
               SizedBox(
@@ -762,7 +765,7 @@ class MainDashboardScreen extends ConsumerWidget {
                     context.push('/subscription');
                   },
                   icon: const Icon(Icons.all_inclusive_rounded, size: 16),
-                  label: const Text('📦 Découvrir tous les Packages, Trimestres & Pass Annuels'),
+                  label: const Text('📦 Découvrir tous les Packages, Trimestres & Packs Annuels'),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: AppColors.primary,
                     side: const BorderSide(color: AppColors.primary),
@@ -770,7 +773,6 @@ class MainDashboardScreen extends ConsumerWidget {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
                 ),
-              ),
               const SizedBox(height: 12),
             ],
           ),

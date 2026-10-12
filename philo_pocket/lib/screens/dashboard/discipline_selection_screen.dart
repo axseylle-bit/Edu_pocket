@@ -302,7 +302,7 @@ class _DisciplineSelectionScreenState
               subtitle: 'Maths + Physique-Chimie + SVT',
               icon: Icons.science_rounded,
               color: const Color(0xFF00897B),
-              badgeText: 'Séries C & D · 2 Paliers',
+              badgeText: 'Séries C & D · 2 Paliers (2 500 & 5 000 F)',
               isObligatoire: isTerminal && (studentState.serie == 'C' || studentState.serie == 'D'),
               onTap: () => _showDisciplineDetailsModal(
                 context,
@@ -323,7 +323,7 @@ class _DisciplineSelectionScreenState
               subtitle: 'Français + Anglais + Espagnol/All.',
               icon: Icons.menu_book_rounded,
               color: const Color(0xFFE65100),
-              badgeText: 'Séries A · 2 Paliers',
+              badgeText: 'Séries A · Palier Unique 2 500 F',
               isObligatoire: isTerminal && (studentState.serie == 'A1' || studentState.serie == 'A2'),
               onTap: () => _showDisciplineDetailsModal(
                 context,
@@ -344,7 +344,7 @@ class _DisciplineSelectionScreenState
               subtitle: 'Histoire-Géo + Économie (SES)',
               icon: Icons.trending_up_rounded,
               color: const Color(0xFF2E7D32),
-              badgeText: 'Série B · 2 Paliers',
+              badgeText: 'Série B · Palier Unique 2 500 F',
               isObligatoire: isTerminal && studentState.serie == 'B',
               onTap: () => _showDisciplineDetailsModal(
                 context,
@@ -1347,7 +1347,7 @@ class _DisciplineSelectionScreenState
                           isTechnique
                               ? 'Cours officiels 100% gratuits · Modules pionniers optionnels : Archimède (Gratuit), Léonard de Vinci (3 000 FCFA/mois), Gustave Eiffel (6 000 FCFA/mois)'
                               : isPole
-                                  ? 'Cours officiels IPN 100% gratuits · Offres de formation du Pôle : Palier Essentiel (3 000 à 3 500 FCFA/mois), Palier Confort (5 000 FCFA/mois)'
+                                  ? 'Cours officiels IPN 100% gratuits · Offres de formation du Pôle : Palier Unique (2 500 FCFA/mois) ou Formule Sciences (2 500 & 5 000 FCFA/mois)'
                                   : 'Cours officiels IPN 100% gratuits · Modules pionniers Philo Pocket : Socrate (Gratuit), Platon (2 500 FCFA/mois), Aristote (5 000 FCFA/mois)',
                           style: TextStyle(
                             fontSize: 11.5,
