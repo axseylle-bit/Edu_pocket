@@ -80,7 +80,10 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: '/hub',
-      builder: (context, state) => const DisciplineSelectionScreen(),
+      builder: (context, state) {
+        final tab = int.tryParse(state.uri.queryParameters['tab'] ?? '0') ?? 0;
+        return DisciplineSelectionScreen(initialTab: tab);
+      },
     ),
     GoRoute(
       path: '/main',

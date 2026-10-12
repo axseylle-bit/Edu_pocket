@@ -6,7 +6,8 @@ import '../../core/constants/app_colors.dart';
 import '../../core/providers/student_provider.dart';
 
 class DisciplineSelectionScreen extends ConsumerStatefulWidget {
-  const DisciplineSelectionScreen({super.key});
+  final int initialTab;
+  const DisciplineSelectionScreen({super.key, this.initialTab = 0});
 
   @override
   ConsumerState<DisciplineSelectionScreen> createState() =>
@@ -22,7 +23,8 @@ class _DisciplineSelectionScreenState
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    final safeIndex = (widget.initialTab >= 0 && widget.initialTab <= 1) ? widget.initialTab : 0;
+    _tabController = TabController(length: 2, vsync: this, initialIndex: safeIndex);
     _tabController.addListener(() {
       if (mounted) setState(() {});
     });
@@ -218,30 +220,73 @@ class _DisciplineSelectionScreenState
           ),
         ),
 
+        // Titre Vaisseau Amiral Solo
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Vaisseau Amiral (100% Indépendant)',
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primary,
+                  ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              decoration: BoxDecoration(
+                color: AppColors.primary.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Text(
+                'Solo · Socrate / Platon / Aristote',
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primary,
+                ),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+
         // Matière Phare : Philosophie (Philo Pocket)
         _buildDisciplineCard(
           context,
           title: 'Philo Pocket',
-          subtitle: 'Philosophie - Programme officiel IPN (15 Notions)',
+          subtitle: 'Philosophie Solo · 15 Notions IPN · 3 Paliers d\'Excellence',
           icon: Icons.local_fire_department_rounded,
           gradient: AppColors.premiumGradient,
           isPrimary: true,
-          badgeText: 'Disponible & Actif',
+          badgeText: 'Vaisseau Amiral Solo',
           isObligatoire: isTerminal,
           onTap: () => context.push('/main'),
         ).animate().fade(delay: 150.ms).scale(begin: const Offset(0.95, 0.95)),
 
         const SizedBox(height: 24),
-        Text(
-          'Autres matières d\'Enseignement Général',
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Pôles d\'Enseignement Général',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textDark,
+                  ),
+            ),
+            const Text(
+              '2 Paliers par Pôle',
+              style: TextStyle(
+                fontSize: 11,
                 fontWeight: FontWeight.bold,
-                color: AppColors.textDark,
+                color: AppColors.textMuted,
               ),
+            ),
+          ],
         ).animate().fade(delay: 200.ms),
-        const SizedBox(height: 16),
+        const SizedBox(height: 12),
 
-        // Grille des matières générales
+        // Grille des Pôles généraux
         GridView.count(
           crossAxisCount: 2,
           shrinkWrap: true,
@@ -250,77 +295,200 @@ class _DisciplineSelectionScreenState
           crossAxisSpacing: 16,
           childAspectRatio: 0.88,
           children: [
+            // 1. Pôle Sciences
             _buildDisciplineCard(
               context,
-              title: 'Maths Générales',
-              subtitle: 'Algèbre, Analyse, Géométrie',
-              icon: Icons.calculate_rounded,
-              color: const Color(0xFF1E88E5),
-              badgeText: 'Séries C, D, B',
-              isObligatoire: isTerminal && studentState.serie != 'A1',
+              title: 'Pôle Sciences',
+              subtitle: 'Maths + Physique-Chimie + SVT',
+              icon: Icons.science_rounded,
+              color: const Color(0xFF00897B),
+              badgeText: 'Séries C & D · 2 Paliers',
+              isObligatoire: isTerminal && (studentState.serie == 'C' || studentState.serie == 'D'),
               onTap: () => _showDisciplineDetailsModal(
                 context,
-                title: 'Mathématiques Générales',
-                filiere: 'Enseignement Général (Séries C, D, B, A)',
+                title: 'Pôle Sciences (Séries C & D)',
+                filiere: 'Mathématiques + Physique-Chimie + S.V.T.',
                 description:
-                    'Cours complets, résolutions de problèmes et annales du Baccalauréat gabonais conformes aux référentiels de l\'IPN.',
+                    'Les 3 matières scientifiques indispensables réunies dans un package mutualisé : cours conformes IPN, TD dirigés, formules et annales officielles du Bac C & D.',
                 etablissements: 'Lycées d\'État de Libreville, Port-Gentil, Franceville, Oyem',
+                targetDiscipline: 'science',
+                isPole: true,
               ),
             ).animate().fade(delay: 250.ms).slideY(begin: 0.1),
+
+            // 2. Pôle Littérature & Langues
             _buildDisciplineCard(
               context,
-              title: 'S.E.S',
-              subtitle: 'Sciences Éco & Sociales',
+              title: 'Pôle Littérature',
+              subtitle: 'Français + Anglais + Espagnol/All.',
+              icon: Icons.menu_book_rounded,
+              color: const Color(0xFFE65100),
+              badgeText: 'Séries A · 2 Paliers',
+              isObligatoire: isTerminal && (studentState.serie == 'A1' || studentState.serie == 'A2'),
+              onTap: () => _showDisciplineDetailsModal(
+                context,
+                title: 'Pôle Littérature & Langues (Séries A)',
+                filiere: 'Français + Anglais + Espagnol + Allemand',
+                description:
+                    'Maîtrise de la langue française, commentaire composé, dissertation littéraire et cours complets de langues vivantes pour réussir les épreuves des séries A.',
+                etablissements: 'Lycée Léon Mba, Lycée Paul Indjendjet Gondjout, tous lycées du Gabon',
+                targetDiscipline: 'litterature',
+                isPole: true,
+              ),
+            ).animate().fade(delay: 300.ms).slideY(begin: 0.1),
+
+            // 3. Pôle Économique & Sciences Humaines
+            _buildDisciplineCard(
+              context,
+              title: 'Pôle Économique',
+              subtitle: 'Histoire-Géo + Économie (SES)',
               icon: Icons.trending_up_rounded,
               color: const Color(0xFF2E7D32),
-              badgeText: 'Série B',
+              badgeText: 'Série B · 2 Paliers',
               isObligatoire: isTerminal && studentState.serie == 'B',
               onTap: () => _showDisciplineDetailsModal(
                 context,
-                title: 'Sciences Économiques et Sociales',
-                filiere: 'Enseignement Général (Série B)',
+                title: 'Pôle Économique & Sciences Humaines',
+                filiere: 'Histoire-Géographie + Économie (S.E.S)',
                 description:
-                    'Analyse macroéconomique, sociologie, mutations économiques contemporaines et préparation au grand écrit du Bac B.',
-                etablissements: 'Lycée Léon Mba, Lycée Paul Indjendjet Gondjout, Lycées du Gabon',
-              ),
-            ).animate().fade(delay: 300.ms).slideY(begin: 0.1),
-            _buildDisciplineCard(
-              context,
-              title: 'Physique-Chimie',
-              subtitle: 'Mécanique, Électrostatique, Chimie',
-              icon: Icons.science_rounded,
-              color: const Color(0xFF00897B),
-              badgeText: 'Séries C & D',
-              isObligatoire: isTerminal &&
-                  (studentState.serie == 'C' || studentState.serie == 'D'),
-              onTap: () => _showDisciplineDetailsModal(
-                context,
-                title: 'Physique - Chimie',
-                filiere: 'Enseignement Général (Séries C, D)',
-                description:
-                    'Fiches de cours, expériences guidées, réactions chimiques et préparation intensive aux épreuves pratiques et théoriques.',
-                etablissements: 'Tous lycées généraux du Gabon',
+                    'Analyse macroéconomique, sociologie, mutations contemporaines, cartographie et repères historiques indispensables pour le grand écrit du Bac B.',
+                etablissements: 'Lycée Léon Mba, Lycée d\'État de l\'Estuaire, lycées du Gabon',
+                targetDiscipline: 'economie',
+                isPole: true,
               ),
             ).animate().fade(delay: 350.ms).slideY(begin: 0.1),
+
+            // 4. Hub Filières Techniques
             _buildDisciplineCard(
               context,
-              title: 'Français & Lettres',
-              subtitle: 'Dissertation, Commentaire',
-              icon: Icons.menu_book_rounded,
-              color: const Color(0xFFE65100),
-              badgeText: 'Séries A1 & A2',
-              isObligatoire: isTerminal,
-              onTap: () => _showDisciplineDetailsModal(
-                context,
-                title: 'Français et Littérature',
-                filiere: 'Enseignement Général (Séries A1, A2, B, C, D)',
-                description:
-                    'Méthodologie du commentaire composé, dissertation littéraire, étude intégrale des œuvres au programme IPN.',
-                etablissements: 'Tous lycées généraux du Gabon',
-              ),
+              title: 'Filières Tech & Pro',
+              subtitle: 'STI, STMG, CET (Dès la 4e)',
+              icon: Icons.precision_manufacturing_rounded,
+              color: const Color(0xFF1E3A8A),
+              badgeText: 'LTNOB, Léconi... · Dès 3 000 F',
+              onTap: () {
+                _tabController.animateTo(1);
+              },
             ).animate().fade(delay: 400.ms).slideY(begin: 0.1),
           ],
         ),
+
+        const SizedBox(height: 20),
+
+        // Bannière d'accès direct aux Filières Techniques & Professionnelles
+        Container(
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF1E3A8A), Color(0xFF2563EB)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xFF1E3A8A).withValues(alpha: 0.25),
+                blurRadius: 14,
+                offset: const Offset(0, 6),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.handyman_rounded,
+                        color: Colors.white, size: 24),
+                  ),
+                  const SizedBox(width: 12),
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Filières Techniques & Professionnelles',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 16,
+                          ),
+                        ),
+                        SizedBox(height: 2),
+                        Text(
+                          'Lycées Techniques (LTNOB, Léconi, Bikélé, Nkok...) & CET (Dès la 4e)',
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 11.5,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              const Text(
+                'Formules de formation dédiées : Archimède (100% Gratuit), Léonard de Vinci (3 000 F/mois), Gustave Eiffel (6 000 F/mois). Séries STI, STMG, CET dès la 4e de métier.',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12.5,
+                  height: 1.4,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        _tabController.animateTo(1);
+                      },
+                      icon: const Icon(Icons.arrow_forward_rounded, size: 18),
+                      label: const Text(
+                        'Consulter les Ateliers & Filières',
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: const Color(0xFF1E3A8A),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      context.push('/subscription?discipline=technique');
+                    },
+                    icon: const Icon(Icons.stars_rounded, size: 18),
+                    label: const Text(
+                      'Paliers Pro',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFF59E0B),
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ).animate().fade(delay: 450.ms).slideY(begin: 0.1),
         const SizedBox(height: 32),
       ],
     );
@@ -1021,6 +1189,8 @@ class _DisciplineSelectionScreenState
     required String description,
     required String etablissements,
     bool isTechnique = false,
+    String targetDiscipline = 'general',
+    bool isPole = false,
   }) {
     showModalBottomSheet(
       context: context,
@@ -1176,7 +1346,9 @@ class _DisciplineSelectionScreenState
                         Text(
                           isTechnique
                               ? 'Cours officiels 100% gratuits · Modules pionniers optionnels : Archimède (Gratuit), Léonard de Vinci (3 000 FCFA/mois), Gustave Eiffel (6 000 FCFA/mois)'
-                              : 'Cours officiels IPN 100% gratuits · Modules pionniers optionnels : Palier 1 (2 500 FCFA/mois), Palier 2 (5 000 FCFA/mois)',
+                              : isPole
+                                  ? 'Cours officiels IPN 100% gratuits · Offres de formation du Pôle : Palier Essentiel (3 000 à 3 500 FCFA/mois), Palier Confort (5 000 FCFA/mois)'
+                                  : 'Cours officiels IPN 100% gratuits · Modules pionniers Philo Pocket : Socrate (Gratuit), Platon (2 500 FCFA/mois), Aristote (5 000 FCFA/mois)',
                           style: TextStyle(
                             fontSize: 11.5,
                             fontWeight: FontWeight.w600,
@@ -1255,14 +1427,18 @@ class _DisciplineSelectionScreenState
                   context.push(
                     Uri(
                       path: '/subscription',
-                      queryParameters: {'discipline': isTechnique ? 'technique' : 'general'},
+                      queryParameters: {'discipline': isTechnique ? 'technique' : targetDiscipline},
                     ).toString(),
                   );
                 },
                 icon: const Icon(Icons.workspace_premium_rounded, size: 18),
-                label: const Text(
-                  'Découvrir les modules pionniers de perfectionnement (dès 2 500 FCFA)',
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                label: Text(
+                  isTechnique
+                      ? 'Découvrir les modules pionniers de perfectionnement (dès 3 000 FCFA)'
+                      : isPole
+                          ? 'Découvrir les offres de formation du Pôle (dès 3 000 FCFA)'
+                          : 'Découvrir les modules pionniers de perfectionnement (dès 2 500 FCFA)',
+                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                 ),
               ),
             ),

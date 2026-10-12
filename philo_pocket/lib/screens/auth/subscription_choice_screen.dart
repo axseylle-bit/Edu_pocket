@@ -240,6 +240,58 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
           ),
         ),
       ),
+  }
+
+  Widget _buildSectionHeader({
+    required String title,
+    required String subtitle,
+    required IconData icon,
+    required Color color,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(top: 14, bottom: 14),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: color.withValues(alpha: 0.2)),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(icon, color: color, size: 22),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 14.5,
+                    color: color,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  subtitle,
+                  style: const TextStyle(
+                    fontSize: 11.5,
+                    color: AppColors.textMuted,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -562,7 +614,9 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                             ),
                             const SizedBox(width: 6),
                             Text(
-                              '🎯 Formules Solo (À la carte)',
+                              isTechnique
+                                  ? '🎯 Filières Techniques & Pro'
+                                  : '🎯 Philo Pocket (Solo Vaisseau Amiral)',
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
@@ -644,7 +698,9 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
-                        'Les formules Solo (2 500 F/mois) s\'appliquent aux disciplines pouvant être prises isolément (Philo, Maths littéraires, Français, Langues). Pour les matières de pôle indissociables (Sciences C & D, Séries A & B), optez pour nos Packages de Pôle dans le second onglet.',
+                        isTechnique
+                            ? 'Filières Techniques & Professionnelles (LTNOB, Léconi, Bikélé, CET dès la 4e) : Paliers Archimède (Gratuit), Léonard de Vinci (3 000 F/mois) et Gustave Eiffel (6 000 F/mois). Minimum légal de 3 000 F respecté pour les paliers payants.'
+                            : 'Philo Pocket est le vaisseau amiral 100% indépendant : la Philosophie ne se mélange à aucune autre matière et fonctionne en solo avec ses 3 paliers d\'excellence (Socrate gratuit, Platon 2 500 F, Aristote 5 000 F). Retrouvez les autres matières réunies par pôles dans l\'onglet Packages ci-contre.',
                         style: const TextStyle(fontSize: 11.5, color: AppColors.textDark, height: 1.3),
                       ),
                     ),
@@ -697,176 +753,354 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
             // CONTENU ONGLET 1 : PACKAGES & BUNDLES (OFFRES GROUPÉES)
             // =================================================================
             if (_selectedTab == 1) ...[
-              if (isTechnique) ...[
-                // 1. Pack Solo (3 000 FCFA / mois)
-                _buildSubscriptionCard(
-                  context,
-                  title: 'Pack Matière Solo (Spécialité Unique)',
-                  subtitle: 'Renforcement ciblé sur 1 seule matière d\'atelier ou technologique',
-                  price: '3 000 FCFA / mois',
-                  billingPeriod: 'Mensuel · Min. 3 000 FCFA respecté',
-                  badgeText: 'À LA CARTE (MIN. 3 000 F)',
-                  color: const Color(0xFF0284C7),
-                  icon: Icons.category_rounded,
-                  tierKey: 'pack_technique_solo',
-                  amountFcfa: 3000,
-                  features: [
-                    'Choix d\'une matière spécifique (Électricité CET, F1 Mécanique, F2 Électrotech, Mercatique STMG, etc.)',
-                    'Cours complets, schémas cotés et exercices appliqués de la matière',
-                    'Tuteur ALECKSE IA configuré pour la matière choisie',
-                    'QCM d\'entraînement d\'atelier et synthèse des cours',
-                    'Renouvellement mensuel libre',
+              // Information pedagogique sur les Poles
+              Container(
+                margin: const EdgeInsets.only(bottom: 16),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFD97706).withValues(alpha: 0.08),
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: const Color(0xFFD97706).withValues(alpha: 0.25)),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.stars_rounded, color: Color(0xFFD97706), size: 22),
+                    const SizedBox(width: 10),
+                    const Expanded(
+                      child: Text(
+                        'Pôles d\'Excellence & Filières : Choisissez votre pack mutualisé (Sciences, Littérature & Langues, Économie, ou Technique & Pro). Chaque pôle propose deux paliers de formation (Essentiel & Confort). Philo Pocket reste 100% solo et indépendant dans le 1er onglet.',
+                        style: TextStyle(fontSize: 11.5, color: AppColors.textDark, height: 1.3),
+                      ),
+                    ),
                   ],
                 ),
+              ),
 
-                // 2. Pack Filière Complète (6 000 FCFA / mois)
-                _buildSubscriptionCard(
-                  context,
-                  title: 'Pack Filière Intégrale (All-in-One)',
-                  subtitle: 'Toutes les matières techniques + enseignement général de la série',
-                  price: '6 000 FCFA / mois',
-                  billingPeriod: 'Toutes les matières de la filière incluses',
-                  badgeText: 'FORMULE TOUT-EN-UN COMPLÈTE',
-                  isPopular: true,
-                  color: const Color(0xFFD97706),
-                  icon: Icons.account_tree_rounded,
-                  tierKey: 'pack_technique_filiere',
-                  amountFcfa: 6000,
-                  features: [
-                    'Débloque 100% des matières de votre filière (STI, STL, STMG ou CET)',
-                    'Toutes les matières technologiques ET générales (Maths appliquées, etc.)',
-                    'Tuteur IA ALECKSE polyvalent sur l\'ensemble du cursus',
-                    'Guides de Travaux Pratiques (TP) d\'atelier et protocoles',
-                    'Rapports hebdomadaires de progression pour la famille',
-                  ],
-                ),
+              // ===============================================================
+              // 1. PÔLE SCIENCES (SÉRIES C & D) : 2 PALIERS PAYANTS
+              // ===============================================================
+              _buildSectionHeader(
+                title: '🔬 PÔLE SCIENCES (SÉRIES C & D)',
+                subtitle: 'Mathématiques + Physique-Chimie + S.V.T. mutualisées',
+                icon: Icons.science_rounded,
+                color: const Color(0xFF00897B),
+              ),
 
-                // 3. Pack Trimestre Réussite (8 000 FCFA / 3 mois)
-                _buildSubscriptionCard(
-                  context,
-                  title: 'Pack Trimestre Réussite (3 Mois)',
-                  subtitle: 'Forfait 90 jours pour sécuriser tout le trimestre scolaire',
-                  price: '8 000 FCFA / trimestre',
-                  billingPeriod: 'Paiement unique pour 3 mois (Soit 2 667 F/mois)',
-                  badgeText: 'ÉCONOMISEZ 1 000 FCFA · 90 JOURS',
-                  color: const Color(0xFF059669),
-                  icon: Icons.date_range_rounded,
-                  tierKey: 'pack_technique_trimestre',
-                  amountFcfa: 8000,
-                  features: [
-                    'Accès ininterrompu pendant 3 mois consécutifs (90 jours)',
-                    'Toutes les matières de la filière incluses sans restriction',
-                    'Préparation ciblée aux devoirs surveillés & compositions trimestrielles',
-                    'Sujets types et protocoles de validation des compétences',
-                    'Mode hors-ligne pour réviser à l\'atelier sans data',
-                  ],
-                ),
+              // Palier Essentiel Sciences (3 500 FCFA / mois)
+              _buildSubscriptionCard(
+                context,
+                title: 'Pôle Sciences · Palier Essentiel (Galilée & Newton)',
+                subtitle: 'Socle scientifique renforcé sur les 3 matières du pôle',
+                price: '3 500 FCFA / mois',
+                billingPeriod: 'Maths + Physique-Chimie + SVT réunies (Coût unitaire ultra-réduit)',
+                badgeText: 'PÔLE SCIENCES · ESSENTIEL',
+                color: const Color(0xFF00897B),
+                icon: Icons.science_rounded,
+                tierKey: 'pack_pole_sciences_essentiel',
+                amountFcfa: 3500,
+                features: [
+                  'Débloque les 3 matières phares du Bac scientifique (Maths, Physique-Chimie, SVT)',
+                  'Formulaires complets & synthèses de cours conformes IPN',
+                  'TD d\'exercices résolus et méthodes de raisonnement scientifique',
+                  'ALECKSE IA tuteur scientifique polyvalent sur les 3 disciplines',
+                  'Quiz d\'auto-évaluation réguliers par chapitre',
+                ],
+              ),
 
-                // 4. Pack Annuel Examen d'État (24 000 FCFA / 9 mois)
-                _buildSubscriptionCard(
-                  context,
-                  title: 'Pack Annuel Examen d\'État (Bac Tech / CAP)',
-                  subtitle: 'Le Pass intégral jusqu\'aux épreuves pratiques et écrites du Bac ou CAP',
-                  price: '24 000 FCFA / an',
-                  billingPeriod: 'Paiement unique pour 9 mois d\'année scolaire',
-                  badgeText: 'PASS EXAMEN · ÉCONOMIE 3 000 F+',
-                  color: const Color(0xFF1E3A8A),
-                  icon: Icons.workspace_premium_rounded,
-                  tierKey: 'pack_technique_annuel',
-                  amountFcfa: 24000,
-                  features: [
-                    'Accès garanti 9 mois (octobre à juillet, jusqu\'aux délibérations)',
-                    'Toutes les annales officielles du CGBT & CAP avec corrigés ministériels',
-                    'Coaching intensif aux épreuves pratiques (LTNOB, Léconi, Bikélé, Nkok)',
-                    'Mode hors-ligne illimité et téléchargement de tous les cours',
-                    'Assistance prioritaire ALECKSE IA 24h/24 jusqu\'au jour J',
-                  ],
-                ),
-              ] else ...[
-                // PACKAGES DE PÔLE & BUNDLES ENSEIGNEMENT GÉNÉRAL
-                // 1. Pack Pôle Scientifique (Maths + Physique + SVT)
-                _buildSubscriptionCard(
-                  context,
-                  title: 'Pack Pôle Scientifique (Séries C & D)',
-                  subtitle: 'Mutualise Mathématiques + Physique-Chimie + S.V.T.',
-                  price: '5 000 FCFA / mois',
-                  billingPeriod: 'Toutes les matières scientifiques réunies',
-                  badgeText: 'PÔLE SCIENCES C & D (MUTUALISÉ)',
-                  isPopular: true,
-                  color: const Color(0xFF00897B),
-                  icon: Icons.science_rounded,
-                  tierKey: 'pack_pole_scientifique',
-                  amountFcfa: 5000,
-                  features: [
-                    'Débloque les 3 matières phares du Bac scientifique (Maths, Physique, SVT)',
-                    'Évite de payer chaque matière séparément (coût unitaire ultra-réduit)',
-                    'Fiches de synthèse, TD d\'exercices résolus et protocoles expérimentaux',
-                    'ALECKSE IA tuteur scientifique polyvalent sur les 3 disciplines',
-                    'Annales officielles corrigées du Bac C et D gabonais',
-                  ],
-                ),
+              // Palier Confort Sciences (5 000 FCFA / mois)
+              _buildSubscriptionCard(
+                context,
+                title: 'Pôle Sciences · Palier Confort (Albert Einstein)',
+                subtitle: 'Préparation d\'excellence intégrale au Baccalauréat C & D',
+                price: '5 000 FCFA / mois',
+                billingPeriod: 'Toutes les matières scientifiques en formule d\'excellence',
+                badgeText: 'PÔLE SCIENCES · CONFORT (EXCELLENCE)',
+                isPopular: true,
+                color: AppColors.aristoteViolet,
+                icon: Icons.military_tech_rounded,
+                tierKey: 'pack_pole_sciences_confort',
+                amountFcfa: 5000,
+                features: [
+                  'Tout le contenu Essentiel Sciences',
+                  'Annales officielles résolues du Baccalauréat C & D gabonais',
+                  'Problèmes de synthèse avancés & simulations d\'épreuves types',
+                  'ALECKSE IA résolveur d\'exercices complexes pas-à-pas',
+                  'Protocoles d\'expérimentation & fiches d\'analyses de graphiques',
+                  'Mode hors-ligne complet pour réviser sans connexion Internet',
+                ],
+              ),
 
-                // 2. Pack Pôle Littéraire & Sciences Humaines (Séries A & B)
-                _buildSubscriptionCard(
-                  context,
-                  title: 'Pack Pôle Littéraire & Éco (Séries A & B)',
-                  subtitle: 'Mutualise Français + Philo + Histoire-Géo + Langues & Éco',
-                  price: '5 000 FCFA / mois',
-                  billingPeriod: 'Toutes les matières littéraires et sciences humaines réunies',
-                  badgeText: 'PÔLE LITTÉRAIRE & ÉCO (MUTUALISÉ)',
-                  color: const Color(0xFFE65100),
-                  icon: Icons.menu_book_rounded,
-                  tierKey: 'pack_pole_litteraire',
-                  amountFcfa: 5000,
-                  features: [
-                    'Débloque l\'ensemble du pôle : Français, Philo, Histoire-Géo, Langues & Éco',
-                    'Méthodologie complète : commentaire composé, dissertation, contraction et cartes',
-                    'ALECKSE IA spécialiste d\'argumentation littéraire et sociologique',
-                    'Dossiers d\'examen, fiches d\'auteurs et repères géopolitiques',
-                    'Préparation intensive aux épreuves écrites et orales du Bac',
-                  ],
-                ),
+              // ===============================================================
+              // 2. PÔLE LITTÉRATURE & LANGUES (SÉRIES A & COLLÈGE) : 2 PALIERS
+              // ===============================================================
+              _buildSectionHeader(
+                title: '📚 PÔLE LITTÉRATURE & LANGUES (SÉRIES A & COLLÈGE)',
+                subtitle: 'Français + Anglais + Espagnol + Allemand (Philosophie 100% Solo)',
+                icon: Icons.menu_book_rounded,
+                color: const Color(0xFFE65100),
+              ),
 
-                // 3. Pack Trimestre Réussite (3 Mois)
-                _buildSubscriptionCard(
-                  context,
-                  title: 'Pack Trimestre Réussite (3 Mois)',
-                  subtitle: 'Couvre l\'intégralité d\'un trimestre scolaire pour tous les pôles',
-                  price: '6 500 FCFA / trimestre',
-                  billingPeriod: 'Paiement unique pour 3 mois (90 jours)',
-                  badgeText: 'ÉCONOMISEZ 1 000 FCFA',
-                  color: AppColors.socrateGreen,
-                  icon: Icons.date_range_rounded,
-                  tierKey: 'pack_general_trimestre',
-                  amountFcfa: 6500,
-                  features: [
-                    'Accès ininterrompu pendant 90 jours consécutifs',
-                    'Devoirs surveillés types & compositions trimestrielles corrigées',
-                    'ALECKSE IA Correcteur de copies et coaching méthodique',
-                    'Relevé de notes et synthèse des compétences pour la famille',
-                  ],
-                ),
+              // Palier Essentiel Littéraire (3 500 FCFA / mois)
+              _buildSubscriptionCard(
+                context,
+                title: 'Pôle Littéraire · Palier Essentiel (Montesquieu & Senghor)',
+                subtitle: 'Méthodes littéraires & maîtrise des langues vivantes',
+                price: '3 500 FCFA / mois',
+                billingPeriod: 'Français + Anglais + Espagnol + Allemand réunis',
+                badgeText: 'PÔLE LITTÉRAIRE · ESSENTIEL',
+                color: const Color(0xFFE65100),
+                icon: Icons.edit_note_rounded,
+                tierKey: 'pack_pole_litteraire_essentiel',
+                amountFcfa: 3500,
+                features: [
+                  'Synthèses intégrales des œuvres littéraires au programme IPN',
+                  'Méthodologie guidée du commentaire composé & de la dissertation',
+                  'Règles de grammaire, fiches de vocabulaire et compréhension pour les langues',
+                  'ALECKSE IA spécialiste en expression écrite et argumentation',
+                  'Quiz d\'orthographe, syntaxe et littérature',
+                ],
+              ),
 
-                // 4. Pack Annuel Examen d'État (Bac Général)
-                _buildSubscriptionCard(
-                  context,
-                  title: 'Pack Annuel Examen d\'État (Bac Général)',
-                  subtitle: 'Pass complet pour toute l\'année scolaire (9 mois - Confort)',
-                  price: '19 000 FCFA / an',
-                  billingPeriod: 'Paiement unique pour 9 mois d\'année scolaire',
-                  badgeText: 'PASS EXAMEN · ÉCONOMIE 3 500 F',
-                  color: AppColors.aristoteViolet,
-                  icon: Icons.military_tech_rounded,
-                  tierKey: 'pack_general_annuel',
-                  amountFcfa: 19000,
-                  features: [
-                    'Accès garanti pendant 9 mois jusqu\'aux délibérations du Bac',
-                    'Toutes les annales officielles du Bac gabonais corrigées pas-à-pas',
-                    'Mode hors-ligne complet et fiches imprimables',
-                    'ALECKSE IA illimité 24h/24 pour réviser sans stress',
-                  ],
-                ),
-              ],
+              // Palier Confort Littéraire (5 000 FCFA / mois)
+              _buildSubscriptionCard(
+                context,
+                title: 'Pôle Littéraire · Palier Confort (Victor Hugo)',
+                subtitle: 'Le pass d\'excellence pour briller au Baccalauréat Série A',
+                price: '5 000 FCFA / mois',
+                billingPeriod: 'Français + Langues vivantes en formule prestige',
+                badgeText: 'PÔLE LITTÉRAIRE · CONFORT (EXCELLENCE)',
+                color: AppColors.aristoteViolet,
+                icon: Icons.military_tech_rounded,
+                tierKey: 'pack_pole_litteraire_confort',
+                amountFcfa: 5000,
+                features: [
+                  'Tout le contenu Essentiel Littéraire & Langues',
+                  'Modèles rédigés de dissertations d\'excellence avec citations clés',
+                  'Annales officielles corrigées du Baccalauréat Série A gabonais',
+                  'Simulations d\'épreuves écrites et orales de langues vivantes',
+                  'ALECKSE IA correcteur de style et d\'argumentation avancé',
+                  'Mode hors-ligne complet',
+                ],
+              ),
+
+              // ===============================================================
+              // 3. PÔLE ÉCONOMIQUE & SCIENCES HUMAINES (SÉRIE B) : 2 PALIERS
+              // ===============================================================
+              _buildSectionHeader(
+                title: '📈 PÔLE ÉCONOMIQUE & SCIENCES HUMAINES (SÉRIE B)',
+                subtitle: 'Histoire-Géographie + Économie (S.E.S) mutualisées',
+                icon: Icons.trending_up_rounded,
+                color: const Color(0xFF2E7D32),
+              ),
+
+              // Palier Essentiel Éco & Humain (3 000 FCFA / mois)
+              _buildSubscriptionCard(
+                context,
+                title: 'Pôle Éco & Humain · Palier Essentiel (Adam Smith & Ibn Khaldoun)',
+                subtitle: 'Bases solides en analyse économique et repères historiques',
+                price: '3 000 FCFA / mois',
+                billingPeriod: 'Histoire-Géographie + S.E.S incluses',
+                badgeText: 'PÔLE ÉCO & HUMAIN · ESSENTIEL',
+                color: const Color(0xFF2E7D32),
+                icon: Icons.analytics_rounded,
+                tierKey: 'pack_pole_eco_essentiel',
+                amountFcfa: 3000,
+                features: [
+                  'Définitions macroéconomiques & fiches IPN en sciences économiques',
+                  'Repères historiques essentiels, frises chronologiques & faits marquants',
+                  'Méthodologie du raisonnement économique et du commentaire de documents',
+                  'Cartographie & schémas géographiques du Gabon et du monde',
+                  'ALECKSE IA assistant en économie et sciences humaines',
+                ],
+              ),
+
+              // Palier Confort Éco & Humain (5 000 FCFA / mois)
+              _buildSubscriptionCard(
+                context,
+                title: 'Pôle Éco & Humain · Palier Confort (Keynes & Fernand Braudel)',
+                subtitle: 'Maîtrise complète des grands écrits du Baccalauréat Série B',
+                price: '5 000 FCFA / mois',
+                billingPeriod: 'Histoire-Géo + S.E.S en formule confort',
+                badgeText: 'PÔLE ÉCO & HUMAIN · CONFORT (EXCELLENCE)',
+                color: AppColors.aristoteViolet,
+                icon: Icons.military_tech_rounded,
+                tierKey: 'pack_pole_eco_confort',
+                amountFcfa: 5000,
+                features: [
+                  'Tout le contenu Essentiel Éco & Humain',
+                  'Annales officielles résolues du Bac B gabonais (Économie & Histoire-Géo)',
+                  'Études de cas économiques contemporaines et dissertations modèles',
+                  'Analyses approfondies des mutations socio-économiques internationales',
+                  'ALECKSE IA pour structurer vos plans et argumentaires économiques',
+                  'Mode hors-ligne complet',
+                ],
+              ),
+
+              // ===============================================================
+              // 4. FILIÈRES TECHNIQUES & PROFESSIONNELLES (LYCÉES TECH & CET)
+              // ===============================================================
+              _buildSectionHeader(
+                title: '⚙️ FILIÈRES TECHNIQUES & PROFESSIONNELLES',
+                subtitle: 'Lycées Techniques (LTNOB, Léconi, Bikélé, Nkok...) & CET (Dès la 4e de métier)',
+                icon: Icons.precision_manufacturing_rounded,
+                color: const Color(0xFF1E3A8A),
+              ),
+
+              // Palier Léonard de Vinci (3 000 FCFA / mois - min strict)
+              _buildSubscriptionCard(
+                context,
+                title: 'Filières Tech · Palier Léonard de Vinci (Essentiel Pro)',
+                subtitle: 'Cours théoriques & technologiques de filière (Minimum strict 3 000 F)',
+                price: '3 000 FCFA / mois',
+                billingPeriod: 'Mensuel · Minimum strict de 3 000 FCFA respecté',
+                badgeText: 'MIN. STRICT 3 000 FCFA (PRO)',
+                color: const Color(0xFF0284C7),
+                icon: Icons.precision_manufacturing_rounded,
+                tierKey: 'leonard_de_vinci',
+                amountFcfa: 3000,
+                features: [
+                  'Cours technologiques complets (STI, STL, STMG, CET dès la 4e de métier)',
+                  'Schémas techniques industriels, cotations & plans normalisés',
+                  'ALECKSE IA Assistant Technique spécialisé d\'atelier',
+                  'QCM industriels & situations-problèmes d\'atelier',
+                  'Renouvellement mensuel sans engagement',
+                ],
+              ),
+
+              // Palier Gustave Eiffel (6 000 FCFA / mois)
+              _buildSubscriptionCard(
+                context,
+                title: 'Filières Tech · Palier Gustave Eiffel (Confort & Ateliers TP)',
+                subtitle: 'Pratique intensive en atelier & protocoles de travaux pratiques',
+                price: '6 000 FCFA / mois',
+                billingPeriod: 'Mensuel · Formule atelier d\'excellence',
+                badgeText: 'ATELIERS & TRAVAUX PRATIQUES',
+                color: const Color(0xFF1E3A8A),
+                icon: Icons.engineering_rounded,
+                tierKey: 'gustave_eiffel',
+                amountFcfa: 6000,
+                features: [
+                  'Tout le contenu Léonard de Vinci',
+                  'Guides complets de Travaux Pratiques (TP) & protocoles d\'atelier',
+                  'Annales officielles corrigées du Baccalauréat Technologique (CGBT) & CAP',
+                  'Préparation aux épreuves pratiques (LTNOB, Léconi, Bikélé, Nkok)',
+                  'Correction IA pas-à-pas des calculs appliqués, RDM et schémas',
+                  'Mode hors-ligne pour réviser à l\'atelier sans connexion Internet',
+                ],
+              ),
+
+              // Pack Filière Complète All-in-One (6 000 FCFA / mois)
+              _buildSubscriptionCard(
+                context,
+                title: 'Pack Filière Intégrale (All-in-One Technique)',
+                subtitle: 'Toutes les matières techniques + enseignement général de la série',
+                price: '6 000 FCFA / mois',
+                billingPeriod: 'Toutes les matières de la filière incluses',
+                badgeText: 'FORMULE TOUT-EN-UN COMPLÈTE',
+                color: const Color(0xFFD97706),
+                icon: Icons.account_tree_rounded,
+                tierKey: 'pack_technique_filiere',
+                amountFcfa: 6000,
+                features: [
+                  'Débloque 100% des matières de votre filière (STI, STL, STMG ou CET)',
+                  'Matières technologiques ET matières générales (Maths appliquées, etc.)',
+                  'Tuteur IA ALECKSE polyvalent sur l\'ensemble du cursus technique',
+                  'Guides de Travaux Pratiques (TP) d\'atelier et protocoles',
+                  'Rapports de compétences pour la famille',
+                ],
+              ),
+
+              // Pack Trimestre Réussite Tech (8 000 FCFA / 3 mois)
+              _buildSubscriptionCard(
+                context,
+                title: 'Pack Trimestre Réussite Tech (3 Mois)',
+                subtitle: 'Forfait 90 jours pour sécuriser tout le trimestre en lycée technique',
+                price: '8 000 FCFA / trimestre',
+                billingPeriod: 'Paiement unique pour 3 mois (Soit 2 667 F/mois)',
+                badgeText: 'ÉCONOMISEZ 1 000 FCFA · 90 JOURS',
+                color: const Color(0xFF059669),
+                icon: Icons.date_range_rounded,
+                tierKey: 'pack_technique_trimestre',
+                amountFcfa: 8000,
+                features: [
+                  'Accès ininterrompu pendant 3 mois consécutifs (90 jours)',
+                  'Toutes les matières de la filière incluses sans restriction',
+                  'Préparation ciblée aux devoirs surveillés & compositions trimestrielles',
+                  'Sujets types et protocoles de validation des compétences d\'atelier',
+                  'Mode hors-ligne pour réviser à l\'atelier sans data',
+                ],
+              ),
+
+              // Pack Annuel Examen d'État Tech (24 000 FCFA / 9 mois)
+              _buildSubscriptionCard(
+                context,
+                title: 'Pack Annuel Examen d\'État Tech (Bac Tech / CAP)',
+                subtitle: 'Le Pass intégral jusqu\'aux épreuves pratiques et écrites du Bac ou CAP',
+                price: '24 000 FCFA / an',
+                billingPeriod: 'Paiement unique pour 9 mois d\'année scolaire',
+                badgeText: 'PASS EXAMEN TECH · ÉCONOMIE 3 000 F+',
+                color: const Color(0xFF1E3A8A),
+                icon: Icons.workspace_premium_rounded,
+                tierKey: 'pack_technique_annuel',
+                amountFcfa: 24000,
+                features: [
+                  'Accès garanti 9 mois (octobre à juillet, jusqu\'aux délibérations)',
+                  'Toutes les annales officielles du CGBT & CAP avec corrigés ministériels',
+                  'Coaching intensif aux épreuves pratiques (LTNOB, Léconi, Bikélé, Nkok)',
+                  'Mode hors-ligne illimité et téléchargement de tous les cours',
+                  'Assistance prioritaire ALECKSE IA 24h/24 jusqu\'au jour J',
+                ],
+              ),
+
+              // ===============================================================
+              // 5. PASS MULTI-TRIMESTRES ENSEIGNEMENT GÉNÉRAL
+              // ===============================================================
+              _buildSectionHeader(
+                title: '🎓 PASS MULTI-TRIMESTRES ENSEIGNEMENT GÉNÉRAL',
+                subtitle: 'Forfaits longue durée couvrant tous les pôles généraux',
+                icon: Icons.school_rounded,
+                color: AppColors.primary,
+              ),
+
+              // Pack Trimestre Réussite Général (6 500 FCFA / 3 mois)
+              _buildSubscriptionCard(
+                context,
+                title: 'Pack Trimestre Réussite Général (3 Mois)',
+                subtitle: 'Couvre l\'intégralité d\'un trimestre scolaire pour tous les pôles',
+                price: '6 500 FCFA / trimestre',
+                billingPeriod: 'Paiement unique pour 3 mois (90 jours)',
+                badgeText: 'ÉCONOMISEZ 1 000 FCFA',
+                color: AppColors.socrateGreen,
+                icon: Icons.date_range_rounded,
+                tierKey: 'pack_general_trimestre',
+                amountFcfa: 6500,
+                features: [
+                  'Accès ininterrompu pendant 90 jours consécutifs',
+                  'Devoirs surveillés types & compositions trimestrielles corrigées',
+                  'ALECKSE IA Correcteur de copies et coaching méthodique',
+                  'Relevé de notes et synthèse des compétences pour la famille',
+                ],
+              ),
+
+              // Pack Annuel Examen d'État Bac Général (19 000 FCFA / 9 mois)
+              _buildSubscriptionCard(
+                context,
+                title: 'Pack Annuel Examen d\'État (Bac Général - 9 Mois)',
+                subtitle: 'Pass complet pour toute l\'année scolaire (9 mois)',
+                price: '19 000 FCFA / an',
+                billingPeriod: 'Paiement unique pour 9 mois d\'année scolaire',
+                badgeText: 'PASS EXAMEN · ÉCONOMIE 3 500 F',
+                color: AppColors.aristoteViolet,
+                icon: Icons.military_tech_rounded,
+                tierKey: 'pack_general_annuel',
+                amountFcfa: 19000,
+                features: [
+                  'Accès garanti pendant 9 mois jusqu\'aux délibérations du Bac',
+                  'Toutes les annales officielles du Bac gabonais corrigées pas-à-pas',
+                  'Mode hors-ligne complet et fiches imprimables',
+                  'ALECKSE IA illimité 24h/24 pour réviser sans stress',
+                ],
+              ),
             ],
           ],
         ),

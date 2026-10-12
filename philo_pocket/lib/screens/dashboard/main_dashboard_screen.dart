@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/providers/student_provider.dart';
+import '../auth/mobile_money_payment_modal.dart';
 
 class MainDashboardScreen extends ConsumerWidget {
   const MainDashboardScreen({super.key});
@@ -198,27 +199,28 @@ class MainDashboardScreen extends ConsumerWidget {
   Widget _buildSubjectsGrid(BuildContext context) {
     return Column(
       children: [
-        // Section Asymétrique : Philo Pocket (Grand Vaisseau Amiral) à gauche, Maths et Physique à droite
+        // 1. SECTION SUPÉRIEURE : Philo Pocket (Vaisseau Amiral Solo) & Pôle Sciences (Séries C & D)
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Philo Pocket (Gauche) - Vaisseau Amiral
+            // Philo Pocket (Gauche) - Vaisseau Amiral Indépendant
             Expanded(
               flex: 1,
               child: _buildSubjectCard(
                 context,
                 title: 'Philo Pocket',
-                subtitle: 'Vaisseau amiral · 15 Notions IPN',
+                subtitle: 'Vaisseau amiral · Philosophie IPN (15 Notions)',
                 icon: Icons.local_fire_department_rounded,
                 color: AppColors.primary,
                 gradient: AppColors.primaryGradient,
                 isActive: true,
                 isLarge: true,
-                height: 376, // 180 + 16 + 180 = 376
+                badgeText: 'VAISSEAU AMIRAL (SOLO)',
+                height: 380,
                 onTap: () => _showDisciplinePioneersModal(
                   context,
                   title: 'Philo Pocket',
-                  subtitle: 'Philosophie · Programme officiel IPN Gabon',
+                  subtitle: 'Philosophie · Vaisseau Amiral IPN Gabon',
                   icon: Icons.local_fire_department_rounded,
                   color: AppColors.primary,
                   description:
@@ -229,293 +231,154 @@ class MainDashboardScreen extends ConsumerWidget {
                   tier1Details: 'Tout le contenu Socrate, quiz illimités pour s\'entraîner, suivi détaillé de la progression et bulletin hebdomadaire pour les parents.',
                   tier2Pioneer: 'Aristote',
                   tier2Details: 'Tout le contenu Platon, mythes philosophiques en 3D, TP et ateliers pratiques, dialogue direct avec les grands philosophes, Bac blanc corrigé par ALECKSE avancé et mode hors ligne.',
+                  tier1Price: '2500 FCFA/mois',
+                  tier2Price: '5000 FCFA/mois',
+                  tier1Amount: 2500,
+                  tier2Amount: 5000,
+                  tier1Key: 'platon',
+                  tier2Key: 'aristote',
                   targetRoute: '/philo-pocket',
                 ),
               ),
             ),
             const SizedBox(width: 16),
-            // Colonne de droite (Maths et Physique)
+
+            // Pôle Sciences (Droite) - Séries C & D (Maths + Physique + SVT)
             Expanded(
               flex: 1,
-              child: Column(
-                children: [
-                  _buildSubjectCard(
-                    context,
-                    title: 'Mathématiques',
-                    subtitle: 'Algèbre, Analyse, Géométrie',
-                    icon: Icons.calculate_rounded,
-                    color: const Color(0xFF1E88E5), // Bleu vibrant
-                    isActive: true,
-                    onTap: () => _showDisciplinePioneersModal(
-                      context,
-                      title: 'Mathématiques Générales',
-                      subtitle: 'Séries C, D, B, A · Référentiel National IPN',
-                      icon: Icons.calculate_rounded,
-                      color: const Color(0xFF1E88E5),
-                      description:
-                          'Enseignement conforme aux programmes officiels gabonais : cours complets du collège au lycée, propriétés, théorèmes et résolutions guidées.',
-                      freePioneer: 'Thalès & Pythagore',
-                      freePioneerDetails: 'Cours complets, formules essentielles, résumés théoriques et fiches de révision en accès libre et 100% gratuit.',
-                      tier1Pioneer: 'Archimède',
-                      tier1Details: 'Travaux dirigés d\'approfondissement, méthodes de démonstration et résolutions pas-à-pas.',
-                      tier2Pioneer: 'Isaac Newton',
-                      tier2Details: 'Préparation intensive aux épreuves du Baccalauréat, annales résolues et simulations d\'examens.',
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  _buildSubjectCard(
-                    context,
-                    title: 'Physique-Chimie',
-                    subtitle: 'Mécanique, Électricité, Chimie',
-                    icon: Icons.science_rounded,
-                    color: const Color(0xFF00897B), // Vert émeraude
-                    isActive: true,
-                    onTap: () => _showDisciplinePioneersModal(
-                      context,
-                      title: 'Physique - Chimie',
-                      subtitle: 'Séries C, D, STI · Référentiel National IPN',
-                      icon: Icons.science_rounded,
-                      color: const Color(0xFF00897B),
-                      description:
-                          'Lois physiques, réactions chimiques, cinématique, électrostatique et applications pratiques préparant aux épreuves nationales.',
-                      freePioneer: 'Galilée & Marie Curie',
-                      freePioneerDetails: 'Fiches de cours intégrales, équations et formules fondamentales en libre accès gratuit pour tous les élèves.',
-                      tier1Pioneer: 'Antoine Lavoisier',
-                      tier1Details: 'TD d\'exercices résolus pas-à-pas, réactions chimiques expliquées et protocoles expérimentaux.',
-                      tier2Pioneer: 'Albert Einstein',
-                      tier2Details: 'Coaching d\'excellence, annales complètes du Bac gabonais et sujets types corrigés.',
-                      isPackOnly: true,
-                      clusterName: 'Pack Pôle Scientifique (Séries C & D : Maths + Physique + SVT)',
-                      clusterBadge: 'PÔLE SCIENCES C & D',
-                      clusterDescription: 'La Physique-Chimie est réunie avec les Mathématiques et les SVT dans un forfait groupé d\'excellence pour toute la filière scientifique. Aucun surcoût individuel : tout le pôle est mutualisé.',
-                    ),
-                  ),
-                ],
+              child: _buildSubjectCard(
+                context,
+                title: 'Pôle Sciences',
+                subtitle: 'Maths · Physique-Chimie · S.V.T.',
+                icon: Icons.science_rounded,
+                color: const Color(0xFF00897B), // Vert émeraude vibrant
+                isActive: true,
+                isLarge: true,
+                badgeText: 'SÉRIES C & D',
+                height: 380,
+                onTap: () => _showDisciplinePioneersModal(
+                  context,
+                  title: 'Pôle Sciences (Séries C & D)',
+                  subtitle: 'Mathématiques · Physique-Chimie · S.V.T.',
+                  icon: Icons.science_rounded,
+                  color: const Color(0xFF00897B),
+                  description:
+                      'Mutualisation complète des 3 matières scientifiques fondamentales du Bac gabonais : algèbre, géométrie, cinématique, réactions chimiques, immunologie et génétique.',
+                  freePioneer: 'Thalès, Marie Curie & Darwin',
+                  freePioneerDetails: 'Fiches de cours intégrales, formules clés, protocoles et quiz de base 100% gratuits pour toutes les matières scientifiques.',
+                  tier1Pioneer: 'Archimède & Lavoisier',
+                  tier1Details: 'TD d\'approfondissement pas-à-pas, réactions chimiques expliquées, résolutions guidées et quiz illimités pour tout le pôle.',
+                  tier2Pioneer: 'Isaac Newton & Einstein',
+                  tier2Details: 'Annales officielles corrigées des Séries C et D, coaching d\'excellence, simulations d\'examen, IA ALECKSE avancée et mode hors ligne.',
+                  isPole: true,
+                  poleBadge: 'PÔLE SCIENCES C & D',
+                  poleIncludedSubjects: 'Maths + Physique + SVT',
+                  tier1Price: '3500 FCFA/mois',
+                  tier2Price: '5000 FCFA/mois',
+                  tier1Amount: 3500,
+                  tier2Amount: 5000,
+                  tier1Key: 'pack_pole_sciences_essentiel',
+                  tier2Key: 'pack_pole_sciences_confort',
+                  tier1Subtitle: 'Pack Essentiel Pôle Sciences (Maths + Physique + SVT)',
+                  tier2Subtitle: 'Pack Confort Pôle Sciences (Examen & Annales C/D)',
+                ),
               ),
             ),
           ],
         ),
         const SizedBox(height: 16),
-        
-        // Grille des autres matières en bas (Toutes actives et colorées)
+
+        // 2. SECTION INTERMÉDIAIRE : Pôle Littérature & Langues & Pôle Économique
         Row(
           children: [
+            // Pôle Littérature & Langues (Séries A & Collège)
             Expanded(
               flex: 1,
               child: _buildSubjectCard(
                 context,
-                title: 'Français & Lettres',
-                subtitle: 'Méthodologie & Littérature',
+                title: 'Pôle Littérature & Langues',
+                subtitle: 'Français · Anglais · Espagnol · Allemand',
                 icon: Icons.menu_book_rounded,
                 color: const Color(0xFFE65100), // Orange ambré
                 isActive: true,
+                badgeText: 'SÉRIES A & COLLÈGE',
+                height: 200,
                 onTap: () => _showDisciplinePioneersModal(
                   context,
-                  title: 'Français & Littérature',
-                  subtitle: 'Toutes Séries · Programme officiel IPN',
+                  title: 'Pôle Littérature & Langues',
+                  subtitle: 'Français · Anglais (LV1) · Espagnol (LV2) · Allemand (LV2)',
                   icon: Icons.menu_book_rounded,
                   color: const Color(0xFFE65100),
                   description:
-                      'Maîtrise du commentaire composé, dissertation littéraire, contraction de texte et étude intégrale des œuvres au programme.',
-                  freePioneer: 'Montesquieu & Aimé Césaire',
-                  freePioneerDetails: 'Cours méthodologiques, synthèses d\'œuvres et fiches d\'auteurs accessibles librement et gratuitement.',
-                  tier1Pioneer: 'Léopold Sédar Senghor',
-                  tier1Details: 'Ateliers de rédaction, figures de style, perfectionnement grammatical et maîtrise de l\'expression.',
-                  tier2Pioneer: 'Victor Hugo',
-                  tier2Details: 'Simulations d\'épreuves du Bac, coaching d\'analyse littéraire et modèles rédigés d\'excellence.',
+                      'Excellence littéraire et linguistique : méthodologie du commentaire composé, dissertation, contraction de texte, grammaire et expression en langues vivantes.',
+                  freePioneer: 'Montesquieu, Césaire & Shakespeare',
+                  freePioneerDetails: 'Synthèses d\'œuvres au programme IPN, méthodologies de base et fiches grammaticales libres et 100% gratuites.',
+                  tier1Pioneer: 'Senghor & Chinua Achebe',
+                  tier1Details: 'Ateliers d\'écriture guidés, figures de style, connecteurs logiques et renforcement lexical complet pour tout le pôle.',
+                  tier2Pioneer: 'Victor Hugo & Nelson Mandela',
+                  tier2Details: 'Modèles rédigés de dissertations d\'excellence, préparation intensive au grand oral et annales corrigées du Baccalauréat.',
+                  isPole: true,
+                  poleBadge: 'PÔLE LITTÉRAIRE & LANGUES',
+                  poleIncludedSubjects: 'Français + Anglais + Espagnol + Allemand',
+                  tier1Price: '3500 FCFA/mois',
+                  tier2Price: '5000 FCFA/mois',
+                  tier1Amount: 3500,
+                  tier2Amount: 5000,
+                  tier1Key: 'pack_pole_litteraire_essentiel',
+                  tier2Key: 'pack_pole_litteraire_confort',
+                  tier1Subtitle: 'Pack Essentiel Littéraire & Langues',
+                  tier2Subtitle: 'Pack Confort Littéraire & Grand Oral',
                 ),
               ),
             ),
             const SizedBox(width: 16),
+
+            // Pôle Économique & Sciences Humaines (Série B)
             Expanded(
               flex: 1,
               child: _buildSubjectCard(
                 context,
-                title: 'S.V.T.',
-                subtitle: 'Sciences de la Vie & Terre',
-                icon: Icons.eco_rounded,
-                color: const Color(0xFF2E7D32), // Vert nature
-                isActive: true,
-                onTap: () => _showDisciplinePioneersModal(
-                  context,
-                  title: 'Sciences de la Vie et de la Terre',
-                  subtitle: 'Séries D, C, Collège · Référentiel IPN',
-                  icon: Icons.eco_rounded,
-                  color: const Color(0xFF2E7D32),
-                  description:
-                      'Génétique, immunologie, reproduction, géologie gabonaise et tectonique des plaques conformes au programme officiel.',
-                  freePioneer: 'Darwin & Cheikh Anta Diop',
-                  freePioneerDetails: 'Cours complets, schémas de référence et fiches de synthèse gratuits pour chaque niveau scolaire.',
-                  tier1Pioneer: 'Louis Pasteur',
-                  tier1Details: 'Fiches bilans illustrées, TD d\'interprétation de graphes et protocoles biologiques.',
-                  tier2Pioneer: 'Gregor Mendel',
-                  tier2Details: 'Maîtrise complète des problèmes de génétique formelle, annales du Bac et entraînement ciblé.',
-                  isPackOnly: true,
-                  clusterName: 'Pack Pôle Scientifique (Séries C & D : Maths + Physique + SVT)',
-                  clusterBadge: 'PÔLE SCIENCES C & D',
-                  clusterDescription: 'Les SVT sont associées aux Mathématiques et à la Physique-Chimie dans le Pack Scientifique. Aucun surcoût individuel : tout le pôle est mutualisé au meilleur tarif.',
-                ),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 16),
-        Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: _buildSubjectCard(
-                context,
-                title: 'Histoire-Géo',
-                subtitle: 'Histoire du Gabon & Monde',
-                icon: Icons.public_rounded,
-                color: const Color(0xFF6D4C41), // Marron terre
-                isActive: true,
-                onTap: () => _showDisciplinePioneersModal(
-                  context,
-                  title: 'Histoire - Géographie',
-                  subtitle: 'Toutes Séries · Programme Gabon IPN',
-                  icon: Icons.public_rounded,
-                  color: const Color(0xFF6D4C41),
-                  description:
-                      'Histoire contemporaine, traite et résistances au Gabon, mondialisation, géographie économique et spatiale du pays.',
-                  freePioneer: 'Hérodote & Léon Mba',
-                  freePioneerDetails: 'Chronologies historiques, fiches géographiques du Gabon et synthèses de cours libres et gratuites.',
-                  tier1Pioneer: 'Cheikh Anta Diop',
-                  tier1Details: 'Méthodologie de la dissertation historique, commentaire de documents et repères géopolitiques.',
-                  tier2Pioneer: 'Fernand Braudel',
-                  tier2Details: 'Dossiers complets, schémas cartographiques d\'examen et préparation intensive au grand oral/écrit.',
-                  isPackOnly: true,
-                  clusterName: 'Pack Pôle Littéraire & Sciences Humaines (Séries A & B)',
-                  clusterBadge: 'SÉRIES A & B',
-                  clusterDescription: 'L\'Histoire-Géographie fait partie intégrante du Pack Littéraire avec le Français, la Philo et les Langues pour mutualiser les coûts d\'examen.',
-                ),
-              ),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              flex: 1,
-              child: _buildSubjectCard(
-                context,
-                title: 'Anglais',
-                subtitle: 'Langue Vivante 1',
-                icon: Icons.language_rounded,
-                color: const Color(0xFF5E35B1), // Violet royal
-                isActive: true,
-                onTap: () => _showDisciplinePioneersModal(
-                  context,
-                  title: 'Anglais (LV1)',
-                  subtitle: 'Toutes Séries & Cycles',
-                  icon: Icons.language_rounded,
-                  color: const Color(0xFF5E35B1),
-                  description:
-                      'Compréhension écrite, vocabulaire thématique, grammaire appliquée, traduction et expression personnelle.',
-                  freePioneer: 'William Shakespeare',
-                  freePioneerDetails: 'Guides grammaticaux, vocabulaire clé des épreuves et cours complets en accès 100% gratuit.',
-                  tier1Pioneer: 'Chinua Achebe',
-                  tier1Details: 'Ateliers de compréhension textuelle, connecteurs logiques et exercices d\'écriture guidés.',
-                  tier2Pioneer: 'Nelson Mandela',
-                  tier2Details: 'Coaching d\'expression avancée, sujets types corrigés du Baccalauréat et fluidité lexicale.',
-                ),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 16),
-        Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: _buildSubjectCard(
-                context,
-                title: 'Espagnol',
-                subtitle: 'Langue Vivante 2',
-                icon: Icons.translate_rounded,
-                color: const Color(0xFFC2185B), // Framboise vive
-                isActive: true,
-                onTap: () => _showDisciplinePioneersModal(
-                  context,
-                  title: 'Espagnol (LV2)',
-                  subtitle: 'Séries A1, A2, B, Lycée & Collège',
-                  icon: Icons.translate_rounded,
-                  color: const Color(0xFFC2185B),
-                  description:
-                      'Grammaire hispanique, conjugaison, civilisation hispanophone, analyse de textes et expression écrite.',
-                  freePioneer: 'Miguel de Cervantes',
-                  freePioneerDetails: 'Tableaux de conjugaison, règles grammaticales et cours de base gratuits.',
-                  tier1Pioneer: 'Gabriel García Márquez',
-                  tier1Details: 'Analyses de textes hispaniques et renforcement lexical pour le secondaire.',
-                  tier2Pioneer: 'Federico García Lorca',
-                  tier2Details: 'Préparation complète aux épreuves écrites et orales du Baccalauréat.',
-                ),
-              ),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              flex: 1,
-              child: _buildSubjectCard(
-                context,
-                title: 'Économie (S.E.S)',
-                subtitle: 'Série B (Éco-Gestion)',
+                title: 'Pôle Économique & Humain',
+                subtitle: 'Histoire-Géo · Économie (S.E.S)',
                 icon: Icons.trending_up_rounded,
                 color: const Color(0xFF0288D1), // Bleu océan
                 isActive: true,
+                badgeText: 'SÉRIE B (ÉCO)',
+                height: 200,
                 onTap: () => _showDisciplinePioneersModal(
                   context,
-                  title: 'Sciences Économiques & Sociales',
-                  subtitle: 'Série B & Enseignement Tertiaire',
+                  title: 'Pôle Économique & Sciences Humaines',
+                  subtitle: 'Histoire-Géographie & Économie (S.E.S)',
                   icon: Icons.trending_up_rounded,
                   color: const Color(0xFF0288D1),
                   description:
-                      'Mécanismes du marché, croissance économique, politique monétaire, sociologie et mutations sociales.',
-                  freePioneer: 'Adam Smith',
-                  freePioneerDetails: 'Définitions macroéconomiques, concepts clés et fiches de cours IPN gratuites.',
-                  tier1Pioneer: 'John Maynard Keynes',
-                  tier1Details: 'Méthodologie d\'argumentation économique et interprétation de tableaux statistiques.',
-                  tier2Pioneer: 'Joseph Schumpeter',
-                  tier2Details: 'Entraînement aux sujets d\'examen du Bac B et synthèses économiques complètes.',
-                  isPackOnly: true,
-                  clusterName: 'Pack Série B (Sciences Économiques & Sociales)',
-                  clusterBadge: 'SÉRIE B (ÉCO)',
-                  clusterDescription: 'L\'Économie (SES) est combinée aux Mathématiques et à l\'Histoire-Géo pour accompagner l\'élève de Série B dans un forfait complet.',
+                      'Histoire contemporaine du Gabon, mondialisation, géographie spatiale et mécanismes macroéconomiques au programme de la Série B.',
+                  freePioneer: 'Hérodote, Léon Mba & Adam Smith',
+                  freePioneerDetails: 'Repères historiques, fiches géographiques du Gabon et définitions macroéconomiques gratuites.',
+                  tier1Pioneer: 'Cheikh Anta Diop & Keynes',
+                  tier1Details: 'Méthodologie de dissertation historique, analyse de documents statistiques et argumentation économique guidée.',
+                  tier2Pioneer: 'Fernand Braudel & Schumpeter',
+                  tier2Details: 'Dossiers complets du Bac B, cartes géopolitiques, annales corrigées et préparation intensive aux examens officiels.',
+                  isPole: true,
+                  poleBadge: 'PÔLE ÉCONOMIQUE & HIST-GÉO',
+                  poleIncludedSubjects: 'Histoire-Géo + S.E.S',
+                  tier1Price: '3000 FCFA/mois',
+                  tier2Price: '5000 FCFA/mois',
+                  tier1Amount: 3000,
+                  tier2Amount: 5000,
+                  tier1Key: 'pack_pole_eco_essentiel',
+                  tier2Key: 'pack_pole_eco_confort',
+                  tier1Subtitle: 'Pack Essentiel Économique & Hist-Géo',
+                  tier2Subtitle: 'Pack Confort Bac Série B',
                 ),
               ),
             ),
           ],
         ),
         const SizedBox(height: 16),
-        Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: _buildSubjectCard(
-                context,
-                title: 'Allemand',
-                subtitle: 'Langue Vivante 2',
-                icon: Icons.record_voice_over_rounded,
-                color: const Color(0xFF455A64), // Ardoise noble
-                isActive: true,
-                onTap: () => _showDisciplinePioneersModal(
-                  context,
-                  title: 'Allemand (LV2)',
-                  subtitle: 'Séries Littéraires & Collège',
-                  icon: Icons.record_voice_over_rounded,
-                  color: const Color(0xFF455A64),
-                  description:
-                      'Grammaire allemande, déclinaisons, compréhension de documents et thèmes de civilisation.',
-                  freePioneer: 'Johann Wolfgang von Goethe',
-                  freePioneerDetails: 'Règles de déclinaison, vocabulaire essentiel et cours gratuits.',
-                  tier1Pioneer: 'Friedrich Schiller',
-                  tier1Details: 'Exercices d\'application, structures de phrases et compréhension guidée.',
-                  tier2Pioneer: 'Alexander von Humboldt',
-                  tier2Details: 'Préparation ciblée aux épreuves officielles du Baccalauréat.',
-                ),
-              ),
-            ),
-            const SizedBox(width: 16),
-            const Spacer(flex: 1), // Espace vide harmonieux
-          ],
-        ),
+
+        // 3. GRANDE CARTE : FILIÈRES TECHNIQUES & PROFESSIONNELLES (Lycées Techniques & CET)
+        _buildTechnicalStreamBanner(context),
       ],
     );
   }
@@ -534,10 +397,18 @@ class MainDashboardScreen extends ConsumerWidget {
     required String tier2Pioneer,
     required String tier2Details,
     String? targetRoute,
-    bool isPackOnly = false,
-    String? clusterName,
-    String? clusterBadge,
-    String? clusterDescription,
+    bool isPole = false,
+    bool isTechnique = false,
+    String tier1Price = '2500 FCFA/mois',
+    String tier2Price = '5000 FCFA/mois',
+    int tier1Amount = 2500,
+    int tier2Amount = 5000,
+    String? tier1Subtitle,
+    String? tier2Subtitle,
+    String? poleBadge,
+    String? poleIncludedSubjects,
+    String tier1Key = 'platon',
+    String tier2Key = 'aristote',
   }) {
     showModalBottomSheet(
       context: context,
@@ -690,282 +561,216 @@ class MainDashboardScreen extends ConsumerWidget {
 
               const SizedBox(height: 18),
 
-              // 2. OFFRES DE FORMATION SUPPLÉMENTAIRE (PÔLE GROUPÉ OU SOLO À LA CARTE)
-              if (isPackOnly) ...[
-                Text(
-                  'Offre de renforcement groupée (Pôle $title) :',
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5, color: AppColors.textDark),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Pour soulager le budget des familles, $title n\'est pas facturée individuellement : elle est réunie dans le forfait groupé avantageux du pôle :',
-                  style: const TextStyle(fontSize: 11.5, color: AppColors.textMuted, height: 1.3),
-                ),
-                const SizedBox(height: 12),
+              // 2. OFFRES DE FORMATION SUPPLÉMENTAIRES (2 PALIERS PIONNIERS AVEC LEURS PRIX)
+              Text(
+                isPole
+                    ? 'Offres de formation mutualisées (Pôle $title) :'
+                    : (isTechnique
+                        ? 'Offres de formation Lycées Techniques & CET :'
+                        : 'Offres de formation Philo Pocket (Vaisseau Amiral Solo) :'),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5, color: AppColors.textDark),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                isPole
+                    ? 'Toutes les matières du pôle ($poleIncludedSubjects) sont regroupées dans ces formules : pas de surcoût par matière !'
+                    : (isTechnique
+                        ? 'Modules de renforcement d\'atelier et technologiques (Minimum strict de 3 000 FCFA respecté).'
+                        : 'Accompagnement philosophique d\'excellence pour toutes les séries de Terminale.'),
+                style: const TextStyle(fontSize: 11.5, color: AppColors.textMuted, height: 1.3),
+              ),
+              const SizedBox(height: 12),
 
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: AppColors.socrateGreen.withValues(alpha: 0.06),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: AppColors.socrateGreen.withValues(alpha: 0.35), width: 1.5),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: AppColors.socrateGreen,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Text(
-                              clusterBadge ?? 'PACK MUTUALISÉ',
-                              style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              clusterName ?? 'Pack de Filière Réuni',
-                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5, color: AppColors.socrateGreen),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        clusterDescription ??
-                            'Toutes les matières du pôle réunies dans un seul forfait pour un coût unitaire très réduit.',
-                        style: const TextStyle(fontSize: 12, color: Colors.black87, height: 1.35),
-                      ),
-                      const SizedBox(height: 12),
-                      // Modules Pionniers inclus
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: AppColors.platonCoral.withValues(alpha: 0.08),
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: AppColors.platonCoral.withValues(alpha: 0.3)),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+              // Palier 1 (Essentiel) - Orange un peu rose
+              Container(
+                padding: const EdgeInsets.all(14),
+                margin: const EdgeInsets.only(bottom: 12),
+                decoration: BoxDecoration(
+                  color: AppColors.platonCoral.withValues(alpha: 0.06),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: AppColors.platonCoral, width: 1.5),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: AppColors.platonCoral.withValues(alpha: 0.15),
+                          radius: 18,
+                          child: const Icon(Icons.psychology_rounded, color: AppColors.platonCoral, size: 20),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
                                 children: [
-                                  Text(
-                                    'Palier $tier1Pioneer (Essentiel)',
-                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11.5, color: AppColors.platonCoral),
+                                  Expanded(
+                                    child: Text(
+                                      'Palier $tier1Pioneer (Essentiel)',
+                                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.platonCoral),
+                                    ),
                                   ),
-                                  const SizedBox(height: 2),
-                                  Text(
-                                    tier1Details,
-                                    style: const TextStyle(fontSize: 10.5, color: Colors.black87, height: 1.25),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.platonCoral,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Text(
+                                      tier1Price,
+                                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.white),
+                                    ),
                                   ),
                                 ],
                               ),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: AppColors.aristoteViolet.withValues(alpha: 0.08),
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: AppColors.aristoteViolet.withValues(alpha: 0.3)),
+                              const SizedBox(height: 3),
+                              Text(
+                                tier1Subtitle ?? 'Pack Essentiel · Renforcement méthodologique & suivi parents',
+                                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.grey.shade700),
                               ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Palier $tier2Pioneer (Confort)',
-                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11.5, color: AppColors.aristoteViolet),
-                                  ),
-                                  const SizedBox(height: 2),
-                                  Text(
-                                    tier2Details,
-                                    style: const TextStyle(fontSize: 10.5, color: Colors.black87, height: 1.25),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 14),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton.icon(
-                          onPressed: () {
-                            Navigator.pop(ctx);
-                            context.push('/subscription');
-                          },
-                          icon: const Icon(Icons.all_inclusive_rounded, size: 16),
-                          label: const Text('Découvrir les Packages Groupés'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.socrateGreen,
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: 11),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              const SizedBox(height: 4),
+                              Text(tier1Details, style: const TextStyle(fontSize: 11.5, color: Colors.black87, height: 1.3)),
+                            ],
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ] else ...[
-                const Text(
-                  'Offres de formation supplémentaire (À la carte & Solo) :',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5, color: AppColors.textDark),
-                ),
-                const SizedBox(height: 4),
-                const Text(
-                  'Renforcement ciblé hors package ou inclus avec réduction dans les forfaits groupés :',
-                  style: TextStyle(fontSize: 11.5, color: AppColors.textMuted, height: 1.3),
-                ),
-                const SizedBox(height: 10),
-
-                // Palier 1 (Essentiel - 2 500 FCFA) - Orange un peu rose
-                Container(
-                  padding: const EdgeInsets.all(14),
-                  margin: const EdgeInsets.only(bottom: 10),
-                  decoration: BoxDecoration(
-                    color: AppColors.platonCoral.withValues(alpha: 0.06),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: AppColors.platonCoral, width: 1.5),
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: AppColors.platonCoral.withValues(alpha: 0.15),
-                        radius: 18,
-                        child: const Icon(Icons.psychology_rounded, color: AppColors.platonCoral, size: 20),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'Palier $tier1Pioneer (Essentiel Solo)',
-                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.platonCoral),
-                                  ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.platonCoral,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: const Text(
-                                    '2500 FCFA/mois',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.white),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 3),
-                            Text(
-                              'Pack Essentiel · Renforcement méthodologique & suivi parents',
-                              style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.grey.shade700),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(tier1Details, style: const TextStyle(fontSize: 11.5, color: Colors.black87, height: 1.3)),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // Palier 2 (Confort - 5 000 FCFA) - Violet
-                Container(
-                  padding: const EdgeInsets.all(14),
-                  margin: const EdgeInsets.only(bottom: 12),
-                  decoration: BoxDecoration(
-                    color: AppColors.aristoteViolet.withValues(alpha: 0.06),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: AppColors.aristoteViolet.withValues(alpha: 0.45), width: 1.5),
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: AppColors.aristoteViolet.withValues(alpha: 0.15),
-                        radius: 18,
-                        child: const Icon(Icons.military_tech_rounded, color: AppColors.aristoteViolet, size: 20),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'Palier $tier2Pioneer (Confort Solo)',
-                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.aristoteViolet),
-                                  ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.aristoteViolet,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: const Text(
-                                    '5000 FCFA/mois',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.white),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 3),
-                            Text(
-                              'Pack Confort · Coaching d\'excellence, Bac blanc ALECKSE & Mode hors-ligne',
-                              style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.grey.shade700),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(tier2Details, style: const TextStyle(fontSize: 11.5, color: Colors.black87, height: 1.3)),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // Bouton vers la grille des abonnements
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton.icon(
-                    onPressed: () {
-                      Navigator.pop(ctx);
-                      context.push('/subscription');
-                    },
-                    icon: const Icon(Icons.workspace_premium_rounded, size: 16),
-                    label: const Text('Découvrir toutes les formules de renforcement'),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.primary,
-                      side: const BorderSide(color: AppColors.primary),
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      ],
                     ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.pop(ctx);
+                          MobileMoneyPaymentModal.show(
+                            context,
+                            tierTitle: 'Palier $tier1Pioneer (Essentiel - $title)',
+                            tierKey: tier1Key,
+                            amountFcfa: tier1Amount,
+                            onSuccess: () => context.go('/hub'),
+                          );
+                        },
+                        icon: const Icon(Icons.bolt_rounded, size: 16),
+                        label: Text('Choisir le Palier Essentiel ($tier1Price)'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.platonCoral,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // Palier 2 (Confort) - Violet
+              Container(
+                padding: const EdgeInsets.all(14),
+                margin: const EdgeInsets.only(bottom: 12),
+                decoration: BoxDecoration(
+                  color: AppColors.aristoteViolet.withValues(alpha: 0.06),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: AppColors.aristoteViolet.withValues(alpha: 0.45), width: 1.5),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: AppColors.aristoteViolet.withValues(alpha: 0.15),
+                          radius: 18,
+                          child: const Icon(Icons.military_tech_rounded, color: AppColors.aristoteViolet, size: 20),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Palier $tier2Pioneer (Confort)',
+                                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.aristoteViolet),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.aristoteViolet,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Text(
+                                      tier2Price,
+                                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 3),
+                              Text(
+                                tier2Subtitle ?? 'Pack Confort · Coaching d\'excellence, Bac blanc ALECKSE & Mode hors-ligne',
+                                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.grey.shade700),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(tier2Details, style: const TextStyle(fontSize: 11.5, color: Colors.black87, height: 1.3)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.pop(ctx);
+                          MobileMoneyPaymentModal.show(
+                            context,
+                            tierTitle: 'Palier $tier2Pioneer (Confort - $title)',
+                            tierKey: tier2Key,
+                            amountFcfa: tier2Amount,
+                            onSuccess: () => context.go('/hub'),
+                          );
+                        },
+                        icon: const Icon(Icons.star_rounded, size: 16),
+                        label: Text('Choisir le Palier Confort ($tier2Price)'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.aristoteViolet,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // Bouton vers la grille des abonnements
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                    context.push('/subscription');
+                  },
+                  icon: const Icon(Icons.all_inclusive_rounded, size: 16),
+                  label: const Text('📦 Découvrir tous les Packages, Trimestres & Pass Annuels'),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: AppColors.primary,
+                    side: const BorderSide(color: AppColors.primary),
+                    padding: const EdgeInsets.symmetric(vertical: 11),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
                 ),
-              ],
+              ),
               const SizedBox(height: 12),
             ],
           ),
@@ -984,6 +789,7 @@ class MainDashboardScreen extends ConsumerWidget {
     required bool isActive,
     bool isLarge = false,
     double? height,
+    String? badgeText,
     required VoidCallback onTap,
   }) {
     return Container(
@@ -1033,7 +839,7 @@ class MainDashboardScreen extends ConsumerWidget {
                           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: isLarge ? 24 : null,
+                                fontSize: isLarge ? 22 : null,
                               ),
                         ),
                         const SizedBox(height: 4),
@@ -1056,18 +862,18 @@ class MainDashboardScreen extends ConsumerWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.2),
+                    color: Colors.black.withValues(alpha: 0.25),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.check_circle_rounded, color: Colors.white, size: 11),
-                      SizedBox(width: 4),
+                      const Icon(Icons.verified_rounded, color: Colors.white, size: 11),
+                      const SizedBox(width: 4),
                       Text(
-                        'Gratuit IPN',
-                        style: TextStyle(
+                        badgeText ?? 'Gratuit IPN',
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 9.5,
                           fontWeight: FontWeight.bold,
@@ -1078,6 +884,199 @@ class MainDashboardScreen extends ConsumerWidget {
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  static Widget _buildTechChip(String label) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.15),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.25)),
+      ),
+      child: Text(
+        label,
+        style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w600),
+      ),
+    );
+  }
+
+  Widget _buildTechnicalStreamBanner(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFF0F172A), Color(0xFF1E3A8A), Color(0xFF1D4ED8)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.2), width: 1.5),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF1E3A8A).withValues(alpha: 0.35),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(24),
+          onTap: () => _showDisciplinePioneersModal(
+            context,
+            title: 'Filières Techniques & Professionnelles',
+            subtitle: 'Lycées Techniques (LTNOB, Léconi...) & CET (Dès la 4e)',
+            icon: Icons.engineering_rounded,
+            color: const Color(0xFF1E3A8A),
+            description:
+                'Panorama complet de l\'enseignement technique et professionnel au Gabon : Génie Mécanique (F1), Électrotechnique (F2), Électronique (F3), Génie Civil (F4), STMG (G), CET et filières industrielles.',
+            freePioneer: 'Archimède (Syllabus & Ateliers)',
+            freePioneerDetails: 'Fiches d\'initiation aux ateliers, panorama des filières et fiches méthodologiques 100% gratuites.',
+            tier1Pioneer: 'Léonard de Vinci (Essentiel Pro)',
+            tier1Details: 'Cours technologiques complets, schémas techniques industriels cotés, QCM d\'atelier et tuteur IA ALECKSE Pro.',
+            tier2Pioneer: 'Gustave Eiffel (Confort & TP Ateliers)',
+            tier2Details: 'Guides complets de TP d\'atelier, annales corrigées du Baccalauréat Technologique (CGBT) & CAP, préparation pratique aux lycées techniques.',
+            isTechnique: true,
+            tier1Price: '3000 FCFA/mois',
+            tier2Price: '6000 FCFA/mois',
+            tier1Amount: 3000,
+            tier2Amount: 6000,
+            tier1Key: 'leonard_de_vinci',
+            tier2Key: 'gustave_eiffel',
+            tier1Subtitle: 'Pack Essentiel Pro (Min. strict 3 000 FCFA respecté)',
+            tier2Subtitle: 'Pack Confort Ateliers & Annales CGBT/CAP',
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(22.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.15),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.engineering_rounded, color: Colors.white, size: 30),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFD97706),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.precision_manufacturing_rounded, color: Colors.white, size: 13),
+                          SizedBox(width: 4),
+                          Text(
+                            'LYCÉES TECHNIQUES & CET GABON',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 14),
+                const Text(
+                  'Filières Techniques & Professionnelles',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                const Text(
+                  'Lycée Technique Omar Bongo (LTNOB), Léconi, Bikélé, Nkok & CET (Dès la 4e)',
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: [
+                    _buildTechChip('STI (F1, F2, F3, F4)'),
+                    _buildTechChip('STMG (G Tertiaire)'),
+                    _buildTechChip('CET Métiers (Dès la 4e)'),
+                    _buildTechChip('Dès 3 000 F/mois'),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        onPressed: () => _showDisciplinePioneersModal(
+                          context,
+                          title: 'Filières Techniques & Professionnelles',
+                          subtitle: 'Lycées Techniques & CET (Dès la 4e)',
+                          icon: Icons.engineering_rounded,
+                          color: const Color(0xFF1E3A8A),
+                          description:
+                              'Panorama complet de l\'enseignement technique et professionnel au Gabon : Génie Mécanique (F1), Électrotechnique (F2), Électronique (F3), Génie Civil (F4), STMG (G), CET et filières industrielles.',
+                          freePioneer: 'Archimède (Syllabus & Ateliers)',
+                          freePioneerDetails: 'Fiches d\'initiation aux ateliers, panorama des filières et fiches méthodologiques 100% gratuites.',
+                          tier1Pioneer: 'Léonard de Vinci (Essentiel Pro)',
+                          tier1Details: 'Cours technologiques complets, schémas techniques industriels cotés, QCM d\'atelier et tuteur IA ALECKSE Pro.',
+                          tier2Pioneer: 'Gustave Eiffel (Confort & TP Ateliers)',
+                          tier2Details: 'Guides complets de TP d\'atelier, annales corrigées du Baccalauréat Technologique (CGBT) & CAP, préparation pratique aux lycées techniques.',
+                          isTechnique: true,
+                          tier1Price: '3000 FCFA/mois',
+                          tier2Price: '6000 FCFA/mois',
+                          tier1Amount: 3000,
+                          tier2Amount: 6000,
+                          tier1Key: 'leonard_de_vinci',
+                          tier2Key: 'gustave_eiffel',
+                          tier1Subtitle: 'Pack Essentiel Pro (Min. strict 3 000 FCFA respecté)',
+                          tier2Subtitle: 'Pack Confort Ateliers & Annales CGBT/CAP',
+                        ),
+                        icon: const Icon(Icons.card_membership_rounded, size: 16),
+                        label: const Text('Offres de Formation Technique'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: const Color(0xFF1E3A8A),
+                          padding: const EdgeInsets.symmetric(vertical: 11),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    OutlinedButton.icon(
+                      onPressed: () => context.push('/hub?tab=1'),
+                      icon: const Icon(Icons.arrow_forward_rounded, size: 16),
+                      label: const Text('Explorer les Ateliers'),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        side: const BorderSide(color: Colors.white70),
+                        padding: const EdgeInsets.symmetric(vertical: 11, horizontal: 14),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
