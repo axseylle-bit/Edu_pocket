@@ -240,6 +240,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
           ),
         ),
       ),
+    );
   }
 
   Widget _buildSectionHeader({

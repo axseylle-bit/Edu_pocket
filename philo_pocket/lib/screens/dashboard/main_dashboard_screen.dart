@@ -773,6 +773,7 @@ class MainDashboardScreen extends ConsumerWidget {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
                 ),
+              ),
               const SizedBox(height: 12),
             ],
           ),
