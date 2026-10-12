@@ -196,6 +196,46 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // BOUTON DE SORTIE VERS LE PROFIL ENSEIGNANT PARTENAIRE
+                      InkWell(
+                        onTap: () async {
+                          await SupabaseService().signOut();
+                          if (context.mounted) context.go('/teacher-partner');
+                        },
+                        borderRadius: BorderRadius.circular(12),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                          margin: const EdgeInsets.only(bottom: 20),
+                          decoration: BoxDecoration(
+                            color: Colors.amber.shade50,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: Colors.amber.shade400, width: 1.5),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.workspace_premium_rounded, color: Colors.orange, size: 28),
+                              const SizedBox(width: 12),
+                              const Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Passer en Mode Enseignant Partenaire',
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                                    ),
+                                    Text(
+                                      'Quitter la configuration élève et tester l\'espace enseignant',
+                                      style: TextStyle(fontSize: 11, color: Colors.black54),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const Icon(Icons.arrow_forward_rounded, size: 18, color: Colors.orange),
+                            ],
+                          ),
+                        ),
+                      ),
+
                       // CYCLE
                       _buildSectionTitle('Cycle'),
                       _buildChips(_cycles, _selectedCycle, (val) {

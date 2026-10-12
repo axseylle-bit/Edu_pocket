@@ -22,6 +22,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   Future<void> _checkAuth() async {
     final supabase = SupabaseService();
+    if (Uri.base.toString().contains('reset') || Uri.base.toString().contains('test')) {
+      await supabase.signOut();
+      if (mounted) setState(() => _isCheckingAuth = false);
+      return;
+    }
+
     if (supabase.isAuthenticated) {
       final role = await supabase.getCurrentUserRole();
       if (role == 'parent') {
@@ -191,6 +197,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             'Commencer',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        TextButton.icon(
+                          onPressed: () => context.go('/teacher-partner'),
+                          icon: const Icon(Icons.workspace_premium_rounded, color: AppColors.primary, size: 20),
+                          label: const Text(
+                            'Accès Enseignant Partenaire / Testeur',
+                            style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.primary),
                           ),
                         ),
                       ],
