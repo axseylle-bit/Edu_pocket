@@ -540,7 +540,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
             ),
             const SizedBox(height: 16),
 
-            // Information Tarification Technique & Règle des 3 000 FCFA
+            // Information Tarification Technique, Vulgarisation & Règle des 3 000 FCFA
             if (isTechnique)
               Container(
                 padding:
@@ -553,20 +553,34 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                     color: const Color(0xFF1E3A8A).withValues(alpha: 0.25),
                   ),
                 ),
-                child: Row(
+                child: const Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.verified_rounded,
-                        color: Color(0xFF1E3A8A), size: 22),
-                    const SizedBox(width: 12),
-                    const Expanded(
-                      child: Text(
-                        'Paliers Pionniers & Packages Techniques : Minimum strict de 3 000 FCFA par formule payante.',
-                        style: TextStyle(
-                          fontSize: 12.5,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF1E3A8A),
-                          height: 1.3,
-                        ),
+                    Icon(Icons.school_rounded,
+                        color: Color(0xFF1E3A8A), size: 24),
+                    SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Orientation Précoce & Réussite dans le Supérieur',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF1E3A8A),
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            'EduPocket vulgarise l\'ensemble des offres de formation pour briser le piège du « tout-général ». Choisir le technique à temps permet de maîtriser l\'ingénierie et les ateliers dès le secondaire pour réussir le supérieur sans ambages face aux élèves du général. (Minimum strict de 3 000 FCFA respecté par formule technique).',
+                            style: TextStyle(
+                              fontSize: 11.5,
+                              color: Color(0xFF1E3A8A),
+                              height: 1.35,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],

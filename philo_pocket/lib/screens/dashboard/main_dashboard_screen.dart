@@ -543,6 +543,47 @@ class MainDashboardScreen extends ConsumerWidget {
                 description,
                 style: const TextStyle(fontSize: 13, color: AppColors.textMuted, height: 1.4),
               ),
+              if (isTechnique)
+                Container(
+                  margin: const EdgeInsets.only(top: 12),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1E3A8A).withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(color: const Color(0xFF1E3A8A).withValues(alpha: 0.25)),
+                  ),
+                  child: const Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(Icons.school_rounded, color: Color(0xFF1E3A8A), size: 22),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '🎯 Enseignement Supérieur Sans Ambages & Emploi',
+                              style: TextStyle(
+                                fontSize: 12.5,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF1E3A8A),
+                              ),
+                            ),
+                            SizedBox(height: 4),
+                            Text(
+                              'En découvrant tôt l\'ensemble des offres de formation, l\'élève choisit le technique à temps. Les disciplines d\'ingénierie et d\'atelier acquises au secondaire lui permettent d\'aborder le supérieur avec fluidité, là où les étudiants issus du général les découvrent tardivement avec difficulté.',
+                              style: TextStyle(
+                                fontSize: 11.5,
+                                color: AppColors.textDark,
+                                height: 1.35,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               const SizedBox(height: 18),
 
               // 1. LE MODÈLE GRATUIT (Accès libre pour chaque enfant gabonais)
@@ -1086,6 +1127,33 @@ class MainDashboardScreen extends ConsumerWidget {
                     color: Colors.white70,
                     fontSize: 12.5,
                     fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.amberAccent.withValues(alpha: 0.4)),
+                  ),
+                  child: const Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(Icons.lightbulb_rounded, color: Colors.amberAccent, size: 18),
+                      SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          'Vulgarisation précoce : Choisir le technique à temps permet de maîtriser l\'ingénierie dès l\'adolescence pour aborder le supérieur sans ambages et garantir l\'adéquation formation-emploi.',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                            height: 1.35,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 12),
