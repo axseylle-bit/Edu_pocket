@@ -48,11 +48,22 @@ class AiService {
     _isInitialized = true;
   }
 
+  DateTime? _lastMessageTime;
+
   // Envoi d'un message à l'IA via la Supabase Edge Function
   Future<String?> sendMessage(String message) async {
     if (!_isInitialized) {
       throw Exception("L'IA n'est pas initialisée.");
     }
+
+    // Protection anti-flood / rate-limiting (au moins 1.5s entre chaque question)
+    if (_lastMessageTime != null) {
+      final diff = DateTime.now().difference(_lastMessageTime!);
+      if (diff.inMilliseconds < 1500) {
+        return "Un instant, je termine d'analyser ta réflexion précédente avant de te répondre ! Prends le temps de bien relire tes arguments.";
+      }
+    }
+    _lastMessageTime = DateTime.now();
 
     _chatHistory.add({
       "role": "user",
@@ -82,8 +93,14 @@ class AiService {
     } catch (e) {
       print("Erreur lors de l'appel à la fonction Supabase Edge : $e");
       // Retirer le message utilisateur de l'historique en cas d'échec
-      _chatHistory.removeLast();
-      return "Désolé, je rencontre un problème de connexion avec mon cerveau artificiel sécurisé.\n\nErreur technique détaillée : $e";
+      if (_chatHistory.isNotEmpty) {
+        _chatHistory.removeLast();
+      }
+      final errStr = e.toString().toLowerCase();
+      if (errStr.contains('socket') || errStr.contains('connection') || errStr.contains('network') || errStr.contains('host')) {
+        return "Connexion temporairement instable. Vérifie tes données mobiles (Airtel ou Moov) ou ton Wi-Fi et réessaie dans un instant.";
+      }
+      return "ALECKSE est momentanément indisponible pour des raisons de maintenance. Réessaie dans quelques instants.";
     }
   }
 

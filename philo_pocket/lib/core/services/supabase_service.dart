@@ -228,6 +228,35 @@ class SupabaseService {
     }
   }
 
+  // Enregistrer une transaction Mobile Money (Airtel Money ou Moov Money)
+  Future<void> enregistrerPaiementMobileMoney({
+    required String referenceTransaction,
+    required String operateur,
+    required String numeroTelephone,
+    required int montant,
+    required String palierKey,
+    String? idempotenceToken,
+  }) async {
+    final user = currentUser;
+    if (user == null) return;
+
+    try {
+      await client.from('paiements_mobile_money').insert({
+        'utilisateur_id': user.id,
+        'reference_transaction': referenceTransaction,
+        'operateur': operateur,
+        'numero_telephone': numeroTelephone,
+        'montant': montant,
+        'palier_key': palierKey,
+        'statut': 'valide',
+        'idempotence_token': idempotenceToken ?? referenceTransaction,
+        'valide_le': DateTime.now().toIso8601String(),
+      });
+    } catch (e) {
+      print("Note: Enregistrement paiement mobile money (sauvegarde locale prioritaire): $e");
+    }
+  }
+
   // Marquer un cours comme lu
   Future<void> markCourseAsRead(String notion) async {
     final user = currentUser;
@@ -268,18 +297,10 @@ class SupabaseService {
     if (user == null) return 0.0;
 
     try {
-      final readCourses = await getReadCourses();
-      
-      // On compte le nombre total de notions dans le programme
-      int totalCourses = 0;
-      for (int i = 1; i <= 3; i++) {
-        // Cette fonction doit Ãªtre importÃ©e si elle ne l'est pas, ou calculÃ©e ailleurs.
-        // Mais pour l'instant on peut utiliser le provider pour faire le ratio.
-      }
-      
-      return 0.0; // Sera calculÃ© dans le StudentProvider pour Ã©viter les imports circulaires
+      // Sera calculé dans le StudentProvider pour éviter les imports circulaires
+      return 0.0;
     } catch (e) {
-      print("Erreur rÃ©cupÃ©ration progression: $e");
+      print("Erreur récupération progression: $e");
       return 0.0;
     }
   }

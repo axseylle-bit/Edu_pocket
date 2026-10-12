@@ -14,6 +14,8 @@ class IpnResourcesScreen extends StatefulWidget {
 
 class _IpnResourcesScreenState extends State<IpnResourcesScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
 
   final List<Map<String, dynamic>> _categories = const [
     {
@@ -268,6 +270,7 @@ class _IpnResourcesScreenState extends State<IpnResourcesScreen> with SingleTick
 
   @override
   void dispose() {
+    _searchController.dispose();
     _tabController.dispose();
     super.dispose();
   }
@@ -309,86 +312,165 @@ class _IpnResourcesScreenState extends State<IpnResourcesScreen> with SingleTick
           }).toList(),
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: _categories.map((cat) {
-          final List<Map<String, dynamic>> docs = cat['docs'] as List<Map<String, dynamic>>;
-          final Color catColor = cat['color'] as Color;
-
-          return ListView(
-            padding: const EdgeInsets.all(20.0),
-            children: [
-              Container(
-                padding: const EdgeInsets.all(16),
-                margin: const EdgeInsets.only(bottom: 20),
-                decoration: BoxDecoration(
-                  color: catColor.withValues(alpha: 0.08),
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: catColor.withValues(alpha: 0.2)),
+      body: Column(
+        children: [
+          // Barre de recherche instantanée
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 6),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                hintText: 'Rechercher un programme, épreuve, chapitre...',
+                hintStyle: const TextStyle(fontSize: 13, color: Colors.black45),
+                prefixIcon: const Icon(Icons.search_rounded, size: 20, color: AppColors.primary),
+                suffixIcon: _searchQuery.isNotEmpty
+                    ? IconButton(
+                        icon: const Icon(Icons.clear_rounded, size: 18),
+                        onPressed: () {
+                          _searchController.clear();
+                          setState(() => _searchQuery = '');
+                        },
+                      )
+                    : null,
+                contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+                filled: true,
+                fillColor: Colors.grey.shade100,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: BorderSide.none,
                 ),
-                child: Row(
-                  children: [
-                    Icon(cat['icon'] as IconData, color: catColor, size: 28),
-                    const SizedBox(width: 14),
-                    Expanded(
+              ),
+              onChanged: (val) => setState(() => _searchQuery = val.trim().toLowerCase()),
+            ),
+          ),
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: _categories.map((cat) {
+                final List<Map<String, dynamic>> allDocs = cat['docs'] as List<Map<String, dynamic>>;
+                final Color catColor = cat['color'] as Color;
+
+                final docs = allDocs.where((doc) {
+                  if (_searchQuery.isEmpty) return true;
+                  final title = (doc['title'] as String).toLowerCase();
+                  final desc = (doc['desc'] as String).toLowerCase();
+                  return title.contains(_searchQuery) || desc.contains(_searchQuery);
+                }).toList();
+
+                if (docs.isEmpty) {
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          Icon(Icons.search_off_rounded, size: 56, color: Colors.grey.shade400),
+                          const SizedBox(height: 12),
                           Text(
-                            'Progressions Officielles IPN · ${cat['name']}',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: catColor,
-                            ),
+                            'Aucun document trouvé pour "$_searchQuery"',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.textDark),
                           ),
-                          const SizedBox(height: 2),
-                          const Text(
-                            'Référentiels pédagogiques nationaux conformes à l\'année 2026-2027.',
-                            style: TextStyle(fontSize: 12, color: Colors.black87),
+                          const SizedBox(height: 6),
+                          Text(
+                            'Vérifiez l\'orthographe ou consultez un autre onglet.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                          ),
+                          const SizedBox(height: 16),
+                          OutlinedButton.icon(
+                            onPressed: () {
+                              _searchController.clear();
+                              setState(() => _searchQuery = '');
+                            },
+                            icon: const Icon(Icons.refresh_rounded, size: 16),
+                            label: const Text('Réinitialiser la recherche'),
                           ),
                         ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-              ...docs.map((doc) {
-                final isPdf = doc['type'] == 'pdf';
-                return Card(
-                  margin: const EdgeInsets.only(bottom: 12.0),
-                  elevation: 1,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                  child: ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    leading: Container(
-                      padding: const EdgeInsets.all(10),
+                  );
+                }
+
+                return ListView(
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      margin: const EdgeInsets.only(bottom: 16),
                       decoration: BoxDecoration(
-                        color: isPdf ? Colors.red.shade50 : catColor.withValues(alpha: 0.1),
-                        shape: BoxShape.circle,
+                        color: catColor.withValues(alpha: 0.08),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: catColor.withValues(alpha: 0.2)),
                       ),
-                      child: Icon(
-                        isPdf ? Icons.picture_as_pdf_rounded : Icons.description_rounded,
-                        color: isPdf ? Colors.redAccent : catColor,
-                        size: 22,
+                      child: Row(
+                        children: [
+                          Icon(cat['icon'] as IconData, color: catColor, size: 28),
+                          const SizedBox(width: 14),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Progressions Officielles IPN · ${cat['name']}',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: catColor,
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  _searchQuery.isNotEmpty
+                                      ? '${docs.length} document(s) correspondant(s)'
+                                      : 'Référentiels pédagogiques nationaux conformes à l\'année 2026-2027.',
+                                  style: const TextStyle(fontSize: 12, color: Colors.black87),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    title: Text(
-                      doc['title']!,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5),
-                    ),
-                    subtitle: Text(
-                      doc['desc']!,
-                      style: const TextStyle(fontSize: 11.5, color: Colors.black54),
-                    ),
-                    trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 14, color: Colors.black45),
-                    onTap: () => _openDocument(context, doc),
-                  ),
+                    ...docs.map((doc) {
+                      final isPdf = doc['type'] == 'pdf';
+                      return Card(
+                        margin: const EdgeInsets.only(bottom: 12.0),
+                        elevation: 1,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                        child: ListTile(
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          leading: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: isPdf ? Colors.red.shade50 : catColor.withValues(alpha: 0.1),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              isPdf ? Icons.picture_as_pdf_rounded : Icons.description_rounded,
+                              color: isPdf ? Colors.redAccent : catColor,
+                              size: 22,
+                            ),
+                          ),
+                          title: Text(
+                            doc['title']!,
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5),
+                          ),
+                          subtitle: Text(
+                            doc['desc']!,
+                            style: const TextStyle(fontSize: 11.5, color: Colors.black54),
+                          ),
+                          trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 14, color: Colors.black45),
+                          onTap: () => _openDocument(context, doc),
+                        ),
+                      );
+                    }),
+                  ],
                 );
-              }),
-            ],
-          );
-        }).toList(),
+              }).toList(),
+            ),
+          ),
+        ],
       ),
     );
   }

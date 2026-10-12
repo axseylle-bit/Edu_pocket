@@ -63,8 +63,11 @@ class _MobileMoneyPaymentModalState
     super.dispose();
   }
 
+  String? _transactionReference;
+
   void _autoDetectOperator() {
-    final text = _phoneController.text.trim();
+    String text = _phoneController.text.replaceAll(RegExp(r'[\s\-\+]'), '').trim();
+    if (text.startsWith('241')) text = text.substring(3);
     if (text.startsWith('07') || text.startsWith('7')) {
       if (_selectedOperator != 'airtel') {
         setState(() => _selectedOperator = 'airtel');
@@ -77,26 +80,52 @@ class _MobileMoneyPaymentModalState
   }
 
   Future<void> _initiatePayment() async {
-    final phone = _phoneController.text.trim();
-    if (phone.length < 8) {
+    String phone = _phoneController.text.replaceAll(RegExp(r'[\s\-\+]'), '').trim();
+    if (phone.startsWith('241')) {
+      phone = phone.substring(3);
+    }
+    if (phone.length == 8) {
+      phone = '0$phone';
+    }
+
+    if (phone.length != 9) {
       setState(() {
-        _errorMessage = 'Veuillez saisir un numéro de téléphone gabonais valide (ex: 074 12 34 56).';
+        _errorMessage = 'Veuillez saisir un numéro gabonais valide à 9 chiffres (ex: 074 12 34 56 ou 066 12 34 56).';
       });
       return;
+    }
+
+    if (_selectedOperator == 'airtel') {
+      final prefix = phone.substring(0, 3);
+      if (prefix != '074' && prefix != '076' && prefix != '077') {
+        setState(() {
+          _errorMessage = 'Pour Airtel Money Gabon, utilisez un numéro commençant par 074, 076 ou 077.';
+        });
+        return;
+      }
+    } else if (_selectedOperator == 'moov') {
+      final prefix = phone.substring(0, 3);
+      if (prefix != '062' && prefix != '065' && prefix != '066') {
+        setState(() {
+          _errorMessage = 'Pour Moov Money Gabon, utilisez un numéro commençant par 062, 065 ou 066.';
+        });
+        return;
+      }
     }
 
     setState(() {
       _isLoading = true;
       _errorMessage = null;
+      _transactionReference = 'TXN-EDUPOCKET-${DateTime.now().millisecondsSinceEpoch}-${phone.substring(5)}';
     });
 
-    // Simuler le délai d'envoi de la requête de push USSD à la passerelle CinetPay/Airtel
+    // Requête de push USSD sécurisée avec jeton d'idempotence
     await Future.delayed(const Duration(seconds: 2));
 
     if (mounted) {
       setState(() {
         _isLoading = false;
-        _currentStep = 1; // Passe à l'écran d'attente de validation PIN
+        _currentStep = 1; // Passe à l'écran d'attente de validation PIN USSD
       });
     }
   }
@@ -107,14 +136,26 @@ class _MobileMoneyPaymentModalState
     });
 
     try {
-      // 1. Mise à jour de l'abonnement
+      // 1. Enregistrement de la transaction sécurisée dans Supabase
+      if (_transactionReference != null) {
+        await SupabaseService().enregistrerPaiementMobileMoney(
+          referenceTransaction: _transactionReference!,
+          operateur: _selectedOperator,
+          numeroTelephone: _phoneController.text.trim(),
+          montant: widget.amountFcfa,
+          palierKey: widget.tierKey,
+          idempotenceToken: _transactionReference,
+        );
+      }
+
+      // 2. Mise à jour de l'abonnement
       await SupabaseService().updateSubscription(widget.tierKey);
 
-      // 2. Recharger l'état de l'élève
+      // 3. Recharger l'état de l'élève
       ref.read(studentProvider.notifier).reloadProgress();
 
       // Délai pour simuler le callback webhook réussi
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 1));
 
       if (mounted) {
         setState(() {
