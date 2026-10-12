@@ -27,19 +27,19 @@
 ---
 
 ### 🔵 Volet Enseignement Technique & Professionnel (50 Places)
-| Filière / Pôle de Spécialité | Séries / Métiers | Quota de Places |
+*Conforme aux Arrêtés Officiels DGEC 2026 (7 Filières de Bac, 43 Séries et 5 Examens Professionnels CAP/BEP/BT/DENC/BPB)*
+
+| Filière Officielle (DGEC) | Séries & Options Homologuées | Quota de Places |
 | :--- | :--- | :---: |
-| **Comptabilité & Finance** | Série G2 | **8 places** |
-| **Commerce & Marketing** | Série G3 | **6 places** |
-| **Secrétariat & Bureautique** | Série G1 | **6 places** |
-| **Électrotechnique & Énergie** | Série F3 | **6 places** |
-| **Génie Civil & BTP** | Série F4 | **6 places** |
-| **Électronique, Numérique & TI** | Série F2 & TI | **5 places** |
-| **Construction Mécanique** | Série F1 | **3 places** |
-| **Filière Bois & Éco-foresterie** | Spécial Nkok / Forêt | **4 places** |
-| **Maintenance Véhicules & Engins** | Mécanique lourde / Auto | **3 places** |
-| **Transit, Douane & Logistique** | Transit maritime Owendo | **3 places** |
-| **SOUS-TOTAL TECHNIQUE & PRO** | — | **50 places** |
+| **Sciences de l'Ingénieur (SI)** | Baccalauréat SI d'excellence | **4 places** |
+| **Sciences & Technologies Industrielles (STI)** | Génie Mécanique (F1, F1C, F1D), Électronique (F2), Électrotechnique (F3), Génie Civil (F4), Éco-Construction (AEC), Énergies Renouvelables (ERE) | **12 places** |
+| **Sciences & Technologies du Tertiaire (STT)** | ACA (ex-G1), CG (ex-G2), ACC (ex-G3) | **8 places** |
+| **Management & Gestion (STMG)** | CFE, RHC, GSI, Mercatique | **6 places** |
+| **Sciences & Technologies de Laboratoire (STL)** | BGB, CLPI, SPCL, BIOTECH (Spécial Léconi & Pôles) | **4 places** |
+| **Bac Pro Métiers Industriels (15 Séries)** | MVA-VP, MVI, Men.I, SD, CBH, ORGO, ISEC, CI, MEH, 3I, DW, MMACM, MEI, EI | **8 places** |
+| **Bac Pro Agricole, Qualité & Tertiaire Pro** | STA (Production Animale, Production Végétale), CQA (Agroalimentaire), TCG, TGA | **4 places** |
+| **1er Cycle CET & Examens Pros (CAP, BEP, BT)** | CAP (DCB, ROC, IS, AC, SD), BEP (DCB, OM, EB, MC, CG, SB), BT (Froid FC, Diesel MMD), DENC | **4 places** |
+| **SOUS-TOTAL TECHNIQUE & PRO** | **7 Filières nationales & 5 Examens officiels** | **50 places** |
 
 ---
 

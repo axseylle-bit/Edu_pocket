@@ -482,6 +482,7 @@ class _TeacherPartnerScreenState extends State<TeacherPartnerScreen> {
                                 const SizedBox(height: 6),
                                 Wrap(
                                   spacing: 8,
+                                  runSpacing: 6,
                                   children: [
                                     ChoiceChip(
                                       label: const Text('Général'),
@@ -489,14 +490,29 @@ class _TeacherPartnerScreenState extends State<TeacherPartnerScreen> {
                                       onSelected: (s) => setState(() => _educationOrder = 'Général'),
                                     ),
                                     ChoiceChip(
-                                      label: const Text('Technique (STI/STMG)'),
-                                      selected: _educationOrder == 'Technique (STI/STMG)',
-                                      onSelected: (s) => setState(() => _educationOrder = 'Technique (STI/STMG)'),
+                                      label: const Text('STI & SI (Industrie & Ingénierie)'),
+                                      selected: _educationOrder == 'STI & SI (Industrie & Ingénierie)',
+                                      onSelected: (s) => setState(() => _educationOrder = 'STI & SI (Industrie & Ingénierie)'),
                                     ),
                                     ChoiceChip(
-                                      label: const Text('Professionnel (CET)'),
-                                      selected: _educationOrder == 'Professionnel (CET)',
-                                      onSelected: (s) => setState(() => _educationOrder = 'Professionnel (CET)'),
+                                      label: const Text('STT & STMG (Tertiaire & Gestion)'),
+                                      selected: _educationOrder == 'STT & STMG (Tertiaire & Gestion)',
+                                      onSelected: (s) => setState(() => _educationOrder = 'STT & STMG (Tertiaire & Gestion)'),
+                                    ),
+                                    ChoiceChip(
+                                      label: const Text('STL (Laboratoires Léconi)'),
+                                      selected: _educationOrder == 'STL (Laboratoires Léconi)',
+                                      onSelected: (s) => setState(() => _educationOrder = 'STL (Laboratoires Léconi)'),
+                                    ),
+                                    ChoiceChip(
+                                      label: const Text('Bac Pro (Métiers & Agricole)'),
+                                      selected: _educationOrder == 'Bac Pro (Métiers & Agricole)',
+                                      onSelected: (s) => setState(() => _educationOrder = 'Bac Pro (Métiers & Agricole)'),
+                                    ),
+                                    ChoiceChip(
+                                      label: const Text('CET (CAP, BEP, BT)'),
+                                      selected: _educationOrder == 'CET (CAP, BEP, BT)',
+                                      onSelected: (s) => setState(() => _educationOrder = 'CET (CAP, BEP, BT)'),
                                     ),
                                   ],
                                 ),

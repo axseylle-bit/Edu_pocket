@@ -1048,12 +1048,12 @@ class MainDashboardScreen extends ConsumerWidget {
           borderRadius: BorderRadius.circular(24),
           onTap: () => _showDisciplinePioneersModal(
             context,
-            title: 'Filières Techniques & Professionnelles',
-            subtitle: 'Lycées Techniques (LTNOB, Léconi...) & CET (Dès la 4e)',
+            title: 'Enseignement Technique & Professionnel',
+            subtitle: '7 Filières, 43 Séries de Bac & 5 Examens Pros (CAP, BEP, BT...)',
             icon: Icons.engineering_rounded,
             color: const Color(0xFF1E3A8A),
             description:
-                'Panorama complet de l\'enseignement technique et professionnel au Gabon : Génie Mécanique (F1), Électrotechnique (F2), Électronique (F3), Génie Civil (F4), STMG (G), CET et filières industrielles.',
+                'Panorama officiel DGEC 2026 : Baccalauréat des Sciences de l\'Ingénieur (SI), STI (Génie Mécanique F1/F1C/F1D, Électronique F2, Électrotechnique F3, Génie Civil F4, AEC, ERE), STT (ACA, CG, ACC / ex-G1, G2, G3), STMG (CFE, RHC, GSI, Mercatique), STL (Biotech, SPCL, BGB, CLPI), 15 Bac Pro, STA Agricole, et cycle moyen CAP, BEP, BT (Froid, Diesel), DENC.',
             freePioneer: 'Archimède (Syllabus & Ateliers)',
             freePioneerDetails: 'Fiches d\'initiation aux ateliers, panorama des filières et fiches méthodologiques 100% gratuites.',
             tier1Pioneer: 'Léonard de Vinci (Essentiel Pro)',
@@ -1161,9 +1161,11 @@ class MainDashboardScreen extends ConsumerWidget {
                   spacing: 6,
                   runSpacing: 6,
                   children: [
-                    _buildTechChip('STI (F1, F2, F3, F4)'),
-                    _buildTechChip('STMG (G Tertiaire)'),
-                    _buildTechChip('CET Métiers (Dès la 4e)'),
+                    _buildTechChip('7 Filières & 43 Séries de Bac'),
+                    _buildTechChip('SI & STI (F1 à F4, AEC, ERE)'),
+                    _buildTechChip('STT & STMG (Tertiaire)'),
+                    _buildTechChip('STL (Léconi) & 15 Bac Pro'),
+                    _buildTechChip('1er Cycle : CAP, BEP, BT, DENC'),
                     _buildTechChip('Dès 3 000 F/mois'),
                   ],
                 ),
@@ -1174,12 +1176,12 @@ class MainDashboardScreen extends ConsumerWidget {
                       child: ElevatedButton.icon(
                         onPressed: () => _showDisciplinePioneersModal(
                           context,
-                          title: 'Filières Techniques & Professionnelles',
-                          subtitle: 'Lycées Techniques & CET (Dès la 4e)',
+                          title: 'Enseignement Technique & Professionnel',
+                          subtitle: '7 Filières, 43 Séries de Bac & 5 Examens Pros (CAP, BEP, BT...)',
                           icon: Icons.engineering_rounded,
                           color: const Color(0xFF1E3A8A),
                           description:
-                              'Panorama complet de l\'enseignement technique et professionnel au Gabon : Génie Mécanique (F1), Électrotechnique (F2), Électronique (F3), Génie Civil (F4), STMG (G), CET et filières industrielles.',
+                              'Panorama officiel DGEC 2026 : Baccalauréat des Sciences de l\'Ingénieur (SI), STI (Génie Mécanique F1/F1C/F1D, Électronique F2, Électrotechnique F3, Génie Civil F4, AEC, ERE), STT (ACA, CG, ACC / ex-G1, G2, G3), STMG (CFE, RHC, GSI, Mercatique), STL (Biotech, SPCL, BGB, CLPI), 15 Bac Pro, STA Agricole, et cycle moyen CAP, BEP, BT (Froid, Diesel), DENC.',
                           freePioneer: 'Archimède (Syllabus & Ateliers)',
                           freePioneerDetails: 'Fiches d\'initiation aux ateliers, panorama des filières et fiches méthodologiques 100% gratuites.',
                           tier1Pioneer: 'Léonard de Vinci (Essentiel Pro)',
