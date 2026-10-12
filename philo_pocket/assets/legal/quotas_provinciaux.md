@@ -33,13 +33,12 @@
 | :--- | :--- | :---: |
 | **Sciences de l'Ingénieur (SI)** | Baccalauréat SI d'excellence | **4 places** |
 | **Sciences & Technologies Industrielles (STI)** | Génie Mécanique (F1, F1C, F1D), Électronique (F2), Électrotechnique (F3), Génie Civil (F4), Éco-Construction (AEC), Énergies Renouvelables (ERE) | **12 places** |
-| **Sciences & Technologies du Tertiaire (STT)** | ACA (ex-G1), CG (ex-G2), ACC (ex-G3) | **8 places** |
-| **Management & Gestion (STMG)** | CFE, RHC, GSI, Mercatique | **6 places** |
+| **Management & Gestion (STMG)** | CFE (Gestion-Finance), RHC (Ressources Humaines), GSI (Systèmes d'Info), Mercatique | **10 places** |
 | **Sciences & Technologies de Laboratoire (STL)** | BGB, CLPI, SPCL, BIOTECH (Spécial Léconi & Pôles) | **4 places** |
 | **Bac Pro Métiers Industriels (15 Séries)** | MVA-VP, MVI, Men.I, SD, CBH, ORGO, ISEC, CI, MEH, 3I, DW, MMACM, MEI, EI | **8 places** |
-| **Bac Pro Agricole, Qualité & Tertiaire Pro** | STA (Production Animale, Production Végétale), CQA (Agroalimentaire), TCG, TGA | **4 places** |
+| **Bac Pro Tertiaire Pro (TGA, TCG) & Agricole** | TGA (Gestion Administrative), TCG (Comptabilité Gestion), STA (Animale/Végétale), CQA | **8 places** |
 | **1er Cycle CET & Examens Pros (CAP, BEP, BT)** | CAP (DCB, ROC, IS, AC, SD), BEP (DCB, OM, EB, MC, CG, SB), BT (Froid FC, Diesel MMD), DENC | **4 places** |
-| **SOUS-TOTAL TECHNIQUE & PRO** | **7 Filières nationales & 5 Examens officiels** | **50 places** |
+| **SOUS-TOTAL TECHNIQUE & PRO** | **Filières nationales & Examens officiels** | **50 places** |
 
 ---
 

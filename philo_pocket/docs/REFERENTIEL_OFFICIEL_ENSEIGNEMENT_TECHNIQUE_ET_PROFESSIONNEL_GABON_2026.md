@@ -55,11 +55,8 @@ Le cœur industriel gabonais (Lycées Techniques LTNOB, Nyonda Makita, Léconi, 
 
 ---
 
-### 🟢 FILIÈRE 3 : BACCALAURÉAT DES SCIENCES ET TECHNOLOGIES DU TERTIAIRE (STT)
-La filière tertiaire classique rénovée (qui modernise les appellations historiques G1, G2, G3) :
-* **ACA : Action et Communication Administratives** *(Anciennement G1)* : Assistanat de direction, bureautique avancée, droit professionnel.
-* **CG : Comptabilité Gestion** *(Anciennement G2)* : Comptabilité générale, fiscalité, paie, analyse financière.
-* **ACC : Action et Communication Commerciales** *(Anciennement G3)* : Vente, prospection commerciale, négociation, commerce.
+### 🟢 ANCIENNE FILIÈRE STT (MUTÉE EN STMG & BAC PRO TERTIAIRE — RETIRÉE DES OFFRES ACTIVES)
+*Note ministérielle : Conformément au Décret n°450/PR et à la décision n°0025/MENFPFC, l'ancienne filière STT (G1, G2, G3) a muté et été remplacée par la filière technologique **STMG** et les filières professionnelles **Bac Pro TGA/TCG**. Elle est par conséquent retirée des offres de formation actives d'EduPocket au profit exclusif de STMG et du Bac Pro Tertiaire.*
 
 ---
 
@@ -162,11 +159,8 @@ Diplôme supérieur d'application tertiaire *(Ogooué-Maritime)* :
 
 ## 4. TABLEAU DE CROISEMENT ET CORRECTIONS SUR EDUPOCKET
 
-| Ancien libellé / Usage courant | Nomenclature Officielle DGEC 2026 | Filière d'appartenance | Intégration sur EduPocket |
-| :--- | :--- | :--- | :--- |
-| **Série G1** | **STT - ACA** (Action & Comm. Admin.) | Bac STT Tertiaire | Mentionné en double (ACA / ex-G1) |
-| **Série G2** | **STT - CG** (Comptabilité Gestion) | Bac STT Tertiaire | Mentionné en double (CG / ex-G2) |
-| **Série G3** | **STT - ACC** (Action & Comm. Commerciales) | Bac STT Tertiaire | Mentionné en double (ACC / ex-G3) |
+| **Ancien Bac E (Maths & Technique)** | **Baccalauréat des Sciences de l'Ingénieur (SI)** | Voie Technologique d'Excellence | **Retiré** : Remplacé par Bac SI et STI Génie Mécanique |
+| **Ancienne Filière STT (G1, G2, G3)** | **STMG & Bac Pro Tertiaire (TGA, TCG)** | Voie Managériale & Pro | **Retiré des offres** : Remplacé intégralement par STMG et Bac Pro TGA/TCG |
 | **Série F1** | **STI Génie Mécanique (F1, F1C, F1D)** | Bac STI Industriel | Scindé en F1 (Méca), F1C (Métal), F1D (Bois) |
 | **Série F2** | **STI Génie Électronique** | Bac STI Industriel | Validé officiellement (F2 Électronique) |
 | **Série F3** | **STI Génie Électrotechnique** | Bac STI Industriel | Validé officiellement (F3 Électrotechnique) |

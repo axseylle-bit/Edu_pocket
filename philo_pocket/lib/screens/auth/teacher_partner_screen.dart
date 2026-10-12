@@ -495,9 +495,9 @@ class _TeacherPartnerScreenState extends State<TeacherPartnerScreen> {
                                       onSelected: (s) => setState(() => _educationOrder = 'STI & SI (Industrie & Ingénierie)'),
                                     ),
                                     ChoiceChip(
-                                      label: const Text('STT & STMG (Tertiaire & Gestion)'),
-                                      selected: _educationOrder == 'STT & STMG (Tertiaire & Gestion)',
-                                      onSelected: (s) => setState(() => _educationOrder = 'STT & STMG (Tertiaire & Gestion)'),
+                                      label: const Text('STMG (Management & Gestion)'),
+                                      selected: _educationOrder == 'STMG (Management & Gestion)',
+                                      onSelected: (s) => setState(() => _educationOrder = 'STMG (Management & Gestion)'),
                                     ),
                                     ChoiceChip(
                                       label: const Text('STL (Laboratoires Léconi)'),
