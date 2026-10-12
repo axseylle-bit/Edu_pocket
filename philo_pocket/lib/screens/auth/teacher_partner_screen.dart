@@ -76,32 +76,36 @@ class TeacherPartnerScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
+                    // 1. LE PATRIMOINE EN PREMIER
                     _buildFeatureRow(
                       context,
-                      icon: Icons.monetization_on_rounded,
-                      title: 'Générez des revenus passifs',
-                      description: 'Partagez vos cours et touchez 70% des revenus générés par vos élèves sur la plateforme.',
+                      icon: Icons.history_edu_rounded,
+                      title: 'Bâtissez le patrimoine éducatif gabonais',
+                      description: 'Vos cours ne meurent plus à la fin de l\'année : ils deviennent des références durables pour les élèves et collègues de tout le Gabon.',
                     ),
                     const Divider(height: 32),
-                    _buildFeatureRow(
-                      context,
-                      icon: Icons.campaign_rounded,
-                      title: 'Code Promo Personnel',
-                      description: 'Distribuez votre code parrain à vos élèves en classe. S\'ils s\'abonnent, vous gagnez une commission supplémentaire.',
-                    ),
-                    const Divider(height: 32),
+                    // 2. ZÉRO STRESS EN 2E
                     _buildFeatureRow(
                       context,
                       icon: Icons.edit_document,
                       title: 'Zéro stress technique',
-                      description: 'Envoyez-nous vos cours sous format Word. Nous nous occupons de tout intégrer et de la mise en page premium.',
+                      description: 'Transmettez-nous vos cours sous format Word. Nous nous occupons de l\'intégration pédagogique selon la méthodologie nationale.',
                     ),
                     const Divider(height: 32),
+                    // 3. RÉMUNÉRATION EN AVANT-DERNIER (Jusqu'à 70%)
                     _buildFeatureRow(
                       context,
-                      icon: Icons.history_edu_rounded,
-                      title: 'Préservez votre patrimoine',
-                      description: 'Vos cours ne meurent plus à la fin de l\'année : ils deviennent des références durables pour tout le Gabon.',
+                      icon: Icons.monetization_on_rounded,
+                      title: 'Rémunération équitable de vos œuvres',
+                      description: 'Partagez vos modules et touchez jusqu\'à 70% des revenus générés par vos élèves sur la plateforme.',
+                    ),
+                    const Divider(height: 32),
+                    // 4. CODE PROMO EN DERNIER
+                    _buildFeatureRow(
+                      context,
+                      icon: Icons.campaign_rounded,
+                      title: 'Code Promo Personnel',
+                      description: 'Distribuez votre code parrain à vos élèves en classe. S\'ils s\'abonnent aux modules de perfectionnement, vous gagnez une commission supplémentaire.',
                     ),
                   ],
                 ),
@@ -157,8 +161,8 @@ class TeacherPartnerScreen extends StatelessWidget {
               
               OutlinedButton.icon(
                 onPressed: () {
-                  // Redirige vers le hub pour qu'ils puissent tester
-                  context.go('/hub');
+                  // Redirige directement vers le tableau de bord principal de l'application
+                  context.go('/main');
                 },
                 icon: const Icon(Icons.phone_android_rounded),
                 label: const Text(

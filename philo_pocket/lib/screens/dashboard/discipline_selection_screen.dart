@@ -1175,8 +1175,8 @@ class _DisciplineSelectionScreenState
                         const SizedBox(height: 3),
                         Text(
                           isTechnique
-                              ? 'Pionniers : Archimède (Gratuit) · Léonard de Vinci (3 000 F) · Gustave Eiffel (6 000 F)\nPackages : Solo (3 000 F), Filière (6 000 F), Trimestre (8 000 F), Pass Annuel (24 000 F)'
-                              : 'Tarif officiel : Dès 2 500 FCFA / palier mensuel (Socrate, Platon, Aristote)',
+                              ? 'Cours officiels 100% gratuits · Modules pionniers optionnels : Archimède (Gratuit), Léonard de Vinci, Gustave Eiffel'
+                              : 'Cours officiels IPN 100% gratuits · Modules de perfectionnement pionniers optionnels (Socrate, Platon, Aristote)',
                           style: TextStyle(
                             fontSize: 11.5,
                             fontWeight: FontWeight.w600,
@@ -1194,11 +1194,35 @@ class _DisciplineSelectionScreenState
             ),
             const SizedBox(height: 16),
 
-            // Bouton vers la souscription
+            // Bouton vers les cours gratuits
             SizedBox(
               width: double.infinity,
               height: 48,
               child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.pop(ctx);
+                  context.push('/cours');
+                },
+                icon: const Icon(Icons.menu_book_rounded, size: 20),
+                label: const Text(
+                  'Consulter les cours & fiches gratuits',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green.shade700,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+
+            // Bouton secondaire pour découvrir les modules de perfectionnement
+            SizedBox(
+              width: double.infinity,
+              child: TextButton.icon(
                 onPressed: () {
                   Navigator.pop(ctx);
                   context.push(
@@ -1208,21 +1232,10 @@ class _DisciplineSelectionScreenState
                     ).toString(),
                   );
                 },
-                icon: const Icon(Icons.workspace_premium_rounded, size: 20),
-                label: Text(
-                  isTechnique
-                      ? 'Voir formules & packages (Dès 3 000 FCFA)'
-                      : 'Débloquer la matière (Dès 2 500 FCFA)',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: isTechnique
-                      ? const Color(0xFF1E3A8A)
-                      : AppColors.primary,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
+                icon: const Icon(Icons.workspace_premium_rounded, size: 18),
+                label: const Text(
+                  'Découvrir les modules pionniers de perfectionnement',
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                 ),
               ),
             ),

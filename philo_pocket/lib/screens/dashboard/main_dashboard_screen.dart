@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -190,24 +190,39 @@ class MainDashboardScreen extends ConsumerWidget {
   Widget _buildSubjectsGrid(BuildContext context) {
     return Column(
       children: [
-        // Section AsymÃ©trique : Philo Pocket (Grand) Ã  gauche, Maths et Physique Ã  droite
+        // Section Asymétrique : Philo Pocket (Grand Vaisseau Amiral) à gauche, Maths et Physique à droite
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Philo Pocket (Gauche)
+            // Philo Pocket (Gauche) - Vaisseau Amiral
             Expanded(
               flex: 1,
               child: _buildSubjectCard(
                 context,
                 title: 'Philo Pocket',
-                subtitle: 'Vaisseau amiral',
-                icon: Icons.menu_book_rounded,
+                subtitle: 'Vaisseau amiral · 15 Notions IPN',
+                icon: Icons.local_fire_department_rounded,
                 color: AppColors.primary,
                 gradient: AppColors.primaryGradient,
                 isActive: true,
                 isLarge: true,
                 height: 376, // 180 + 16 + 180 = 376
-                onTap: () => context.push('/philo-pocket'),
+                onTap: () => _showDisciplinePioneersModal(
+                  context,
+                  title: 'Philo Pocket',
+                  subtitle: 'Philosophie · Programme officiel IPN Gabon',
+                  icon: Icons.local_fire_department_rounded,
+                  color: AppColors.primary,
+                  description:
+                      'Programme officiel complet du Gabon : 15 notions fondamentales, méthodologie de la dissertation, commentaire de texte et repères conceptuels.',
+                  freePioneer: 'Socrate',
+                  freePioneerDetails: 'Les 15 notions fondamentales du programme officiel IPN, résumés de cours, plans types et citations clés en libre accès.',
+                  tier1Pioneer: 'Platon',
+                  tier1Details: 'Analyses textuelles avancées, dissertations intégrales rédigées et mythes interactifs guidés.',
+                  tier2Pioneer: 'Aristote',
+                  tier2Details: 'Entraînement intensif au Bac, coaching méthodologique pas-à-pas et correction personnalisée.',
+                  targetRoute: '/philo-pocket',
+                ),
               ),
             ),
             const SizedBox(width: 16),
@@ -218,22 +233,50 @@ class MainDashboardScreen extends ConsumerWidget {
                 children: [
                   _buildSubjectCard(
                     context,
-                    title: 'MathÃ©matiques',
-                    subtitle: 'AlgÃ¨bre & Analyse',
+                    title: 'Mathématiques',
+                    subtitle: 'Algèbre, Analyse, Géométrie',
                     icon: Icons.calculate_rounded,
-                    color: Colors.blueGrey.shade800,
-                    isActive: false,
-                    onTap: () {},
+                    color: const Color(0xFF1E88E5), // Bleu vibrant
+                    isActive: true,
+                    onTap: () => _showDisciplinePioneersModal(
+                      context,
+                      title: 'Mathématiques Générales',
+                      subtitle: 'Séries C, D, B, A · Référentiel National IPN',
+                      icon: Icons.calculate_rounded,
+                      color: const Color(0xFF1E88E5),
+                      description:
+                          'Enseignement conforme aux programmes officiels gabonais : cours complets du collège au lycée, propriétés, théorèmes et résolutions guidées.',
+                      freePioneer: 'Thalès & Pythagore',
+                      freePioneerDetails: 'Cours complets, formules essentielles, résumés théoriques et fiches de révision en accès libre et 100% gratuit.',
+                      tier1Pioneer: 'Archimède',
+                      tier1Details: 'Travaux dirigés d\'approfondissement, méthodes de démonstration et résolutions pas-à-pas.',
+                      tier2Pioneer: 'Isaac Newton',
+                      tier2Details: 'Préparation intensive aux épreuves du Baccalauréat, annales résolues et simulations d\'examens.',
+                    ),
                   ),
                   const SizedBox(height: 16),
                   _buildSubjectCard(
                     context,
                     title: 'Physique-Chimie',
-                    subtitle: 'Sciences Physiques',
+                    subtitle: 'Mécanique, Électricité, Chimie',
                     icon: Icons.science_rounded,
-                    color: Colors.blueGrey.shade800,
-                    isActive: false,
-                    onTap: () {},
+                    color: const Color(0xFF00897B), // Vert émeraude
+                    isActive: true,
+                    onTap: () => _showDisciplinePioneersModal(
+                      context,
+                      title: 'Physique - Chimie',
+                      subtitle: 'Séries C, D, STI · Référentiel National IPN',
+                      icon: Icons.science_rounded,
+                      color: const Color(0xFF00897B),
+                      description:
+                          'Lois physiques, réactions chimiques, cinématique, électrostatique et applications pratiques préparant aux épreuves nationales.',
+                      freePioneer: 'Galilée & Marie Curie',
+                      freePioneerDetails: 'Fiches de cours intégrales, équations et formules fondamentales en libre accès gratuit pour tous les élèves.',
+                      tier1Pioneer: 'Antoine Lavoisier',
+                      tier1Details: 'TD d\'exercices résolus pas-à-pas, réactions chimiques expliquées et protocoles expérimentaux.',
+                      tier2Pioneer: 'Albert Einstein',
+                      tier2Details: 'Coaching d\'excellence, annales complètes du Bac gabonais et sujets types corrigés.',
+                    ),
                   ),
                 ],
               ),
@@ -242,19 +285,33 @@ class MainDashboardScreen extends ConsumerWidget {
         ),
         const SizedBox(height: 16),
         
-        // Grille des autres matiÃ¨res en bas
+        // Grille des autres matières en bas (Toutes actives et colorées)
         Row(
           children: [
             Expanded(
               flex: 1,
               child: _buildSubjectCard(
                 context,
-                title: 'FranÃ§ais',
-                subtitle: 'LittÃ©rature',
-                icon: Icons.edit_document,
-                color: Colors.blueGrey.shade800,
-                isActive: false,
-                onTap: () {},
+                title: 'Français & Lettres',
+                subtitle: 'Méthodologie & Littérature',
+                icon: Icons.menu_book_rounded,
+                color: const Color(0xFFE65100), // Orange ambré
+                isActive: true,
+                onTap: () => _showDisciplinePioneersModal(
+                  context,
+                  title: 'Français & Littérature',
+                  subtitle: 'Toutes Séries · Programme officiel IPN',
+                  icon: Icons.menu_book_rounded,
+                  color: const Color(0xFFE65100),
+                  description:
+                      'Maîtrise du commentaire composé, dissertation littéraire, contraction de texte et étude intégrale des œuvres au programme.',
+                  freePioneer: 'Montesquieu & Aimé Césaire',
+                  freePioneerDetails: 'Cours méthodologiques, synthèses d\'œuvres et fiches d\'auteurs accessibles librement et gratuitement.',
+                  tier1Pioneer: 'Léopold Sédar Senghor',
+                  tier1Details: 'Ateliers de rédaction, figures de style, perfectionnement grammatical et maîtrise de l\'expression.',
+                  tier2Pioneer: 'Victor Hugo',
+                  tier2Details: 'Simulations d\'épreuves du Bac, coaching d\'analyse littéraire et modèles rédigés d\'excellence.',
+                ),
               ),
             ),
             const SizedBox(width: 16),
@@ -263,11 +320,25 @@ class MainDashboardScreen extends ConsumerWidget {
               child: _buildSubjectCard(
                 context,
                 title: 'S.V.T.',
-                subtitle: 'Sciences de la Vie',
+                subtitle: 'Sciences de la Vie & Terre',
                 icon: Icons.eco_rounded,
-                color: Colors.blueGrey.shade800,
-                isActive: false,
-                onTap: () {},
+                color: const Color(0xFF2E7D32), // Vert nature
+                isActive: true,
+                onTap: () => _showDisciplinePioneersModal(
+                  context,
+                  title: 'Sciences de la Vie et de la Terre',
+                  subtitle: 'Séries D, C, Collège · Référentiel IPN',
+                  icon: Icons.eco_rounded,
+                  color: const Color(0xFF2E7D32),
+                  description:
+                      'Génétique, immunologie, reproduction, géologie gabonaise et tectonique des plaques conformes au programme officiel.',
+                  freePioneer: 'Darwin & Cheikh Anta Diop',
+                  freePioneerDetails: 'Cours complets, schémas de référence et fiches de synthèse gratuits pour chaque niveau scolaire.',
+                  tier1Pioneer: 'Louis Pasteur',
+                  tier1Details: 'Fiches bilans illustrées, TD d\'interprétation de graphes et protocoles biologiques.',
+                  tier2Pioneer: 'Gregor Mendel',
+                  tier2Details: 'Maîtrise complète des problèmes de génétique formelle, annales du Bac et entraînement ciblé.',
+                ),
               ),
             ),
           ],
@@ -279,12 +350,26 @@ class MainDashboardScreen extends ConsumerWidget {
               flex: 1,
               child: _buildSubjectCard(
                 context,
-                title: 'Histoire-GÃ©o',
-                subtitle: 'Sciences Humaines',
+                title: 'Histoire-Géo',
+                subtitle: 'Histoire du Gabon & Monde',
                 icon: Icons.public_rounded,
-                color: Colors.blueGrey.shade800,
-                isActive: false,
-                onTap: () {},
+                color: const Color(0xFF6D4C41), // Marron terre
+                isActive: true,
+                onTap: () => _showDisciplinePioneersModal(
+                  context,
+                  title: 'Histoire - Géographie',
+                  subtitle: 'Toutes Séries · Programme Gabon IPN',
+                  icon: Icons.public_rounded,
+                  color: const Color(0xFF6D4C41),
+                  description:
+                      'Histoire contemporaine, traite et résistances au Gabon, mondialisation, géographie économique et spatiale du pays.',
+                  freePioneer: 'Hérodote & Léon Mba',
+                  freePioneerDetails: 'Chronologies historiques, fiches géographiques du Gabon et synthèses de cours libres et gratuites.',
+                  tier1Pioneer: 'Cheikh Anta Diop',
+                  tier1Details: 'Méthodologie de la dissertation historique, commentaire de documents et repères géopolitiques.',
+                  tier2Pioneer: 'Fernand Braudel',
+                  tier2Details: 'Dossiers complets, schémas cartographiques d\'examen et préparation intensive au grand oral/écrit.',
+                ),
               ),
             ),
             const SizedBox(width: 16),
@@ -295,9 +380,23 @@ class MainDashboardScreen extends ConsumerWidget {
                 title: 'Anglais',
                 subtitle: 'Langue Vivante 1',
                 icon: Icons.language_rounded,
-                color: Colors.blueGrey.shade800,
-                isActive: false,
-                onTap: () {},
+                color: const Color(0xFF5E35B1), // Violet royal
+                isActive: true,
+                onTap: () => _showDisciplinePioneersModal(
+                  context,
+                  title: 'Anglais (LV1)',
+                  subtitle: 'Toutes Séries & Cycles',
+                  icon: Icons.language_rounded,
+                  color: const Color(0xFF5E35B1),
+                  description:
+                      'Compréhension écrite, vocabulaire thématique, grammaire appliquée, traduction et expression personnelle.',
+                  freePioneer: 'William Shakespeare',
+                  freePioneerDetails: 'Guides grammaticaux, vocabulaire clé des épreuves et cours complets en accès 100% gratuit.',
+                  tier1Pioneer: 'Chinua Achebe',
+                  tier1Details: 'Ateliers de compréhension textuelle, connecteurs logiques et exercices d\'écriture guidés.',
+                  tier2Pioneer: 'Nelson Mandela',
+                  tier2Details: 'Coaching d\'expression avancée, sujets types corrigés du Baccalauréat et fluidité lexicale.',
+                ),
               ),
             ),
           ],
@@ -312,9 +411,23 @@ class MainDashboardScreen extends ConsumerWidget {
                 title: 'Espagnol',
                 subtitle: 'Langue Vivante 2',
                 icon: Icons.translate_rounded,
-                color: Colors.blueGrey.shade800,
-                isActive: false,
-                onTap: () {},
+                color: const Color(0xFFC2185B), // Framboise vive
+                isActive: true,
+                onTap: () => _showDisciplinePioneersModal(
+                  context,
+                  title: 'Espagnol (LV2)',
+                  subtitle: 'Séries A1, A2, B, Lycée & Collège',
+                  icon: Icons.translate_rounded,
+                  color: const Color(0xFFC2185B),
+                  description:
+                      'Grammaire hispanique, conjugaison, civilisation hispanophone, analyse de textes et expression écrite.',
+                  freePioneer: 'Miguel de Cervantes',
+                  freePioneerDetails: 'Tableaux de conjugaison, règles grammaticales et cours de base gratuits.',
+                  tier1Pioneer: 'Gabriel García Márquez',
+                  tier1Details: 'Analyses de textes hispaniques et renforcement lexical pour le secondaire.',
+                  tier2Pioneer: 'Federico García Lorca',
+                  tier2Details: 'Préparation complète aux épreuves écrites et orales du Baccalauréat.',
+                ),
               ),
             ),
             const SizedBox(width: 16),
@@ -322,12 +435,26 @@ class MainDashboardScreen extends ConsumerWidget {
               flex: 1,
               child: _buildSubjectCard(
                 context,
-                title: 'Ã‰conomie',
-                subtitle: 'SÃ©rie B (S.E.S)',
+                title: 'Économie (S.E.S)',
+                subtitle: 'Série B (Éco-Gestion)',
                 icon: Icons.trending_up_rounded,
-                color: Colors.blueGrey.shade800,
-                isActive: false,
-                onTap: () {},
+                color: const Color(0xFF0288D1), // Bleu océan
+                isActive: true,
+                onTap: () => _showDisciplinePioneersModal(
+                  context,
+                  title: 'Sciences Économiques & Sociales',
+                  subtitle: 'Série B & Enseignement Tertiaire',
+                  icon: Icons.trending_up_rounded,
+                  color: const Color(0xFF0288D1),
+                  description:
+                      'Mécanismes du marché, croissance économique, politique monétaire, sociologie et mutations sociales.',
+                  freePioneer: 'Adam Smith',
+                  freePioneerDetails: 'Définitions macroéconomiques, concepts clés et fiches de cours IPN gratuites.',
+                  tier1Pioneer: 'John Maynard Keynes',
+                  tier1Details: 'Méthodologie d\'argumentation économique et interprétation de tableaux statistiques.',
+                  tier2Pioneer: 'Joseph Schumpeter',
+                  tier2Details: 'Entraînement aux sujets d\'examen du Bac B et synthèses économiques complètes.',
+                ),
               ),
             ),
           ],
@@ -342,16 +469,258 @@ class MainDashboardScreen extends ConsumerWidget {
                 title: 'Allemand',
                 subtitle: 'Langue Vivante 2',
                 icon: Icons.record_voice_over_rounded,
-                color: Colors.blueGrey.shade800,
-                isActive: false,
-                onTap: () {},
+                color: const Color(0xFF455A64), // Ardoise noble
+                isActive: true,
+                onTap: () => _showDisciplinePioneersModal(
+                  context,
+                  title: 'Allemand (LV2)',
+                  subtitle: 'Séries Littéraires & Collège',
+                  icon: Icons.record_voice_over_rounded,
+                  color: const Color(0xFF455A64),
+                  description:
+                      'Grammaire allemande, déclinaisons, compréhension de documents et thèmes de civilisation.',
+                  freePioneer: 'Johann Wolfgang von Goethe',
+                  freePioneerDetails: 'Règles de déclinaison, vocabulaire essentiel et cours gratuits.',
+                  tier1Pioneer: 'Friedrich Schiller',
+                  tier1Details: 'Exercices d\'application, structures de phrases et compréhension guidée.',
+                  tier2Pioneer: 'Alexander von Humboldt',
+                  tier2Details: 'Préparation ciblée aux épreuves officielles du Baccalauréat.',
+                ),
               ),
             ),
             const SizedBox(width: 16),
-            const Spacer(flex: 1), // Espace vide pour Ã©quilibrer la derniÃ¨re ligne
+            const Spacer(flex: 1), // Espace vide harmonieux
           ],
         ),
       ],
+    );
+  }
+
+  void _showDisciplinePioneersModal(
+    BuildContext context, {
+    required String title,
+    required String subtitle,
+    required IconData icon,
+    required Color color,
+    required String description,
+    required String freePioneer,
+    required String freePioneerDetails,
+    required String tier1Pioneer,
+    required String tier1Details,
+    required String tier2Pioneer,
+    required String tier2Details,
+    String? targetRoute,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => Container(
+        padding: const EdgeInsets.all(24.0),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 48,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 18),
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: color.withValues(alpha: 0.15),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(icon, color: color, size: 28),
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: const TextStyle(
+                            fontSize: 19,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.textDark,
+                          ),
+                        ),
+                        Text(
+                          subtitle,
+                          style: TextStyle(
+                            fontSize: 12.5,
+                            color: color,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 14),
+              Text(
+                description,
+                style: const TextStyle(fontSize: 13, color: AppColors.textMuted, height: 1.4),
+              ),
+              const SizedBox(height: 18),
+
+              // 1. LE MODÈLE GRATUIT (Accès libre pour chaque enfant gabonais)
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.green.shade50,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: Colors.green.shade300, width: 1.5),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          decoration: BoxDecoration(
+                            color: Colors.green.shade700,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Text(
+                            '100% GRATUIT',
+                            style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          'Socle Officiel IPN · $freePioneer',
+                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green.shade900, fontSize: 13.5),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      freePioneerDetails,
+                      style: const TextStyle(fontSize: 12, color: Colors.black87, height: 1.35),
+                    ),
+                    const SizedBox(height: 12),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.pop(ctx);
+                          if (targetRoute != null) {
+                            context.push(targetRoute);
+                          } else {
+                            context.push('/cours');
+                          }
+                        },
+                        icon: const Icon(Icons.menu_book_rounded, size: 18),
+                        label: const Text('Consulter les Cours & Fiches Gratuits'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green.shade700,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 18),
+
+              // 2. OFFRES DE FORMATION SUPPLÉMENTAIRE EN PALIERS PIONNIERS
+              const Text(
+                'Offres de formation supplémentaire (Optionnelles) :',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5, color: AppColors.textDark),
+              ),
+              const SizedBox(height: 4),
+              const Text(
+                'EduPocket ne vend pas les cours. Seuls les ateliers de renforcement intensif et tutorat personnalisé font l\'objet de modules pionniers créés par les enseignants référents :',
+                style: TextStyle(fontSize: 11.5, color: AppColors.textMuted, height: 1.3),
+              ),
+              const SizedBox(height: 10),
+
+              // Palier 1
+              Container(
+                padding: const EdgeInsets.all(12),
+                margin: const EdgeInsets.only(bottom: 8),
+                decoration: BoxDecoration(
+                  color: color.withValues(alpha: 0.05),
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: color.withValues(alpha: 0.2)),
+                ),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: color.withValues(alpha: 0.2),
+                      radius: 16,
+                      child: Icon(Icons.workspace_premium_rounded, color: color, size: 18),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Palier $tier1Pioneer', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.5, color: color)),
+                          const SizedBox(height: 2),
+                          Text(tier1Details, style: const TextStyle(fontSize: 11, color: Colors.black87)),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // Palier 2
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withValues(alpha: 0.05),
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
+                ),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: AppColors.primary.withValues(alpha: 0.2),
+                      radius: 16,
+                      child: const Icon(Icons.stars_rounded, color: AppColors.primary, size: 18),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Palier $tier2Pioneer', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.5, color: AppColors.primary)),
+                          const SizedBox(height: 2),
+                          Text(tier2Details, style: const TextStyle(fontSize: 11, color: Colors.black87)),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -373,24 +742,20 @@ class MainDashboardScreen extends ConsumerWidget {
         color: gradient == null ? color : null,
         gradient: gradient,
         borderRadius: BorderRadius.circular(24),
-        border: isActive
-            ? Border.all(color: AppColors.secondary.withValues(alpha: 0.5), width: 2)
-            : Border.all(color: Colors.white.withValues(alpha: 0.05), width: 1),
-        boxShadow: isActive
-            ? [
-                BoxShadow(
-                  color: AppColors.primary.withValues(alpha: 0.4),
-                  blurRadius: 20,
-                  offset: const Offset(0, 8),
-                ),
-              ]
-            : [],
+        border: Border.all(color: Colors.white.withValues(alpha: 0.15), width: 1.5),
+        boxShadow: [
+          BoxShadow(
+            color: (gradient != null ? AppColors.primary : color).withValues(alpha: 0.35),
+            blurRadius: 16,
+            offset: const Offset(0, 6),
+          ),
+        ],
       ),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(24),
-          onTap: isActive ? onTap : null,
+          onTap: onTap,
           child: Stack(
             children: [
               Padding(
@@ -402,11 +767,11 @@ class MainDashboardScreen extends ConsumerWidget {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: isActive ? 0.2 : 0.05),
+                        color: Colors.white.withValues(alpha: 0.2),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(icon, 
-                        color: isActive ? Colors.white : Colors.white38, 
+                        color: Colors.white, 
                         size: isLarge ? 40 : 32
                       ),
                     ),
@@ -416,7 +781,7 @@ class MainDashboardScreen extends ConsumerWidget {
                         Text(
                           title,
                           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                color: isActive ? Colors.white : Colors.white54,
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: isLarge ? 24 : null,
                               ),
@@ -424,8 +789,8 @@ class MainDashboardScreen extends ConsumerWidget {
                         const SizedBox(height: 4),
                         Text(
                           subtitle,
-                          style: TextStyle(
-                            color: isActive ? Colors.white70 : Colors.white38,
+                          style: const TextStyle(
+                            color: Colors.white70,
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                           ),
@@ -435,27 +800,33 @@ class MainDashboardScreen extends ConsumerWidget {
                   ],
                 ),
               ),
-              if (!isActive)
-                Positioned(
-                  top: 16,
-                  right: 16,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.6),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.redAccent.withValues(alpha: 0.5)),
-                    ),
-                    child: const Text(
-                      'BIENTÃ”T',
-                      style: TextStyle(
-                        color: Colors.redAccent,
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
+              Positioned(
+                top: 14,
+                right: 14,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withValues(alpha: 0.2),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
+                  ),
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.check_circle_rounded, color: Colors.white, size: 11),
+                      SizedBox(width: 4),
+                      Text(
+                        'Gratuit IPN',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 9.5,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
+              ),
             ],
           ),
         ),
