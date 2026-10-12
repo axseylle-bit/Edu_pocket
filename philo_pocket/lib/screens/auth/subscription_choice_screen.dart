@@ -562,7 +562,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                             ),
                             const SizedBox(width: 6),
                             Text(
-                              'Paliers Pionniers',
+                              '🎯 Formules Solo (À la carte)',
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
@@ -608,7 +608,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                             ),
                             const SizedBox(width: 6),
                             Text(
-                              '📦 Packages & Bundles',
+                              '📦 Packages de Pôle & Filières',
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
@@ -627,9 +627,30 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
             ),
 
             // =================================================================
-            // CONTENU ONGLET 0 : PALIERS PIONNIERS (MENSUEL)
+            // CONTENU ONGLET 0 : FORMULES SOLO (À LA CARTE)
             // =================================================================
             if (_selectedTab == 0) ...[
+              Container(
+                margin: const EdgeInsets.only(bottom: 16),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withValues(alpha: 0.06),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.info_outline_rounded, size: 20, color: AppColors.primary),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        'Les formules Solo (2 500 F/mois) s\'appliquent aux disciplines pouvant être prises isolément (Philo, Maths littéraires, Français, Langues). Pour les matières de pôle indissociables (Sciences C & D, Séries A & B), optez pour nos Packages de Pôle dans le second onglet.',
+                        style: const TextStyle(fontSize: 11.5, color: AppColors.textDark, height: 1.3),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               _buildSubscriptionCard(
                 context,
                 title: tier1Name,
@@ -762,59 +783,87 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                   ],
                 ),
               ] else ...[
-                // PACKAGES ENSEIGNEMENT GÉNÉRAL
+                // PACKAGES DE PÔLE & BUNDLES ENSEIGNEMENT GÉNÉRAL
+                // 1. Pack Pôle Scientifique (Maths + Physique + SVT)
                 _buildSubscriptionCard(
                   context,
-                  title: 'Pack Matière Solo Mensuel',
-                  subtitle: 'Accès illimité à une discipline spécifique (Essentiel)',
-                  price: '2 500 FCFA / mois',
-                  billingPeriod: 'Facturation mensuelle sans engagement',
-                  badgeText: 'À LA CARTE (ESSENTIEL)',
-                  color: AppColors.platonCoral,
-                  icon: Icons.psychology_rounded,
-                  tierKey: 'pack_general_solo',
-                  amountFcfa: 2500,
+                  title: 'Pack Pôle Scientifique (Séries C & D)',
+                  subtitle: 'Mutualise Mathématiques + Physique-Chimie + S.V.T.',
+                  price: '5 000 FCFA / mois',
+                  billingPeriod: 'Toutes les matières scientifiques réunies',
+                  badgeText: 'PÔLE SCIENCES C & D (MUTUALISÉ)',
+                  isPopular: true,
+                  color: const Color(0xFF00897B),
+                  icon: Icons.science_rounded,
+                  tierKey: 'pack_pole_scientifique',
+                  amountFcfa: 5000,
                   features: [
-                    'Tous les cours et chapitres de la matière',
-                    'ALECKSE IA tuteur dédié',
-                    'Quiz illimités et fiches de révision',
+                    'Débloque les 3 matières phares du Bac scientifique (Maths, Physique, SVT)',
+                    'Évite de payer chaque matière séparément (coût unitaire ultra-réduit)',
+                    'Fiches de synthèse, TD d\'exercices résolus et protocoles expérimentaux',
+                    'ALECKSE IA tuteur scientifique polyvalent sur les 3 disciplines',
+                    'Annales officielles corrigées du Bac C et D gabonais',
                   ],
                 ),
+
+                // 2. Pack Pôle Littéraire & Sciences Humaines (Séries A & B)
+                _buildSubscriptionCard(
+                  context,
+                  title: 'Pack Pôle Littéraire & Éco (Séries A & B)',
+                  subtitle: 'Mutualise Français + Philo + Histoire-Géo + Langues & Éco',
+                  price: '5 000 FCFA / mois',
+                  billingPeriod: 'Toutes les matières littéraires et sciences humaines réunies',
+                  badgeText: 'PÔLE LITTÉRAIRE & ÉCO (MUTUALISÉ)',
+                  color: const Color(0xFFE65100),
+                  icon: Icons.menu_book_rounded,
+                  tierKey: 'pack_pole_litteraire',
+                  amountFcfa: 5000,
+                  features: [
+                    'Débloque l\'ensemble du pôle : Français, Philo, Histoire-Géo, Langues & Éco',
+                    'Méthodologie complète : commentaire composé, dissertation, contraction et cartes',
+                    'ALECKSE IA spécialiste d\'argumentation littéraire et sociologique',
+                    'Dossiers d\'examen, fiches d\'auteurs et repères géopolitiques',
+                    'Préparation intensive aux épreuves écrites et orales du Bac',
+                  ],
+                ),
+
+                // 3. Pack Trimestre Réussite (3 Mois)
                 _buildSubscriptionCard(
                   context,
                   title: 'Pack Trimestre Réussite (3 Mois)',
-                  subtitle: 'Couvre l\'intégralité d\'un trimestre scolaire',
+                  subtitle: 'Couvre l\'intégralité d\'un trimestre scolaire pour tous les pôles',
                   price: '6 500 FCFA / trimestre',
                   billingPeriod: 'Paiement unique pour 3 mois (90 jours)',
                   badgeText: 'ÉCONOMISEZ 1 000 FCFA',
-                  isPopular: true,
                   color: AppColors.socrateGreen,
                   icon: Icons.date_range_rounded,
                   tierKey: 'pack_general_trimestre',
                   amountFcfa: 6500,
                   features: [
-                    'Accès ininterrompu pendant 90 jours',
-                    'Devoirs surveillés types & compositions corrigées',
-                    'ALECKSE IA Correcteur de copies',
-                    'Relevé de notes périodique',
+                    'Accès ininterrompu pendant 90 jours consécutifs',
+                    'Devoirs surveillés types & compositions trimestrielles corrigées',
+                    'ALECKSE IA Correcteur de copies et coaching méthodique',
+                    'Relevé de notes et synthèse des compétences pour la famille',
                   ],
                 ),
+
+                // 4. Pack Annuel Examen d'État (Bac Général)
                 _buildSubscriptionCard(
                   context,
                   title: 'Pack Annuel Examen d\'État (Bac Général)',
                   subtitle: 'Pass complet pour toute l\'année scolaire (9 mois - Confort)',
                   price: '19 000 FCFA / an',
-                  billingPeriod: 'Paiement unique pour 9 mois',
+                  billingPeriod: 'Paiement unique pour 9 mois d\'année scolaire',
                   badgeText: 'PASS EXAMEN · ÉCONOMIE 3 500 F',
                   color: AppColors.aristoteViolet,
                   icon: Icons.military_tech_rounded,
                   tierKey: 'pack_general_annuel',
                   amountFcfa: 19000,
                   features: [
-                    'Accès garanti pendant 9 mois jusqu\'au Bac',
-                    'Toutes les annales officielles du Bac corrigées',
-                    'Mode hors-ligne complet',
-                    'ALECKSE IA illimité 24h/24',
+                    'Accès garanti pendant 9 mois jusqu\'aux délibérations du Bac',
+                    'Toutes les annales officielles du Bac gabonais corrigées pas-à-pas',
+                    'Mode hors-ligne complet et fiches imprimables',
+                    'ALECKSE IA illimité 24h/24 pour réviser sans stress',
                   ],
                 ),
               ],

@@ -284,6 +284,10 @@ class MainDashboardScreen extends ConsumerWidget {
                       tier1Details: 'TD d\'exercices résolus pas-à-pas, réactions chimiques expliquées et protocoles expérimentaux.',
                       tier2Pioneer: 'Albert Einstein',
                       tier2Details: 'Coaching d\'excellence, annales complètes du Bac gabonais et sujets types corrigés.',
+                      isPackOnly: true,
+                      clusterName: 'Pack Pôle Scientifique (Séries C & D : Maths + Physique + SVT)',
+                      clusterBadge: 'PÔLE SCIENCES C & D',
+                      clusterDescription: 'La Physique-Chimie est réunie avec les Mathématiques et les SVT dans un forfait groupé d\'excellence pour toute la filière scientifique. Aucun surcoût individuel : tout le pôle est mutualisé.',
                     ),
                   ),
                 ],
@@ -346,6 +350,10 @@ class MainDashboardScreen extends ConsumerWidget {
                   tier1Details: 'Fiches bilans illustrées, TD d\'interprétation de graphes et protocoles biologiques.',
                   tier2Pioneer: 'Gregor Mendel',
                   tier2Details: 'Maîtrise complète des problèmes de génétique formelle, annales du Bac et entraînement ciblé.',
+                  isPackOnly: true,
+                  clusterName: 'Pack Pôle Scientifique (Séries C & D : Maths + Physique + SVT)',
+                  clusterBadge: 'PÔLE SCIENCES C & D',
+                  clusterDescription: 'Les SVT sont associées aux Mathématiques et à la Physique-Chimie dans le Pack Scientifique. Aucun surcoût individuel : tout le pôle est mutualisé au meilleur tarif.',
                 ),
               ),
             ),
@@ -377,6 +385,10 @@ class MainDashboardScreen extends ConsumerWidget {
                   tier1Details: 'Méthodologie de la dissertation historique, commentaire de documents et repères géopolitiques.',
                   tier2Pioneer: 'Fernand Braudel',
                   tier2Details: 'Dossiers complets, schémas cartographiques d\'examen et préparation intensive au grand oral/écrit.',
+                  isPackOnly: true,
+                  clusterName: 'Pack Pôle Littéraire & Sciences Humaines (Séries A & B)',
+                  clusterBadge: 'SÉRIES A & B',
+                  clusterDescription: 'L\'Histoire-Géographie fait partie intégrante du Pack Littéraire avec le Français, la Philo et les Langues pour mutualiser les coûts d\'examen.',
                 ),
               ),
             ),
@@ -462,6 +474,10 @@ class MainDashboardScreen extends ConsumerWidget {
                   tier1Details: 'Méthodologie d\'argumentation économique et interprétation de tableaux statistiques.',
                   tier2Pioneer: 'Joseph Schumpeter',
                   tier2Details: 'Entraînement aux sujets d\'examen du Bac B et synthèses économiques complètes.',
+                  isPackOnly: true,
+                  clusterName: 'Pack Série B (Sciences Économiques & Sociales)',
+                  clusterBadge: 'SÉRIE B (ÉCO)',
+                  clusterDescription: 'L\'Économie (SES) est combinée aux Mathématiques et à l\'Histoire-Géo pour accompagner l\'élève de Série B dans un forfait complet.',
                 ),
               ),
             ),
@@ -518,6 +534,10 @@ class MainDashboardScreen extends ConsumerWidget {
     required String tier2Pioneer,
     required String tier2Details,
     String? targetRoute,
+    bool isPackOnly = false,
+    String? clusterName,
+    String? clusterBadge,
+    String? clusterDescription,
   }) {
     showModalBottomSheet(
       context: context,
@@ -670,150 +690,282 @@ class MainDashboardScreen extends ConsumerWidget {
 
               const SizedBox(height: 18),
 
-              // 2. OFFRES DE FORMATION SUPPLÉMENTAIRE EN PALIERS PIONNIERS
-              const Text(
-                'Offres de formation supplémentaire (Optionnelles) :',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5, color: AppColors.textDark),
-              ),
-              const SizedBox(height: 4),
-              const Text(
-                'EduPocket ne vend pas les cours. Seuls les ateliers de renforcement intensif et tutorat personnalisé font l\'objet de modules pionniers créés par les enseignants référents :',
-                style: TextStyle(fontSize: 11.5, color: AppColors.textMuted, height: 1.3),
-              ),
-              const SizedBox(height: 10),
-
-              // Palier 1 (Essentiel - 2 500 FCFA) - Orange un peu rose
-              Container(
-                padding: const EdgeInsets.all(14),
-                margin: const EdgeInsets.only(bottom: 10),
-                decoration: BoxDecoration(
-                  color: AppColors.platonCoral.withValues(alpha: 0.06),
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.platonCoral, width: 1.5),
+              // 2. OFFRES DE FORMATION SUPPLÉMENTAIRE (PÔLE GROUPÉ OU SOLO À LA CARTE)
+              if (isPackOnly) ...[
+                Text(
+                  'Offre de renforcement groupée (Pôle $title) :',
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5, color: AppColors.textDark),
                 ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: AppColors.platonCoral.withValues(alpha: 0.15),
-                      radius: 18,
-                      child: const Icon(Icons.psychology_rounded, color: AppColors.platonCoral, size: 20),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                const SizedBox(height: 4),
+                Text(
+                  'Pour soulager le budget des familles, $title n\'est pas facturée individuellement : elle est réunie dans le forfait groupé avantageux du pôle :',
+                  style: const TextStyle(fontSize: 11.5, color: AppColors.textMuted, height: 1.3),
+                ),
+                const SizedBox(height: 12),
+
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppColors.socrateGreen.withValues(alpha: 0.06),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: AppColors.socrateGreen.withValues(alpha: 0.35), width: 1.5),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
                         children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  'Palier $tier1Pioneer (Essentiel)',
-                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.platonCoral),
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                decoration: BoxDecoration(
-                                  color: AppColors.platonCoral,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: const Text(
-                                  '2500 FCFA/mois',
-                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.white),
-                                ),
-                              ),
-                            ],
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: AppColors.socrateGreen,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              clusterBadge ?? 'PACK MUTUALISÉ',
+                              style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                            ),
                           ),
-                          const SizedBox(height: 3),
-                          Text(
-                            'Renforcement intensif & TD méthodologiques pas-à-pas',
-                            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.grey.shade700),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              clusterName ?? 'Pack de Filière Réuni',
+                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5, color: AppColors.socrateGreen),
+                            ),
                           ),
-                          const SizedBox(height: 4),
-                          Text(tier1Details, style: const TextStyle(fontSize: 11.5, color: Colors.black87, height: 1.3)),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Palier 2 (Confort - 5 000 FCFA) - Violet
-              Container(
-                padding: const EdgeInsets.all(14),
-                margin: const EdgeInsets.only(bottom: 12),
-                decoration: BoxDecoration(
-                  color: AppColors.aristoteViolet.withValues(alpha: 0.06),
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.aristoteViolet.withValues(alpha: 0.45), width: 1.5),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: AppColors.aristoteViolet.withValues(alpha: 0.15),
-                      radius: 18,
-                      child: const Icon(Icons.military_tech_rounded, color: AppColors.aristoteViolet, size: 20),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      const SizedBox(height: 8),
+                      Text(
+                        clusterDescription ??
+                            'Toutes les matières du pôle réunies dans un seul forfait pour un coût unitaire très réduit.',
+                        style: const TextStyle(fontSize: 12, color: Colors.black87, height: 1.35),
+                      ),
+                      const SizedBox(height: 12),
+                      // Modules Pionniers inclus
+                      Row(
                         children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  'Palier $tier2Pioneer (Confort)',
-                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.aristoteViolet),
-                                ),
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: AppColors.platonCoral.withValues(alpha: 0.08),
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: AppColors.platonCoral.withValues(alpha: 0.3)),
                               ),
-                              Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                decoration: BoxDecoration(
-                                  color: AppColors.aristoteViolet,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: const Text(
-                                  '5000 FCFA/mois',
-                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.white),
-                                ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Palier $tier1Pioneer (Essentiel)',
+                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11.5, color: AppColors.platonCoral),
+                                  ),
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    tier1Details,
+                                    style: const TextStyle(fontSize: 10.5, color: Colors.black87, height: 1.25),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                          const SizedBox(height: 3),
-                          Text(
-                            'Coaching d\'excellence, annales résolues & préparation examens',
-                            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.grey.shade700),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: AppColors.aristoteViolet.withValues(alpha: 0.08),
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: AppColors.aristoteViolet.withValues(alpha: 0.3)),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Palier $tier2Pioneer (Confort)',
+                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11.5, color: AppColors.aristoteViolet),
+                                  ),
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    tier2Details,
+                                    style: const TextStyle(fontSize: 10.5, color: Colors.black87, height: 1.25),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          const SizedBox(height: 4),
-                          Text(tier2Details, style: const TextStyle(fontSize: 11.5, color: Colors.black87, height: 1.3)),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Bouton vers la grille des abonnements
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton.icon(
-                  onPressed: () {
-                    Navigator.pop(ctx);
-                    context.push('/subscription');
-                  },
-                  icon: const Icon(Icons.workspace_premium_rounded, size: 16),
-                  label: const Text('Découvrir toutes les formules de renforcement'),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: AppColors.primary,
-                    side: const BorderSide(color: AppColors.primary),
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      const SizedBox(height: 14),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.pop(ctx);
+                            context.push('/subscription');
+                          },
+                          icon: const Icon(Icons.all_inclusive_rounded, size: 16),
+                          label: const Text('Découvrir les Packages Groupés'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.socrateGreen,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 11),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
+              ] else ...[
+                const Text(
+                  'Offres de formation supplémentaire (À la carte & Solo) :',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5, color: AppColors.textDark),
+                ),
+                const SizedBox(height: 4),
+                const Text(
+                  'Renforcement ciblé hors package ou inclus avec réduction dans les forfaits groupés :',
+                  style: TextStyle(fontSize: 11.5, color: AppColors.textMuted, height: 1.3),
+                ),
+                const SizedBox(height: 10),
+
+                // Palier 1 (Essentiel - 2 500 FCFA) - Orange un peu rose
+                Container(
+                  padding: const EdgeInsets.all(14),
+                  margin: const EdgeInsets.only(bottom: 10),
+                  decoration: BoxDecoration(
+                    color: AppColors.platonCoral.withValues(alpha: 0.06),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: AppColors.platonCoral, width: 1.5),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: AppColors.platonCoral.withValues(alpha: 0.15),
+                        radius: 18,
+                        child: const Icon(Icons.psychology_rounded, color: AppColors.platonCoral, size: 20),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Palier $tier1Pioneer (Essentiel Solo)',
+                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.platonCoral),
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.platonCoral,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: const Text(
+                                    '2500 FCFA/mois',
+                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.white),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 3),
+                            Text(
+                              'Pack Essentiel · Renforcement méthodologique & suivi parents',
+                              style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.grey.shade700),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(tier1Details, style: const TextStyle(fontSize: 11.5, color: Colors.black87, height: 1.3)),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Palier 2 (Confort - 5 000 FCFA) - Violet
+                Container(
+                  padding: const EdgeInsets.all(14),
+                  margin: const EdgeInsets.only(bottom: 12),
+                  decoration: BoxDecoration(
+                    color: AppColors.aristoteViolet.withValues(alpha: 0.06),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: AppColors.aristoteViolet.withValues(alpha: 0.45), width: 1.5),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: AppColors.aristoteViolet.withValues(alpha: 0.15),
+                        radius: 18,
+                        child: const Icon(Icons.military_tech_rounded, color: AppColors.aristoteViolet, size: 20),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Palier $tier2Pioneer (Confort Solo)',
+                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.aristoteViolet),
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.aristoteViolet,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: const Text(
+                                    '5000 FCFA/mois',
+                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.white),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 3),
+                            Text(
+                              'Pack Confort · Coaching d\'excellence, Bac blanc ALECKSE & Mode hors-ligne',
+                              style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.grey.shade700),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(tier2Details, style: const TextStyle(fontSize: 11.5, color: Colors.black87, height: 1.3)),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Bouton vers la grille des abonnements
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton.icon(
+                    onPressed: () {
+                      Navigator.pop(ctx);
+                      context.push('/subscription');
+                    },
+                    icon: const Icon(Icons.workspace_premium_rounded, size: 16),
+                    label: const Text('Découvrir toutes les formules de renforcement'),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: AppColors.primary,
+                      side: const BorderSide(color: AppColors.primary),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                  ),
+                ),
+              ],
               const SizedBox(height: 12),
             ],
           ),
