@@ -72,11 +72,26 @@ Pour garantir la crédibilité et la pérennité d'EduPocket face aux défis du 
 | **Respect des Programmes IPN** | Organisation rigoureuse selon les progressions officielles, sans imposer un cours dogmatique unique. |
 | **Contrôle de la Qualité Didactique** | Processus de vérification collégiale et validation par les enseignants référents de discipline. |
 | **Protection des Enseignants** | Règles claires de droits d'auteur, royalties équitables (70 %) et transparence totale des flux. |
-| **Gamification Pédagogique** | Les points récompensent la compréhension et la régularité, pas le simple temps d'écran. |
+| **Gamification Pédagogique (Académie EVA)** | L'Académie EVA (Excelle Virtual Academy) récompense la régularité, les quiz réussis et la compréhension par des Crédits EVA et des Badges d'excellence, sans dépendance mercantile. |
 
 ---
 
-## 4. LA SYNTHÈSE FONDATRICE : 4 PILIERS POUR LE GABON
+## 4. L'ACADÉMIE EVA (EXCELLE VIRTUAL ACADEMY) : LA GAMIFICATION AU SERVICE DE L'EFFORT
+
+**EVA (Excelle Virtual Academy)** est le cœur battant de la motivation et de l'émulation saine au sein d'EduPocket Gabon. Loin des mécaniques de jeux addictives, EVA est une **académie d'émulation pédagogique et de gratification vertueuse** :
+
+1. **Les Crédits EVA (`credits_eva`)** : Chaque notion travaillée, chaque devoir surveillé simulé et chaque quiz réussi permet d'engranger des Crédits EVA. Ils mesurent la régularité et la persévérance de l'apprenant, pas le simple temps d'écran.
+2. **Les Badges d'Honneur Académique** : Des distinctions numériques officielles qui attestent des compétences franchies :
+   * *Badge Initié* : Premier cours et premier quiz validés avec succès.
+   * *Badge Pionnier du Savoir* : Progression méthodique sur les programmes conformes IPN.
+   * *Badge Rigueur Méthodique* : Réussite aux exercices de dissertation et commentaire guidé.
+   * *Badge Maître d'Atelier* : Validation des schémas industriels et protocoles en filières techniques.
+3. **Les Paliers de Progression EVA (`statut_eva`)** : De l'élève *Initié* au grade de *Disciple*, puis de *Savant* et enfin d'*Élite Major de Promotion*, l'Académie EVA offre à chaque enfant gabonais une trajectoire claire de reconnaissance de ses efforts scolaires.
+4. **Valorisation auprès de la Famille** : Les Crédits et Badges EVA sont directement intégrés dans les rapports transmis aux parents pour célébrer chaque étape de progression et encourager l'assiduité.
+
+---
+
+## 5. LA SYNTHÈSE FONDATRICE : 4 PILIERS POUR LE GABON
 
 * **L'Apprenant** : Accéder au savoir, anticiper, s'entraîner et réussir à un coût abordable.
 * **L'Enseignant** : Préserver son patrimoine intellectuel, perfectionner ses cours et percevoir des revenus passifs légitimes.

@@ -343,6 +343,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
       'Méthodologie IPN de base',
       '1 quiz d\'évaluation par notion',
       'ALECKSE basique',
+      'Académie EVA : Statut Initié & 50 Crédits EVA offerts',
     ];
 
     List<String> tier2Features = [
@@ -350,6 +351,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
       'Quiz illimités pour s\'entraîner',
       'Suivi détaillé de la progression',
       'Bulletin hebdomadaire pour les parents',
+      'Académie EVA : Statut Disciple & Crédits EVA x2',
     ];
 
     List<String> tier3Features = [
@@ -359,6 +361,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
       'Dialogue direct avec les grands philosophes',
       'Bac blanc corrigé par ALECKSE avancé',
       'Mode hors ligne',
+      'Académie EVA : Statut Maître & Badges d\'Excellence certifiés',
     ];
 
     // MODÈLE ÉCONOMIQUE TECHNIQUE : PIONNIERS DE L'INGÉNIERIE & MINIMUM 3000 FCFA
@@ -395,6 +398,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
         'Panorama complet des filières industrielles & débouchés au Gabon',
         '1 fiche méthodologique par module technologique',
         'Accès à la communauté technique PhiloPocket',
+        'Académie EVA : Statut Initié Pro & 50 Crédits EVA',
       ];
 
       tier2Features = [
@@ -404,6 +408,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
         'ALECKSE IA Assistant Technique spécialisé d\'atelier',
         'QCM industriels & situations-problèmes d\'atelier illimités',
         'Rapport de compétences pour les parents',
+        'Académie EVA : Statut Disciple Pro & Crédits EVA x2',
       ];
 
       tier3Features = [
@@ -413,6 +418,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
         'Préparation aux épreuves pratiques (LTNOB, Léconi, Bikélé, Nkok)',
         'Correction IA pas-à-pas des calculs appliqués, RDM et schémas',
         'Mode hors-ligne pour réviser à l\'atelier sans connexion Internet',
+        'Académie EVA : Statut Maître Technique & Badges d\'Excellence d\'atelier',
       ];
     } else if (widget.targetDiscipline == 'science') {
       tier1Name = 'Thalès & Pythagore';
@@ -434,12 +440,14 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
         'Méthodologie IPN de base',
         '1 quiz d\'évaluation par notion',
         'ALECKSE basique',
+        'Académie EVA : Statut Initié & 50 Crédits EVA offerts',
       ];
       tier2Features = [
         'Tout le contenu gratuit',
         'TD dirigés & résolutions pas-à-pas',
         'Quiz illimités pour s\'entraîner',
         'Bulletin hebdomadaire pour les parents',
+        'Académie EVA : Statut Disciple Scientifique & Crédits x2',
       ];
       tier3Features = [
         'Tout le contenu Essentiel',
@@ -447,6 +455,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
         'Simulations d\'épreuves complexes',
         'ALECKSE résolveur d\'exercices avancé',
         'Mode hors ligne',
+        'Académie EVA : Statut Maître des Sciences & Badges d\'Excellence',
       ];
     } else if (widget.targetDiscipline == 'litterature' || widget.targetDiscipline == 'francais') {
       tier1Name = 'Montesquieu';
@@ -467,6 +476,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
         'Méthodologie IPN de base (Commentaire & Dissertation)',
         '1 quiz d\'évaluation par œuvre',
         'ALECKSE basique',
+        'Académie EVA : Statut Initié & 50 Crédits EVA offerts',
       ];
       tier2Features = [
         'Tout le contenu gratuit Montesquieu',
@@ -477,6 +487,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
         'Annales officielles corrigées du Baccalauréat Série A gabonais',
         'ALECKSE IA correcteur de style et d\'argumentation',
         'Mode hors-ligne complet',
+        'Académie EVA : Statut Disciple Littéraire & Badges d\'Éloquence',
       ];
     } else if (widget.targetDiscipline == 'economie') {
       tier1Name = 'Hérodote & Adam Smith';
@@ -498,6 +509,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
         'Méthodologie de base du raisonnement économique',
         '1 quiz d\'évaluation par chapitre',
         'ALECKSE basique',
+        'Académie EVA : Statut Initié & 50 Crédits EVA offerts',
       ];
       tier2Features = [
         'Tout le contenu gratuit',
@@ -507,6 +519,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
         'Analyses approfondies des mutations socio-économiques',
         'ALECKSE IA pour structurer vos argumentaires économiques',
         'Mode hors-ligne complet',
+        'Académie EVA : Statut Disciple Éco & Badges de Rigueur',
       ];
     }
 
@@ -559,6 +572,64 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                   ],
                 ),
               ),
+            // Bandeau d'honneur Académie EVA (Excelle Virtual Academy)
+            Container(
+              margin: const EdgeInsets.only(bottom: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF6A4C93), Color(0xFF1E3A8A)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF6A4C93).withValues(alpha: 0.25),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.18),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.workspace_premium_rounded,
+                        color: Colors.amber, size: 26),
+                  ),
+                  const SizedBox(width: 12),
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '🏆 Académie EVA (Excelle Virtual Academy)',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13.5,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 2),
+                        Text(
+                          'Système de gamification éthique : chaque formule débloque des Crédits EVA, des Badges d\'assiduité et des distinctions d\'excellence.',
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 11.5,
+                            height: 1.3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
             // =================================================================
             // SÉLECTEUR D'ONGLETS : PALIERS PIONNIERS VS PACKAGES & BUNDLES
@@ -796,6 +867,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                   'TD d\'exercices résolus et méthodes de raisonnement scientifique',
                   'ALECKSE IA tuteur scientifique polyvalent sur les 3 disciplines',
                   'Quiz d\'auto-évaluation réguliers par chapitre',
+                  'Académie EVA : Statut Disciple des Sciences & Crédits EVA x2',
                 ],
               ),
 
@@ -819,6 +891,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                   'ALECKSE IA résolveur d\'exercices complexes pas-à-pas',
                   'Protocoles d\'expérimentation & fiches d\'analyses de graphiques',
                   'Mode hors-ligne complet pour réviser sans connexion Internet',
+                  'Académie EVA : Statut Maître des Sciences & Badges d\'Excellence certifiés',
                 ],
               ),
 
@@ -853,6 +926,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                   'Simulations d\'épreuves écrites et orales de langues vivantes',
                   'ALECKSE IA spécialiste en expression écrite et argumentation',
                   'Mode hors-ligne complet pour réviser sans connexion Internet',
+                  'Académie EVA : Statut Disciple des Lettres & Badges d\'Éloquence',
                 ],
               ),
 
@@ -887,6 +961,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                   'Analyses approfondies des mutations socio-économiques internationales',
                   'ALECKSE IA pour structurer vos plans et argumentaires économiques',
                   'Mode hors-ligne complet',
+                  'Académie EVA : Statut Disciple Éco & Badges de Rigueur d\'Analyse',
                 ],
               ),
 
@@ -918,6 +993,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                   'ALECKSE IA Assistant Technique spécialisé d\'atelier',
                   'QCM industriels & situations-problèmes d\'atelier',
                   'Renouvellement mensuel sans engagement',
+                  'Académie EVA : Statut Disciple Pro & Crédits EVA x2',
                 ],
               ),
 
@@ -940,6 +1016,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                   'Préparation aux épreuves pratiques (LTNOB, Léconi, Bikélé, Nkok)',
                   'Correction IA pas-à-pas des calculs appliqués, RDM et schémas',
                   'Mode hors-ligne pour réviser à l\'atelier sans connexion Internet',
+                  'Académie EVA : Statut Maître Technique & Badges d\'Excellence d\'atelier',
                 ],
               ),
 
@@ -961,6 +1038,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                   'Tuteur IA ALECKSE polyvalent sur l\'ensemble du cursus technique',
                   'Guides de Travaux Pratiques (TP) d\'atelier et protocoles',
                   'Rapports de compétences pour la famille',
+                  'Académie EVA : Statut Maître de Filière & Trophée d\'Ingénierie',
                 ],
               ),
 
@@ -982,6 +1060,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                   'Préparation ciblée aux devoirs surveillés & compositions trimestrielles',
                   'Sujets types et protocoles de validation des compétences d\'atelier',
                   'Mode hors-ligne pour réviser à l\'atelier sans data',
+                  'Académie EVA : Statut Élite Trimestriel & 500 Crédits EVA bonus',
                 ],
               ),
 
@@ -1003,6 +1082,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                   'Coaching intensif aux épreuves pratiques (LTNOB, Léconi, Bikélé, Nkok)',
                   'Mode hors-ligne illimité et téléchargement de tous les cours',
                   'Assistance prioritaire ALECKSE IA 24h/24 jusqu\'au jour J',
+                  'Académie EVA : Statut Major de Promotion Tech & Trophée Annuel d\'Or',
                 ],
               ),
 
@@ -1033,6 +1113,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                   'Devoirs surveillés types & compositions trimestrielles corrigées',
                   'ALECKSE IA Correcteur de copies et coaching méthodique',
                   'Relevé de notes et synthèse des compétences pour la famille',
+                  'Académie EVA : Statut Élite Trimestriel & 500 Crédits EVA bonus',
                 ],
               ),
 
@@ -1053,6 +1134,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                   'Toutes les annales officielles du Bac gabonais corrigées pas-à-pas',
                   'Mode hors-ligne complet et fiches imprimables',
                   'ALECKSE IA illimité 24h/24 pour réviser sans stress',
+                  'Académie EVA : Statut Major de Promotion & Trophée Annuel d\'Or',
                 ],
               ),
             ],

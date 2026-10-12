@@ -191,6 +191,80 @@ class MainDashboardScreen extends ConsumerWidget {
             style: TextStyle(
                 color: Colors.white.withValues(alpha: 0.6), fontSize: 12),
           ),
+          const SizedBox(height: 14),
+          // Capsule Académie EVA (Excelle Virtual Academy)
+          InkWell(
+            onTap: () => _showEvaAcademyInfoModal(context, studentState),
+            borderRadius: BorderRadius.circular(16),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.25)),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(7),
+                    decoration: BoxDecoration(
+                      color: Colors.amber.withValues(alpha: 0.25),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.workspace_premium_rounded,
+                        color: Colors.amber, size: 20),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Académie EVA · Excelle Virtual Academy',
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Row(
+                          children: [
+                            Text(
+                              'Grade ${studentState.statutEva}',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: Colors.amber,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                '${studentState.creditsEva} Crédits EVA',
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 10.5,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Icon(Icons.arrow_forward_ios_rounded,
+                      color: Colors.white60, size: 14),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -1335,6 +1409,323 @@ class MainDashboardScreen extends ConsumerWidget {
           fontSize: 10.5,
           fontWeight: FontWeight.w600,
         ),
+      ),
+    );
+  }
+
+  void _showEvaAcademyInfoModal(BuildContext context, StudentState studentState) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => DraggableScrollableSheet(
+        initialChildSize: 0.85,
+        minChildSize: 0.5,
+        maxChildSize: 0.95,
+        builder: (_, scrollController) => Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+          ),
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+          child: ListView(
+            controller: scrollController,
+            children: [
+              // Poignée de glissement
+              Center(
+                child: Container(
+                  width: 44,
+                  height: 5,
+                  margin: const EdgeInsets.only(bottom: 16),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+
+              // Header Académie EVA
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFF6A4C93), Color(0xFF1E3A8A)],
+                      ),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: const Icon(Icons.workspace_premium_rounded,
+                        color: Colors.amber, size: 28),
+                  ),
+                  const SizedBox(width: 14),
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Académie EVA',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w900,
+                            color: Color(0xFF1E3A8A),
+                          ),
+                        ),
+                        Text(
+                          'Excelle Virtual Academy · Gamification du Savoir',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: AppColors.textMuted,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close_rounded),
+                    onPressed: () => Navigator.pop(ctx),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 18),
+
+              // Carte Statut Actuel de l'Élève
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF0F172A), Color(0xFF1E3A8A)],
+                  ),
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'VOTRE GRADE ACADÉMIQUE',
+                              style: TextStyle(
+                                color: Colors.white70,
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1.1,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              studentState.statutEva,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                          decoration: BoxDecoration(
+                            color: Colors.amber,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.stars_rounded, color: Colors.black, size: 18),
+                              const SizedBox(width: 6),
+                              Text(
+                                '${studentState.creditsEva} Crédits',
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    const Divider(color: Colors.white24),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'L\'Académie EVA récompense votre assiduité réelle et la rigueur de vos révisions. Les points s\'obtiennent par l\'effort scolaire continu.',
+                      style: TextStyle(color: Colors.white70, fontSize: 11.5, height: 1.3),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              const Text(
+                'Comment progresser dans l\'Académie EVA ?',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textDark,
+                ),
+              ),
+              const SizedBox(height: 10),
+
+              _buildEvaPerkTile(
+                icon: Icons.menu_book_rounded,
+                color: const Color(0xFF00897B),
+                title: 'Lire une fiche de synthèse officielle',
+                points: '+25 Crédits EVA',
+                description: 'Maîtrisez les notions fondamentales du programme gabonais.',
+              ),
+              _buildEvaPerkTile(
+                icon: Icons.quiz_rounded,
+                color: const Color(0xFFE65100),
+                title: 'Réussir un Quiz d\'évaluation IPN',
+                points: '+30 Crédits EVA',
+                description: 'Testez votre compréhension immédiate après chaque chapitre.',
+              ),
+              _buildEvaPerkTile(
+                icon: Icons.assignment_turned_in_rounded,
+                color: const Color(0xFF6A4C93),
+                title: 'Résoudre un sujet d\'examen blanc',
+                points: '+50 Crédits EVA',
+                description: 'Entraînez-vous sur les annales officielles avec correction pas-à-pas.',
+              ),
+              _buildEvaPerkTile(
+                icon: Icons.local_fire_department_rounded,
+                color: Colors.orange,
+                title: 'Assiduité quotidienne continue',
+                points: 'Bonus Série Flamme 🔥',
+                description: 'Revenez réviser chaque jour pour maximiser vos multiplicateurs.',
+              ),
+
+              const SizedBox(height: 16),
+              const Text(
+                'Échelons de l\'Académie EVA',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textDark,
+                ),
+              ),
+              const SizedBox(height: 10),
+
+              _buildGradeStep(title: 'Initié 🌱', points: '0 à 99 Crédits', desc: 'Découverte des programmes et fiches libres.'),
+              _buildGradeStep(title: 'Apprenti ⭐', points: '100 à 199 Crédits', desc: 'Régularité confirmée et premiers quiz réussis.'),
+              _buildGradeStep(title: 'Disciple ⭐⭐', points: '200 à 349 Crédits', desc: 'Méthodologie solide et devoirs surveillés réguliers.'),
+              _buildGradeStep(title: 'Maître ⭐⭐⭐', points: '350+ Crédits', desc: 'Excellence méthodologique et maîtrise des annales d\'examen.'),
+
+              const SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF1E3A8A),
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                    context.push('/subscription-choice');
+                  },
+                  icon: const Icon(Icons.workspace_premium_rounded),
+                  label: const Text('Découvrir les formules & bonus EVA'),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEvaPerkTile({
+    required IconData icon,
+    required Color color,
+    required String title,
+    required String points,
+    required String description,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.06),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: color.withValues(alpha: 0.18)),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(icon, color: color, size: 20),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.5),
+                    ),
+                    Text(
+                      points,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        color: color,
+                        fontSize: 11.5,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  description,
+                  style: const TextStyle(color: AppColors.textMuted, fontSize: 11),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGradeStep({required String title, required String points, required String desc}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Row(
+        children: [
+          const Icon(Icons.check_circle_outline_rounded, color: Color(0xFF1E3A8A), size: 18),
+          const SizedBox(width: 8),
+          Text(
+            title,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.5),
+          ),
+          const SizedBox(width: 6),
+          Text(
+            '($points) :',
+            style: const TextStyle(fontSize: 11.5, color: AppColors.textMuted),
+          ),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Text(
+              desc,
+              style: const TextStyle(fontSize: 11.5, color: AppColors.textDark),
+            ),
+          ),
+        ],
       ),
     );
   }

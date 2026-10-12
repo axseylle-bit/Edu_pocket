@@ -12,6 +12,8 @@ class StudentState {
   final String niveau;
   final String serie;
   final int streak;
+  final int creditsEva;
+  final String statutEva;
 
   StudentState({
     this.tier = SubscriptionTier.gratuit,
@@ -21,6 +23,8 @@ class StudentState {
     this.niveau = '',
     this.serie = '',
     this.streak = 0,
+    this.creditsEva = 120,
+    this.statutEva = 'Initié',
   });
 
   StudentState copyWith({
@@ -31,6 +35,8 @@ class StudentState {
     String? niveau,
     String? serie,
     int? streak,
+    int? creditsEva,
+    String? statutEva,
   }) {
     return StudentState(
       tier: tier ?? this.tier,
@@ -40,6 +46,8 @@ class StudentState {
       niveau: niveau ?? this.niveau,
       serie: serie ?? this.serie,
       streak: streak ?? this.streak,
+      creditsEva: creditsEva ?? this.creditsEva,
+      statutEva: statutEva ?? this.statutEva,
     );
   }
 }
@@ -85,12 +93,34 @@ class StudentNotifier extends StateNotifier<StudentState> {
       progress = (readCourses.length / totalNotions).clamp(0.0, 1.0);
     }
 
+    // Calcul dynamique de l'Académie EVA (Excelle Virtual Academy)
+    int dbCredits = (profile?['credits_eva'] as num?)?.toInt() ?? 0;
+    int calculatedCredits = 50 + (readCourses.length * 25);
+    if (tier == SubscriptionTier.essentiel) calculatedCredits += 100;
+    if (tier == SubscriptionTier.confort) calculatedCredits += 250;
+    int creditsEva = dbCredits > 0 ? dbCredits : calculatedCredits;
+
+    String statutEva = profile?['statut_eva'] as String? ?? '';
+    if (statutEva.isEmpty) {
+      if (creditsEva >= 350) {
+        statutEva = 'Maître';
+      } else if (creditsEva >= 200) {
+        statutEva = 'Disciple';
+      } else if (creditsEva >= 100) {
+        statutEva = 'Apprenti';
+      } else {
+        statutEva = 'Initié';
+      }
+    }
+
     state = state.copyWith(
       tier: tier,
       globalProgress: progress,
       userName: name,
       niveau: niveau,
       serie: serie,
+      creditsEva: creditsEva,
+      statutEva: statutEva,
       isLoading: false,
     );
     

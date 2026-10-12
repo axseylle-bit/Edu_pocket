@@ -152,24 +152,38 @@ ALECKSE constitue un soutien parascolaire d'appoint. Il ne remplace en aucun cas
 
 ---
 
-### ARTICLE 7 : PROPRIÉTÉ INTELLECTUELLE
+### ARTICLE 7 : SYSTÈME DE GAMIFICATION PÉDAGOGIQUE — ACADÉMIE EVA (EXCELLE VIRTUAL ACADEMY)
+
+7.1. **Vocation et Fonctionnement**  
+L'**Académie EVA (Excelle Virtual Academy)** est le système intégré de gamification et de motivation pédagogique d'EduPocket. Elle récompense l'assiduité, la régularité du travail personnel et l'amélioration des résultats scolaires à travers des **Crédits EVA** (`credits_eva`), des **Badges d'Honneur** et des **Statuts de Progression Académique** (*Initié, Apprenti, Disciple, Savant, Maître / Élite*).
+
+7.2. **Attribution au Mérite et Gratifications d'Abonnement**  
+* Les Crédits EVA sont obtenus par l'effort scolaire continu (lecture de résumés de cours, complétion de quiz d'évaluation, résolution d'annales d'examen).
+* Les formules d'abonnement (Packs Mensuels, Forfaits Annuels) octroient des gratifications d'honneur sous forme de bonus d'adhésion à l'Académie, de badges certifiés et de multiplicateurs de crédits pour valoriser l'engagement scolaire de l'élève.
+
+7.3. **Inaliénabilité et Absence de Valeur Fiduciaire**  
+Les Crédits EVA et Badges de l'Académie constituent des récompenses purement pédagogiques et ludiques. Ils ne possèdent aucune valeur monétaire en devise réelle, ne peuvent être vendus, échangés, transférés à des tiers ni convertis en espèces monétaires.
+
+---
+
+### ARTICLE 8 : PROPRIÉTÉ INTELLECTUELLE
 
 *(Ordonnance n° 0011/PR/2024 du 26 février 2024)*
 
-7.1. L'ensemble des éléments composant l'application EduPocket (architecture logicielle, code source, graphismes, logos, marques, textes explicatifs, schémas techniques industriels, vidéos et banques de QCM) est protégé par les lois sur la propriété intellectuelle et le droit d'auteur.  
-7.2. Il est formellement interdit à tout Utilisateur de reproduire, copier, revendre, diffuser sur des groupes publics (WhatsApp, Telegram, réseaux sociaux) ou d'exploiter commercialement les cours et contenus d'EduPocket sans autorisation écrite préalable.  
-7.3. Tout partage abusif ou piratage de contenus entraînera la suspension immédiate et définitive du compte de l'Utilisateur sans remboursement, sans préjudice de poursuites civiles et pénales.
+8.1. L'ensemble des éléments composant l'application EduPocket (architecture logicielle, code source, graphismes, logos, marques, textes explicatifs, schémas techniques industriels, vidéos et banques de QCM) est protégé par les lois sur la propriété intellectuelle et le droit d'auteur.  
+8.2. Il est formellement interdit à tout Utilisateur de reproduire, copier, revendre, diffuser sur des groupes publics (WhatsApp, Telegram, réseaux sociaux) ou d'exploiter commercialement les cours et contenus d'EduPocket sans autorisation écrite préalable.  
+8.3. Tout partage abusif ou piratage de contenus entraînera la suspension immédiate et définitive du compte de l'Utilisateur sans remboursement, sans préjudice de poursuites civiles et pénales.
 
 ---
 
-### ARTICLE 8 : RÉSILIATION ET SUPPRESSION DE COMPTE
+### ARTICLE 9 : RÉSILIATION ET SUPPRESSION DE COMPTE
 
-8.1. **À l'initiative de l'Élève ou du Parent** : L'Utilisateur peut cesser d'utiliser l'application à tout moment et demander la suppression intégrale de ses données personnelles depuis les paramètres de son profil. L'abonnement en cours arrive simplement à son terme sans renouvellement forcé.  
-8.2. **À l'initiative d'EduPocket** : EduPocket se réserve le droit de suspendre ou supprimer tout compte en cas de propos injurieux, de tentative de piratage du système ou de non-respect manifeste des présentes CGU.
+9.1. **À l'initiative de l'Élève ou du Parent** : L'Utilisateur peut cesser d'utiliser l'application à tout moment et demander la suppression intégrale de ses données personnelles depuis les paramètres de son profil. L'abonnement en cours arrive simplement à son terme sans renouvellement forcé.  
+9.2. **À l'initiative d'EduPocket** : EduPocket se réserve le droit de suspendre ou supprimer tout compte en cas de propos injurieux, de tentative de piratage du système ou de non-respect manifeste des présentes CGU.
 
 ---
 
-### ARTICLE 9 : DROIT APPLICABLE ET TRIBUNAUX COMPÉTENTS
+### ARTICLE 10 : DROIT APPLICABLE ET TRIBUNAUX COMPÉTENTS
 
 Les présentes CGU / CGV sont régies et interprétées conformément au droit de la République Gabonaise et aux actes uniformes de l'OHADA. Tout litige non résolu à l'amiable sera soumis à la juridiction exclusive des tribunaux compétents de Libreville.
 

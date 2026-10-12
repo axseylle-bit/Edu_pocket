@@ -57,6 +57,14 @@ L'intégration du tuteur intelligent ALECKSE au sein d'EduPocket respecte strict
   * **Paliers Payants (Abonnements & Packages)** : Garantie d'une expérience **100 % exempte de toute publicité (*Ad-Free*)**, assurant un environnement d'apprentissage calme et une concentration maximale.
 * **Absence de Messagerie Privée Non Modérée entre Inconnus** : Pour garantir la sécurité intégrale des collégiens et lycéens, EduPocket ne comporte pas de chat public non surveillé entre élèves.
 
+### 2.4. Charte de Gamification Pédagogique : L'Académie EVA (Excelle Virtual Academy)
+
+L'**Académie EVA (Excelle Virtual Academy)** constitue le dispositif officiel de gamification éthique et bienveillante d'EduPocket. Elle a pour mission exclusive d'encourager la persévérance, la régularité et le goût de l'effort :
+
+* **Gratification Fondée sur le Mérite Réel** : Les **Crédits EVA** (`credits_eva`) et **Badges d'Excellence** sont décernés uniquement en récompense d'actes d'apprentissage authentiques (lecture approfondie des fiches de synthèse, résolution autonome d'exercices d'application, taux de réussite aux quiz méthodologiques, assiduité hebdomadaire).
+* **Éthique et Absence de Spéculation Marchande** : Les Crédits EVA récompensent l'effort intellectuel et ne constituent en aucun cas une crypto-monnaie, un actif spéculatif ou une monnaie convertible en espèces. Aucun élève ne peut acheter directement des notes ou substituer l'argent au travail personnel.
+* **Émulation Saine et Bienveillante** : Les grades de l'Académie EVA (*Initié, Apprenti, Disciple, Savant, Maître / Élite*) célèbrent la progression individuelle de chaque élève par rapport à son point de départ. Le système vise à restaurer la confiance scolaire sans jamais humilier ni stigmatiser les élèves en difficulté.
+
 ---
 
 ## 3. CONTACT ET SIGNALEMENT DE CONTENU
