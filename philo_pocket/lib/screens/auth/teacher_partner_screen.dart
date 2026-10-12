@@ -9,9 +9,8 @@ class TeacherPartnerScreen extends StatelessWidget {
   const TeacherPartnerScreen({Key? key}) : super(key: key);
 
   Future<void> _launchWhatsApp(BuildContext context) async {
-    // Remplacer par le numéro de téléphone réel de l'utilisateur
-    const phoneNumber = '+24177000000'; // Numéro fictif pour l'instant
-    const message = 'Bonjour, je suis enseignant et je souhaite rejoindre eduPocket en tant que partenaire pour proposer mes cours.';
+    const phoneNumber = '+24177141912';
+    const message = 'Bonjour, je suis enseignant et je souhaite échanger sur le partenariat pédagogique EduPocket.';
     
     final url = Uri.parse('https://wa.me/$phoneNumber?text=${Uri.encodeComponent(message)}');
     

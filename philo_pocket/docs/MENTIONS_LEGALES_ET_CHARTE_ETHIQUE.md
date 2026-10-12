@@ -11,9 +11,10 @@
 * **Dénomination du Service** : EDUPOCKET GABON (Plateforme éducative multi-disciplinaire du secondaire général et technique)
 * **Forme Juridique / Éditeur** : Projet éducatif d'innovation pédagogique privée édité par la Direction EduPocket Gabon
 * **Siège Social & Localisation** : Libreville, République Gabonaise
-* **Courriel de Contact Général** : contact@edupocket-app.com
-* **Courriel du Support Utilisateurs & Parents** : support@edupocket-app.com
-* **Courriel Délégué Protection des Données (DPO)** : privacy@edupocket-app.com
+* **Courriel de Contact Général & Coordination** : axseylle@gmail.com
+* **Courriel du Support Utilisateurs & Parents** : axseylle@gmail.com
+* **Courriel Délégué Protection des Données (DPO)** : axseylle@gmail.com
+* **Contact Téléphonique & WhatsApp** : +241 77 14 19 12
 * **Direction de la Publication & Coordination Pédagogique** : Équipe Pédagogique EduPocket Gabon
 
 ### 1.2. Hébergement Technique et Infrastructure Cloud

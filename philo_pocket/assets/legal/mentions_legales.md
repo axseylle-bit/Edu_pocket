@@ -1,7 +1,7 @@
 # MENTIONS LÉGALES ET CHARTE ÉTHIQUE DU SERVICE
 
 **APPLICATION MOBILE & SERVICES NUMÉRIQUES : EDUPOCKET GABON**  
-*Dernière mise à jour : 11 Octobre 2026*
+*Dernière mise à jour : 12 Octobre 2026*
 
 ---
 
@@ -11,9 +11,10 @@
 * **Dénomination du Service** : EDUPOCKET GABON (Plateforme éducative multi-disciplinaire du secondaire général et technique)
 * **Forme Juridique / Éditeur** : Projet éducatif d'innovation pédagogique privée édité par la Direction EduPocket Gabon
 * **Siège Social & Localisation** : Libreville, République Gabonaise
-* **Courriel de Contact Général** : contact@edupocket-app.com
-* **Courriel du Support Utilisateurs & Parents** : support@edupocket-app.com
-* **Courriel Délégué Protection des Données (DPO)** : privacy@edupocket-app.com
+* **Courriel de Contact Général & Coordination** : axseylle@gmail.com
+* **Courriel du Support Utilisateurs & Parents** : axseylle@gmail.com
+* **Courriel Délégué Protection des Données (DPO)** : axseylle@gmail.com
+* **Contact Téléphonique & WhatsApp** : +241 77 14 19 12
 * **Direction de la Publication & Coordination Pédagogique** : Équipe Pédagogique EduPocket Gabon
 
 ### 1.2. Hébergement Technique et Infrastructure Cloud
@@ -62,5 +63,6 @@ L'intégration du tuteur intelligent ALECKSE au sein d'EduPocket respecte strict
 
 Pour toute réclamation, signalement d'erreur pédagogique ou notification d'atteinte aux droits d'auteur :
 * **Formulaire en Ligne** : Onglet « Profil > Aide & Réclamations » au sein de l'application mobile.
-* **Email Pédagogique** : pedagogie@edupocket-app.com
+* **Email Pédagogique & Coordination** : axseylle@gmail.com
+* **Contact Téléphonique / WhatsApp** : +241 77 14 19 12
 * **Délai de Traitement** : L'équipe pédagogique et technique s'engage à traiter tout signalement sous 48 heures ouvrées.

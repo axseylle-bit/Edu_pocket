@@ -1,94 +1,109 @@
-# STRATÉGIE DE RECRUTEMENT DES ENSEIGNANTS PIONNIERS & SPEECH DE CONVICTION
+# STRATÉGIE PÉDAGOGIQUE & CONVICTION DES ENSEIGNANTS PARTENAIRES
 **PLATEFORME ÉDUCATIVE : EDUPOCKET GABON**  
-*Phase Pilote : Réseau des Enseignants Référents Provinciaux*  
-*Base de Référence : 100 Places Général + 50 Places Technique à Libreville (Ratio 2:1)*  
+*Réseau Pédagogique des Enseignants Référents Provinciaux*  
+*Contact Coordination : WhatsApp +241 77 14 19 12 | Email : axseylle@gmail.com*  
 *Date : Octobre 2026*
 
 ---
 
-## 1. PRINCIPE STRATÉGIQUE FONDAMENTAL
+## 1. VISION FONDATRICE : L'IMPLICATION COLLÉGIALE PAR LA CONVICTION
 
-Pour bâtir un réseau pionnier solide et couvrir l'ensemble des besoins scolaires au Gabon :
-1. **Socle Grand Libreville (Estuaire) : 150 Enseignants Pionniers** :
-   * **100 places pour l'Enseignement Général** (Collèges et Lycées d'enseignement général).
-   * **50 places pour l'Enseignement Technique & Professionnel** (LTNOB Owendo, Lycée Technique de Nkok, Lycées Commerciaux et Centres de Formation).
-2. **Pondération par volume de niveaux scolaires (Volet Général)** :
-   * **Matières transversales fondamentales (6e ➔ Terminale, soit 7 niveaux complets)** : Français, Mathématiques, Sciences Physiques, SVT, Histoire-Géo/ÉC, Anglais. Elles mobilisent **88 places sur 100** pour couvrir tous les niveaux et examens (BEPC + BAC).
-   * **Matières exclusives du 2nd cycle & Langues** : Philosophie (1re & Tle), Espagnol (LV2), SES (Série B). Elles mobilisent **12 places sur 100** (4 places en Philo, 4 places en Espagnol, 4 places en SES), garantissant aux enseignants retenus un large volume d'élèves sans dispersion.
-3. **Pondération spécialités atelier & tertiaire (Volet Technique - 50 places)** : Couvre les filières tertiaires (G1, G2, G3), industrielles (F1, F2, F3, F4, TI) et les métiers stratégiques (Bois Nkok, Maintenance, Transit).
-4. **Dégressivité démographique provinciale** : Les 8 autres provinces bénéficient des réductions démographiques proportionnelles (-30 % à -80 %) calculées sur cette double base.
+EduPocket ne cherche pas à « vendre » une opportunité à des enseignants, mais à **les associer à un projet d'intérêt national**. Le collègue enseignant n'est pas un prospect commercial : c'est un pair, un auteur, un praticien dont l'expertise et la rigueur sont indispensables pour hisser le niveau scolaire du Gabon.
+
+### Les 3 Piliers de l'Adhésion Sincère :
+1. **Le Respect du Travail Intellectuel** : Reconnaître que chaque cours préparé au fil des années représente des nuits de travail qui méritent d'être préservées, transmises et équitablement valorisées (70 % de royalties d'auteur).
+2. **L'Égalité Républicaine Territoriale** : Offrir aux élèves et collègues de l'intérieur du pays (Makokou, Mouila, Tchibanga, Koulamoutou, etc.) les mêmes ressources d'excellence que le Grand Libreville.
+3. **La Transparence Pédagogique** : Aucune pression artificielle. Les quotas provinciaux sont consultables en toute clarté directement dans l'application pour garantir un encadrement sérieux.
 
 ---
 
-## 2. TABLEAU DE LIBREVILLE (150 PLACES AU TOTAL)
+## 2. LE CAHIER DES CHARGES : LES NORMES PÉDAGOGIQUES EDUPOCKET
 
-### 🟢 VOLET A : ENSEIGNEMENT GÉNÉRAL (100 PLACES À LIBREVILLE)
+Pour garantir que les élèves disposent de supports de haute volée conformes aux exigences des examens d'État (BEPC, BAC Général et Technique), tout cours déposé par un enseignant partenaire doit respecter **la Norme Didactique EduPocket** :
 
-| Groupe de Disciplines | Discipline | Amplitude Cursus | Quota LBV | Enjeux Pédagogiques & Volume d'Élèves |
-| :--- | :--- | :---: | :---: | :--- |
-| **Piliers Transversaux (88 places)**<br>*Interviennent sur les 7 niveaux de la 6e à la Terminale* | **Français & Lettres** | 6e ➔ Tle *(7 niveaux)* | **18 places** | Tronc commun obligatoire tous niveaux, fort volume horaire, épreuves anticipées, BEPC et BAC. |
-| | **Mathématiques** | 6e ➔ Tle *(7 niveaux)* | **18 places** | Matière reine toutes séries, coef déterminant BEPC + BAC C, D, E. |
-| | **Physique - Chimie (PC)** | 6e ➔ Tle *(7 niveaux)* | **14 places** | Sciences d'observation / PC de la 6e à la Tle. Pilier des séries scientifiques. |
-| | **Sciences de la Vie et de la Terre (SVT)** | 6e ➔ Tle *(7 niveaux)* | **14 places** | De la 6e à la Tle. Pilier du BAC D et épreuve incontournable du BEPC. |
-| | **Histoire - Géographie & ÉC** | 6e ➔ Tle *(7 niveaux)* | **14 places** | Tronc commun 6e ➔ Tle. Forte demande méthodologique en dissertation et commentaire. |
-| | **Anglais (LV1)** | 6e ➔ Tle *(7 niveaux)* | **10 places** | Tronc commun obligatoire de la 6e à la Tle toutes séries. |
-| **Second Cycle & Langues (12 places)**<br>*Interviennent au Lycée / Séries A & B* | **Philosophie** | 1re & Tle *(2 niveaux)* | **4 places** | Répartis sur les séries du BAC (A, B, C, D) à Libreville. Monopole d'or sur les révisions des bacheliers. |
-| | **Espagnol (LV2)** | 4e ➔ Tle *(Collège & Lycée)* | **4 places** | Langue vivante 2 n°1 au Gabon, coefficients déterminants séries A1/A2. |
-| | **SES (Sciences Éco & Sociales)** | 2nde ➔ Tle *(Série B)* | **4 places** | Spécifique Lycée série B. |
-| **SOUS-TOTAL GÉNÉRAL** | — | — | **100 places** | **Pool Général Grand Libreville** |
-
----
-
-### 🔵 VOLET B : ENSEIGNEMENT TECHNIQUE ET PROFESSIONNEL (50 PLACES À LIBREVILLE)
-
-| Pôle Technique | Filières & Séries Ciblées | Quota LBV | Enjeux d'Apprentissage & Examens Officiels |
-| :--- | :--- | :---: | :--- |
-| **1. Tertiaire & Gestion (20 places)** | **Série G2 (Comptabilité & Gestion financière)** | **8 places** | Filière tertiaire n°1 : Bilan, compte de résultat, fiscalité, compta analytique. |
-| | **Série G3 (Commerce, Vente & Marketing)** | **6 places** | Action commerciale, négociation, mercatique (BAC G3). |
-| | **Série G1 (Secrétariat, Bureautique, Assistanat)** | **6 places** | Organisation administrative, communication d'entreprise, bureautique. |
-| **2. Industriel & Ingénierie (20 places)**| **Série F3 (Électrotechnique & Énergie)** | **6 places** | Schémas électriques, moteurs industriels, automatismes (très forte demande). |
-| | **Série F4 (Génie Civil, BTP & Topographie)** | **6 places** | Calculs de structures, métré, dessin de construction (BTP). |
-| | **Série F2 & TI (Électronique, Systèmes & TI)** | **5 places** | Numérique, microprocesseurs, maintenance informatique et réseaux. |
-| | **Série F1 (Construction Mécanique)** | **3 places** | Dessin industriel, guidage, productique et usinage mécanique. |
-| **3. Métiers & Filières Pro (10 places)**| **Filière Bois & Éco-foresterie (Spécial Nkok)** | **4 places** | Usinage du bois, ameublement, valorisation de la ressource forestière (ZIS Nkok). |
-| | **Maintenance Véhicules Industriels & Engins** | **3 places** | Motorisation thermique, diagnostic engins miniers et forestiers. |
-| | **Transit, Douane & Logistique Portuaire** | **3 places** | Procédures douanières gabonaises, consignation et transit maritime (Owendo). |
-| **SOUS-TOTAL TECHNIQUE & PRO** | — | — | **50 places** | **Pool Technique & Pro Grand Libreville** |
+```text
+📋 STRUCTURE OFFICIELLE D'UN MODULE EDUPOCKET :
+├── 1. MINI-FICHE PÉDAGOGIQUE
+│    ├── Objectifs d'apprentissage clairs
+│    ├── Compétences visées selon le programme officiel IPN
+│    └── Prérequis nécessaires pour aborder la notion
+├── 2. COURS DÉVELOPPÉ & STRUCTURÉ
+│    ├── Respect scrupuleux de la méthodologie nationale gabonaise
+│    ├── Clarté didactique, rigueur conceptuelle et exemples contextualisés
+│    └── Découpage clair par parties, thèses et arguments
+├── 3. FICHES DE TD & EXERCICES D'APPLICATION
+│    ├── Série d'exercices progressifs (entraînement, approfondissement, type examen)
+│    └── Corrigés types détaillés et critères d'évaluation
+├── 4. CORPUS DE TEXTES & DOCUMENTS D'ÉTUDE (si applicable)
+│    ├── Textes d'auteurs de référence ou documents graphiques/schémas techniques
+│    └── Pistes d'exploitation et questions de guidage
+└── 5. BIBLIOGRAPHIE & SITOGRAPHIE OFFICIELLES
+     ├── Ouvrages de référence homologués IPN
+     └── Ressources complémentaires pour aller plus loin
+```
 
 ---
 
-## 3. GRILLE NATIONALE PAR PROVINCE (606 PLACES AU GABON : 405 GÉNÉRAL + 201 TECHNIQUE)
+## 3. LE SPEECH DE VIVE VOIX ENTRE COLLÈGUES (SALLE DES PROFS OU ÉCHANGE PRIVÉ)
 
-En appliquant les taux de dégressivité démographique sur la base **100 Général / 50 Technique** :
-
-| # | Province | Pôles Économiques & Lycées Clés | Taux Démographique | Quota Général | Quota Technique | Total Province |
-| :---: | :--- | :--- | :---: | :---: | :---: | :---: |
-| **G1** | **Estuaire** | Libreville, Owendo, Ntoum, Nkok | **Base (100 %)** | **100 profs** | **50 profs** | **150 profs** |
-| **G2** | **Haut-Ogooué** | Franceville, Moanda *(Lycée Agathe Obendze, Mines, Manganèse)* | -30 % | **70 profs** | **35 profs** | **105 profs** |
-| **G3** | **Ogooué-Maritime**| Port-Gentil *(Lycée Jean-Fidèle Otando, Pétrole, BTP)* | -40 % | **60 profs** | **30 profs** | **90 profs** |
-| **G4** | **Woleu-Ntem** | Oyem, Bitam *(Lycée Technique, Agro-foresterie)* | -55 % | **45 profs** | **22 profs** | **67 profs** |
-| **G5** | **Ngounié** | Mouila, Fougamou *(Lycée Technique, BTP, Élevage)* | -65 % | **35 profs** | **17 profs** | **52 profs** |
-| **G6** | **Moyen-Ogooué** | Lambaréné, Ndjolé *(Santé, Forêt, Gestion)* | -70 % | **30 profs** | **15 profs** | **45 profs** |
-| **G7** | **Nyanga** | Tchibanga, Mayumba *(BTP, Pêche, Forêt)* | -75 % | **25 profs** | **12 profs** | **37 profs** |
-| **G8** | **Ogooué-Lolo** | Koulamoutou, Lastoursville *(Transgabonais, Bois)* | -80 % | **20 profs** | **10 profs** | **30 profs** |
-| **G9** | **Ogooué-Ivindo** | Makokou, Booué *(BTP, Électricité, Bois)* | -80 % | **20 profs** | **10 profs** | **30 profs** |
-| **TOTAL**| **9 Provinces** | **Ensemble du Territoire National Gabonais** | — | **405 profs** | **201 profs** | **606 profs** |
+> *« Bonjour cher collègue,*
+>
+> *Je viens échanger avec toi parce qu'on partage la même passion de la transmission et les mêmes exigences en classe. Chaque année, on passe des heures à préparer nos progressions, nos fiches de cours, nos séries de TD et nos corrigés selon les programmes de l'IPN. Et malheureusement, à la fin de chaque année scolaire, tout ce travail intellectuel reste dans nos clés USB ou se disperse sur des photocopies froissées.*
+>
+> *Avec des collègues du secondaire général et technique, nous avons mis en place **EduPocket Gabon**, une plateforme mobile conçue pour préserver ce patrimoine intellectuel et le mettre à la disposition des apprenants de tout le pays.*
+>
+> *Le projet repose sur une démarche de grande rigueur : nous construisons une banque de modules complets, chacun précédé d'une mini-fiche pédagogique, du cours méthodologique, de TD avec corrigés et d'une bibliographie de référence.*
+>
+> *Notre souhait est de valoriser les enseignants en tant qu'auteurs reconnus : tu restes propriétaire de ton travail, avec un contrat de cession de droits d'auteur qui te reverse **70 % de royalties**, versés directement via Airtel Money ou Moov Money.*
+>
+> *Je t'invite à regarder l'application sur mon smartphone : tu y trouveras notre **Manifeste Fondateur pour le Gabon** ainsi que le tableau des besoins par province. J'aimerais beaucoup avoir ton regard de spécialiste sur cette démarche et voir si tu souhaites contribuer à faire rayonner notre discipline. »*
 
 ---
 
-## 4. ARGUMENTS CLÉS POUR LA MOBILISATION DES COLLÈGUES
+## 4. MESSAGE WHATSAPP COLLÉGIAL & RESPECTUEUX
 
-### 1. Pour les professeurs de Français et Mathématiques (18 places à LBV) :
-> *« Nous ouvrons 18 places de Référents en Maths et 18 en Français à Libreville. Votre matière touche tous les collégiens et tous les lycéens du Gabon de la 6e à la Terminale. Avec vos fiches intégrées sur l'application, vous touchez 70 % de royalties sur un public captif de milliers d'élèves. C'est le moment de réserver votre place avant que le quota ne soit atteint. »*
+```text
+📚 CHER(E) COLLÈGUE — VALORISONS ENSEMBLE NOTRE TRAVAIL PÉDAGOGIQUE
 
-### 2. Pour les professeurs de Physique-Chimie, SVT et Histoire-Géo (14 places à LBV) :
-> *« 14 places ouvertes à Libreville pour les matières transversales. Vos séries d'exercices et méthodes d'épreuves (BEPC, BAC) sont attendues par les élèves. Versement direct de vos gains chaque mois par Airtel Money / Moov Money. »*
+Bonjour cher(e) collègue,
 
-### 3. Pour les professeurs de Philosophie (4 places à LBV) :
-> *« La philo n'intervenant qu'en 1re et Terminale, nous limitons strictement à 4 places pour Libreville (soit une par grande série : A, B, C, D). Ces 4 enseignants se partagent le monopole des révisions du BAC dans l'application. Premier arrivé, premier servi. »*
+Comme toi, je mesure l'énergie et la rigueur que demande chaque année la préparation de nos cours, de nos fiches de TD et de nos corrigés méthodologiques conformes aux programmes de l'IPN. 
 
-### 4. Pour les professeurs d'Espagnol (4 places à LBV) :
-> *« L'espagnol est la LV2 n°1 choisie par les élèves gabonais au collège et lycée. Nous ouvrons 4 places de Référents pour couvrir les classes de la 4e jusqu'au BAC (notamment les séries A1/A2 à fort coefficient). »*
+Pourtant, une grande partie de ce travail précieux reste cantonnée à nos propres classes ou finit par se perdre d'une rentrée à l'autre.
 
-### 5. Pour les professeurs du Technique & Professionnel (50 places à LBV) :
-> *« Nos lycéens du technique (LTNOB, Nkok, Port-Gentil) n'ont pas de manuels officiels. On ouvre 8 places en G2, 6 en F3, 6 en F4, etc. Venez valoriser vos schémas et cours d'atelier. »*
+C'est pour remédier à cela et bâtir un véritable patrimoine éducatif national qu'est née EDUPOCKET GABON, une plateforme mobile conçue par et pour les enseignants du secondaire général et technique.
+
+🎯 NOTRE CHARTE D'EXCELLENCE PÉDAGOGIQUE :
+Chaque module proposé répond à des normes précises :
+✅ Une mini-fiche pédagogique (objectifs didactiques & compétences IPN)
+✅ Le cours complet respectant la méthodologie nationale
+✅ Des fiches de TD avec corrigés détaillés et progressifs
+✅ Des textes d'auteurs ou documents d'étude selon la discipline
+✅ Une bibliographie de référence
+
+🤝 UN MODÈLE FONDÉ SUR LA RECONNAISSANCE DE L'ENSEIGNANT :
+• Tu es officiellement crédité comme Enseignant Référent de ta matière.
+• Tu perçois 70 % de royalties d'auteur sur la diffusion de tes modules (paiements directs par Airtel Money / Moov Money).
+• Tu contribues à réduire les inégalités d'accès au savoir entre Libreville et l'intérieur du pays.
+
+📲 Tu peux dès à présent découvrir la plateforme, lire notre Manifeste Républicain et consulter les quotas d'attribution provinciaux directement dans l'application.
+
+Si la démarche te parle et que tu souhaites échanger avec nous, contacte directement la coordination pédagogique :
+📱 WhatsApp : +241 77 14 19 12
+📧 Email : axseylle@gmail.com
+
+EduPocket Gabon — L'excellence et le dévouement de nos enseignants au service de la nation.
+```
+
+---
+
+## 5. LES RÉPONSES AUX INTERROGATIONS PÉDAGOGIQUES DES COLLÈGUES
+
+### Question 1 : *« Pourquoi imposer une mini-fiche pédagogique et des TD types ? »*
+* **Réponse :** « Parce qu'EduPocket n'est pas un simple recueil de résumés informels, mais un outil d'apprentissage rigoureux. La mini-fiche donne du sens à l'apprentissage de l'élève (il sait pourquoi il apprend cette notion), et les TD lui permettent de s'auto-évaluer concrètement face aux exigences du BEPC et du BAC. »
+
+### Question 2 : *« Qui valide les cours déposés ? »*
+* **Réponse :** « Les contenus sont relus et validés entre pairs au sein du collège des enseignants référents de chaque discipline, dans le respect absolu des directives de l'Inspection Pédagogique Nationale (IPN). »
+
+### Question 3 : *« Comment s'organise le calendrier d'ici décembre ? »*
+* **Réponse :** « Chaque enseignant partenaire se voit confier un chapitre officiel précis du programme selon sa spécialité. Il le conçoit à son rythme durant le mois de novembre. En décembre, nous procédons aux tests croisés entre collègues avant la mise à disposition des élèves en janvier. »

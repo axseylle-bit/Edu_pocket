@@ -168,6 +168,16 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
       appBar: AppBar(
         title: const Text('Configuration du profil'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout_rounded),
+            tooltip: 'Se déconnecter / Réinitialiser',
+            onPressed: () async {
+              await SupabaseService().signOut();
+              if (context.mounted) context.go('/welcome');
+            },
+          ),
+        ],
       ),
       body: SafeArea(
         child: Padding(
