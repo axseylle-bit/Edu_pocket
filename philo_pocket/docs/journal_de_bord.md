@@ -49,6 +49,50 @@ Ce document sert de mémoire centrale pour suivre la progression du développeme
 - ✅ **Méthode commando anti-goulot d'étranglement (Objectif Fin Décembre)** :
   - Règle « 1 Enseignant = 1 Chapitre Officiel » (zéro travail perdu, couverture intégrale du programme en parallèle).
   - Sélection sur « Micro-Test d'Éligibilité » (1 fiche + 5 QCM seulement) pour ne léser aucun candidat.
+- ✅ **Critères académiques obligatoires définis** : Un cours complet doit comprendre :
+  1. Une mini fiche pédagogique (objectifs et compétences du programme national).
+  2. Le cours rédigé selon la méthodologie officielle gabonaise.
+  3. Des Travaux Dirigés (TD) avec exercices d'application corrigés.
+  4. Des extraits de textes d'auteurs ou schémas cotés.
+  5. Une bibliographie conforme aux exigences de la discipline.
+
+### 6. 🏛️ Restructuration du Dashboard & Architecture "Vaisseau Amiral"
+- ✅ **Rétablissement de l'ergonomie originelle** :
+  - **Philo Pocket** mis en valeur en grand « Vaisseau Amiral » à gauche (15 notions IPN intégrales pour le Bac).
+  - Grille des autres disciplines à droite, toutes actives, colorées et accessibles (Maths, Physique-Chimie, Français & Lettres, SVT, Histoire-Géo, SES, Anglais, Espagnol, Allemand).
+  - Élimination de tout bandeau payant sur les cours de base : affichage permanent du macaron **« Gratuit IPN »**.
+- ✅ **Intégration d'un accès de test administrateur/fondateur** : Permet à la fondatrice de tester et revivre chaque parcours élève/parent/enseignant sans être redirigée automatiquement.
+
+### 7. 📚 Intégration Massive des 28 Documents Officiels IPN (2026-2027)
+- ✅ **Téléchargement et intégration locale dans `assets/ipn/`** :
+  - **Mathématiques (10 documents)** : 6e, 5e, 4e, 3e, 2de S/STI, 2de LE/STMG, 1ère S/SI, Terminale A1/B, Référentiel d'évaluation BEPC, Banque d'épreuves.
+  - **Physique-Chimie (8 documents)** : 6e, 5e, 4e, 3e, 2nde S/STI, 1ère S/SI, Terminale D, Terminale C/SI.
+  - **Français & Lettres (1 document intégral de 94 Ko)** : Progressions officielles complètes du Collège (6e, 5e, 4e, 3e).
+  - **S.E.S (3 documents)** : Seconde, 1ère B, Terminale B.
+  - **Philosophie & Textes Cadres IPN (6 documents officiels PDF)** : Progressions nationales (2,4 Mo), Méthodologies nationales v2, Épreuve orale, Grilles d'évaluation harmonisées, Critères d'élaboration des épreuves, Étude d'une œuvre.
+- ✅ **Déclaration complète des répertoires d'assets** dans `pubspec.yaml`.
+- ✅ **Création de la Bibliothèque des Progressions & IPN (`IpnResourcesScreen`)** : Filtrage dynamique par onglets thématiques, visionneuse Markdown pour les progressions et visionneuse PDF (`SfPdfViewer`) pour les textes réglementaires.
+- ✅ **Grande Bannière VIP d'accès direct sur le Dashboard** :
+  - Mise en évidence de l'archive de **28 documents certifiés IPN 2026-2027**.
+  - Boutons d'accès directs par discipline depuis les fiches de cours et depuis les outils transversaux.
+
+### 8. 💡 Clarification Stratégique Fondamentale : Modèle Économique en PACKAGES (Pas par Matière)
+- ✅ **Prise de conscience & arbitrage de la fondatrice** :
+  - **Problème identifié** : Une tarification individuelle par matière (ex: 2 500 F x 9 matières = 22 500 F/mois) ruinerait les parents gabonais et trahirait la mission sociale d'EduPocket.
+  - **Solution EduPocket** : **Les cours officiels sont 100% GRATUITS (Socle IPN à 0 FCFA)**, et les offres de renforcement sont structurées en **PACKAGES & FORMULES TRANSVERSALES GLOBALES** :
+    1. **Pack Trimestre Réussite (6 500 FCFA / 3 mois)** : Couvre l'intégralité des matières pour sécuriser les compositions trimestrielles (soit ~2 160 F/mois).
+    2. **Pack Annuel Examen d'État (19 000 FCFA / 9 mois)** : Pass complet pour l'année scolaire incluant toutes les annales officielles, corrections méthodologiques pas-à-pas et tuteur IA ALECKSE illimité.
+    3. **Pack Filière Complète All-in-One (Technique & Pro : 6 000 FCFA / mois)** : Débloque toutes les matières d'atelier, de technologie et d'enseignement général de la série (STI, STMG, CET).
+    4. **Paliers Pionniers transversaux** : Palier 1 (2 500 FCFA/mois) et Palier 2 (5 000 FCFA/mois) comme contributions de renforcement finançant les 70% de royalties aux enseignants.
+- ✅ **Bénéfices majeurs** :
+  - Protection absolue du pouvoir d'achat des familles gabonaises.
+  - Immunité totale contre tout grief de "mercantilisme scolaire" devant le Ministère de l'Éducation Nationale.
+  - Rémunération juste, transparente et automatisée des 606 enseignants partenaires.
+
+### 9. 🚀 Validation Technique & Déploiement Continu
+- ✅ **Analyse statique Flutter** : 0 erreur, 0 avertissement (`flutter analyze` passé avec succès).
+- ✅ **Tests unitaires et de composants** : 100% des tests validés (`flutter test`).
+- ✅ **Synchronisation Git & Dépôt distant** : Commits structurés et push direct sur la branche `main` du dépôt GitHub officiel `axseylle-bit/Edu_pocket`.
 
 ---
 
