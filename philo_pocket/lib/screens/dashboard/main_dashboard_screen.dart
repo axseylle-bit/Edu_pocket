@@ -224,11 +224,11 @@ class MainDashboardScreen extends ConsumerWidget {
                   description:
                       'Programme officiel complet du Gabon : 15 notions fondamentales, méthodologie de la dissertation, commentaire de texte et repères conceptuels.',
                   freePioneer: 'Socrate',
-                  freePioneerDetails: 'Les 15 notions fondamentales du programme officiel IPN, résumés de cours, plans types et citations clés en libre accès.',
+                  freePioneerDetails: 'Accès aux fiches de cours, méthodologie IPN de base, 1 quiz d\'évaluation par notion et ALECKSE basique en libre accès 100% gratuit.',
                   tier1Pioneer: 'Platon',
-                  tier1Details: 'Analyses textuelles avancées, dissertations intégrales rédigées et mythes interactifs guidés.',
+                  tier1Details: 'Tout le contenu Socrate, quiz illimités pour s\'entraîner, suivi détaillé de la progression et bulletin hebdomadaire pour les parents.',
                   tier2Pioneer: 'Aristote',
-                  tier2Details: 'Entraînement intensif au Bac, coaching méthodologique pas-à-pas et correction personnalisée.',
+                  tier2Details: 'Tout le contenu Platon, mythes philosophiques en 3D, TP et ateliers pratiques, dialogue direct avec les grands philosophes, Bac blanc corrigé par ALECKSE avancé et mode hors ligne.',
                   targetRoute: '/philo-pocket',
                 ),
               ),
@@ -592,9 +592,9 @@ class MainDashboardScreen extends ConsumerWidget {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.green.shade50,
+                  color: AppColors.socrateGreen.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: Colors.green.shade300, width: 1.5),
+                  border: Border.all(color: AppColors.socrateGreen.withValues(alpha: 0.4), width: 1.5),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -602,20 +602,20 @@ class MainDashboardScreen extends ConsumerWidget {
                     Row(
                       children: [
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
                           decoration: BoxDecoration(
-                            color: Colors.green.shade700,
+                            color: AppColors.socrateGreen,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: const Text(
                             '100% GRATUIT',
-                            style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                            style: TextStyle(color: Colors.white, fontSize: 10.5, fontWeight: FontWeight.bold),
                           ),
                         ),
                         const SizedBox(width: 8),
                         Text(
                           'Socle Officiel IPN · $freePioneer',
-                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green.shade900, fontSize: 13.5),
+                          style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.socrateGreen, fontSize: 14),
                         ),
                       ],
                     ),
@@ -639,7 +639,7 @@ class MainDashboardScreen extends ConsumerWidget {
                         icon: const Icon(Icons.menu_book_rounded, size: 18),
                         label: const Text('Consulter les Cours & Fiches Gratuits'),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green.shade700,
+                          backgroundColor: AppColors.socrateGreen,
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -657,8 +657,8 @@ class MainDashboardScreen extends ConsumerWidget {
                         icon: const Icon(Icons.description_outlined, size: 18),
                         label: const Text('📋 Voir les Progressions Officielles IPN'),
                         style: OutlinedButton.styleFrom(
-                          foregroundColor: Colors.green.shade800,
-                          side: BorderSide(color: Colors.green.shade600),
+                          foregroundColor: AppColors.socrateGreen,
+                          side: const BorderSide(color: AppColors.socrateGreen),
                           padding: const EdgeInsets.symmetric(vertical: 11),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                         ),
@@ -682,22 +682,22 @@ class MainDashboardScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 10),
 
-              // Palier 1 (2 500 FCFA)
+              // Palier 1 (Essentiel - 2 500 FCFA) - Orange un peu rose
               Container(
                 padding: const EdgeInsets.all(14),
                 margin: const EdgeInsets.only(bottom: 10),
                 decoration: BoxDecoration(
-                  color: color.withValues(alpha: 0.05),
+                  color: AppColors.platonCoral.withValues(alpha: 0.06),
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: color.withValues(alpha: 0.25)),
+                  border: Border.all(color: AppColors.platonCoral, width: 1.5),
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CircleAvatar(
-                      backgroundColor: color.withValues(alpha: 0.2),
+                      backgroundColor: AppColors.platonCoral.withValues(alpha: 0.15),
                       radius: 18,
-                      child: Icon(Icons.workspace_premium_rounded, color: color, size: 20),
+                      child: const Icon(Icons.psychology_rounded, color: AppColors.platonCoral, size: 20),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
@@ -708,20 +708,19 @@ class MainDashboardScreen extends ConsumerWidget {
                             children: [
                               Expanded(
                                 child: Text(
-                                  'Palier $tier1Pioneer',
-                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5, color: color),
+                                  'Palier $tier1Pioneer (Essentiel)',
+                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.platonCoral),
                                 ),
                               ),
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: color.withValues(alpha: 0.15),
+                                  color: AppColors.platonCoral,
                                   borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(color: color.withValues(alpha: 0.3)),
                                 ),
-                                child: Text(
-                                  '2 500 FCFA / mois',
-                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11.5, color: color),
+                                child: const Text(
+                                  '2500 FCFA/mois',
+                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.white),
                                 ),
                               ),
                             ],
@@ -740,22 +739,22 @@ class MainDashboardScreen extends ConsumerWidget {
                 ),
               ),
 
-              // Palier 2 (5 000 FCFA)
+              // Palier 2 (Confort - 5 000 FCFA) - Violet
               Container(
                 padding: const EdgeInsets.all(14),
                 margin: const EdgeInsets.only(bottom: 12),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withValues(alpha: 0.05),
+                  color: AppColors.aristoteViolet.withValues(alpha: 0.06),
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.25)),
+                  border: Border.all(color: AppColors.aristoteViolet.withValues(alpha: 0.45), width: 1.5),
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CircleAvatar(
-                      backgroundColor: AppColors.primary.withValues(alpha: 0.2),
+                      backgroundColor: AppColors.aristoteViolet.withValues(alpha: 0.15),
                       radius: 18,
-                      child: const Icon(Icons.stars_rounded, color: AppColors.primary, size: 20),
+                      child: const Icon(Icons.military_tech_rounded, color: AppColors.aristoteViolet, size: 20),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
@@ -766,20 +765,19 @@ class MainDashboardScreen extends ConsumerWidget {
                             children: [
                               Expanded(
                                 child: Text(
-                                  'Palier $tier2Pioneer',
-                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5, color: AppColors.primary),
+                                  'Palier $tier2Pioneer (Confort)',
+                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.aristoteViolet),
                                 ),
                               ),
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: AppColors.primary.withValues(alpha: 0.15),
+                                  color: AppColors.aristoteViolet,
                                   borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
                                 ),
                                 child: const Text(
-                                  '5 000 FCFA / mois',
-                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11.5, color: AppColors.primary),
+                                  '5000 FCFA/mois',
+                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.white),
                                 ),
                               ),
                             ],

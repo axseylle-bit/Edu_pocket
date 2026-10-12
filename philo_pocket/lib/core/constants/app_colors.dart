@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 /// Charte Graphique Officielle et Moderne de Philo Pocket
 class AppColors {
@@ -7,8 +7,13 @@ class AppColors {
       Color(0xFF1B4D3E); // Vert forÃªt profond et premium
   static const Color primaryLight = Color(0xFF2A7A62);
 
-  static const Color secondary = Color(0xFFE9C46A); // Or moutarde Ã©lÃ©gant
-  static const Color accent = Color(0xFFE76F51); // Terre cuite vibrante
+  static const Color secondary = Color(0xFFE9C46A); // Or moutarde élégant
+  static const Color accent = Color(0xFFE06D53); // Orange un peu rose (Platon)
+
+  // Couleurs Officielles des Paliers Philo Pocket
+  static const Color socrateGreen = Color(0xFF1B5E20); // Vert foncé (Socrate Gratuit)
+  static const Color platonCoral = Color(0xFFE06D53);  // Orange un peu rose / Corail (Platon Essentiel)
+  static const Color aristoteViolet = Color(0xFF6A4C93); // Violet (Aristote Confort)
 
   // Fonds (Backgrounds)
   static const Color backgroundLight =

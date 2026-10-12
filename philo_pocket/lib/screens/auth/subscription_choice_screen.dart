@@ -255,62 +255,87 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
         widget.targetDiscipline.startsWith('cet') ||
         widget.targetDiscipline == 'pro';
 
-    // Noms et prix des paliers par défaut (Enseignement Général / Philo)
+    // Noms, sous-noms et prix des paliers historiques (Philo Pocket & Enseignement Général)
     String tier1Name = 'Socrate';
-    String? tier1Subtitle = 'Père de la maïeutique et du questionnement';
+    String? tier1Subtitle;
     String tier2Name = 'Platon';
-    String? tier2Subtitle = 'Théorie des Idées et dialectique';
+    String? tier2Subtitle;
     String tier3Name = 'Aristote';
-    String? tier3Subtitle = 'Logique, éthique et sciences premières';
+    String? tier3Subtitle;
     bool showTier3 = true;
     String subjectName = "la philosophie";
 
     int tier2Amount = 2500;
     int tier3Amount = 5000;
-    String tier2Price = '2 500 FCFA/mois';
-    String tier3Price = '5 000 FCFA/mois';
+    String tier1Price = 'Gratuit';
+    String tier2Price = '2500 FCFA/mois (Essentiel)';
+    String tier3Price = '5000 FCFA/mois (Confort)';
     String tier1Key = 'socrate';
     String tier2Key = 'platon';
     String tier3Key = 'aristote';
 
+    Color tier1Color = AppColors.socrateGreen;   // Vert foncé (0xFF1B5E20)
+    Color tier2Color = AppColors.platonCoral;    // Orange un peu rose / Corail (0xFFE06D53)
+    Color tier3Color = AppColors.aristoteViolet; // Violet (0xFF6A4C93)
+
+    IconData tier1Icon = Icons.menu_book_rounded;
+    IconData tier2Icon = Icons.psychology_rounded;
+    IconData tier3Icon = Icons.military_tech_rounded;
+
+    String? tier2Badge = 'LE PLUS CHOISI';
+    String? tier3Badge;
+
     List<String> tier1Features = [
-      'Accès à tous les cours fondamentaux (Chapitres complets)',
+      'Accès aux fiches de cours',
       'Méthodologie IPN de base',
+      '1 quiz d\'évaluation par notion',
+      'ALECKSE basique',
     ];
 
     List<String> tier2Features = [
-      'Tout le contenu gratuit',
-      'ALECKSE IA (Explications et TD guidés)',
+      'Tout le contenu Socrate',
       'Quiz illimités pour s\'entraîner',
-      'Bulletin pour les parents',
+      'Suivi détaillé de la progression',
+      'Bulletin hebdomadaire pour les parents',
     ];
 
     List<String> tier3Features = [
-      'Tout le contenu Essentiel',
-      'ALECKSE Correcteur (Bac & Copies)',
-      'Situations-Problèmes complexes',
-      'Travaux Pratiques (TP) intensifs',
+      'Tout le contenu Platon',
+      'Mythes philosophiques en 3D',
+      'TP et Ateliers pratiques',
+      'Dialogue direct avec les grands philosophes',
+      'Bac blanc corrigé par ALECKSE avancé',
       'Mode hors ligne',
     ];
 
     // MODÈLE ÉCONOMIQUE TECHNIQUE : PIONNIERS DE L'INGÉNIERIE & MINIMUM 3000 FCFA
     if (isTechnique) {
       tier1Name = 'Archimède';
-      tier1Subtitle = 'Père de la mécanique & de l\'ingénierie fondamentale';
+      tier1Subtitle = null;
       tier2Name = 'Léonard de Vinci';
-      tier2Subtitle = 'Maître du dessin technique coté & des machines';
+      tier2Subtitle = null;
       tier3Name = 'Gustave Eiffel';
-      tier3Subtitle = 'Pionnier du génie civil & des grands ouvrages métalliques';
+      tier3Subtitle = null;
       showTier3 = true;
       subjectName = "l'enseignement technique & professionnel";
 
       tier2Amount = 3000; // Minimum strict de 3 000 FCFA
       tier3Amount = 6000; // Palier supérieur atelier
-      tier2Price = '3 000 FCFA/mois (Essentiel Pro)';
-      tier3Price = '6 000 FCFA/mois (Expert & Ateliers)';
+      tier1Price = 'Gratuit';
+      tier2Price = '3000 FCFA/mois (Essentiel Pro)';
+      tier3Price = '6000 FCFA/mois (Confort & Ateliers)';
       tier1Key = 'archimede';
       tier2Key = 'leonard_de_vinci';
       tier3Key = 'gustave_eiffel';
+
+      tier1Color = AppColors.socrateGreen;
+      tier2Color = AppColors.platonCoral;
+      tier3Color = AppColors.aristoteViolet;
+
+      tier1Icon = Icons.handyman_rounded;
+      tier2Icon = Icons.precision_manufacturing_rounded;
+      tier3Icon = Icons.engineering_rounded;
+      tier2Badge = 'LE PLUS CHOISI (PRO)';
 
       tier1Features = [
         'Syllabus officiel & fiches d\'initiation aux ateliers',
@@ -337,27 +362,108 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
         'Mode hors-ligne pour réviser à l\'atelier sans connexion Internet',
       ];
     } else if (widget.targetDiscipline == 'science') {
-      tier1Name = 'Newton';
-      tier1Subtitle = 'Fondements de la physique classique & gravitation';
-      tier2Name = 'Tesla';
-      tier2Subtitle = 'Électromagnétisme & innovations appliquées';
-      tier3Name = 'Einstein';
-      tier3Subtitle = 'Relativité & physique moderne d\'excellence';
-      subjectName = "les sciences";
-    } else if (widget.targetDiscipline == 'litterature') {
-      tier1Name = 'Découverte';
-      tier1Subtitle = 'Initiation aux genres littéraires';
-      tier2Name = 'Molière';
-      tier2Subtitle = 'Analyse de texte, théâtre & dissertation littéraire';
-      showTier3 = false;
-      subjectName = "la littérature";
+      tier1Name = 'Thalès & Pythagore';
+      tier2Name = 'Archimède';
+      tier3Name = 'Isaac Newton';
+      tier1Price = 'Gratuit';
+      tier2Price = '2500 FCFA/mois (Essentiel)';
+      tier3Price = '5000 FCFA/mois (Confort)';
+      tier1Color = AppColors.socrateGreen;
+      tier2Color = AppColors.platonCoral;
+      tier3Color = AppColors.aristoteViolet;
+      tier1Icon = Icons.calculate_rounded;
+      tier2Icon = Icons.science_rounded;
+      tier3Icon = Icons.military_tech_rounded;
+      tier2Badge = 'LE PLUS CHOISI';
+      subjectName = "les sciences & mathématiques";
+      tier1Features = [
+        'Accès aux fiches de cours & formules fondamentales',
+        'Méthodologie IPN de base',
+        '1 quiz d\'évaluation par notion',
+        'ALECKSE basique',
+      ];
+      tier2Features = [
+        'Tout le contenu gratuit',
+        'TD dirigés & résolutions pas-à-pas',
+        'Quiz illimités pour s\'entraîner',
+        'Bulletin hebdomadaire pour les parents',
+      ];
+      tier3Features = [
+        'Tout le contenu Essentiel',
+        'Annales officielles résolues du Baccalauréat',
+        'Simulations d\'épreuves complexes',
+        'ALECKSE résolveur d\'exercices avancé',
+        'Mode hors ligne',
+      ];
+    } else if (widget.targetDiscipline == 'litterature' || widget.targetDiscipline == 'francais') {
+      tier1Name = 'Montesquieu';
+      tier2Name = 'Léopold Sédar Senghor';
+      tier3Name = 'Victor Hugo';
+      showTier3 = true;
+      tier1Price = 'Gratuit';
+      tier2Price = '2500 FCFA/mois (Essentiel)';
+      tier3Price = '5000 FCFA/mois (Confort)';
+      tier1Color = AppColors.socrateGreen;
+      tier2Color = AppColors.platonCoral;
+      tier3Color = AppColors.aristoteViolet;
+      tier1Icon = Icons.menu_book_rounded;
+      tier2Icon = Icons.edit_note_rounded;
+      tier3Icon = Icons.military_tech_rounded;
+      tier2Badge = 'LE PLUS CHOISI';
+      subjectName = "le français & la littérature";
+      tier1Features = [
+        'Accès aux synthèses d\'œuvres & fiches d\'auteurs',
+        'Méthodologie IPN de base (Commentaire & Dissertation)',
+        '1 quiz d\'évaluation par œuvre',
+        'ALECKSE basique',
+      ];
+      tier2Features = [
+        'Tout le contenu gratuit',
+        'Ateliers d\'écriture & figures de style',
+        'Quiz illimités pour s\'entraîner',
+        'Bulletin hebdomadaire pour les parents',
+      ];
+      tier3Features = [
+        'Tout le contenu Essentiel',
+        'Modèles rédigés de dissertation d\'excellence',
+        'Simulations d\'épreuves du Baccalauréat',
+        'ALECKSE correcteur de commentaires',
+        'Mode hors ligne',
+      ];
     } else if (widget.targetDiscipline == 'economie') {
       tier1Name = 'Adam Smith';
-      tier1Subtitle = 'Notions de base de marché & société';
       tier2Name = 'Keynes';
-      tier2Subtitle = 'Macroéconomie, politiques publiques & dissertations';
-      showTier3 = false;
-      subjectName = "l'économie";
+      tier3Name = 'Schumpeter';
+      showTier3 = true;
+      tier1Price = 'Gratuit';
+      tier2Price = '2500 FCFA/mois (Essentiel)';
+      tier3Price = '5000 FCFA/mois (Confort)';
+      tier1Color = AppColors.socrateGreen;
+      tier2Color = AppColors.platonCoral;
+      tier3Color = AppColors.aristoteViolet;
+      tier1Icon = Icons.trending_up_rounded;
+      tier2Icon = Icons.analytics_rounded;
+      tier3Icon = Icons.military_tech_rounded;
+      tier2Badge = 'LE PLUS CHOISI';
+      subjectName = "l'économie (S.E.S)";
+      tier1Features = [
+        'Définitions macroéconomiques & fiches IPN',
+        'Méthodologie de base du raisonnement économique',
+        '1 quiz d\'évaluation par chapitre',
+        'ALECKSE basique',
+      ];
+      tier2Features = [
+        'Tout le contenu gratuit',
+        'Interprétation de tableaux & graphiques',
+        'Quiz illimités pour s\'entraîner',
+        'Bulletin hebdomadaire pour les parents',
+      ];
+      tier3Features = [
+        'Tout le contenu Essentiel',
+        'Entraînement complet aux sujets du Bac B',
+        'Synthèses économiques d\'actualité',
+        'Mode hors ligne',
+      ];
     }
 
     return Scaffold(
@@ -528,14 +634,10 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                 context,
                 title: tier1Name,
                 subtitle: tier1Subtitle,
-                price: 'Gratuit',
-                billingPeriod: 'Accès libre illimité',
-                color: isTechnique
-                    ? const Color(0xFF0284C7)
-                    : AppColors.primary,
-                icon: isTechnique
-                    ? Icons.handyman_rounded
-                    : Icons.menu_book_rounded,
+                price: tier1Price,
+                billingPeriod: null,
+                color: tier1Color,
+                icon: tier1Icon,
                 tierKey: tier1Key,
                 amountFcfa: 0,
                 features: tier1Features,
@@ -545,15 +647,11 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                 title: tier2Name,
                 subtitle: tier2Subtitle,
                 price: tier2Price,
-                billingPeriod: 'Facturation mensuelle sans engagement',
-                color: isTechnique
-                    ? const Color(0xFFD97706)
-                    : AppColors.accent,
-                icon: isTechnique
-                    ? Icons.precision_manufacturing_rounded
-                    : Icons.psychology_rounded,
+                billingPeriod: null,
+                color: tier2Color,
+                icon: tier2Icon,
                 isPopular: true,
-                badgeText: 'PIONNIER DU DESSIN & ATELIER',
+                badgeText: tier2Badge,
                 tierKey: tier2Key,
                 amountFcfa: tier2Amount,
                 features: tier2Features,
@@ -564,14 +662,10 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                   title: tier3Name,
                   subtitle: tier3Subtitle,
                   price: tier3Price,
-                  billingPeriod: 'Facturation mensuelle · Ateliers & TP complets',
-                  color: isTechnique
-                      ? const Color(0xFF1E3A8A)
-                      : const Color(0xFF6A4C93),
-                  icon: isTechnique
-                      ? Icons.engineering_rounded
-                      : Icons.workspace_premium_rounded,
-                  badgeText: 'EXCELLENCE & HORS-LIGNE',
+                  billingPeriod: null,
+                  color: tier3Color,
+                  icon: tier3Icon,
+                  badgeText: tier3Badge,
                   tierKey: tier3Key,
                   amountFcfa: tier3Amount,
                   features: tier3Features,
@@ -672,12 +766,12 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                 _buildSubscriptionCard(
                   context,
                   title: 'Pack Matière Solo Mensuel',
-                  subtitle: 'Accès illimité à une discipline spécifique',
+                  subtitle: 'Accès illimité à une discipline spécifique (Essentiel)',
                   price: '2 500 FCFA / mois',
-                  billingPeriod: 'Facturation mensuelle',
-                  badgeText: 'À LA CARTE',
-                  color: AppColors.primary,
-                  icon: Icons.book_rounded,
+                  billingPeriod: 'Facturation mensuelle sans engagement',
+                  badgeText: 'À LA CARTE (ESSENTIEL)',
+                  color: AppColors.platonCoral,
+                  icon: Icons.psychology_rounded,
                   tierKey: 'pack_general_solo',
                   amountFcfa: 2500,
                   features: [
@@ -694,7 +788,7 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                   billingPeriod: 'Paiement unique pour 3 mois (90 jours)',
                   badgeText: 'ÉCONOMISEZ 1 000 FCFA',
                   isPopular: true,
-                  color: const Color(0xFF059669),
+                  color: AppColors.socrateGreen,
                   icon: Icons.date_range_rounded,
                   tierKey: 'pack_general_trimestre',
                   amountFcfa: 6500,
@@ -708,12 +802,12 @@ class _SubscriptionChoiceScreenState extends State<SubscriptionChoiceScreen> {
                 _buildSubscriptionCard(
                   context,
                   title: 'Pack Annuel Examen d\'État (Bac Général)',
-                  subtitle: 'Pass complet pour toute l\'année scolaire (9 mois)',
+                  subtitle: 'Pass complet pour toute l\'année scolaire (9 mois - Confort)',
                   price: '19 000 FCFA / an',
                   billingPeriod: 'Paiement unique pour 9 mois',
                   badgeText: 'PASS EXAMEN · ÉCONOMIE 3 500 F',
-                  color: const Color(0xFF6A4C93),
-                  icon: Icons.workspace_premium_rounded,
+                  color: AppColors.aristoteViolet,
+                  icon: Icons.military_tech_rounded,
                   tierKey: 'pack_general_annuel',
                   amountFcfa: 19000,
                   features: [
