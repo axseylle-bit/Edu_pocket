@@ -1175,8 +1175,8 @@ class _DisciplineSelectionScreenState
                         const SizedBox(height: 3),
                         Text(
                           isTechnique
-                              ? 'Cours officiels 100% gratuits · Modules pionniers optionnels : Archimède (Gratuit), Léonard de Vinci, Gustave Eiffel'
-                              : 'Cours officiels IPN 100% gratuits · Modules de perfectionnement pionniers optionnels (Socrate, Platon, Aristote)',
+                              ? 'Cours officiels 100% gratuits · Modules pionniers optionnels : Archimède (Gratuit), Léonard de Vinci (3 000 FCFA/mois), Gustave Eiffel (6 000 FCFA/mois)'
+                              : 'Cours officiels IPN 100% gratuits · Modules pionniers optionnels : Palier 1 (2 500 FCFA/mois), Palier 2 (5 000 FCFA/mois)',
                           style: TextStyle(
                             fontSize: 11.5,
                             fontWeight: FontWeight.w600,
@@ -1219,6 +1219,33 @@ class _DisciplineSelectionScreenState
             ),
             const SizedBox(height: 8),
 
+            // Bouton vers les progressions officielles IPN
+            SizedBox(
+              width: double.infinity,
+              height: 44,
+              child: OutlinedButton.icon(
+                onPressed: () {
+                  Navigator.pop(ctx);
+                  context.push('/ipn');
+                },
+                icon: const Icon(Icons.description_outlined, size: 18),
+                label: const Text(
+                  '📋 Consulter les Progressions Officielles IPN',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                ),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: isTechnique ? const Color(0xFF1E3A8A) : AppColors.primary,
+                  side: BorderSide(
+                    color: isTechnique ? const Color(0xFF1E3A8A) : AppColors.primary,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+
             // Bouton secondaire pour découvrir les modules de perfectionnement
             SizedBox(
               width: double.infinity,
@@ -1234,7 +1261,7 @@ class _DisciplineSelectionScreenState
                 },
                 icon: const Icon(Icons.workspace_premium_rounded, size: 18),
                 label: const Text(
-                  'Découvrir les modules pionniers de perfectionnement',
+                  'Découvrir les modules pionniers de perfectionnement (dès 2 500 FCFA)',
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                 ),
               ),

@@ -58,6 +58,10 @@ flutter:
   assets:
     - .env
     - assets/ipn/
+    - assets/ipn/maths/
+    - assets/ipn/physique_chimie/
+    - assets/ipn/ses/
+    - assets/ipn/francais/
     - assets/images/
     - assets/courses/
     - assets/methodologie/

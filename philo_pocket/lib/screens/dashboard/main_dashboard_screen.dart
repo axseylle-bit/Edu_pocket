@@ -6,7 +6,7 @@ import '../../core/constants/app_colors.dart';
 import '../../core/providers/student_provider.dart';
 
 class MainDashboardScreen extends ConsumerWidget {
-  const MainDashboardScreen({Key? key}) : super(key: key);
+  const MainDashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,10 +25,18 @@ class MainDashboardScreen extends ConsumerWidget {
                   .fade(duration: 600.ms)
                   .slideY(begin: -0.1, end: 0, curve: Curves.easeOutQuad),
 
-              const SizedBox(height: 32),
+              const SizedBox(height: 28),
+
+              // Bannière VIP d'accès direct aux Progressions Officielles IPN 2026-2027
+              _buildIpnProgressionsBanner(context)
+                  .animate()
+                  .fade(delay: 150.ms)
+                  .slideY(begin: 0.08, end: 0),
+
+              const SizedBox(height: 28),
 
               Text(
-                'MatiÃ¨res',
+                'Matières',
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -638,6 +646,24 @@ class MainDashboardScreen extends ConsumerWidget {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 8),
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton.icon(
+                        onPressed: () {
+                          Navigator.pop(ctx);
+                          context.push('/ipn?category=${Uri.encodeComponent(title)}');
+                        },
+                        icon: const Icon(Icons.description_outlined, size: 18),
+                        label: const Text('📋 Voir les Progressions Officielles IPN'),
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: Colors.green.shade800,
+                          side: BorderSide(color: Colors.green.shade600),
+                          padding: const EdgeInsets.symmetric(vertical: 11),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -656,30 +682,57 @@ class MainDashboardScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 10),
 
-              // Palier 1
+              // Palier 1 (2 500 FCFA)
               Container(
-                padding: const EdgeInsets.all(12),
-                margin: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.all(14),
+                margin: const EdgeInsets.only(bottom: 10),
                 decoration: BoxDecoration(
                   color: color.withValues(alpha: 0.05),
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: color.withValues(alpha: 0.2)),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: color.withValues(alpha: 0.25)),
                 ),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CircleAvatar(
                       backgroundColor: color.withValues(alpha: 0.2),
-                      radius: 16,
-                      child: Icon(Icons.workspace_premium_rounded, color: color, size: 18),
+                      radius: 18,
+                      child: Icon(Icons.workspace_premium_rounded, color: color, size: 20),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Palier $tier1Pioneer', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.5, color: color)),
-                          const SizedBox(height: 2),
-                          Text(tier1Details, style: const TextStyle(fontSize: 11, color: Colors.black87)),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  'Palier $tier1Pioneer',
+                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5, color: color),
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: color.withValues(alpha: 0.15),
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(color: color.withValues(alpha: 0.3)),
+                                ),
+                                child: Text(
+                                  '2 500 FCFA / mois',
+                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11.5, color: color),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 3),
+                          Text(
+                            'Renforcement intensif & TD méthodologiques pas-à-pas',
+                            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.grey.shade700),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(tier1Details, style: const TextStyle(fontSize: 11.5, color: Colors.black87, height: 1.3)),
                         ],
                       ),
                     ),
@@ -687,33 +740,80 @@ class MainDashboardScreen extends ConsumerWidget {
                 ),
               ),
 
-              // Palier 2
+              // Palier 2 (5 000 FCFA)
               Container(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(14),
+                margin: const EdgeInsets.only(bottom: 12),
                 decoration: BoxDecoration(
                   color: AppColors.primary.withValues(alpha: 0.05),
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.25)),
                 ),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CircleAvatar(
                       backgroundColor: AppColors.primary.withValues(alpha: 0.2),
-                      radius: 16,
-                      child: const Icon(Icons.stars_rounded, color: AppColors.primary, size: 18),
+                      radius: 18,
+                      child: const Icon(Icons.stars_rounded, color: AppColors.primary, size: 20),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Palier $tier2Pioneer', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.5, color: AppColors.primary)),
-                          const SizedBox(height: 2),
-                          Text(tier2Details, style: const TextStyle(fontSize: 11, color: Colors.black87)),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  'Palier $tier2Pioneer',
+                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5, color: AppColors.primary),
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: AppColors.primary.withValues(alpha: 0.15),
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+                                ),
+                                child: const Text(
+                                  '5 000 FCFA / mois',
+                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11.5, color: AppColors.primary),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 3),
+                          Text(
+                            'Coaching d\'excellence, annales résolues & préparation examens',
+                            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.grey.shade700),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(tier2Details, style: const TextStyle(fontSize: 11.5, color: Colors.black87, height: 1.3)),
                         ],
                       ),
                     ),
                   ],
+                ),
+              ),
+
+              // Bouton vers la grille des abonnements
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                    context.push('/subscription');
+                  },
+                  icon: const Icon(Icons.workspace_premium_rounded, size: 16),
+                  label: const Text('Découvrir toutes les formules de renforcement'),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: AppColors.primary,
+                    side: const BorderSide(color: AppColors.primary),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  ),
                 ),
               ),
               const SizedBox(height: 12),
@@ -851,7 +951,7 @@ class MainDashboardScreen extends ConsumerWidget {
           child: _buildToolButton(
             context,
             icon: Icons.picture_as_pdf_rounded,
-            label: 'IPN Docs',
+            label: 'Progressions IPN',
             color: const Color(0xFF9C3B3B),
             onTap: () => context.push('/ipn'),
           ),
@@ -913,6 +1013,176 @@ class MainDashboardScreen extends ConsumerWidget {
             textAlign: TextAlign.center,
           ),
         ],
+      ),
+    );
+  }
+
+  // =========================================================================
+  // BANNIÈRE OFFICIELLE : BIBLIOTHÈQUE DES PROGRESSIONS & RÉFÉRENTIELS IPN
+  // =========================================================================
+  Widget _buildIpnProgressionsBanner(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFF0F172A), Color(0xFF1E3A8A)], // Bleu Nuit Impérial & Bleu Profond
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: const Color(0xFF38BDF8).withValues(alpha: 0.35), width: 1.5),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF1E3A8A).withValues(alpha: 0.35),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(24),
+          onTap: () => context.push('/ipn'),
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF38BDF8).withValues(alpha: 0.15),
+                        shape: BoxShape.circle,
+                        border: Border.all(color: const Color(0xFF38BDF8).withValues(alpha: 0.4)),
+                      ),
+                      child: const Icon(
+                        Icons.auto_stories_rounded,
+                        color: Color(0xFF38BDF8),
+                        size: 28,
+                      ),
+                    ),
+                    const SizedBox(width: 14),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                decoration: BoxDecoration(
+                                  color: Colors.green.shade600,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Text(
+                                  '100% OFFICIEL IPN',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withValues(alpha: 0.15),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Text(
+                                  '28 DOCUMENTS TÉLÉCHARGÉS',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          const Text(
+                            'Bibliothèque des Progressions & Programmes Nationaux',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.5,
+                              fontWeight: FontWeight.bold,
+                              height: 1.25,
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          const Text(
+                            'Tous les documents de référence téléchargés et certifiés IPN pour l\'année scolaire 2026-2027.',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 12,
+                              height: 1.35,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                // Chips des matières disponibles
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: [
+                    _buildIpnTag('Maths (10 docs · 6e à Tle)', const Color(0xFF1E88E5)),
+                    _buildIpnTag('Physique-Chimie (8 docs · 6e à Tle)', const Color(0xFF00897B)),
+                    _buildIpnTag('Français (Collège complet)', const Color(0xFFE65100)),
+                    _buildIpnTag('S.E.S (3 docs · 2de, 1ère, Tle)', const Color(0xFF0288D1)),
+                    _buildIpnTag('Philosophie (6 docs & PDF)', AppColors.primary),
+                  ],
+                ),
+                const SizedBox(height: 14),
+                // Bouton d'accès direct
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    onPressed: () => context.push('/ipn'),
+                    icon: const Icon(Icons.folder_shared_rounded, size: 18),
+                    label: const Text(
+                      'Consulter tous les documents officiels IPN',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF38BDF8),
+                      foregroundColor: const Color(0xFF0F172A),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildIpnTag(String text, Color color) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.25),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: color.withValues(alpha: 0.4), width: 1),
+      ),
+      child: Text(
+        text,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 10.5,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }

@@ -150,7 +150,10 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: '/ipn',
-      builder: (context, state) => const IpnResourcesScreen(),
+      builder: (context, state) {
+        final category = state.extra as String? ?? state.uri.queryParameters['category'];
+        return IpnResourcesScreen(initialCategory: category);
+      },
     ),
     GoRoute(
       path: '/chat',
