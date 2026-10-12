@@ -64,7 +64,8 @@ Le présent contrat a pour objet de définir :
 - Numériser, afficher et diffuser les cours sur l'application mobile et ses supports associés.
 - Transformer les exercices en formats interactifs (QCM, flashcards, fiches récapitulatives).
 - Utiliser les contenus pour l'entraînement contextuel du tuteur d'intelligence artificielle pédagogique **ALECKSE IA**, afin de répondre aux questions des élèves dans le strict respect de la méthodologie de l'auteur.  
-3.3. **Usage Personnel de l'Enseignant** : L'Enseignant conserve le droit absolu d'utiliser ses cours dans le cadre de son enseignement présentiel direct avec ses propres élèves en classe.
+3.3. **Usage Personnel de l'Enseignant** : L'Enseignant conserve le droit absolu d'utiliser ses cours dans le cadre de son enseignement présentiel direct avec ses propres élèves en classe.  
+3.4. **Signature Nominative, Protection Contre le Vol et Droit d'Usage Réciproque** : Chaque cours et module produit est signé nominativement du nom, du prénom et de l'établissement de son auteur, lui assurant une pleine reconnaissance et une protection légale contre tout vol ou plagiat de son œuvre. Par esprit de confraternité et dans le but d'enrichir la pratique enseignante nationale, l'Enseignant Partenaire autorise expressément l'ensemble des autres enseignants partenaires du réseau EduPocket à utiliser ses cours signés comme support pédagogique en classe, et bénéficie en contrepartie du droit réciproque d'utiliser les cours signés de ses pairs. Tous les cours obéissent obligatoirement à la même méthodologie officielle nationale prescrite par l'Institut Pédagogique National (IPN) et aux standards didactiques d'EduPocket.
 
 ---
 
@@ -83,6 +84,9 @@ Chaque Enseignant Partenaire se voit attribuer un code personnel unique (ex. `PR
 Lorsqu'un élève s'abonne en renseignant le code de l'Enseignant :
 * **Mois 1 (Mois d'acquisition)** : L'Enseignant perçoit **70 % de la Recette Nette** attribuée à ses cours, et EduPocket perçoit **30 %**.
 * **Mois suivants (Renouvellements mensuels)** : Pour assurer la pérennité financière de la plateforme et le maintien des services IA, la part de l'Enseignant Auteur passe à **50 % de la Recette Nette** pour chaque mois renouvelé tant que l'élève reste actif.
+
+4.3.1. **Déontologie et Finalité du Code de Parrainage**  
+Le code de parrainage constitue une motivation financière légitime récompensant l'investissement et le travail pédagogique rigoureux abattu par l'Enseignant Partenaire. Les Parties conviennent expressément que l'attribution de ce code ne confère en aucun cas à l'Enseignant le rôle de démarcheur commercial et ne l'autorise en aucune circonstance à contraindre, pénaliser ou harceler les élèves au sein de ses classes ou de son établissement d'affectation pour qu'ils souscrivent avec son code. L'adoption d'EduPocket par l'élève doit demeurer un acte libre et consenti, guidé exclusivement par la qualité didactique des ressources.
 
 4.4. **Règles Applicables aux Packages Multi-Enseignants**  
 Lorsqu'un package global regroupant plusieurs disciplines (ex. *Pack Filière Complète* ou *Pack Trimestre Réussite*) est vendu :
