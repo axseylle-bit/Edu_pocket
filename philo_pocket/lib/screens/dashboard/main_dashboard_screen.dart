@@ -645,23 +645,62 @@ class MainDashboardScreen extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton.icon(
-                        onPressed: () {
-                          Navigator.pop(ctx);
-                          context.push('/ipn?category=${Uri.encodeComponent(title)}');
-                        },
-                        icon: const Icon(Icons.description_outlined, size: 18),
-                        label: const Text('📋 Voir les Progressions Officielles IPN'),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: AppColors.socrateGreen,
-                          side: const BorderSide(color: AppColors.socrateGreen),
-                          padding: const EdgeInsets.symmetric(vertical: 11),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    if (isTechnique) ...[
+                      Row(
+                        children: [
+                          Expanded(
+                            child: OutlinedButton.icon(
+                              onPressed: () {
+                                Navigator.pop(ctx);
+                                context.push('/ipn?category=STMG');
+                              },
+                              icon: const Icon(Icons.business_center_rounded, size: 16),
+                              label: const Text('📋 STMG Tronc & Projet'),
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: AppColors.socrateGreen,
+                                side: const BorderSide(color: AppColors.socrateGreen),
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: OutlinedButton.icon(
+                              onPressed: () {
+                                Navigator.pop(ctx);
+                                context.push('/ipn?category=Bac Pro');
+                              },
+                              icon: const Icon(Icons.work_outline_rounded, size: 16),
+                              label: const Text('📋 Bac Pro TGA'),
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: AppColors.socrateGreen,
+                                side: const BorderSide(color: AppColors.socrateGreen),
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ] else
+                      SizedBox(
+                        width: double.infinity,
+                        child: OutlinedButton.icon(
+                          onPressed: () {
+                            Navigator.pop(ctx);
+                            context.push('/ipn?category=${Uri.encodeComponent(title)}');
+                          },
+                          icon: const Icon(Icons.description_outlined, size: 18),
+                          label: const Text('📋 Voir les Progressions Officielles IPN'),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: AppColors.socrateGreen,
+                            side: const BorderSide(color: AppColors.socrateGreen),
+                            padding: const EdgeInsets.symmetric(vertical: 11),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          ),
                         ),
                       ),
-                    ),
                   ],
                 ),
               ),

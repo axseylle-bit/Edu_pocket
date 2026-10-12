@@ -219,6 +219,38 @@ class _IpnResourcesScreenState extends State<IpnResourcesScreen> with SingleTick
         },
       ],
     },
+    {
+      'name': 'Série STMG (Gestion)',
+      'icon': Icons.business_center_rounded,
+      'color': Color(0xFF6A1B9A),
+      'docs': [
+        {
+          'title': '1ère STMG — Programme Intégral Tronc Commun (2024-2026)',
+          'path': 'assets/ipn/stmg/programme_1ere_stmg.md',
+          'type': 'md',
+          'desc': 'SGDN (8h), Économie, Droit, Management, Maths, CMC, Philo, Langues, Arts',
+        },
+        {
+          'title': 'Terminale STMG — Épreuve Orale & Projet de Gestion Officiel',
+          'path': 'assets/ipn/stmg/epreuve_projet_gestion_stmg.md',
+          'type': 'md',
+          'desc': 'Guide officiel IPN, plan 15-20 pages, fiche de suivi et grille de notation /20',
+        },
+      ],
+    },
+    {
+      'name': 'Bac Pro TGA',
+      'icon': Icons.work_outline_rounded,
+      'color': Color(0xFFC2185B),
+      'docs': [
+        {
+          'title': 'Bac Pro TGA — Référentiels & Progression (2nde, 1ère, Tle)',
+          'path': 'assets/ipn/bac_pro/progression_bac_pro_tga.md',
+          'type': 'md',
+          'desc': 'Les 4 pôles, grille horaire, 16 semaines de stages, épreuves et philo adaptée',
+        },
+      ],
+    },
   ];
 
   @override
