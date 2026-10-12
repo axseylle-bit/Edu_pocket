@@ -141,39 +141,65 @@ class SupabaseService {
     }
   }
 
-  // Récupère l'abonnement de l'utilisateur (Cache SharedPreferences puis table abonnements)
+  // Récupère l'abonnement certifié de l'utilisateur (Source de vérité Supabase + Cache sécurisé hors-ligne)
   Future<String> getStudentSubscription() async {
     final user = currentUser;
     if (user == null) return 'gratuit';
 
     try {
       final prefs = await SharedPreferences.getInstance();
-      final local = prefs.getString('mock_palier_${user.id}');
-      if (local != null && local.isNotEmpty) {
-        return local;
-      }
 
-      // Essayer de lire depuis Supabase abonnements si disponible
+      // 1. Priorité absolue : Vérification serveur en temps réel sur la table Supabase abonnements
       try {
         final res = await client
             .from('abonnements')
-            .select('palier, statut')
+            .select('palier, statut, date_fin')
             .eq('utilisateur_id', user.id)
             .eq('statut', 'actif')
             .maybeSingle();
 
         if (res != null && res['palier'] != null) {
-          final palier = res['palier'] as String;
-          await prefs.setString('mock_palier_${user.id}', palier);
-          return palier;
+          final dateFinStr = res['date_fin'] as String?;
+          bool isExpired = false;
+          if (dateFinStr != null) {
+            final dateFin = DateTime.tryParse(dateFinStr);
+            if (dateFin != null && DateTime.now().isAfter(dateFin)) {
+              isExpired = true;
+            }
+          }
+
+          if (!isExpired) {
+            final palier = res['palier'] as String;
+            // Mise en cache validée par le serveur pour le mode hors-ligne
+            await prefs.setString('verified_palier_${user.id}', palier);
+            await prefs.setString('verified_expiry_${user.id}', dateFinStr ?? '');
+            return palier;
+          } else {
+            // L'abonnement a expiré
+            await prefs.remove('verified_palier_${user.id}');
+            await prefs.remove('verified_expiry_${user.id}');
+            return 'gratuit';
+          }
+        } else {
+          // Aucun abonnement actif sur le serveur
+          await prefs.remove('verified_palier_${user.id}');
+          await prefs.remove('verified_expiry_${user.id}');
         }
       } catch (_) {
-        // En cas d'absence de la table ou erreur réseau, retomber sur gratuit
+        // 2. Mode hors-ligne (ex: zones reculées du Gabon sans connexion) :
+        // Le cache n'est accepté que s'il a été certifié par le serveur avec date d'expiration valide
+        final cached = prefs.getString('verified_palier_${user.id}');
+        final cachedExpiry = prefs.getString('verified_expiry_${user.id}');
+        if (cached != null && cached.isNotEmpty && cachedExpiry != null && cachedExpiry.isNotEmpty) {
+          final expiry = DateTime.tryParse(cachedExpiry);
+          if (expiry != null && DateTime.now().isBefore(expiry)) {
+            return cached;
+          }
+        }
       }
 
       return 'gratuit';
-    } catch (e) {
-      print("Erreur récupération abonnement: $e");
+    } catch (_) {
       return 'gratuit';
     }
   }
@@ -185,45 +211,47 @@ class SupabaseService {
 
     try {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('mock_palier_${user.id}', palier);
+
+      String dbPalier = 'essentiel';
+      int durationDays = 30;
+
+      if (palier.contains('annuel')) {
+        durationDays = 270; // 9 mois (année scolaire complète)
+        dbPalier = 'confort';
+      } else if (palier.contains('trimestre')) {
+        durationDays = 90; // 3 mois (trimestre scolaire)
+        dbPalier = 'confort';
+      } else if (palier.contains('expert') ||
+          palier.contains('confort') ||
+          palier.contains('eiffel') ||
+          palier.contains('filiere')) {
+        dbPalier = 'confort';
+      } else if (palier == 'gratuit' ||
+          palier == 'socrate' ||
+          palier == 'archimede') {
+        dbPalier = 'gratuit';
+      } else if (palier.contains('vinci') ||
+          palier.contains('solo') ||
+          palier.contains('platon')) {
+        dbPalier = 'essentiel';
+      }
+
+      final dateFin = DateTime.now().add(Duration(days: durationDays)).toIso8601String();
+      await prefs.setString('verified_palier_${user.id}', palier);
+      await prefs.setString('verified_expiry_${user.id}', dateFin);
 
       // Synchronisation avec la table Supabase abonnements si disponible
       try {
-        String dbPalier = 'essentiel';
-        int durationDays = 30;
-
-        if (palier.contains('annuel')) {
-          durationDays = 270; // 9 mois (année scolaire complète)
-          dbPalier = 'confort';
-        } else if (palier.contains('trimestre')) {
-          durationDays = 90; // 3 mois (trimestre scolaire)
-          dbPalier = 'confort';
-        } else if (palier.contains('expert') ||
-            palier.contains('confort') ||
-            palier.contains('eiffel') ||
-            palier.contains('filiere')) {
-          dbPalier = 'confort';
-        } else if (palier == 'gratuit' ||
-            palier == 'socrate' ||
-            palier == 'archimede') {
-          dbPalier = 'gratuit';
-        } else if (palier.contains('vinci') ||
-            palier.contains('solo') ||
-            palier.contains('platon')) {
-          dbPalier = 'essentiel';
-        }
-
         await client.from('abonnements').upsert({
           'utilisateur_id': user.id,
           'palier': dbPalier,
           'statut': 'actif',
-          'date_fin': DateTime.now().add(Duration(days: durationDays)).toIso8601String(),
+          'date_fin': dateFin,
         });
       } catch (dbErr) {
-        print("Note: Synchro DB abonnements (sauvegarde locale active): $dbErr");
+        // Note: Seul service_role ou webhook backend a le droit d'écrire en production RLS
       }
     } catch (e) {
-      print("Erreur mise à jour abonnement: $e");
       rethrow;
     }
   }

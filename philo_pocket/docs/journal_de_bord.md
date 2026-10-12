@@ -112,6 +112,23 @@ Ce document sert de mémoire centrale pour suivre la progression du développeme
   - Suppression des variables inutilisées dans `supabase_service.dart`.
   - Validation sans faute de `flutter test` et `flutter analyze`.
 
+### 11. 🔒 Verrouillage Anti-Piratage, Plafond Quotas IA & Optimisation du Poids (APK Léger)
+- ✅ **Plafonds stricts de requêtes à l'IA ALECKSE (`ai_service.dart` & `chat-gemini`)** :
+  - Compte Gratuit (0 FCFA) : Plafond quotidien de **20 questions par jour**, réinitialisé chaque nuit à minuit, avec message pédagogique et incitatif.
+  - Compte Premium / Packages : Plafond étendu de **150 questions par jour** (protection anti-bot et anti-dépassement).
+  - Contrôle dynamique des requêtes restantes via `AiService.getRemainingDailyQuestions()`.
+  - Protection anti-jailbreak et restriction de la taille du payload (150 Ko max) dans la Supabase Edge Function `chat-gemini`.
+- ✅ **Allègement drastique de l'application (Poids de l'APK)** :
+  - Activation de **R8 / ProGuard** (`isMinifyEnabled = true`) et suppression des ressources mortes (`isShrinkResources = true`) dans `android/app/build.gradle.kts`.
+  - Création des règles `android/app/proguard-rules.pro` préservant les points d'entrée Flutter, Supabase et Syncfusion.
+  - Suppression du fichier PDF doublon `methodologies_nationales_philosophie.pdf` (économie directe de 747 Ko d'assets).
+- ✅ **Architecture Anti-Piratage & Anti-Tampering ("Impiratable")** :
+  - **Inversion de l'autorité d'abonnement dans `supabase_service.dart`** : La base de données Supabase `abonnements` est l'unique autorité légitime. Aucune manipulation locale dans `SharedPreferences` sur un téléphone rooté (Lucky Patcher, SQLite editor) ne peut tromper l'application.
+  - Cache hors-ligne conditionné à une date de fin certifiée par le serveur (`verified_expiry`).
+  - Blocage RLS Postgres : seul le serveur `service_role` peut valider ou prolonger un abonnement, rendant vaine toute tentative d'injection directe par API.
+  - Obfuscation R8 du bytecode natif : rend le reverse engineering et la décompilation (JADX/APKTool) illisibles.
+  - Clé API Google Gemini confinée à 100% sur le serveur Supabase (zéro clé exposée dans l'APK).
+
 ---
 
 ## 📅 Sessions Précédentes

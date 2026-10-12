@@ -1,10 +1,54 @@
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'supabase_service.dart';
 
 class AiService {
   String _systemInstruction = "";
   List<Map<String, dynamic>> _chatHistory = [];
   bool _isInitialized = false;
+
+  // Plafonds officiels de requêtes IA pour protéger l'infrastructure et éviter les abus
+  static const int dailyFreeQuota = 20; // 20 questions/jour pour les comptes gratuits
+  static const int dailyPremiumQuota = 150; // 150 questions/jour pour les abonnés (protection anti-bot)
+
+  // Clé de stockage journalière : "ai_daily_count_<userId>_YYYY-MM-DD"
+  static String _todayKey(String userId) {
+    final now = DateTime.now();
+    final dateStr = "${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
+    return "ai_daily_count_${userId}_$dateStr";
+  }
+
+  // Nombre de requêtes posées aujourd'hui
+  static Future<int> getDailyUsedQuestions() async {
+    final user = Supabase.instance.client.auth.currentUser;
+    if (user == null) return 0;
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(_todayKey(user.id)) ?? 0;
+  }
+
+  // Nombre de requêtes restantes aujourd'hui
+  static Future<int> getRemainingDailyQuestions() async {
+    final user = Supabase.instance.client.auth.currentUser;
+    if (user == null) return dailyFreeQuota;
+
+    final subTier = await SupabaseService().getStudentSubscription();
+    final isPremium = subTier != 'gratuit';
+    final limit = isPremium ? dailyPremiumQuota : dailyFreeQuota;
+    final used = await getDailyUsedQuestions();
+    final remaining = limit - used;
+    return remaining < 0 ? 0 : remaining;
+  }
+
+  // Incrémenter le compteur de requêtes consommées
+  static Future<void> incrementDailyCount() async {
+    final user = Supabase.instance.client.auth.currentUser;
+    if (user == null) return;
+    final prefs = await SharedPreferences.getInstance();
+    final key = _todayKey(user.id);
+    final count = prefs.getInt(key) ?? 0;
+    await prefs.setInt(key, count + 1);
+  }
 
   // Initialisation du modèle (on prépare juste les instructions)
   Future<void> init(String? methodologyId, String? contextText,
@@ -56,7 +100,23 @@ class AiService {
       throw Exception("L'IA n'est pas initialisée.");
     }
 
-    // Protection anti-flood / rate-limiting (au moins 1.5s entre chaque question)
+    // 1. Contrôle du plafond quotidien de requêtes pour protéger l'infrastructure
+    final subTier = await SupabaseService().getStudentSubscription();
+    final isPremium = subTier != 'gratuit';
+    final dailyLimit = isPremium ? dailyPremiumQuota : dailyFreeQuota;
+    final usedToday = await getDailyUsedQuestions();
+
+    if (usedToday >= dailyLimit) {
+      if (!isPremium) {
+        return "⏳ Tu as atteint ton plafond de $dailyFreeQuota questions gratuites pour aujourd'hui avec ALECKSE.\n\n"
+            "Ton quota sera automatiquement réinitialisé demain dès 00h00. Pour poser des questions en illimité et préparer tes épreuves sans restriction, découvre nos Packages Réussite dans ton Profil !";
+      } else {
+        return "⏳ Tu as atteint ton plafond de sécurité de $dailyPremiumQuota questions pour aujourd'hui.\n\n"
+            "Ton accès sera réinitialisé demain dès minuit. Prends le temps de relire et d'assimiler les notions travaillées aujourd'hui !";
+      }
+    }
+
+    // 2. Protection anti-flood / rate-limiting (au moins 1.5s entre chaque question)
     if (_lastMessageTime != null) {
       final diff = DateTime.now().difference(_lastMessageTime!);
       if (diff.inMilliseconds < 1500) {
@@ -86,6 +146,10 @@ class AiService {
           "role": "model",
           "parts": [{"text": reply}]
         });
+
+        // Incrémenter le quota journalier consommé
+        await incrementDailyCount();
+
         return reply;
       } else {
         throw Exception("Erreur Edge Function: ${response.status}");
