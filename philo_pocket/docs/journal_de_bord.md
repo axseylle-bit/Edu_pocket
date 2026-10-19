@@ -165,3 +165,16 @@ Ce document sert de mémoire centrale pour suivre la progression du développeme
 ### 3. Lancement Public (Janvier 2027)
 - [ ] Déverrouiller les profils Élève et Parent dans `role_selection_screen.dart`.
 - [ ] Raccorder les passerelles marchandes Airtel Money / Moov Money pour les abonnements.
+
+### 12. 📦 Harmonisation Globale, Sécurisation Supabase & Grand Classement Didactique IPN (19-20 Octobre 2026)
+- ✅ **Condensation Pédagogique Terminale** : Cours "Ethnie et Nation" ramené au format condensé strict (-33%) tout en maintenant l'intégralité du canevas méthodologique (Introduction, 3 parties dialectiques, citations, transitions et conclusion).
+- ✅ **Vérification Intégrale des Fichiers IPN Français** : Validation des 5 PDF officiels dans ssets/ipn/francais/ et synchronisation miroir avec C:\Users\NVT\philopocket\assets\ipn\francais.
+- ✅ **Lancement & Accessibilité Web** : Démarrage du serveur web local Flutter sur http://localhost:8080 (HTTP 200 OK) avec accès direct à tous les modules (/#/ipn, /#/teacher-partner, /#/cours, /#/hub).
+- ✅ **Contrôle d'Idempotence et Sécurité Supabase** :
+  - Audit des migrations SQL (20261019_authorization_and_ai_quota_hardening.sql, 20261019_payment_client_hardening.sql, etc.).
+  - Confirmation du non-conflit sur les DROP CONSTRAINT IF EXISTS et validation de la primauté des règles de sécurité du 19 octobre.
+- ✅ **Grand Nettoyage & Classement des Documents IPN** :
+  - 580 fichiers analysés sur le Bureau et dans les Téléchargements.
+  - Décluttering total du Bureau (0 fichier PDF en vrac).
+  - 301 documents classés dans C:\Users\NVT\Desktop\DOSSIERS_IPN_CLASSES répartis sur 16 disciplines avec sous-dossiers par filière métier.
+  - 266 doublons supprimés en toute sécurité et raccourci créé dans Téléchargements.

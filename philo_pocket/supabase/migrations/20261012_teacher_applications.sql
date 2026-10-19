@@ -51,9 +51,9 @@ CREATE POLICY "Lecture des candidatures par les admins et propriétaires"
     USING (
         auth.uid() = user_id 
         OR EXISTS (
-            SELECT 1 FROM public.profiles 
-            WHERE profiles.id = auth.uid() 
-            AND profiles.role IN ('admin', 'superadmin', 'coordinator')
+            SELECT 1 FROM public.utilisateurs AS u
+            WHERE u.id = auth.uid()
+            AND u.role IN ('admin', 'superadmin', 'coordinator')
         )
     );
 
@@ -65,8 +65,8 @@ CREATE POLICY "Mise a jour par admin uniquement"
     TO authenticated
     USING (
         EXISTS (
-            SELECT 1 FROM public.profiles 
-            WHERE profiles.id = auth.uid() 
-            AND profiles.role IN ('admin', 'superadmin', 'coordinator')
+            SELECT 1 FROM public.utilisateurs AS u
+            WHERE u.id = auth.uid()
+            AND u.role IN ('admin', 'superadmin', 'coordinator')
         )
     );
